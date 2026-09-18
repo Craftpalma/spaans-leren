@@ -1216,11 +1216,52 @@ section {
         height: 58px;
     }
 }
+/* =========================================
+   CABECERA MÓVIL
+========================================= */
 
+@media (max-width: 768px) {
+
+    /* Ocultamos el logo grande del Hero */
+    .hero-logo {
+        display: none;
+    }
+
+    /* Ocultamos "Spaans Leren" de la cabecera */
+    .logo {
+        display: none;
+    }
+
+    /* Cabecera móvil */
+    .nav-container {
+        min-height: 72px;
+        padding: 0 15px;
+    }
+
+    /* Logo de la izquierda */
+    .header::after {
+        content: "";
+        position: absolute;
+        left: 15px;
+        top: 7px;
+        width: 65px;
+        height: 58px;
+        background-image: url("images/logo4.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    /* Menú a la derecha */
+    .menu-button {
+        margin-left: auto;
+    }
+
+}
 /* =========================================
    LOGO EN CABECERA - MÓVIL
 ========================================= */
-
+/*
 @media (max-width: 768px) {
 
     /* Ocultamos el logo grande del Hero */
@@ -1241,10 +1282,10 @@ section {
         top: 7px;
         width: 65px;
         height: 58px;
-        background-image: url("images/logo3.png");
+        background-image: url("images/logo4.png");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
     }
 
-}
+}*/
