@@ -263,10 +263,27 @@ section {
 
 .hero-content {
     padding: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
 }
 
 .hero-text {
     max-width: 720px;
+}
+.hero-logo {
+    flex: 0 0 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-logo img {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    display: block;
 }
 
 .hero h1 {
