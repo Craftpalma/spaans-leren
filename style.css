@@ -273,7 +273,7 @@ section {
     max-width: 720px;
 }
 .hero-logo {
-    flex: 0 0 550px;
+    flex: 0 0 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -281,7 +281,7 @@ section {
 
 .hero-logo img {
     width: 100%;
-    max-width: 260px;
+    max-width: 400px;
     height: auto;
     display: block;
 }
