@@ -703,6 +703,76 @@
 
     </div>
 
+<!-- CHATBOT -->
+<div class="chatbot">
+
+    <!-- Botón flotante -->
+    <button class="chatbot-button" id="chatbotButton" aria-label="Abrir asistente">
+        💬
+    </button>
+
+    <!-- Ventana del chat -->
+    <div class="chatbot-window" id="chatbotWindow">
+
+        <div class="chatbot-header">
+            <div>
+                <strong>Asistente Spaans Leren</strong>
+                <span>● En línea</span>
+            </div>
+
+            <button id="chatbotClose" aria-label="Cerrar chat">
+                ×
+            </button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbotMessages">
+
+            <div class="bot-message">
+                👋 ¡Hola! Soy el asistente de Spaans Leren.
+                <br><br>
+                ¿En qué puedo ayudarte?
+            </div>
+
+            <div class="chatbot-options">
+
+                <button data-question="Quiero información sobre los cursos">
+                    📚 Información sobre cursos
+                </button>
+
+                <button data-question="Quiero conocer los precios">
+                    💰 Precios
+                </button>
+
+                <button data-question="Quiero hacer una clase de prueba">
+                    🎓 Clase de prueba gratis
+                </button>
+
+                <button data-question="Quiero reservar una clase">
+                    📅 Quiero reservar
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="chatbot-input">
+
+            <input
+                type="text"
+                id="chatbotInput"
+                placeholder="Escribe tu pregunta..."
+            >
+
+            <button id="chatbotSend" aria-label="Enviar mensaje">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    
 
     <script src="script.js"></script>
 
