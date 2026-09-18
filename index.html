@@ -1,16 +1,710 @@
-<header>
-    <h1>Español con Gloria</h1>
-    <p>Aprende español de forma fácil y práctica</p>
-</header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<section>
-    <h2>Nuestros cursos</h2>
-    ...
-</section>
+    <meta name="description"
+          content="Cursos de español para todos los niveles: A1, A2, B1, B2, conversación y español para negocios.">
 
-<section>
-    <h2>Precios</h2>
-    ...
-</section>
+    <title>Cursos de Español | Spaans Leren</title>
 
-<button>Reservar clase</button>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <header class="header">
+        <div class="container nav-container">
+
+            <a href="#" class="logo">
+                Spaans <span>Leren</span>
+            </a>
+
+            <button class="menu-button" id="menuButton" aria-label="Abrir menú">
+                ☰
+            </button>
+
+            <nav class="nav" id="navMenu">
+                <a href="#inicio">Inicio</a>
+                <a href="#cursos">Cursos</a>
+                <a href="#precios">Precios</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero" id="inicio">
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <span class="eyebrow">
+                        APRENDE ESPAÑOL
+                    </span>
+
+                    <h1>
+                        Encuentra el curso
+                        <span>perfecto para ti</span>
+                    </h1>
+
+                    <p>
+                        Cursos de español adaptados a tu nivel,
+                        tus objetivos y tu forma de aprender.
+                    </p>
+
+                    <a href="#contacto" class="button button-primary">
+                        Clase de prueba gratis
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CURSOS -->
+        <section class="courses-section" id="cursos">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        NUESTROS CURSOS
+                    </span>
+
+                    <h2>
+                        Aprende a tu ritmo
+                    </h2>
+
+                    <p>
+                        Desde tus primeras palabras en español hasta
+                        conversaciones avanzadas y comunicación profesional.
+                    </p>
+
+                </div>
+
+
+                <div class="courses-grid">
+
+
+                    <!-- A1 -->
+                    <article class="course-card">
+
+                        <div class="course-level">
+                            A1
+                        </div>
+
+                        <h3>
+                            Principiantes
+                        </h3>
+
+                        <p>
+                            ¿Acabas de empezar con el español?
+                            Este curso te dará una base sólida para
+                            comunicarte en situaciones cotidianas.
+                        </p>
+
+                        <h4>Incluye:</h4>
+
+                        <ul>
+                            <li>Saludos y presentaciones</li>
+                            <li>Números, fechas y horarios</li>
+                            <li>Verbos básicos en presente</li>
+                            <li>Descripciones simples</li>
+                            <li>Conversaciones cotidianas</li>
+                        </ul>
+
+                        <div class="objective">
+                            <strong>Objetivo:</strong>
+                            Comunicarte en situaciones básicas del día a día.
+                        </div>
+
+                        <button class="course-button"
+                                data-course="A1 - Principiantes">
+                            Me interesa
+                        </button>
+
+                    </article>
+
+
+                    <!-- A2 -->
+                    <article class="course-card">
+
+                        <div class="course-level">
+                            A2
+                        </div>
+
+                        <h3>
+                            Nivel básico
+                        </h3>
+
+                        <p>
+                            Si ya tienes algunas nociones de español,
+                            este curso te ayudará a mejorar tu fluidez,
+                            gramática y vocabulario.
+                        </p>
+
+                        <h4>Incluye:</h4>
+
+                        <ul>
+                            <li>Pasado y futuro próximo</li>
+                            <li>Rutinas y experiencias personales</li>
+                            <li>Compras, viajes y ocio</li>
+                            <li>Comprensión oral básica</li>
+                            <li>Conversaciones guiadas</li>
+                        </ul>
+
+                        <div class="objective">
+                            <strong>Objetivo:</strong>
+                            Mantener conversaciones sencillas con confianza.
+                        </div>
+
+                        <button class="course-button"
+                                data-course="A2">
+                            Me interesa
+                        </button>
+
+                    </article>
+
+
+                    <!-- B1 -->
+                    <article class="course-card featured">
+
+                        <div class="popular">
+                            MÁS ELEGIDO
+                        </div>
+
+                        <div class="course-level">
+                            B1
+                        </div>
+
+                        <h3>
+                            Nivel intermedio
+                        </h3>
+
+                        <p>
+                            Para quienes quieren mejorar su expresión
+                            oral y escrita y desenvolverse con mayor
+                            autonomía en español.
+                        </p>
+
+                        <h4>Incluye:</h4>
+
+                        <ul>
+                            <li>Tiempos verbales principales</li>
+                            <li>Narración de experiencias</li>
+                            <li>Opiniones y argumentos</li>
+                            <li>Textos y audios reales</li>
+                            <li>Conversación espontánea</li>
+                        </ul>
+
+                        <div class="objective">
+                            <strong>Objetivo:</strong>
+                            Desenvolverte con autonomía en la mayoría
+                            de situaciones.
+                        </div>
+
+                        <button class="course-button"
+                                data-course="B1 - Nivel intermedio">
+                            Me interesa
+                        </button>
+
+                    </article>
+
+
+                    <!-- B2 -->
+                    <article class="course-card">
+
+                        <div class="course-level">
+                            B2
+                        </div>
+
+                        <h3>
+                            Nivel avanzado
+                        </h3>
+
+                        <p>
+                            Perfecciona tu español para utilizarlo
+                            con soltura en contextos sociales,
+                            académicos y laborales.
+                        </p>
+
+                        <h4>Incluye:</h4>
+
+                        <ul>
+                            <li>Subjuntivo y estructuras complejas</li>
+                            <li>Debate y argumentación</li>
+                            <li>Expresiones idiomáticas</li>
+                            <li>Producción escrita avanzada</li>
+                            <li>Pronunciación y naturalidad</li>
+                        </ul>
+
+                        <div class="objective">
+                            <strong>Objetivo:</strong>
+                            Comunicarte con soltura y precisión.
+                        </div>
+
+                        <button class="course-button"
+                                data-course="B2 - Nivel avanzado">
+                            Me interesa
+                        </button>
+
+                    </article>
+
+
+                    <!-- CONVERSACIÓN -->
+                    <article class="course-card">
+
+                        <div class="course-level conversation">
+                            HABLA
+                        </div>
+
+                        <h3>
+                            Conversación en español
+                        </h3>
+
+                        <p class="quote">
+                            “Hablar, practicar y ganar confianza”
+                        </p>
+
+                        <p>
+                            Clases centradas exclusivamente en la
+                            producción oral.
+                        </p>
+
+                        <h4>Ideal para:</h4>
+
+                        <ul>
+                            <li>Estudiantes que entienden español</li>
+                            <li>Personas que necesitan soltarse</li>
+                            <li>Práctica de conversación</li>
+                            <li>Mejorar pronunciación</li>
+                        </ul>
+
+                        <h4>Temas:</h4>
+
+                        <p>
+                            Actualidad, cultura, viajes,
+                            experiencias personales y debates.
+                        </p>
+
+                        <button class="course-button"
+                                data-course="Conversación en español">
+                            Me interesa
+                        </button>
+
+                    </article>
+
+
+                    <!-- FINES ESPECÍFICOS -->
+                    <article class="course-card">
+
+                        <div class="course-level special">
+                            ESPECIAL
+                        </div>
+
+                        <h3>
+                            Cursos para fines específicos
+                        </h3>
+
+                        <p>
+                            Cursos adaptados a tus intereses,
+                            necesidades profesionales y objetivos
+                            personales.
+                        </p>
+
+                        <ul>
+                            <li>Español para viajes</li>
+                            <li>Español para empresas</li>
+                            <li>Perfeccionamiento</li>
+                            <li>Preparación de exámenes</li>
+                        </ul>
+
+                        <div class="objective">
+                            <strong>Objetivo:</strong>
+                            Aprender español de forma práctica
+                            y enfocada.
+                        </div>
+
+                        <button class="course-button"
+                                data-course="Cursos para fines específicos">
+                            Me interesa
+                        </button>
+
+                    </article>
+
+
+                    <!-- NEGOCIOS -->
+                    <article class="course-card business-card">
+
+                        <div class="course-level business">
+                            BUSINESS
+                        </div>
+
+                        <h3>
+                            Español para negocios
+                        </h3>
+
+                        <p class="quote">
+                            “Comunicación profesional efectiva”
+                        </p>
+
+                        <p>
+                            Enfocado en contextos empresariales
+                            y laborales.
+                        </p>
+
+                        <h4>Incluye:</h4>
+
+                        <ul>
+                            <li>Reuniones</li>
+                            <li>Correos formales</li>
+                            <li>Presentaciones</li>
+                            <li>Negociación</li>
+                            <li>Vocabulario corporativo</li>
+                        </ul>
+
+                        <div class="objective">
+                            <strong>Objetivo:</strong>
+                            Trabajar en español con seguridad.
+                        </div>
+
+                        <button class="course-button"
+                                data-course="Español para negocios">
+                            Me interesa
+                        </button>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRUEBA GRATUITA -->
+        <section class="trial-section">
+
+            <div class="container">
+
+                <div class="trial-box">
+
+                    <div>
+                        <span class="eyebrow">
+                            ¿NO SABES QUÉ NIVEL TIENES?
+                        </span>
+
+                        <h2>
+                            Empieza con una clase de prueba
+                        </h2>
+
+                        <p>
+                            Una primera sesión gratuita de 30 minutos
+                            para conocer tu nivel y definir tus objetivos.
+                        </p>
+                    </div>
+
+                    <a href="#contacto"
+                       class="button button-light">
+                        Reservar prueba gratuita
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRECIOS -->
+        <section class="pricing-section" id="precios">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        PRECIOS
+                    </span>
+
+                    <h2>
+                        Empieza sin compromiso
+                    </h2>
+
+                    <p>
+                        Prueba una clase y después elige el bono
+                        que mejor se adapte a ti.
+                    </p>
+
+                </div>
+
+
+                <div class="pricing-grid">
+
+                    <div class="price-card">
+
+                        <span>
+                            PRUEBA
+                        </span>
+
+                        <h3>
+                            Gratis
+                        </h3>
+
+                        <p>
+                            30 minutos
+                        </p>
+
+                        <strong>
+                            Diagnóstico inicial
+                        </strong>
+
+                        <a href="#contacto"
+                           class="button button-outline">
+                            Reservar
+                        </a>
+
+                    </div>
+
+
+                    <div class="price-card">
+
+                        <span>
+                            PACK 5
+                        </span>
+
+                        <h3>
+                            110 €
+                        </h3>
+
+                        <p>
+                            5 clases
+                        </p>
+
+                        <strong>
+                            Clases individuales
+                        </strong>
+
+                        <button class="button button-outline price-interest"
+                                data-course="Pack de 5 clases - 110 €">
+                            Me interesa
+                        </button>
+
+                    </div>
+
+
+                    <div class="price-card price-highlight">
+
+                        <span>
+                            PACK 10
+                        </span>
+
+                        <h3>
+                            200 €
+                        </h3>
+
+                        <p>
+                            10 clases
+                        </p>
+
+                        <strong>
+                            Clases individuales
+                        </strong>
+
+                        <button class="button button-primary price-interest"
+                                data-course="Pack de 10 clases - 200 €">
+                            Me interesa
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACTO -->
+        <section class="contact-section" id="contacto">
+
+            <div class="container contact-container">
+
+                <div class="contact-text">
+
+                    <span class="eyebrow">
+                        CONTACTO
+                    </span>
+
+                    <h2>
+                        ¿Listo para empezar?
+                    </h2>
+
+                    <p>
+                        Cuéntanos qué necesitas y te ayudaremos
+                        a encontrar el curso adecuado para ti.
+                    </p>
+
+                </div>
+
+
+                <form class="contact-form" id="contactForm">
+
+                    <label for="name">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Tu nombre"
+                        required
+                    >
+
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="tu@email.com"
+                        required
+                    >
+
+
+                    <label for="course">
+                        Curso que te interesa
+                    </label>
+
+                    <select id="course" name="course">
+
+                        <option value="">
+                            Selecciona una opción
+                        </option>
+
+                        <option>A1 - Principiantes</option>
+                        <option>A2</option>
+                        <option>B1 - Nivel intermedio</option>
+                        <option>B2 - Nivel avanzado</option>
+                        <option>Conversación en español</option>
+                        <option>Cursos para fines específicos</option>
+                        <option>Español para negocios</option>
+                        <option>Clase de prueba gratuita</option>
+
+                    </select>
+
+
+                    <label for="message">
+                        Mensaje
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        placeholder="Cuéntanos qué necesitas..."
+                    ></textarea>
+
+
+                    <button
+                        type="submit"
+                        class="button button-primary"
+                    >
+                        Enviar consulta
+                    </button>
+
+                    <p class="form-note">
+                        * Este formulario es una demostración.
+                        Posteriormente podemos conectarlo a email,
+                        WhatsApp o al asistente de IA.
+                    </p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div>
+                <strong>
+                    Spaans Leren
+                </strong>
+
+                <p>
+                    Aprende español de forma práctica y natural.
+                </p>
+            </div>
+
+            <p>
+                © <span id="year"></span> Spaans Leren
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- MODAL -->
+    <div class="modal" id="courseModal">
+
+        <div class="modal-content">
+
+            <button
+                class="modal-close"
+                id="modalClose"
+                aria-label="Cerrar"
+            >
+                ×
+            </button>
+
+            <span class="eyebrow">
+                TU ELECCIÓN
+            </span>
+
+            <h2>
+                <span id="selectedCourse">
+                    Curso
+                </span>
+            </h2>
+
+            <p>
+                Has seleccionado este curso.
+                Déjanos tus datos y nos pondremos en contacto contigo.
+            </p>
+
+            <a href="#contacto"
+               class="button button-primary"
+               id="modalContact">
+                Contactar
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
