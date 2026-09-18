@@ -1,0 +1,923 @@
+/* =========================================
+   VARIABLES
+========================================= */
+
+:root {
+    --primary: #176b87;
+    --primary-dark: #0f5067;
+    --secondary: #e7b65c;
+    --dark: #17252d;
+    --text: #44545c;
+    --light: #f5f8f9;
+    --white: #ffffff;
+    --border: #e1e8eb;
+
+    --radius: 18px;
+    --shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+
+    --container: 1180px;
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+
+/* =========================================
+   GENERAL
+========================================= */
+
+.container {
+    width: min(92%, var(--container));
+    margin: auto;
+}
+
+section {
+    scroll-margin-top: 80px;
+}
+
+.eyebrow {
+    display: inline-block;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: var(--primary);
+
+    margin-bottom: 12px;
+}
+
+.section-heading {
+    max-width: 700px;
+    margin: 0 auto 55px;
+
+    text-align: center;
+}
+
+.section-heading h2 {
+    color: var(--dark);
+
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.15;
+
+    margin-bottom: 18px;
+}
+
+.section-heading p {
+    font-size: 1.05rem;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 50px;
+
+    padding: 13px 25px;
+
+    border-radius: 50px;
+
+    border: 2px solid transparent;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button-primary {
+    color: var(--white);
+    background: var(--primary);
+
+    box-shadow:
+        0 8px 20px rgba(23, 107, 135, 0.2);
+}
+
+.button-primary:hover {
+    background: var(--primary-dark);
+}
+
+.button-light {
+    color: var(--primary);
+    background: var(--white);
+}
+
+.button-outline {
+    color: var(--primary);
+    background: transparent;
+
+    border-color: var(--primary);
+}
+
+.button-outline:hover {
+    color: var(--white);
+    background: var(--primary);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    min-height: 72px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: var(--dark);
+
+    font-size: 1.35rem;
+
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.nav {
+    display: flex;
+
+    gap: 30px;
+
+    align-items: center;
+}
+
+.nav a {
+    font-size: 0.95rem;
+
+    font-weight: 600;
+
+    color: var(--dark);
+
+    transition: color 0.2s ease;
+}
+
+.nav a:hover {
+    color: var(--primary);
+}
+
+.menu-button {
+    display: none;
+
+    border: none;
+
+    background: none;
+
+    font-size: 1.7rem;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    min-height: 600px;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef7f9 0%,
+            #ffffff 60%,
+            #f8f1df 100%
+        );
+}
+
+.hero-content {
+    padding: 100px 0;
+}
+
+.hero-text {
+    max-width: 720px;
+}
+
+.hero h1 {
+    color: var(--dark);
+
+    font-size: clamp(2.7rem, 6vw, 5rem);
+
+    line-height: 1.03;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    display: block;
+
+    color: var(--primary);
+}
+
+.hero p {
+    max-width: 600px;
+
+    font-size: 1.2rem;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================
+   COURSES
+========================================= */
+
+.courses-section {
+    padding: 100px 0;
+}
+
+.courses-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.course-card {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 30px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+.course-level {
+    width: fit-content;
+
+    padding: 7px 13px;
+
+    margin-bottom: 18px;
+
+    border-radius: 8px;
+
+    color: var(--white);
+
+    background: var(--primary);
+
+    font-size: 0.75rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.course-level.conversation {
+    background: var(--secondary);
+    color: var(--dark);
+}
+
+.course-level.special {
+    background: #7856a8;
+}
+
+.course-level.business {
+    background: #334e68;
+}
+
+.course-card h3 {
+    color: var(--dark);
+
+    font-size: 1.45rem;
+
+    line-height: 1.2;
+
+    margin-bottom: 14px;
+}
+
+.course-card p {
+    margin-bottom: 18px;
+}
+
+.course-card h4 {
+    color: var(--dark);
+
+    margin: 10px 0 8px;
+
+    font-size: 0.95rem;
+}
+
+.course-card ul {
+    padding-left: 20px;
+
+    margin-bottom: 20px;
+}
+
+.course-card li {
+    margin-bottom: 7px;
+}
+
+.objective {
+    margin-top: auto;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    background: var(--light);
+
+    font-size: 0.9rem;
+}
+
+.objective strong {
+    color: var(--dark);
+}
+
+.quote {
+    color: var(--primary);
+
+    font-weight: 700;
+}
+
+.course-button {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 12px 20px;
+
+    border: 2px solid var(--primary);
+
+    border-radius: 50px;
+
+    color: var(--primary);
+
+    background: transparent;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.course-button:hover {
+    color: var(--white);
+
+    background: var(--primary);
+}
+
+
+/* =========================================
+   FEATURED COURSE
+========================================= */
+
+.course-card.featured {
+    border: 2px solid var(--secondary);
+}
+
+.popular {
+    position: absolute;
+
+    top: -13px;
+
+    right: 20px;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    background: var(--secondary);
+
+    color: var(--dark);
+
+    font-size: 0.7rem;
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   TRIAL
+========================================= */
+
+.trial-section {
+    padding: 80px 0;
+}
+
+.trial-box {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 55px;
+
+    border-radius: 25px;
+
+    color: var(--white);
+
+    background:
+        linear-gradient(
+            120deg,
+            var(--primary),
+            var(--primary-dark)
+        );
+}
+
+.trial-box .eyebrow {
+    color: var(--secondary);
+}
+
+.trial-box h2 {
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+
+    line-height: 1.15;
+
+    margin-bottom: 12px;
+}
+
+.trial-box p {
+    max-width: 650px;
+}
+
+
+/* =========================================
+   PRICING
+========================================= */
+
+.pricing-section {
+    padding: 100px 0;
+
+    background: var(--light);
+}
+
+.pricing-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    max-width: 900px;
+
+    margin: auto;
+}
+
+.price-card {
+    padding: 35px 30px;
+
+    text-align: center;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+.price-card span {
+    font-size: 0.75rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: var(--primary);
+}
+
+.price-card h3 {
+    color: var(--dark);
+
+    font-size: 2.5rem;
+
+    margin: 12px 0 5px;
+}
+
+.price-card p {
+    margin-bottom: 15px;
+}
+
+.price-card strong {
+    display: block;
+
+    margin-bottom: 25px;
+}
+
+.price-highlight {
+    border: 2px solid var(--primary);
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact-section {
+    padding: 100px 0;
+}
+
+.contact-container {
+    display: grid;
+
+    grid-template-columns: 0.8fr 1.2fr;
+
+    gap: 80px;
+
+    align-items: start;
+}
+
+.contact-text h2 {
+    color: var(--dark);
+
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.15;
+
+    margin-bottom: 20px;
+}
+
+.contact-text p {
+    font-size: 1.1rem;
+}
+
+.contact-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.contact-form label {
+    color: var(--dark);
+
+    font-weight: 700;
+
+    margin-top: 8px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 1rem;
+
+    background: var(--white);
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(23, 107, 135, 0.1);
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.form-note {
+    font-size: 0.8rem;
+
+    color: #7b878d;
+
+    margin-top: 5px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    padding: 40px 0;
+
+    color: #d9e4e8;
+
+    background: var(--dark);
+}
+
+.footer-content {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.footer strong {
+    color: var(--white);
+
+    font-size: 1.2rem;
+}
+
+.footer p {
+    margin-top: 5px;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 200;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+
+    width: min(500px, 100%);
+
+    padding: 45px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    background: var(--white);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content h2 {
+    color: var(--dark);
+
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 15px;
+
+    right: 20px;
+
+    border: none;
+
+    background: none;
+
+    color: var(--dark);
+
+    font-size: 2rem;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 950px) {
+
+    .courses-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .pricing-grid {
+        grid-template-columns:
+            1fr;
+            max-width: 450px;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .trial-box {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav {
+        position: absolute;
+
+        top: 72px;
+
+        left: 0;
+
+        right: 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        gap: 0;
+
+        padding: 10px 20px 20px;
+
+        background: var(--white);
+
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav.active {
+        display: flex;
+    }
+
+    .nav a {
+        width: 100%;
+
+        padding: 14px 5px;
+    }
+
+    .hero {
+        min-height: 520px;
+    }
+
+    .hero-content {
+        padding: 75px 0;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .courses-section,
+    .pricing-section,
+    .contact-section {
+        padding: 75px 0;
+    }
+
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trial-box {
+        padding: 35px 25px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 420px) {
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .course-card {
+        padding: 25px 22px;
+    }
+
+    .modal-content {
+        padding: 40px 25px;
+    }
+}
