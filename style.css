@@ -1274,11 +1274,12 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .business-image img {
     width: 100%;
-    max-width: 420px;
+    max-width: 280px;
     height: auto;
     border-radius: 20px;
     box-shadow: var(--shadow);
