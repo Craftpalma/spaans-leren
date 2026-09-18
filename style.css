@@ -1258,4 +1258,46 @@ section {
     }
 
 }
+/* =========================================
+   BUSINESS FEATURE
+========================================= */
 
+.business-feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.business-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.business-image img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    display: block;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .business-feature {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .business-image img {
+        max-width: 360px;
+    }
+
+}
