@@ -5,11 +5,11 @@
 const menuButton = document.getElementById("menuButton");
 const navMenu = document.getElementById("navMenu");
 
-menuButton.addEventListener("click", () => {
-
-    navMenu.classList.toggle("active");
-
-});
+if (menuButton && navMenu) {
+    menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
+}
 
 
 /* Cerrar menú al pulsar un enlace */
@@ -17,13 +17,9 @@ menuButton.addEventListener("click", () => {
 const navLinks = document.querySelectorAll(".nav a");
 
 navLinks.forEach((link) => {
-
     link.addEventListener("click", () => {
-
         navMenu.classList.remove("active");
-
     });
-
 });
 
 
@@ -33,134 +29,256 @@ navLinks.forEach((link) => {
 
 const year = document.getElementById("year");
 
-year.textContent = new Date().getFullYear();
+if (year) {
+    year.textContent = new Date().getFullYear();
+}
 
 
 /* =========================================
-   MODAL DE CURSOS
+   CHATBOT
 ========================================= */
 
-const courseButtons =
-    document.querySelectorAll(".course-button, .price-interest");
+const chatbotButton =
+    document.getElementById("chatbotButton");
 
-const modal =
-    document.getElementById("courseModal");
+const chatbotWindow =
+    document.getElementById("chatbotWindow");
 
-const modalClose =
-    document.getElementById("modalClose");
+const chatbotClose =
+    document.getElementById("chatbotClose");
 
-const selectedCourse =
-    document.getElementById("selectedCourse");
+const chatbotInput =
+    document.getElementById("chatbotInput");
 
-const modalContact =
-    document.getElementById("modalContact");
+const chatbotSend =
+    document.getElementById("chatbotSend");
+
+const chatbotMessages =
+    document.getElementById("chatbotMessages");
 
 
-courseButtons.forEach((button) => {
+/* Abrir chatbot */
 
-    button.addEventListener("click", () => {
-
-        const course =
-            button.getAttribute("data-course");
-
-        selectedCourse.textContent = course;
-
-        modal.classList.add("active");
-
+if (chatbotButton) {
+    chatbotButton.addEventListener("click", () => {
+        chatbotWindow.classList.toggle("active");
     });
-
-});
-
-
-/* Cerrar modal */
-
-modalClose.addEventListener("click", () => {
-
-    modal.classList.remove("active");
-
-});
+}
 
 
-/* Cerrar haciendo clic fuera */
+/* Cerrar chatbot */
 
-modal.addEventListener("click", (event) => {
+if (chatbotClose) {
+    chatbotClose.addEventListener("click", () => {
+        chatbotWindow.classList.remove("active");
+    });
+}
 
-    if (event.target === modal) {
 
-        modal.classList.remove("active");
+/* =========================================
+   AÑADIR MENSAJE AL CHAT
+========================================= */
+
+function addMessage(text, type) {
+
+    const message = document.createElement("div");
+
+    message.classList.add(
+        type === "user"
+            ? "user-message"
+            : "bot-message"
+    );
+
+    message.textContent = text;
+
+    chatbotMessages.appendChild(message);
+
+    chatbotMessages.scrollTop =
+        chatbotMessages.scrollHeight;
+}
+
+
+/* =========================================
+   RESPUESTAS TEMPORALES
+========================================= */
+
+function getBotResponse(question) {
+
+    const text = question.toLowerCase();
+
+
+    if (
+        text.includes("curso") ||
+        text.includes("nivel")
+    ) {
+
+        return "Tenemos cursos desde A1 hasta B2, además de conversación, cursos para fines específicos y español para negocios.";
 
     }
 
-});
+
+    if (
+        text.includes("precio") ||
+        text.includes("precios") ||
+        text.includes("cuesta") ||
+        text.includes("coste")
+    ) {
+
+        return "La clase de diagnóstico de 30 minutos es gratuita. También tenemos un pack de 5 clases por 110 € y un pack de 10 clases por 200 €.";
+
+    }
+
+
+    if (
+        text.includes("prueba") ||
+        text.includes("diagnóstico") ||
+        text.includes("gratis")
+    ) {
+
+        return "La clase de diagnóstico es gratuita y dura 30 minutos. Sirve para conocer tu nivel y establecer tus objetivos.";
+
+    }
+
+
+    if (
+        text.includes("reserv") ||
+        text.includes("clase")
+    ) {
+
+        return "¡Perfecto! Podemos ayudarte a reservar una clase. Para empezar, dime tu nombre y qué curso te interesa.";
+
+    }
+
+
+    if (
+        text.includes("hola") ||
+        text.includes("buenas")
+    ) {
+
+        return "¡Hola! 👋 Encantado de ayudarte. Puedes preguntarme sobre cursos, precios o la clase de prueba gratuita.";
+
+    }
+
+
+    return "¡Gracias por tu pregunta! 😊 De momento estoy aprendiendo. Puedes preguntarme por nuestros cursos, precios o la clase de prueba gratuita.";
+
+}
 
 
 /* =========================================
-   BOTÓN DEL MODAL
+   ENVIAR MENSAJE
 ========================================= */
 
-modalContact.addEventListener("click", () => {
+function sendMessage() {
 
-    modal.classList.remove("active");
+    const text =
+        chatbotInput.value.trim();
 
-});
+
+    if (text === "") {
+        return;
+    }
+
+
+    /* Mensaje del usuario */
+
+    addMessage(text, "user");
+
+
+    /* Limpiar campo */
+
+    chatbotInput.value = "";
+
+
+    /* Respuesta del asistente */
+
+    setTimeout(() => {
+
+        const response =
+            getBotResponse(text);
+
+        addMessage(response, "bot");
+
+    }, 500);
+}
+
+
+/* Botón enviar */
+
+if (chatbotSend) {
+    chatbotSend.addEventListener(
+        "click",
+        sendMessage
+    );
+}
 
 
 /* =========================================
-   FORMULARIO
+   ENTER PARA ENVIAR
 ========================================= */
 
-const contactForm =
-    document.getElementById("contactForm");
+if (chatbotInput) {
+
+    chatbotInput.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+}
 
 
-contactForm.addEventListener("submit", (event) => {
+/* =========================================
+   BOTONES DE OPCIONES
+========================================= */
 
-    event.preventDefault();
-
-    const name =
-        document.getElementById("name").value;
-
-    const course =
-        document.getElementById("course").value;
-
-
-    /*
-        DE MOMENTO NO ENVIAMOS NADA.
-
-        Más adelante podemos conectar este formulario
-        con:
-
-        - Email
-        - WhatsApp
-        - Google Sheets
-        - Formspree
-        - Supabase
-        - Nuestro agente IA
-    */
-
-
-    alert(
-        `¡Gracias, ${name}!\n\n` +
-        `Hemos recibido tu consulta` +
-        (course ? ` sobre ${course}.` : ".")
+const chatbotOptions =
+    document.querySelectorAll(
+        ".chatbot-options button"
     );
 
 
-    contactForm.reset();
+chatbotOptions.forEach((button) => {
 
-});
+    button.addEventListener("click", () => {
+
+        const question =
+            button.getAttribute(
+                "data-question"
+            );
 
 
-/* =========================================
-   ESCAPE PARA CERRAR EL MODAL
-========================================= */
+        /* Mostrar pregunta del usuario */
 
-document.addEventListener("keydown", (event) => {
+        addMessage(
+            question,
+            "user"
+        );
 
-    if (event.key === "Escape") {
 
-        modal.classList.remove("active");
+        /* Responder */
 
-    }
+        setTimeout(() => {
+
+            const response =
+                getBotResponse(question);
+
+            addMessage(
+                response,
+                "bot"
+            );
+
+        }, 500);
+
+    });
 
 });
