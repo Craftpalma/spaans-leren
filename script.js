@@ -169,48 +169,88 @@ function getBotResponse(question) {
    ENVIAR MENSAJE
 ========================================= */
 
-function sendMessage() {
+/* =========================================
+   ENVIAR MENSAJE AL WORKER
+========================================= */
 
-    const text =
-        chatbotInput.value.trim();
+async function sendMessage() {
 
+    const text = chatbotInput.value.trim();
 
     if (text === "") {
         return;
     }
 
-
-    /* Mensaje del usuario */
-
+    /* Mostrar mensaje del usuario */
     addMessage(text, "user");
 
-
     /* Limpiar campo */
-
     chatbotInput.value = "";
 
+    /* Mensaje temporal */
+    addMessage("Espera un momento...", "bot");
 
-    /* Respuesta del asistente */
+    try {
 
-    setTimeout(() => {
+        const response = await fetch(
+            "https://spaans-leren-chatbot.newpalma.workers.dev/",
+            {
+                method: "POST",
 
-        const response =
-            getBotResponse(text);
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-        addMessage(response, "bot");
+                body: JSON.stringify({
+                    message: text
+                })
+            }
+        );
 
-    }, 500);
+        const data = await response.json();
+
+        /* Eliminar mensaje temporal */
+        const messages = chatbotMessages.children;
+
+        if (messages.length > 0) {
+            messages[messages.length - 1].remove();
+        }
+
+        /* Mostrar respuesta del Worker */
+        if (data.reply) {
+
+            addMessage(data.reply, "bot");
+
+        } else if (data.message) {
+
+            addMessage(data.message, "bot");
+
+        } else {
+
+            addMessage(
+                "He recibido tu mensaje, pero no tengo una respuesta todavía.",
+                "bot"
+            );
+        }
+
+    } catch (error) {
+
+        console.error("Error conectando con el Worker:", error);
+
+        /* Eliminar mensaje temporal */
+        const messages = chatbotMessages.children;
+
+        if (messages.length > 0) {
+            messages[messages.length - 1].remove();
+        }
+
+        addMessage(
+            "No he podido conectar con el asistente. Inténtalo de nuevo.",
+            "bot"
+        );
+    }
 }
 
-
-/* Botón enviar */
-
-if (chatbotSend) {
-    chatbotSend.addEventListener(
-        "click",
-        sendMessage
-    );
-}
 
 
 /* =========================================
