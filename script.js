@@ -296,28 +296,10 @@ chatbotOptions.forEach((button) => {
                 "data-question"
             );
 
+        /* Enviar la pregunta al Worker */
+        chatbotInput.value = question;
 
-        /* Mostrar pregunta del usuario */
-
-        addMessage(
-            question,
-            "user"
-        );
-
-
-        /* Responder */
-
-        setTimeout(() => {
-
-            const response =
-                getBotResponse(question);
-
-            addMessage(
-                response,
-                "bot"
-            );
-
-        }, 500);
+        sendMessage();
 
     });
 
