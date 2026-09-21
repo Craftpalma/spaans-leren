@@ -223,12 +223,12 @@ async function sendMessage() {
 
         } else if (data.message) {
 
-            addMessage(data.message, "bot");
+            addMessage("Error del asistente: " + data.error, "bot");
 
         } else {
 
             addMessage(
-                "He recibido tu mensaje, pero no tengo una respuesta todavía.",
+                "El worker respondio, pero no recibimos una respuesta valida." + data.error,
                 "bot"
             );
         }
