@@ -276,6 +276,18 @@ if (chatbotInput) {
 
 }
 
+/* =========================================
+   BOTÓN ENVIAR
+========================================= */
+
+if (chatbotSend) {
+
+    chatbotSend.addEventListener(
+        "click",
+        sendMessage
+    );
+
+}
 
 /* =========================================
    BOTONES DE OPCIONES
