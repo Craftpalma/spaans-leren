@@ -248,6 +248,27 @@ function selectTime(dayName, time) {
 
             return;
         }
+       // Comprobar si el contacto tiene formato de email
+            const emailPattern =
+             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Comprobar si el contacto tiene formato de teléfono
+            const phonePattern =
+             /^\+?[0-9\s().-]{7,20}$/;
+
+
+      // Si no es ni email ni teléfono
+      if (
+          !emailPattern.test(studentContact) &&
+          !phonePattern.test(studentContact)
+         ) {
+
+    alert(
+        "Por favor, introduce un email o un teléfono válido."
+    );
+
+    return;
+}
 
 
         requestClass.textContent = "🟡 Pre-reserva realizada";
