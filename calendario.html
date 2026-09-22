@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calendario de clases | Spaans Leren</title>
+
+    <meta name="description" content="Consulta la disponibilidad de clases de español de Spaans Leren.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                Spaans <span>Leren</span>
+            </a>
+
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="index.html#cursos">Cursos</a>
+                <a href="index.html#precios">Precios</a>
+                <a href="calendario.html">Calendario</a>
+                <a href="index.html#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- CALENDARIO -->
+    <main class="calendar-page">
+
+        <section class="calendar-section">
+
+            <h1>Calendario de clases</h1>
+
+            <p class="calendar-intro">
+                Consulta nuestra disponibilidad para clases de español.
+            </p>
+
+            <div class="calendar-info">
+                <strong>Horario habitual</strong>
+                <p>Lunes a viernes · 09:00 - 20:00</p>
+            </div>
+
+
+            <!-- CABECERA DEL CALENDARIO -->
+            <div class="calendar-header">
+
+                <button id="previousMonth" type="button">
+                    ←
+                </button>
+
+                <h2 id="currentMonth"></h2>
+
+                <button id="nextMonth" type="button">
+                    →
+                </button>
+
+            </div>
+
+
+            <!-- DÍAS DE LA SEMANA -->
+            <div class="calendar-weekdays">
+                <div>Lun</div>
+                <div>Mar</div>
+                <div>Mié</div>
+                <div>Jue</div>
+                <div>Vie</div>
+                <div>Sáb</div>
+                <div>Dom</div>
+            </div>
+
+
+            <!-- DÍAS -->
+            <div id="calendarDays" class="calendar-days"></div>
+
+
+            <!-- HORARIOS -->
+            <div id="availableTimes" class="available-times">
+
+                <h3>Selecciona un día</h3>
+
+                <p>
+                    Aquí aparecerán los horarios disponibles.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            © <span id="currentYear"></span> Spaans Leren
+        </p>
+    </footer>
+
+
+    <script src="calendario.js"></script>
+
+</body>
+</html>
