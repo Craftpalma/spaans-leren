@@ -117,40 +117,64 @@ function renderCalendar() {
 
 function selectDay(year, month, day) {
 
-    const selectedDate = new Date(year, month, day);
+    const selectedDate = new Date(year, month, day);
 
-    const dayName = selectedDate.toLocaleDateString("es-ES", {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    });
+    const dayName = selectedDate.toLocaleDateString("es-ES", {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+    });
+
+    const times = [
+        "09:00",
+        "10:00",
+        "11:00",
+        "12:00",
+        "13:00",
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00"
+    ];
 
 
-    availableTimes.innerHTML = `
+    availableTimes.innerHTML = `
 
-        <h3>${dayName}</h3>
+        <h3>${dayName}</h3>
 
-        <p>Horarios disponibles:</p>
+        <p>Selecciona un horario:</p>
 
-        <div class="time-list">
+        <div class="time-list"></div>
 
-            <button>09:00</button>
-            <button>10:00</button>
-            <button>11:00</button>
-            <button>12:00</button>
-            <button>13:00</button>
-            <button>14:00</button>
-            <button>15:00</button>
-            <button>16:00</button>
-            <button>17:00</button>
-            <button>18:00</button>
-            <button>19:00</button>
+    `;
 
-        </div>
 
-    `;
+    const timeList = availableTimes.querySelector(".time-list");
+
+
+    times.forEach(function(time) {
+
+        const button = document.createElement("button");
+
+        button.type = "button";
+
+        button.textContent = time;
+
+        button.classList.add("available-time");
+
+        button.addEventListener("click", function() {
+
+            selectTime(dayName, time);
+
+        });
+
+        timeList.appendChild(button);
+
+    });
+
 }
-
 
 // =========================================
 // CAMBIAR DE MES
