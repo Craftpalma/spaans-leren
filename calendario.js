@@ -54,7 +54,7 @@ function renderCalendar() {
     const firstDay = new Date(year, month, 1);
 
     let startingDay = firstDay.getDay();
-      startingDay = (startingDay + 6) % 7;
+     const startingDay = (new Date(year, month, 1).getDay() + 6) % 7;
     // Convertimos domingo = 0 a lunes = 0
    /* if (startingDay === 0) {
         startingDay = 6;
