@@ -175,6 +175,48 @@ function selectDay(year, month, day) {
     });
 
 }
+// =========================================
+// SELECCIONAR HORA
+// =========================================
+function selectTime(dayName, time) {
+
+    availableTimes.innerHTML = `
+
+        <h3>${dayName}</h3>
+
+        <div class="selected-time">
+
+            <p>Has seleccionado:</p>
+
+            <strong>${time}</strong>
+
+            <p>
+                Este horario está disponible para solicitar una clase.
+            </p>
+
+            <button type="button" id="requestClass">
+                Solicitar esta hora
+            </button>
+
+        </div>
+
+    `;
+
+
+    const requestClass = document.getElementById("requestClass");
+
+
+    requestClass.addEventListener("click", function() {
+
+        alert(
+            `Solicitud de clase:\n\n${dayName} a las ${time}`
+        );
+
+    });
+
+}
+
+
 
 // =========================================
 // CAMBIAR DE MES
