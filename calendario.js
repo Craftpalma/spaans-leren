@@ -190,12 +190,38 @@ function selectTime(dayName, time) {
             <strong>${time}</strong>
 
             <p>
-                Este horario está disponible para solicitar una clase.
+                Esta hora está disponible para solicitar una clase.
             </p>
 
-            <button type="button" id="requestClass">
-                Solicitar esta hora
-            </button>
+            <div class="reservation-form">
+
+                <label for="studentName">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Tu nombre"
+                    required
+                >
+
+                <label for="studentContact">
+                    Email o teléfono / WhatsApp
+                </label>
+
+                <input
+                    type="text"
+                    id="studentContact"
+                    placeholder="Tu email o teléfono"
+                    required
+                >
+
+                <button type="button" id="requestClass">
+                    🟡 Solicitar esta hora
+                </button>
+
+            </div>
 
         </div>
 
@@ -207,15 +233,39 @@ function selectTime(dayName, time) {
 
     requestClass.addEventListener("click", function() {
 
+        const studentName =
+            document.getElementById("studentName").value.trim();
+
+        const studentContact =
+            document.getElementById("studentContact").value.trim();
+
+
+        if (!studentName || !studentContact) {
+
+            alert(
+                "Por favor, introduce tu nombre y un email o teléfono."
+            );
+
+            return;
+        }
+
+
+        requestClass.textContent = "🟡 Pre-reserva realizada";
+
+        requestClass.disabled = true;
+
+
         alert(
-            `Solicitud de clase:\n\n${dayName} a las ${time}`
+            `Solicitud enviada:\n\n` +
+            `${dayName} a las ${time}\n` +
+            `Nombre: ${studentName}\n` +
+            `Contacto: ${studentContact}\n\n` +
+            `La profesora debe confirmar la reserva.`
         );
 
     });
 
 }
-
-
 
 // =========================================
 // CAMBIAR DE MES
