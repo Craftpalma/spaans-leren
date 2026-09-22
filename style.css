@@ -1362,15 +1362,18 @@ section {
 /* DÍAS DE LA SEMANA */
 
 .calendar-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
     gap: 6px;
+    width: 100%;
     margin-bottom: 6px;
     font-weight: bold;
 }
 
 .calendar-weekdays div {
     padding: 10px 5px;
+    text-align: center;
+    min-width: 0;
 }
 
 
