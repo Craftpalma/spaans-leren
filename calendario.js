@@ -165,7 +165,7 @@ function selectDay(year, month, day) {
 
         button.addEventListener("click", function() {
 
-            selectTime(dayName, time);
+            selectTime(dayName, time,this);
 
         });
 
@@ -177,7 +177,7 @@ function selectDay(year, month, day) {
 // =========================================
 // SELECCIONAR HORA
 // =========================================
-function selectTime(dayName, time) {
+function selectTime(dayName, time, timeButton) {
 
     availableTimes.innerHTML = `
 
@@ -275,6 +275,8 @@ function selectTime(dayName, time) {
 
         requestClass.disabled = true;
 
+       timeButton.classList.add("pre-reserved");
+       timeButton.disabled = true;
 
         alert(
             `Solicitud enviada:\n\n` +
