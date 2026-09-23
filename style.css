@@ -1511,11 +1511,15 @@ section {
 .legend-color.pre-reserved {
     background: #fff1a8;
     border-color: #e7b65c;
+   //para los bordes
+   border: 2px solid #e7b65c;
 }
 
 .legend-color.booked {
     background: #f5d6d6;
     border-color: #d99a9a;
+   //para los bordes 
+   border: 2px solid #d99a9a;
 }
 
 /* MÓVIL */
