@@ -1462,6 +1462,11 @@ section {
 .calendar-day.unavailable {
     background: #eeeeee;
 }
+.time-list button.pre-reserved {
+   background: #fff1a8;
+   border-color: #e7b65c;
+   color: #17252d;
+}
 
 
 /* MÓVIL */
