@@ -1521,6 +1521,13 @@ section {
    //para los bordes 
    border: 2px solid #d99a9a;
 }
+.calendar-day.both {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(90deg, #e7b65c 50%, #d99a9a 50%) border-box;
+}
+
 
 /* MÓVIL */
 
