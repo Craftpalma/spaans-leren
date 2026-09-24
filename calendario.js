@@ -109,71 +109,151 @@ function renderCalendar() {
     }
 }
 
-
 // =========================================
 // SELECCIONAR DÍA
 // =========================================
 
-function selectDay(year, month, day) {
+async function selectDay(year, month, day) {
 
-    const selectedDate = new Date(year, month, day);
+    const selectedDate = new Date(year, month, day);
 
-    const dayName = selectedDate.toLocaleDateString("es-ES", {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    });
+    const dayName = selectedDate.toLocaleDateString("es-ES", {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+    });
 
-    const times = [
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00"
-    ];
+    // Fecha en formato YYYY-MM-DD
+    const dateString =
+        `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
+    availableTimes.innerHTML = `
 
-    availableTimes.innerHTML = `
+        <h3>${dayName}</h3>
 
-        <h3>${dayName}</h3>
+        <p>Comprobando disponibilidad...</p>
 
-        <p>Selecciona un horario:</p>
+        <div class="time-list"></div>
 
-        <div class="time-list"></div>
+    `;
 
-    `;
+    const timeList =
+        availableTimes.querySelector(".time-list");
 
 
-    const timeList = availableTimes.querySelector(".time-list");
+    try {
+
+        const response = await fetch(
+            `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`
+        );
+
+        const data = await response.json();
 
 
-    times.forEach(function(time) {
+        if (!data.ok) {
 
-        const button = document.createElement("button");
+            throw new Error(
+                data.error || "No se pudo consultar la disponibilidad."
+            );
 
-        button.type = "button";
+        }
 
-        button.textContent = time;
 
-        button.classList.add("available-time");
+        data.availability.forEach(function(slot) {
 
-        button.addEventListener("click", function() {
+            const button =
+                document.createElement("button");
 
-            selectTime(dayName, time,this);
+            button.type = "button";
 
-        });
+            button.textContent = slot.time;
 
-        timeList.appendChild(button);
 
-    });
+            // =====================================
+            // DISPONIBLE
+            // =====================================
+
+            if (slot.status === "available") {
+
+                button.classList.add("available-time");
+
+                button.addEventListener("click", function() {
+
+                    selectTime(
+                        dayName,
+                        slot.time,
+                        button
+                    );
+
+                });
+
+            }
+
+
+            // =====================================
+            // PRE-RESERVADO
+            // =====================================
+
+            else if (slot.status === "pre_reserved") {
+
+                button.classList.add("pre-reserved");
+
+                button.disabled = true;
+
+            }
+
+
+            // =====================================
+            // RESERVADO
+            // =====================================
+
+            else if (slot.status === "booked") {
+
+                button.classList.add("booked");
+
+                button.disabled = true;
+
+            }
+
+
+            // =====================================
+            // OTRO ESTADO
+            // =====================================
+
+            else {
+
+                button.disabled = true;
+
+            }
+
+
+            timeList.appendChild(button);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Error consultando disponibilidad:",
+            error
+        );
+
+        availableTimes.innerHTML = `
+
+            <h3>${dayName}</h3>
+
+            <p>
+                No se ha podido consultar la disponibilidad.
+                Inténtalo de nuevo.
+            </p>
+
+        `;
+
+    }
 
 }
+
 // =========================================
 // SELECCIONAR HORA
 // =========================================
