@@ -257,7 +257,7 @@ async function selectDay(year, month, day) {
 // =========================================
 // SELECCIONAR HORA
 // =========================================
-function selectTime(dayName, time, timeButton) {
+async function selectTime(dayName, time, timeButton) {
 
     availableTimes.innerHTML = `
 
@@ -308,17 +308,26 @@ function selectTime(dayName, time, timeButton) {
     `;
 
 
-    const requestClass = document.getElementById("requestClass");
+    const requestClass =
+        document.getElementById("requestClass");
 
 
-    requestClass.addEventListener("click", function() {
+    requestClass.addEventListener("click", async function() {
 
         const studentName =
-            document.getElementById("studentName").value.trim();
+            document.getElementById("studentName")
+                .value
+                .trim();
 
         const studentContact =
-            document.getElementById("studentContact").value.trim();
+            document.getElementById("studentContact")
+                .value
+                .trim();
 
+
+        // =====================================
+        // COMPROBAR CAMPOS
+        // =====================================
 
         if (!studentName || !studentContact) {
 
@@ -328,43 +337,177 @@ function selectTime(dayName, time, timeButton) {
 
             return;
         }
-       // Comprobar si el contacto tiene formato de email
-            const emailPattern =
-             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      // Comprobar si el contacto tiene formato de teléfono
-            const phonePattern =
-             /^\+?[0-9\s().-]{7,20}$/;
 
 
-      // Si no es ni email ni teléfono
-      if (
-          !emailPattern.test(studentContact) &&
-          !phonePattern.test(studentContact)
-         ) {
+        // =====================================
+        // COMPROBAR EMAIL / TELÉFONO
+        // =====================================
 
-    alert(
-        "Por favor, introduce un email o un teléfono válido."
-    );
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    return;
-}
+        const phonePattern =
+            /^\+?[0-9\s().-]{7,20}$/;
 
 
-        requestClass.textContent = "🟡 Pre-reserva realizada";
+        if (
+            !emailPattern.test(studentContact) &&
+            !phonePattern.test(studentContact)
+        ) {
+
+            alert(
+                "Por favor, introduce un email o un teléfono válido."
+            );
+
+            return;
+        }
+
+
+        // =====================================
+        // OBTENER FECHA
+        // =====================================
+
+        const selectedDate =
+            new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                parseInt(
+                    dayName.match(/\d+/)[0]
+                )
+            );
+
+        const dateString =
+            `${selectedDate.getFullYear()}-` +
+            `${String(selectedDate.getMonth() + 1).padStart(2, "0")}-` +
+            `${String(selectedDate.getDate()).padStart(2, "0")}`;
+
+
+        // =====================================
+        // DESACTIVAR BOTÓN DURANTE LA PETICIÓN
+        // =====================================
 
         requestClass.disabled = true;
 
-       timeButton.classList.add("pre-reserved");
-       timeButton.disabled = true;
+        requestClass.textContent =
+            "⏳ Comprobando disponibilidad...";
 
-        alert(
-            `Solicitud enviada:\n\n` +
-            `${dayName} a las ${time}\n` +
-            `Nombre: ${studentName}\n` +
-            `Contacto: ${studentContact}\n\n` +
-            `La profesora debe confirmar la reserva.`
-        );
+
+        try {
+
+            const response = await fetch(
+                "https://spaans-leren-chatbot.newpalma.workers.dev/",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        action: "create_reservation",
+                        date: dateString,
+                        time: time,
+                        name: studentName,
+                        contact: studentContact,
+                        class_type: "diagnóstico",
+                        source: "calendar"
+                    })
+                }
+            );
+
+
+            const data =
+                await response.json();
+
+
+            // =====================================
+            // RESERVA CREADA
+            // =====================================
+
+            if (
+                response.ok &&
+                data.ok &&
+                data.created
+            ) {
+
+                requestClass.textContent =
+                    "🟡 Pre-reserva realizada";
+
+
+                timeButton.classList.add(
+                    "pre-reserved"
+                );
+
+                timeButton.disabled = true;
+
+
+                alert(
+                    `Solicitud enviada:\n\n` +
+                    `${dayName} a las ${time}\n` +
+                    `Nombre: ${studentName}\n` +
+                    `Contacto: ${studentContact}\n\n` +
+                    `La profesora debe confirmar la reserva.`
+                );
+
+
+                return;
+            }
+
+
+            // =====================================
+            // HORA YA OCUPADA
+            // =====================================
+
+            if (
+                response.status === 409 ||
+                data.status === "pre_reserved" ||
+                data.status === "booked"
+            ) {
+
+                requestClass.disabled = false;
+
+                requestClass.textContent =
+                    "Hora no disponible";
+
+
+                alert(
+                    "Lo sentimos, esta hora acaba de ser reservada por otra persona."
+                );
+
+
+                return;
+            }
+
+
+            // =====================================
+            // OTRO ERROR
+            // =====================================
+
+            throw new Error(
+                data.error ||
+                "No se pudo realizar la reserva."
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Error creando pre-reserva:",
+                error
+            );
+
+
+            requestClass.disabled = false;
+
+            requestClass.textContent =
+                "🟡 Solicitar esta hora";
+
+
+            alert(
+                "No se ha podido realizar la solicitud. " +
+                "Por favor, inténtalo de nuevo."
+            );
+        }
 
     });
 
