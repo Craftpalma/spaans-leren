@@ -224,7 +224,33 @@ async function sendMessage() {
 
         /* Mostrar respuesta del Worker */
         if (data.reply) {
+/*añadido para memoria*/   /* Guardar conversación */
+               /* Guardar conversación */
 
+    conversationHistory.push({
+
+        role: "user",
+
+        parts: [
+            {
+                text: text
+            }
+        ]
+
+    });
+
+    conversationHistory.push({
+
+        role: "model",
+
+        parts: [
+            {
+                text: data.reply
+            }
+        ]
+
+    });
+           /*memoria hasta aqui*/
             addMessage(data.reply, "bot");
 
         } else if (data.message) {
