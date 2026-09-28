@@ -168,151 +168,167 @@ function getBotResponse(question) {
 /* =========================================
    ENVIAR MENSAJE
 ========================================= */
-
 /* =========================================
-   ENVIAR MENSAJE AL WORKER
+   MEMORIA DE LA CONVERSACIÓN
 ========================================= */
 
+let conversationHistory = [];
+/* =========================================
+   ENVIAR MENSAJE AL WORKER Mod Memoria
+========================================= */
 async function sendMessage() {
 
-    const text = chatbotInput.value.trim();
+    const text =
+        chatbotInput.value.trim();
 
     if (text === "") {
+
         return;
+
     }
 
     /* Mostrar mensaje del usuario */
-    addMessage(text, "user");
+
+    addMessage(
+        text,
+        "user"
+    );
 
     /* Limpiar campo */
+
     chatbotInput.value = "";
 
     /* Mensaje temporal */
-    addMessage("Espera un momento...", "bot");
+
+    addMessage(
+        "Espera un momento...",
+        "bot"
+    );
 
     try {
 
-        const response = await fetch(
-            "https://spaans-leren-chatbot.newpalma.workers.dev/",
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                "https://spaans-leren-chatbot.newpalma.workers.dev/",
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
-                    message: text
-                })
-            }
-        );
+                    body: JSON.stringify({
 
-        const data = await response.json();
+                        message: text,
+
+                        history:
+                            conversationHistory
+
+                    })
+                }
+            );
+
+        const data =
+            await response.json();
 
         /* Eliminar mensaje temporal */
-        const messages = chatbotMessages.children;
+
+        const messages =
+            chatbotMessages.children;
 
         if (messages.length > 0) {
-            messages[messages.length - 1].remove();
+
+            messages[
+                messages.length - 1
+            ].remove();
+
         }
 
         /* Mostrar respuesta del Worker */
+
         if (data.reply) {
 
-            addMessage(data.reply, "bot");
+            addMessage(
+                data.reply,
+                "bot"
+            );
+
+            /* Guardar conversación */
+
+            conversationHistory.push({
+
+                role: "user",
+
+                parts: [
+                    {
+                        text: text
+                    }
+                ]
+
+            });
+
+            conversationHistory.push({
+
+                role: "model",
+
+                parts: [
+                    {
+                        text: data.reply
+                    }
+                ]
+
+            });
 
         } else if (data.message) {
 
-            addMessage("Error del asistente: " + data.error, "bot");
+            addMessage(
+                "Error del asistente: " +
+                data.error,
+                "bot"
+            );
 
         } else {
 
             addMessage(
-                "El worker respondio, pero no recibimos una respuesta valida." + data.error,
+
+                "El worker respondio, pero no recibimos una respuesta valida." +
+                (data.error || ""),
+
                 "bot"
+
             );
+
         }
 
     } catch (error) {
 
-        console.error("Error conectando con el Worker:", error);
+        console.error(
+            "Error conectando con el Worker:",
+            error
+        );
 
         /* Eliminar mensaje temporal */
-        const messages = chatbotMessages.children;
+
+        const messages =
+            chatbotMessages.children;
 
         if (messages.length > 0) {
-            messages[messages.length - 1].remove();
+
+            messages[
+                messages.length - 1
+            ].remove();
+
         }
 
         addMessage(
+
             "No he podido conectar con el asistente. Inténtalo de nuevo.",
+
             "bot"
+
         );
+
     }
-}
-
-
-
-/* =========================================
-   ENTER PARA ENVIAR
-========================================= */
-
-if (chatbotInput) {
-
-    chatbotInput.addEventListener(
-        "keydown",
-        (event) => {
-
-            if (event.key === "Enter") {
-
-                event.preventDefault();
-
-                sendMessage();
-
-            }
-
-        }
-    );
 
 }
-
-/* =========================================
-   BOTÓN ENVIAR
-========================================= */
-
-if (chatbotSend) {
-
-    chatbotSend.addEventListener(
-        "click",
-        sendMessage
-    );
-
-}
-
-/* =========================================
-   BOTONES DE OPCIONES
-========================================= */
-
-const chatbotOptions =
-    document.querySelectorAll(
-        ".chatbot-options button"
-    );
-
-
-chatbotOptions.forEach((button) => {
-
-    button.addEventListener("click", () => {
-
-        const question =
-            button.getAttribute(
-                "data-question"
-            );
-
-        /* Enviar la pregunta al Worker */
-        chatbotInput.value = question;
-
-        sendMessage();
-
-    });
-
-});
