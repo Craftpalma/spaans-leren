@@ -348,6 +348,7 @@ chatbotOptions.forEach((button) => {
     });
 
 });
+```js
 /* =========================================
    FORMULARIO DE CONTACTO → WORKER → RESEND
 ========================================= */
@@ -355,116 +356,167 @@ chatbotOptions.forEach((button) => {
 const contactForm =
     document.getElementById("contactForm");
 
-const formMessage =
-    document.getElementById("formMessage");
-
 
 if (contactForm) {
 
-    contactForm.addEventListener("submit", async (event) => {
+    contactForm.addEventListener(
+        "submit",
+        async (event) => {
 
-        event.preventDefault();
-
-        const name =
-            document.getElementById("name").value.trim();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const course =
-            document.getElementById("course").value;
-
-        const message =
-            document.getElementById("message").value.trim();
+            event.preventDefault();
 
 
-        /* Mensaje mientras se envía */
+            /* =====================================
+               OBTENER DATOS DEL FORMULARIO
+            ===================================== */
 
-        if (formMessage) {
+            const name =
+                document.getElementById("name").value.trim();
 
-            formMessage.textContent =
-                "Enviando consulta...";
+            const email =
+                document.getElementById("email").value.trim();
 
-        }
+            const course =
+                document.getElementById("course").value;
 
-
-        try {
-
-            const response = await fetch(
-                "https://spaans-leren-chatbot.newpalma.workers.dev/",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        type: "contact",
-
-                        name: name,
-
-                        email: email,
-
-                        course: course,
-
-                        message: message
-
-                    })
-                }
-            );
+            const message =
+                document.getElementById("message").value.trim();
 
 
-            const data =
-                await response.json();
+            /* =====================================
+               COMPROBAR DATOS
+            ===================================== */
 
+            if (!name || !email || !message) {
 
-            if (data.ok) {
-
-                if (formMessage) {
-
-                    formMessage.textContent =
-                        "✅ ¡Gracias! Hemos recibido tu consulta. Te responderemos lo antes posible.";
-
-                }
-
-                contactForm.reset();
-
-            } else {
-
-                if (formMessage) {
-
-                    formMessage.textContent =
-                        "❌ No hemos podido enviar la consulta. Inténtalo de nuevo.";
-
-                }
-
-                console.error(
-                    "Error del Worker:",
-                    data.error
+                alert(
+                    "Por favor, completa tu nombre, email y mensaje."
                 );
 
+                return;
             }
 
 
-        } catch (error) {
+            /* =====================================
+               BOTÓN ENVIANDO
+            ===================================== */
 
-            console.error(
-                "Error enviando formulario:",
-                error
-            );
+            const submitButton =
+                contactForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+            const originalText =
+                submitButton.textContent;
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "Enviando...";
 
 
-            if (formMessage) {
+            try {
 
-                formMessage.textContent =
-                    "❌ No se ha podido enviar la consulta. Inténtalo de nuevo.";
+
+                /* =====================================
+                   ENVIAR AL WORKER
+                ===================================== */
+
+                const response =
+                    await fetch(
+                        "https://spaans-leren-chatbot.newpalma.workers.dev/",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                action: "contact",
+
+                                name: name,
+
+                                email: email,
+
+                                course: course,
+
+                                message: message
+
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                /* =====================================
+                   RESPUESTA DEL WORKER
+                ===================================== */
+
+                if (data.ok) {
+
+                    alert(
+                        "¡Mensaje enviado correctamente! 😊"
+                    );
+
+                    contactForm.reset();
+
+                } else {
+
+                    alert(
+                        "No se pudo enviar el mensaje: " +
+                        (
+                            data.error ||
+                            "Error desconocido."
+                        )
+                    );
+
+                    console.error(
+                        "Error del Worker:",
+                        data.error
+                    );
+                }
+
+
+            } catch (error) {
+
+
+                /* =====================================
+                   ERROR DE CONEXIÓN
+                ===================================== */
+
+                console.error(
+                    "Error enviando formulario:",
+                    error
+                );
+
+                alert(
+                    "No se pudo enviar el mensaje. " +
+                    "Inténtalo de nuevo."
+                );
+
+
+            } finally {
+
+
+                /* =====================================
+                   RESTAURAR BOTÓN
+                ===================================== */
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    originalText;
 
             }
 
         }
-
-    });
+    );
 
 }
+```
