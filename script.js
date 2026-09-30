@@ -348,7 +348,7 @@ chatbotOptions.forEach((button) => {
     });
 
 });
-```js
+
 /* =========================================
    FORMULARIO DE CONTACTO → WORKER → RESEND
 ========================================= */
