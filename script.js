@@ -348,3 +348,123 @@ chatbotOptions.forEach((button) => {
     });
 
 });
+/* =========================================
+   FORMULARIO DE CONTACTO → WORKER → RESEND
+========================================= */
+
+const contactForm =
+    document.getElementById("contactForm");
+
+const formMessage =
+    document.getElementById("formMessage");
+
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const course =
+            document.getElementById("course").value;
+
+        const message =
+            document.getElementById("message").value.trim();
+
+
+        /* Mensaje mientras se envía */
+
+        if (formMessage) {
+
+            formMessage.textContent =
+                "Enviando consulta...";
+
+        }
+
+
+        try {
+
+            const response = await fetch(
+                "https://spaans-leren-chatbot.newpalma.workers.dev/",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        type: "contact",
+
+                        name: name,
+
+                        email: email,
+
+                        course: course,
+
+                        message: message
+
+                    })
+                }
+            );
+
+
+            const data =
+                await response.json();
+
+
+            if (data.ok) {
+
+                if (formMessage) {
+
+                    formMessage.textContent =
+                        "✅ ¡Gracias! Hemos recibido tu consulta. Te responderemos lo antes posible.";
+
+                }
+
+                contactForm.reset();
+
+            } else {
+
+                if (formMessage) {
+
+                    formMessage.textContent =
+                        "❌ No hemos podido enviar la consulta. Inténtalo de nuevo.";
+
+                }
+
+                console.error(
+                    "Error del Worker:",
+                    data.error
+                );
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Error enviando formulario:",
+                error
+            );
+
+
+            if (formMessage) {
+
+                formMessage.textContent =
+                    "❌ No se ha podido enviar la consulta. Inténtalo de nuevo.";
+
+            }
+
+        }
+
+    });
+
+}
