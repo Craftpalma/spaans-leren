@@ -1595,9 +1595,54 @@ section {
     background: var(--primary-dark);
 }
 /* =========================================
-   MINI CALENDARIO - HERO
+   PREVIEW CALENDARIO GRANDE
 ========================================= */
 
+.calendar-preview {
+    width: 100%;
+    max-width: 520px;
+    min-height: 360px;
+    padding: 35px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-preview-icon {
+    font-size: 58px;
+    margin-bottom: 18px;
+}
+
+.calendar-preview h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.calendar-preview p {
+    max-width: 400px;
+    font-size: 17px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.calendar-preview .button {
+    display: inline-block;
+    font-size: 16px;
+    padding: 13px 25px;
+}
+/* =========================================
+   MINI CALENDARIO - HERO
+========================================= */
+/*
 .hero-calendar {
     max-width: 360px;
     padding: 30px;
@@ -1626,4 +1671,4 @@ section {
 
 .hero-calendar .button {
     display: inline-block;
-}
+}*/
