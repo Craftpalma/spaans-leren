@@ -1594,3 +1594,36 @@ section {
 .assistant-link:hover {
     background: var(--primary-dark);
 }
+/* =========================================
+   MINI CALENDARIO - HERO
+========================================= */
+
+.hero-calendar {
+    max-width: 360px;
+    padding: 30px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.hero-calendar-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.hero-calendar h3 {
+    margin-bottom: 12px;
+    color: var(--dark);
+}
+
+.hero-calendar p {
+    margin-bottom: 22px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.hero-calendar .button {
+    display: inline-block;
+}
