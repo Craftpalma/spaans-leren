@@ -350,6 +350,25 @@ chatbotOptions.forEach((button) => {
 });
 
 /* =========================================
+   ABRIR CHATBOT DESDE ENLACE EXTERNO
+========================================= */
+
+const urlParams = new URLSearchParams(
+    window.location.search
+);
+
+if (
+    urlParams.get("openChat") === "true" &&
+    chatbotWindow
+) {
+
+    chatbotWindow.classList.add("active");
+
+}
+
+
+
+/* =========================================
    FORMULARIO DE CONTACTO → WORKER → RESEND
 ========================================= */
 
