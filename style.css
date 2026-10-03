@@ -1768,6 +1768,165 @@ section {
 
 }
 /* =========================================
+   TARJETA CALENDARIO - INDEX
+========================================= */
+
+.calendar-card {
+    width: 100%;
+    min-height: 390px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+    color: var(--text);
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.calendar-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.10);
+
+    border-color: var(--primary);
+}
+
+.calendar-card-icon {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.calendar-card-label {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: var(--primary);
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+/* MINI CALENDARIO */
+
+.calendar-card .mini-calendar {
+    width: 100%;
+    max-width: 390px;
+
+    padding: 18px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-sizing: border-box;
+}
+
+
+/* DÍAS DE LA SEMANA */
+
+.calendar-card .mini-calendar-weekdays,
+.calendar-card .mini-calendar-days {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 6px;
+
+    text-align: center;
+}
+
+.calendar-card .mini-calendar-weekdays {
+    margin-bottom: 8px;
+}
+
+.calendar-card .mini-calendar-weekdays span {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--primary);
+}
+
+
+/* NÚMEROS */
+
+.calendar-card .mini-calendar-days span {
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    color: var(--dark);
+}
+
+
+/* DÍAS */
+
+.calendar-card h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    color: var(--dark);
+
+    font-size: 1.45rem;
+}
+
+.calendar-card p {
+    max-width: 390px;
+
+    margin-bottom: 0;
+
+    color: var(--text);
+}
+
+
+/* MÓVIL */
+
+@media (max-width: 768px) {
+
+    .calendar-card {
+        min-height: auto;
+
+        padding: 25px 20px;
+    }
+
+    .calendar-card .mini-calendar {
+        max-width: 100%;
+    }
+
+}
+/* =========================================
    PREVIEW CALENDARIO GRANDE
 ========================================= */
 /*
