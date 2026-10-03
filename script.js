@@ -601,7 +601,7 @@ interestButtons.forEach((button) => {
         if (contactSection) {
 
             contactSection.scrollIntoView({
-                behavior: "smooth"
+                behavior: "smooth",
                   block: "start"
             });
 
