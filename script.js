@@ -519,42 +519,84 @@ if (contactForm) {
     );
 
 }
-
 /* =========================================
-   BOTONES "ME INTERESA" → CONTACTO
+   BOTONES "ME INTERESA" DE LOS CURSOS
 ========================================= */
 
-const interestButtons =
-    document.querySelectorAll(
-        ".course-button, .price-interest"
-    );
+const courseButtons =
+    document.querySelectorAll(".course-button, .price-interest");
 
-const courseSelect =
-    document.getElementById("course");
-
-interestButtons.forEach((button) => {
+courseButtons.forEach((button) => {
 
     button.addEventListener("click", () => {
 
         const selectedCourse =
             button.getAttribute("data-course");
 
-        if (courseSelect && selectedCourse) {
+        const courseSelect =
+            document.getElementById("course");
 
-            /* Seleccionar automáticamente el curso */
-            courseSelect.value = selectedCourse;
+        const messageField =
+            document.getElementById("message");
+
+
+        /* =====================================
+           SELECCIONAR CURSO AUTOMÁTICAMENTE
+        ===================================== */
+
+        if (courseSelect) {
+
+            let found = false;
+
+            for (let option of courseSelect.options) {
+
+                if (option.text === selectedCourse) {
+
+                    courseSelect.value = selectedCourse;
+
+                    found = true;
+
+                    break;
+                }
+            }
+
+            /*
+             * Si es un pack y no existe en el desplegable,
+             * dejamos la opción vacía y lo indicamos en el mensaje.
+             */
+
+            if (!found) {
+                courseSelect.value = "";
+            }
 
         }
 
-        /* Bajar directamente a Contacto */
+
+        /* =====================================
+           MENSAJE AUTOMÁTICO
+        ===================================== */
+
+        if (messageField) {
+
+            messageField.value =
+                "Estoy interesado/a en " +
+                selectedCourse +
+                ".";
+
+        }
+
+
+        /* =====================================
+           BAJAR A CONTACTO
+        ===================================== */
+
         const contactSection =
             document.getElementById("contacto");
 
         if (contactSection) {
 
             contactSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
+                behavior: "smooth"
             });
 
         }
@@ -562,4 +604,5 @@ interestButtons.forEach((button) => {
     });
 
 });
+
 
