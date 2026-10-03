@@ -1675,14 +1675,14 @@ section {
 
 
 /* DÍAS DE LA SEMANA */
-/*
+
 .mini-calendar-weekdays,
 .mini-calendar-days {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 7px;
     text-align: center;
-}*/
+}
 
 .mini-calendar-weekdays {
     margin-bottom: 8px;
