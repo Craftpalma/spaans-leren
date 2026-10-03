@@ -519,6 +519,7 @@ if (contactForm) {
     );
 
 }
+
 /* =========================================
    BOTONES "ME INTERESA" → CONTACTO
 ========================================= */
@@ -527,29 +528,25 @@ const interestButtons = document.querySelectorAll(
     ".course-button, .price-interest"
 );
 
-const courseSelect = document.getElementById("course");
-
 interestButtons.forEach((button) => {
 
     button.addEventListener("click", () => {
 
-        const selectedCourse = button.getAttribute("data-course");
+        const selectedCourse =
+            button.getAttribute("data-course");
 
-        /* Seleccionar automáticamente el curso */
-        if (courseSelect && selectedCourse) {
+        const courseSelect =
+            document.getElementById("course");
 
-            courseSelect.value = selectedCourse;
+        const messageField =
+            document.getElementById("message");
 
-        }
-
-        /* Bajar a Contacto */
-        window.location.hash = "contacto";
 
         /* =====================================
            SELECCIONAR CURSO AUTOMÁTICAMENTE
         ===================================== */
 
-        if (courseSelect) {
+        if (courseSelect && selectedCourse) {
 
             let found = false;
 
@@ -565,11 +562,7 @@ interestButtons.forEach((button) => {
                 }
             }
 
-            /*
-             * Si es un pack y no existe en el desplegable,
-             * dejamos la opción vacía y lo indicamos en el mensaje.
-             */
-
+            /* Si el curso no existe en el desplegable */
             if (!found) {
                 courseSelect.value = "";
             }
@@ -581,7 +574,7 @@ interestButtons.forEach((button) => {
            MENSAJE AUTOMÁTICO
         ===================================== */
 
-        if (messageField) {
+        if (messageField && selectedCourse) {
 
             messageField.value =
                 "Estoy interesado/a en " +
@@ -602,7 +595,7 @@ interestButtons.forEach((button) => {
 
             contactSection.scrollIntoView({
                 behavior: "smooth",
-                  block: "start"
+                block: "start"
             });
 
         }
@@ -610,5 +603,6 @@ interestButtons.forEach((button) => {
     });
 
 });
+
 
 
