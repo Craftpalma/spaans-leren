@@ -1778,9 +1778,10 @@ padding: 0 20px;
 
 
 display: flex;
+flex-direction: column;
 align-items: center;
 justify-content: center;
-gap: 70px;
+gap: 35px;
 
 
 }
@@ -1924,6 +1925,7 @@ TEXTO
 
 .availability-content {
 max-width: 450px;
+text-align: center;
 }
 
 .availability-label {
