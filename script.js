@@ -520,3 +520,46 @@ if (contactForm) {
 
 }
 
+/* =========================================
+   BOTONES "ME INTERESA" → CONTACTO
+========================================= */
+
+const interestButtons =
+    document.querySelectorAll(
+        ".course-button, .price-interest"
+    );
+
+const courseSelect =
+    document.getElementById("course");
+
+interestButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        const selectedCourse =
+            button.getAttribute("data-course");
+
+        if (courseSelect && selectedCourse) {
+
+            /* Seleccionar automáticamente el curso */
+            courseSelect.value = selectedCourse;
+
+        }
+
+        /* Bajar directamente a Contacto */
+        const contactSection =
+            document.getElementById("contacto");
+
+        if (contactSection) {
+
+            contactSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    });
+
+});
+
