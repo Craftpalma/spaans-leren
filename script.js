@@ -520,25 +520,30 @@ if (contactForm) {
 
 }
 /* =========================================
-   BOTONES "ME INTERESA" DE LOS CURSOS
+   BOTONES "ME INTERESA" → CONTACTO
 ========================================= */
 
-const courseButtons =
-    document.querySelectorAll(".course-button, .price-interest");
+const interestButtons = document.querySelectorAll(
+    ".course-button, .price-interest"
+);
 
-courseButtons.forEach((button) => {
+const courseSelect = document.getElementById("course");
+
+interestButtons.forEach((button) => {
 
     button.addEventListener("click", () => {
 
-        const selectedCourse =
-            button.getAttribute("data-course");
+        const selectedCourse = button.getAttribute("data-course");
 
-        const courseSelect =
-            document.getElementById("course");
+        /* Seleccionar automáticamente el curso */
+        if (courseSelect && selectedCourse) {
 
-        const messageField =
-            document.getElementById("message");
+            courseSelect.value = selectedCourse;
 
+        }
+
+        /* Bajar a Contacto */
+        window.location.hash = "contacto";
 
         /* =====================================
            SELECCIONAR CURSO AUTOMÁTICAMENTE
@@ -597,6 +602,7 @@ courseButtons.forEach((button) => {
 
             contactSection.scrollIntoView({
                 behavior: "smooth"
+                  block: "start"
             });
 
         }
