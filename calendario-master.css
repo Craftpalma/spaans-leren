@@ -190,4 +190,29 @@
     }
 
 }
+/* =========================================
+   ESTADOS COMPLETOS DEL DÍA - MASTER
+========================================= */
 
+/* Todas las horas del día están pre-reservadas */
+.day.all-pending {
+    border: 2px solid #e7b65c;
+}
+
+/* Todas las horas del día están confirmadas */
+.day.all-confirmed {
+    border: 2px solid #d99a9a;
+}
+
+/* Día con pre-reservas + confirmadas */
+.day.both {
+    border: 2px solid transparent;
+
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(
+            90deg,
+            #e7b65c 50%,
+            #d99a9a 50%
+        ) border-box;
+}
