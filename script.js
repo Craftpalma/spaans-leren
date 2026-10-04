@@ -255,7 +255,7 @@ currentController = new AbortController();
                 body: JSON.stringify({
                     message: text,
                     history: conversationHistory
-                })
+                }),
                signal: signal
             }
         );
