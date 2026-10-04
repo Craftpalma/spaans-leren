@@ -1024,7 +1024,7 @@ function createReservationDetail(
 
 
 /* =========================================
-   MOSTRAR DETALLES AL PINCHAR
+   MOSTRAR DETALLES DE UNA RESERVA
 ========================================= */
 
 function showReservationDetails(
@@ -1037,11 +1037,9 @@ function showReservationDetails(
     );
 
 
-    /*
-       Si conocemos la fecha de la reserva,
-       seleccionamos automáticamente ese día
-       en el panel superior.
-    */
+    /* -----------------------------------------
+       SI EXISTE FECHA, SELECCIONAR SU DÍA
+    ----------------------------------------- */
 
     if (reservation.date) {
 
@@ -1082,7 +1080,297 @@ function showReservationDetails(
 
     }
 
+
+    /* -----------------------------------------
+       CONTENEDOR
+    ----------------------------------------- */
+
+    if (!dayReservations) {
+        return;
+    }
+
+
+    /* -----------------------------------------
+       TEXTO DEL ESTADO
+    ----------------------------------------- */
+
+    let statusText =
+        reservation.status;
+
+
+    if (
+        reservation.status ===
+        "pre_reserved"
+    ) {
+
+        statusText =
+            "🟡 Pendiente de confirmación";
+
+    } else if (
+        reservation.status ===
+        "booked"
+    ) {
+
+        statusText =
+            "🔴 Confirmada";
+
+    } else if (
+        reservation.status ===
+        "cancelled"
+    ) {
+
+        statusText =
+            "Cancelada";
+
+    } else if (
+        reservation.status ===
+        "expired"
+    ) {
+
+        statusText =
+            "Expirada";
+
+    }
+
+
+    /* -----------------------------------------
+       BOTONES
+    ----------------------------------------- */
+
+    let actions = "";
+
+
+    if (
+        reservation.status ===
+        "pre_reserved"
+    ) {
+
+        actions = `
+
+            <div class="reservation-detail-actions">
+
+                <button
+                    type="button"
+                    class="master-action-button master-confirm-button"
+                    id="masterConfirmButton"
+                >
+                    ✓ Confirmar reserva
+                </button>
+
+                <button
+                    type="button"
+                    class="master-action-button master-cancel-button"
+                    id="masterCancelButton"
+                >
+                    ✕ Cancelar reserva
+                </button>
+
+            </div>
+
+        `;
+
+    } else if (
+        reservation.status ===
+        "booked"
+    ) {
+
+        actions = `
+
+            <div class="reservation-detail-actions">
+
+                <button
+                    type="button"
+                    class="master-action-button master-cancel-button"
+                    id="masterCancelButton"
+                >
+                    ✕ Cancelar reserva
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------
+       MOSTRAR PANEL
+    ----------------------------------------- */
+
+    dayReservations.innerHTML = `
+
+        <div class="reservation-detail-panel">
+
+            <h3>
+                Detalle de la reserva
+            </h3>
+
+
+            <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Fecha
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${reservation.date || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Hora
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${reservation.time || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Nombre
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${reservation.name || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Contacto
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${reservation.contact || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Clase
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${reservation.class_type || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Estado
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${statusText}
+                </div>
+
+            </div>
+
+
+            <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Origen
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${reservation.source || "—"}
+                </div>
+
+            </div>
+
+
+            ${actions}
+
+        </div>
+
+    `;
+
+
+    /* -----------------------------------------
+       BOTÓN CONFIRMAR
+    ----------------------------------------- */
+
+    const confirmButton =
+        document.getElementById(
+            "masterConfirmButton"
+        );
+
+
+    if (confirmButton) {
+
+        confirmButton.addEventListener(
+            "click",
+            () => {
+
+                console.log(
+                    "CONFIRMAR:",
+                    reservation
+                );
+
+
+                alert(
+                    "La confirmación la conectaremos al Worker en el siguiente paso."
+                );
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------
+       BOTÓN CANCELAR
+    ----------------------------------------- */
+
+    const cancelButton =
+        document.getElementById(
+            "masterCancelButton"
+        );
+
+
+    if (cancelButton) {
+
+        cancelButton.addEventListener(
+            "click",
+            () => {
+
+                console.log(
+                    "CANCELAR:",
+                    reservation
+                );
+
+
+                alert(
+                    "La cancelación la conectaremos al Worker en el siguiente paso."
+                );
+
+            }
+        );
+
+    }
+
 }
+
+
+
 
 
 /* =========================================
