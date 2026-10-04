@@ -177,7 +177,6 @@ let conversationHistory = [];
 
 /* Petición actual al Worker */
 let currentController = null;
-
 async function sendMessage() {
 
     const text = chatbotInput.value.trim();
@@ -186,16 +185,6 @@ async function sendMessage() {
         return;
     }
 
-    /* Cancelar la petición anterior si todavía está pendiente */
-    if (currentController) {
-        currentController.abort();
-    }
-
-    /* Crear controlador para esta nueva petición */
-    currentController = new AbortController();
-
-    const signal = currentController.signal;
-
 
     /* =========================================
        IDENTIFICAR ESTA PETICIÓN
@@ -203,14 +192,206 @@ async function sendMessage() {
 
     const requestId = ++sendMessage.lastRequestId;
 
-       /* =========================================
-      CANCELAR PETICION ANTERIOR
+
+    /* =========================================
+       CANCELAR PETICIÓN ANTERIOR
     ========================================= */
-   /* Cancelar la petición anterior si todavía está pendiente */
 
-if (currentController) {
+    if (currentController) {
+        currentController.abort();
+    }
 
-    currentController.abort();
+    currentController = new AbortController();
+
+    const signal = currentController.signal;
+
+
+    /* =========================================
+       MOSTRAR MENSAJE DEL USUARIO
+    ========================================= */
+
+    addMessage(text, "user");
+
+    chatbotInput.value = "";
+
+
+    /* =========================================
+       MENSAJE TEMPORAL
+    ========================================= */
+
+    const waitingMessage =
+        document.createElement("div");
+
+    waitingMessage.classList.add("bot-message");
+
+    waitingMessage.textContent =
+        "Espera un momento...";
+
+    chatbotMessages.appendChild(waitingMessage);
+
+    chatbotMessages.scrollTop =
+        chatbotMessages.scrollHeight;
+
+
+    try {
+
+        const response = await fetch(
+            "https://spaans-leren-chatbot.newpalma.workers.dev/",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: text,
+                    history: conversationHistory
+                }),
+
+                signal: signal
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        /* =========================================
+           COMPROBAR SI SIGUE SIENDO LA PETICIÓN
+           MÁS RECIENTE
+        ========================================= */
+
+        if (requestId !== sendMessage.lastRequestId) {
+
+            console.log(
+                "Respuesta ignorada por ser de una petición anterior:",
+                text
+            );
+
+            return;
+        }
+
+
+        /* =========================================
+           ELIMINAR "ESPERA..."
+        ========================================= */
+
+        if (waitingMessage.parentNode) {
+            waitingMessage.remove();
+        }
+
+
+        /* =========================================
+           RESPUESTA DEL WORKER
+        ========================================= */
+
+        if (data.reply) {
+
+            /* Guardar conversación */
+
+            conversationHistory.push({
+
+                role: "user",
+
+                parts: [
+                    {
+                        text: text
+                    }
+                ]
+
+            });
+
+
+            conversationHistory.push({
+
+                role: "model",
+
+                parts: [
+                    {
+                        text: data.reply
+                    }
+                ]
+
+            });
+
+
+            addMessage(
+                data.reply,
+                "bot"
+            );
+
+
+        } else if (data.message) {
+
+            addMessage(
+                "El asistente no ha podido completar la consulta. Inténtalo de nuevo.",
+                "bot"
+            );
+
+
+        } else {
+
+            addMessage(
+                "No he recibido una respuesta válida del asistente. Inténtalo de nuevo.",
+                "bot"
+            );
+
+        }
+
+
+    } catch (error) {
+
+
+        /* =========================================
+           PETICIÓN CANCELADA
+        ========================================= */
+
+        if (error.name === "AbortError") {
+
+            console.log(
+                "Petición cancelada porque el usuario envió una nueva pregunta."
+            );
+
+            return;
+        }
+
+
+        console.error(
+            "Error conectando con el Worker:",
+            error
+        );
+
+
+        /* =========================================
+           SI YA HAY UNA PETICIÓN MÁS NUEVA
+        ========================================= */
+
+        if (requestId !== sendMessage.lastRequestId) {
+
+            console.log(
+                "Error ignorado porque existe una petición más reciente."
+            );
+
+            return;
+        }
+
+
+        /* =========================================
+           ELIMINAR SU PROPIO "ESPERA..."
+        ========================================= */
+
+        if (waitingMessage.parentNode) {
+            waitingMessage.remove();
+        }
+
+
+        addMessage(
+            "No he podido conectar con el asistente. Inténtalo de nuevo.",
+            "bot"
+        );
+
+    }
 
 }
 
