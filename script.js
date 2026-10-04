@@ -177,6 +177,7 @@ let conversationHistory = [];
 
 /* Petición actual al Worker */
 let currentController = null;
+
 async function sendMessage() {
 
     const text = chatbotInput.value.trim();
