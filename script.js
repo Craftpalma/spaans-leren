@@ -203,6 +203,22 @@ async function sendMessage() {
 
     const requestId = ++sendMessage.lastRequestId;
 
+       /* =========================================
+      CANCELAR PETICION ANTERIOR
+    ========================================= */
+   /* Cancelar la petición anterior si todavía está pendiente */
+
+if (currentController) {
+
+    currentController.abort();
+
+}
+
+/* Crear controlador para esta nueva petición */
+
+currentController = new AbortController();
+   
+
 
     /* Mostrar mensaje del usuario */
     addMessage(text, "user");
@@ -240,6 +256,7 @@ async function sendMessage() {
                     message: text,
                     history: conversationHistory
                 })
+               signal: signal
             }
         );
 
@@ -336,6 +353,18 @@ async function sendMessage() {
 
 
     } catch (error) {
+   /* =========================================
+          PETICIÓN CANCELADA POR UNA NUEVA
+    ========================================= */
+
+    if (error.name === "AbortError") {
+
+        console.log(
+            "Petición cancelada porque el usuario envió una nueva pregunta."
+        );
+
+        return;
+    }
 
         console.error(
             "Error conectando con el Worker:",
