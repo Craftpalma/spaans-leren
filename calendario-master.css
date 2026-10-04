@@ -1,0 +1,94 @@
+/* =========================================
+   TODAS LAS RESERVAS
+========================================= */
+
+.all-reservations {
+    margin-top: 20px;
+
+    background: white;
+
+    border: 1px solid #e1e8eb;
+
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+.all-reservations h2 {
+    margin-top: 0;
+
+    color: #176b87;
+
+    font-size: 20px;
+}
+
+.reservation-list-item {
+
+    border: 1px solid #e1e8eb;
+
+    border-radius: 8px;
+
+    padding: 14px;
+
+    margin-bottom: 10px;
+
+    cursor: pointer;
+
+    transition: background 0.15s,
+                transform 0.1s;
+}
+
+.reservation-list-item:hover {
+
+    background: #f5f8f9;
+
+    transform: translateY(-1px);
+}
+
+.reservation-list-item.pending {
+
+    border-left: 5px solid #e7b65c;
+
+}
+
+.reservation-list-item.confirmed {
+
+    border-left: 5px solid #d99a9a;
+
+}
+
+.reservation-list-date {
+
+    font-weight: bold;
+
+    color: #176b87;
+
+    font-size: 16px;
+
+}
+
+.reservation-list-name {
+
+    font-weight: bold;
+
+    margin-top: 5px;
+
+}
+
+.reservation-list-type {
+
+    margin-top: 3px;
+
+    font-size: 14px;
+
+}
+
+.reservation-list-status {
+
+    margin-top: 5px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
