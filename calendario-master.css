@@ -92,3 +92,102 @@
     font-weight: bold;
 
 }
+
+/* =========================================
+   DETALLE DE RESERVA MASTER
+========================================= */
+
+.reservation-detail-panel {
+    margin-top: 15px;
+    padding: 20px;
+
+    background: #f5f8f9;
+
+    border: 1px solid #e1e8eb;
+    border-radius: 10px;
+}
+
+.reservation-detail-panel h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+
+    color: #176b87;
+    font-size: 20px;
+}
+
+.reservation-detail-row {
+    display: flex;
+    gap: 10px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid #e1e8eb;
+}
+
+.reservation-detail-row:last-child {
+    border-bottom: none;
+}
+
+.reservation-detail-label {
+    width: 110px;
+
+    font-weight: bold;
+
+    color: #176b87;
+}
+
+.reservation-detail-value {
+    flex: 1;
+}
+
+.reservation-detail-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    flex-wrap: wrap;
+}
+
+.master-action-button {
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 10px 16px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.master-confirm-button {
+    background: #176b87;
+    color: white;
+}
+
+.master-cancel-button {
+    background: #d99a9a;
+    color: #17252d;
+}
+
+.master-action-button:hover {
+    opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+
+    .reservation-detail-row {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .reservation-detail-label {
+        width: auto;
+    }
+
+}
+
