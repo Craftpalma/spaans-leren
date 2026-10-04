@@ -1,4 +1,3 @@
-
 /* =========================================
    SPAANS LEREN - CALENDARIO MASTER
 ========================================= */
@@ -8,109 +7,484 @@ const WORKER_URL =
 
 
 /* =========================================
-   ELEMENTOS DEL DOM
+   VARIABLES DEL CALENDARIO
 ========================================= */
 
-const reservationList =
-    document.getElementById("allReservations");
+let currentDate = new Date();
+let selectedDate = null;
 
 
 /* =========================================
-   CARGAR TODAS LAS RESERVAS
+   ELEMENTOS DEL DOM
+========================================= */
+
+let calendarGrid;
+let currentDateElement;
+let previousMonthButton;
+let nextMonthButton;
+let selectedDayTitle;
+let dayReservations;
+let allReservations;
+
+
+/* =========================================
+   NOMBRES DE LOS MESES
+========================================= */
+
+const monthNames = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
+];
+
+
+/* =========================================
+   INICIALIZAR
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        calendarGrid =
+            document.getElementById(
+                "calendarGrid"
+            );
+
+        currentDateElement =
+            document.getElementById(
+                "currentDate"
+            );
+
+        previousMonthButton =
+            document.getElementById(
+                "previousMonth"
+            );
+
+        nextMonthButton =
+            document.getElementById(
+                "nextMonth"
+            );
+
+        selectedDayTitle =
+            document.getElementById(
+                "selectedDayTitle"
+            );
+
+        dayReservations =
+            document.getElementById(
+                "dayReservations"
+            );
+
+        allReservations =
+            document.getElementById(
+                "allReservations"
+            );
+
+
+        /* -----------------------------------------
+           COMPROBAR ELEMENTOS
+        ----------------------------------------- */
+
+        if (!calendarGrid) {
+
+            console.error(
+                "No se encontró #calendarGrid"
+            );
+
+            return;
+        }
+
+
+        if (!allReservations) {
+
+            console.error(
+                "No se encontró #allReservations"
+            );
+
+        }
+
+
+        /* -----------------------------------------
+           BOTONES DEL MES
+        ----------------------------------------- */
+
+        if (previousMonthButton) {
+
+            previousMonthButton.addEventListener(
+                "click",
+                () => {
+
+                    currentDate.setMonth(
+                        currentDate.getMonth() - 1
+                    );
+
+                    renderCalendar();
+
+                }
+            );
+
+        }
+
+
+        if (nextMonthButton) {
+
+            nextMonthButton.addEventListener(
+                "click",
+                () => {
+
+                    currentDate.setMonth(
+                        currentDate.getMonth() + 1
+                    );
+
+                    renderCalendar();
+
+                }
+            );
+
+        }
+
+
+        /* -----------------------------------------
+           CARGAR CALENDARIO
+        ----------------------------------------- */
+
+        renderCalendar();
+
+
+        /* -----------------------------------------
+           CARGAR TODAS LAS RESERVAS
+        ----------------------------------------- */
+
+        loadAllReservations();
+
+    }
+);
+
+
+/* =========================================
+   MOSTRAR CALENDARIO
+========================================= */
+
+function renderCalendar() {
+
+    if (!calendarGrid) {
+        return;
+    }
+
+
+    calendarGrid.innerHTML = "";
+
+
+    const year =
+        currentDate.getFullYear();
+
+
+    const month =
+        currentDate.getMonth();
+
+
+    if (currentDateElement) {
+
+        currentDateElement.textContent =
+            `${monthNames[month]} ${year}`;
+
+    }
+
+
+    /* -----------------------------------------
+       PRIMER DÍA DEL MES
+    ----------------------------------------- */
+
+    let firstDay =
+        new Date(
+            year,
+            month,
+            1
+        ).getDay();
+
+
+    /*
+       JavaScript:
+
+       Domingo = 0
+       Lunes = 1
+
+       Lo convertimos para que
+       la semana empiece en lunes.
+    */
+
+    firstDay =
+        firstDay === 0
+            ? 6
+            : firstDay - 1;
+
+
+    /* -----------------------------------------
+       DÍAS DEL MES
+    ----------------------------------------- */
+
+    const daysInMonth =
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
+
+
+    /* -----------------------------------------
+       ESPACIOS VACÍOS
+    ----------------------------------------- */
+
+    for (
+        let i = 0;
+        i < firstDay;
+        i++
+    ) {
+
+        const emptyDay =
+            document.createElement("div");
+
+        emptyDay.className =
+            "day empty";
+
+        calendarGrid.appendChild(
+            emptyDay
+        );
+
+    }
+
+
+    /* -----------------------------------------
+       CREAR DÍAS
+    ----------------------------------------- */
+
+    for (
+        let day = 1;
+        day <= daysInMonth;
+        day++
+    ) {
+
+        const dayElement =
+            document.createElement("div");
+
+
+        dayElement.className =
+            "day";
+
+
+        const dayNumber =
+            document.createElement("div");
+
+
+        dayNumber.className =
+            "day-number";
+
+
+        dayNumber.textContent =
+            day;
+
+
+        dayElement.appendChild(
+            dayNumber
+        );
+
+
+        /* -----------------------------------------
+           CLICK EN EL DÍA
+        ----------------------------------------- */
+
+        dayElement.addEventListener(
+            "click",
+            () => {
+
+                selectDay(
+                    year,
+                    month,
+                    day
+                );
+
+            }
+        );
+
+
+        calendarGrid.appendChild(
+            dayElement
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SELECCIONAR DÍA
+========================================= */
+
+function selectDay(
+    year,
+    month,
+    day
+) {
+
+    selectedDate =
+        new Date(
+            year,
+            month,
+            day
+        );
+
+
+    const formattedDate =
+        `${year}-` +
+        `${(month + 1)
+            .toString()
+            .padStart(2, "0")}-` +
+        `${day
+            .toString()
+            .padStart(2, "0")}`;
+
+
+    const displayDate =
+        `${day
+            .toString()
+            .padStart(2, "0")}/` +
+        `${(month + 1)
+            .toString()
+            .padStart(2, "0")}/` +
+        `${year}`;
+
+
+    if (selectedDayTitle) {
+
+        selectedDayTitle.textContent =
+            `Reservas del ${displayDate}`;
+
+    }
+
+
+    if (dayReservations) {
+
+        dayReservations.innerHTML = `
+
+            <p class="no-reservations">
+
+                Cargando reservas...
+
+            </p>
+
+        `;
+
+
+        loadReservationsForDay(
+            formattedDate
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   CARGAR TODAS LAS RESERVAS DESDE D1
 ========================================= */
 
 async function loadAllReservations() {
 
-    if (!reservationList) {
+    if (!allReservations) {
 
         console.error(
-            "No se encontró #allReservations en calendario-master.html"
+            "No se encontró #allReservations"
         );
 
         return;
     }
 
 
-    /* -----------------------------------------
-       MENSAJE DE CARGA
-    ----------------------------------------- */
+    allReservations.innerHTML = `
 
-    reservationList.innerHTML = `
         <p class="no-reservations">
+
             Cargando reservas...
+
         </p>
+
     `;
 
 
     try {
 
-        /* -----------------------------------------
-           CONSULTAR WORKER
-        ----------------------------------------- */
-
-        const response = await fetch(
-            WORKER_URL,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    action: "master_reservations"
-                })
-            }
+        console.log(
+            "Consultando reservas MASTER..."
         );
 
 
-        /* -----------------------------------------
-           COMPROBAR RESPUESTA HTTP
-        ----------------------------------------- */
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        action:
+                            "master_reservations"
+
+                    })
+
+                }
+            );
+
 
         if (!response.ok) {
 
             throw new Error(
                 `Error HTTP ${response.status}`
             );
+
         }
 
-
-        /* -----------------------------------------
-           CONVERTIR RESPUESTA A JSON
-        ----------------------------------------- */
 
         const data =
             await response.json();
 
 
         console.log(
-            "Reservas recibidas:",
+            "Respuesta MASTER:",
             data
         );
 
 
-        /* -----------------------------------------
-           COMPROBAR RESULTADO
-        ----------------------------------------- */
-
         if (
             !data.ok ||
-            !Array.isArray(data.reservations)
+            !Array.isArray(
+                data.reservations
+            )
         ) {
 
             throw new Error(
                 data.error ||
                 "Respuesta de reservas no válida."
             );
+
         }
 
 
-        /* -----------------------------------------
-           MOSTRAR RESERVAS
-        ----------------------------------------- */
-
-        renderReservations(
+        renderAllReservations(
             data.reservations
         );
 
@@ -123,12 +497,19 @@ async function loadAllReservations() {
         );
 
 
-        reservationList.innerHTML = `
+        allReservations.innerHTML = `
+
             <p class="no-reservations">
-                No se pudieron cargar las reservas.
+
+                No se pudieron cargar
+                las reservas.
+
             </p>
+
         `;
+
     }
+
 }
 
 
@@ -136,49 +517,65 @@ async function loadAllReservations() {
    MOSTRAR TODAS LAS RESERVAS
 ========================================= */
 
-function renderReservations(
+function renderAllReservations(
     reservations
 ) {
 
-    if (!reservationList) {
+    if (!allReservations) {
         return;
     }
 
-
-    /* -----------------------------------------
-       NO HAY RESERVAS
-    ----------------------------------------- */
 
     if (
         reservations.length === 0
     ) {
 
-        reservationList.innerHTML = `
+        allReservations.innerHTML = `
+
             <p class="no-reservations">
+
                 No hay reservas registradas.
+
             </p>
+
         `;
 
         return;
+
     }
 
 
-    /* -----------------------------------------
-       LIMPIAR LISTA
-    ----------------------------------------- */
-
-    reservationList.innerHTML = "";
+    allReservations.innerHTML = "";
 
 
-    /* -----------------------------------------
-       CREAR CADA RESERVA
-    ----------------------------------------- */
+    /*
+       Ordenar por fecha y hora
+    */
+
+    reservations.sort(
+        (a, b) => {
+
+            const dateA =
+                `${a.date} ${a.time}`;
+
+            const dateB =
+                `${b.date} ${b.time}`;
+
+            return dateA.localeCompare(
+                dateB
+            );
+
+        }
+    );
+
 
     reservations.forEach(
         reservation => {
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             item.className =
@@ -186,7 +583,7 @@ function renderReservations(
 
 
             /* ---------------------------------
-               ESTADO VISUAL
+               ESTADO
             --------------------------------- */
 
             if (
@@ -206,18 +603,23 @@ function renderReservations(
                 item.classList.add(
                     "confirmed"
                 );
+
             }
 
 
             /* ---------------------------------
-               FECHA Y HORA
+               FECHA
             --------------------------------- */
 
             const date =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             date.className =
                 "reservation-list-date";
+
 
             date.textContent =
                 `${reservation.date} · ${reservation.time}`;
@@ -228,10 +630,14 @@ function renderReservations(
             --------------------------------- */
 
             const name =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             name.className =
                 "reservation-list-name";
+
 
             name.textContent =
                 reservation.name ||
@@ -243,14 +649,18 @@ function renderReservations(
             --------------------------------- */
 
             const type =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             type.className =
                 "reservation-list-type";
 
+
             type.textContent =
                 reservation.class_type ||
-                "Tipo de clase no especificado";
+                "Sin especificar";
 
 
             /* ---------------------------------
@@ -258,7 +668,10 @@ function renderReservations(
             --------------------------------- */
 
             const status =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             status.className =
                 "reservation-list-status";
@@ -301,11 +714,12 @@ function renderReservations(
                 status.textContent =
                     reservation.status ||
                     "Estado desconocido";
+
             }
 
 
             /* ---------------------------------
-               AÑADIR INFORMACIÓN
+               AÑADIR
             --------------------------------- */
 
             item.appendChild(
@@ -326,7 +740,7 @@ function renderReservations(
 
 
             /* ---------------------------------
-               CLICK EN LA RESERVA
+               CLICK
             --------------------------------- */
 
             item.addEventListener(
@@ -341,32 +755,189 @@ function renderReservations(
             );
 
 
-            reservationList.appendChild(
+            allReservations.appendChild(
                 item
             );
 
         }
     );
+
 }
 
 
 /* =========================================
-   MOSTRAR INFORMACIÓN DE UNA RESERVA
+   CARGAR RESERVAS DE UN DÍA
 ========================================= */
 
-function showReservationDetails(
+async function loadReservationsForDay(
+    date
+) {
+
+    if (!dayReservations) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        action:
+                            "master_reservations"
+
+                    })
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Error HTTP ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !data.ok ||
+            !Array.isArray(
+                data.reservations
+            )
+        ) {
+
+            throw new Error(
+                data.error ||
+                "Respuesta no válida."
+            );
+
+        }
+
+
+        const reservations =
+            data.reservations.filter(
+                reservation =>
+                    reservation.date === date
+            );
+
+
+        if (
+            reservations.length === 0
+        ) {
+
+            dayReservations.innerHTML = `
+
+                <p class="no-reservations">
+
+                    No hay reservas para este día.
+
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        dayReservations.innerHTML = "";
+
+
+        reservations.forEach(
+            reservation => {
+
+                const detail =
+                    createReservationDetail(
+                        reservation
+                    );
+
+
+                dayReservations.appendChild(
+                    detail
+                );
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error cargando reservas del día:",
+            error
+        );
+
+
+        dayReservations.innerHTML = `
+
+            <p class="no-reservations">
+
+                No se pudieron cargar
+                las reservas.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   CREAR DETALLE DE RESERVA
+========================================= */
+
+function createReservationDetail(
     reservation
 ) {
 
-    console.log(
-        "Reserva seleccionada:",
-        reservation
-    );
+    const detail =
+        document.createElement(
+            "div"
+        );
 
 
-    /* -----------------------------------------
-       CONVERTIR ESTADO A TEXTO
-    ----------------------------------------- */
+    detail.className =
+        "reservation-detail";
+
+
+    if (
+        reservation.status ===
+        "pre_reserved"
+    ) {
+
+        detail.classList.add(
+            "pending"
+        );
+
+    } else if (
+        reservation.status ===
+        "booked"
+    ) {
+
+        detail.classList.add(
+            "confirmed"
+        );
+
+    }
+
 
     let statusText =
         reservation.status;
@@ -403,114 +974,117 @@ function showReservationDetails(
 
         statusText =
             "Expirada";
+
     }
 
 
-    /* -----------------------------------------
-       MOSTRAR EN EL PANEL DE DETALLES
-    ----------------------------------------- */
+    detail.innerHTML = `
 
-    const details =
-        document.getElementById(
-            "dayReservations"
-        );
+        <p>
+            <strong>Fecha:</strong>
+            ${reservation.date || "—"}
+        </p>
 
-    const title =
-        document.getElementById(
-            "selectedDayTitle"
-        );
+        <p>
+            <strong>Hora:</strong>
+            ${reservation.time || "—"}
+        </p>
 
+        <p>
+            <strong>Nombre:</strong>
+            ${reservation.name || "—"}
+        </p>
 
-    if (
-        !details ||
-        !title
-    ) {
+        <p>
+            <strong>Contacto:</strong>
+            ${reservation.contact || "—"}
+        </p>
 
-        console.error(
-            "No se encontró el panel de detalles."
-        );
+        <p>
+            <strong>Clase:</strong>
+            ${reservation.class_type || "—"}
+        </p>
 
-        return;
-    }
+        <p>
+            <strong>Estado:</strong>
+            ${statusText}
+        </p>
 
-
-    title.textContent =
-        "Detalle de la reserva";
-
-
-    details.innerHTML = `
-
-        <div class="
-            reservation-detail
-            ${reservation.status === "pre_reserved"
-                ? "pending"
-                : ""}
-            ${reservation.status === "booked"
-                ? "confirmed"
-                : ""}
-        ">
-
-            <p>
-                <strong>Fecha:</strong>
-                ${reservation.date || "—"}
-            </p>
-
-            <p>
-                <strong>Hora:</strong>
-                ${reservation.time || "—"}
-            </p>
-
-            <p>
-                <strong>Nombre:</strong>
-                ${reservation.name || "No indicado"}
-            </p>
-
-            <p>
-                <strong>Contacto:</strong>
-                ${reservation.contact || "No indicado"}
-            </p>
-
-            <p>
-                <strong>Clase:</strong>
-                ${reservation.class_type || "No especificada"}
-            </p>
-
-            <p>
-                <strong>Estado:</strong>
-                ${statusText || "—"}
-            </p>
-
-            <p>
-                <strong>Origen:</strong>
-                ${reservation.source || "No indicado"}
-            </p>
-
-        </div>
+        <p>
+            <strong>Origen:</strong>
+            ${reservation.source || "—"}
+        </p>
 
     `;
 
 
-    /* -----------------------------------------
-       LLEVAR AL USUARIO AL DETALLE
-    ----------------------------------------- */
+    return detail;
 
-    details.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
 }
 
 
 /* =========================================
-   INICIAR
+   MOSTRAR DETALLES AL PINCHAR
 ========================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+function showReservationDetails(
+    reservation
+) {
 
-        loadAllReservations();
+    console.log(
+        "Reserva seleccionada:",
+        reservation
+    );
+
+
+    /*
+       Si conocemos la fecha de la reserva,
+       seleccionamos automáticamente ese día
+       en el panel superior.
+    */
+
+    if (reservation.date) {
+
+        const parts =
+            reservation.date.split("-");
+
+
+        if (parts.length === 3) {
+
+            const year =
+                Number(parts[0]);
+
+            const month =
+                Number(parts[1]) - 1;
+
+            const day =
+                Number(parts[2]);
+
+
+            currentDate =
+                new Date(
+                    year,
+                    month,
+                    1
+                );
+
+
+            renderCalendar();
+
+
+            selectDay(
+                year,
+                month,
+                day
+            );
+
+        }
 
     }
-);
 
+}
+
+
+/* =========================================
+   FIN
+========================================= */
