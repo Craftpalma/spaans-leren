@@ -173,9 +173,6 @@ function getBotResponse(question) {
 ========================================= */
 
 let conversationHistory = [];
-/* =========================================
-   ENVIAR MENSAJE AL WORKER
-========================================= */
 
 async function sendMessage() {
 
@@ -185,14 +182,33 @@ async function sendMessage() {
         return;
     }
 
+    /* =========================================
+       IDENTIFICAR ESTA PETICIÓN
+    ========================================= */
+
+    const requestId = ++sendMessage.lastRequestId;
+
+
     /* Mostrar mensaje del usuario */
     addMessage(text, "user");
+
 
     /* Limpiar campo */
     chatbotInput.value = "";
 
-    /* Mensaje temporal */
-    addMessage("Espera un momento...", "bot");
+
+    /* Crear mensaje temporal propio para esta petición */
+    const waitingMessage = document.createElement("div");
+
+    waitingMessage.classList.add("bot-message");
+
+    waitingMessage.textContent = "Espera un momento...";
+
+    chatbotMessages.appendChild(waitingMessage);
+
+    chatbotMessages.scrollTop =
+        chatbotMessages.scrollHeight;
+
 
     try {
 
@@ -207,84 +223,146 @@ async function sendMessage() {
 
                 body: JSON.stringify({
                     message: text,
-                      history:
-                            conversationHistory
+                    history: conversationHistory
                 })
             }
         );
 
+
         const data = await response.json();
 
-        /* Eliminar mensaje temporal */
-        const messages = chatbotMessages.children;
 
-        if (messages.length > 0) {
-            messages[messages.length - 1].remove();
+        /* =========================================
+           COMPROBAR SI ESTA PETICIÓN SIGUE SIENDO
+           LA ÚLTIMA
+        ========================================= */
+
+        if (requestId !== sendMessage.lastRequestId) {
+
+            /*
+             * El usuario ya ha enviado otra pregunta.
+             * Esta respuesta queda obsoleta.
+             */
+
+            console.log(
+                "Respuesta ignorada por ser de una petición anterior:",
+                text
+            );
+
+            return;
         }
 
-        /* Mostrar respuesta del Worker */
+
+        /* =========================================
+           ELIMINAR SU PROPIO "ESPERA..."
+        ========================================= */
+
+        if (waitingMessage.parentNode) {
+            waitingMessage.remove();
+        }
+
+
+        /* =========================================
+           RESPUESTA DEL WORKER
+        ========================================= */
+
         if (data.reply) {
-/*añadido para memoria*/   /* Guardar conversación */
-               /* Guardar conversación */
 
-    conversationHistory.push({
+            /* Guardar conversación */
 
-        role: "user",
+            conversationHistory.push({
 
-        parts: [
-            {
-                text: text
-            }
-        ]
+                role: "user",
 
-    });
+                parts: [
+                    {
+                        text: text
+                    }
+                ]
 
-    conversationHistory.push({
+            });
 
-        role: "model",
 
-        parts: [
-            {
-                text: data.reply
-            }
-        ]
+            conversationHistory.push({
 
-    });
-           /*memoria hasta aqui*/
-            addMessage(data.reply, "bot");
+                role: "model",
+
+                parts: [
+                    {
+                        text: data.reply
+                    }
+                ]
+
+            });
+
+
+            addMessage(
+                data.reply,
+                "bot"
+            );
+
 
         } else if (data.message) {
 
-            addMessage("Error del asistente: " + data.error, "bot");
+            addMessage(
+                "El asistente no ha podido completar la consulta. Inténtalo de nuevo.",
+                "bot"
+            );
+
 
         } else {
 
             addMessage(
-                "El worker respondio, pero no recibimos una respuesta valida." + data.error,
+                "No he recibido una respuesta válida del asistente. Inténtalo de nuevo.",
                 "bot"
             );
+
         }
+
 
     } catch (error) {
 
-        console.error("Error conectando con el Worker:", error);
+        console.error(
+            "Error conectando con el Worker:",
+            error
+        );
 
-        /* Eliminar mensaje temporal */
-        const messages = chatbotMessages.children;
 
-        if (messages.length > 0) {
-            messages[messages.length - 1].remove();
+        /* =========================================
+           SI YA HAY UNA PETICIÓN MÁS NUEVA,
+           IGNORAMOS TAMBIÉN ESTE ERROR
+        ========================================= */
+
+        if (requestId !== sendMessage.lastRequestId) {
+
+            console.log(
+                "Error ignorado porque existe una petición más reciente."
+            );
+
+            return;
         }
+
+
+        /* Eliminar su propio mensaje temporal */
+
+        if (waitingMessage.parentNode) {
+            waitingMessage.remove();
+        }
+
 
         addMessage(
             "No he podido conectar con el asistente. Inténtalo de nuevo.",
             "bot"
         );
+
     }
+
 }
 
 
+/* Contador de peticiones del chatbot */
 
+sendMessage.lastRequestId = 0;
 /* =========================================
    ENTER PARA ENVIAR
 ========================================= */
