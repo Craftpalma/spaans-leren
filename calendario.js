@@ -42,7 +42,7 @@ const months = [
 // MOSTRAR CALENDARIO
 // =========================================
 
-function renderCalendar() {
+async function renderCalendar() {
 
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -54,61 +54,191 @@ function renderCalendar() {
     const firstDay = new Date(year, month, 1);
 
     let startingDay = firstDay.getDay();
+
     // Convertimos domingo = 0 a lunes = 0
     if (startingDay === 0) {
         startingDay = 6;
     } else {
         startingDay = startingDay - 1;
     }
-   
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const daysInMonth =
+        new Date(year, month + 1, 0).getDate();
 
 
-    // Espacios antes del primer día
+    // =====================================
+    // ESPACIOS ANTES DEL PRIMER DÍA
+    // =====================================
+
     for (let i = 0; i < startingDay; i++) {
 
-        const emptyDay = document.createElement("div");
+        const emptyDay =
+            document.createElement("div");
 
-        emptyDay.classList.add("calendar-day", "empty");
+        emptyDay.classList.add(
+            "calendar-day",
+            "empty"
+        );
 
         calendarDays.appendChild(emptyDay);
     }
 
 
-    // Días del mes
+    // =====================================
+    // DÍAS DEL MES
+    // =====================================
+
     for (let day = 1; day <= daysInMonth; day++) {
 
-        const date = new Date(year, month, day);
+        const date =
+            new Date(year, month, day);
 
-        const dayElement = document.createElement("button");
+        const dayElement =
+            document.createElement("button");
 
         dayElement.type = "button";
 
-        dayElement.classList.add("calendar-day");
+        dayElement.classList.add(
+            "calendar-day"
+        );
 
         dayElement.textContent = day;
 
 
-        // Fin de semana
-        if (date.getDay() === 0 || date.getDay() === 6) {
+        // =================================
+        // FIN DE SEMANA
+        // =================================
 
-            dayElement.classList.add("weekend");
+        if (
+            date.getDay() === 0 ||
+            date.getDay() === 6
+        ) {
+
+            dayElement.classList.add(
+                "weekend"
+            );
 
         } else {
 
-            dayElement.addEventListener("click", function () {
+            // =============================
+            // CLICK EN DÍA
+            // =============================
 
-                selectDay(year, month, day);
+            dayElement.addEventListener(
+                "click",
+                function () {
+
+                    selectDay(
+                        year,
+                        month,
+                        day
+                    );
+
+                }
+            );
+
+
+            // =============================
+            // COMPROBAR RESERVAS DEL DÍA
+            // =============================
+
+            const dateString =
+                `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+
+            fetch(
+                `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`
+            )
+            .then(response => response.json())
+            .then(data => {
+
+                if (
+                    !data.ok ||
+                    !data.availability
+                ) {
+                    return;
+                }
+
+
+                // =========================
+                // COMPROBAR ESTADOS
+                // =========================
+
+                const hasPreReserved =
+                    data.availability.some(
+                        slot =>
+                            slot.status === "pre_reserved"
+                    );
+
+
+                const hasBooked =
+                    data.availability.some(
+                        slot =>
+                            slot.status === "booked"
+                    );
+
+
+                // =========================
+                // PRE-RESERVA
+                // =========================
+
+                if (hasPreReserved) {
+
+                    dayElement.classList.add(
+                        "pre-reserved"
+                    );
+
+                }
+
+
+                // =========================
+                // RESERVADA
+                // =========================
+
+                if (hasBooked) {
+
+                    dayElement.classList.add(
+                        "booked"
+                    );
+
+                }
+
+
+                // =========================
+                // AMBAS
+                // =========================
+
+                if (
+                    hasPreReserved &&
+                    hasBooked
+                ) {
+
+                    dayElement.classList.add(
+                        "both"
+                    );
+
+                }
+
+            })
+            .catch(error => {
+
+                console.error(
+                    `Error consultando el día ${dateString}:`,
+                    error
+                );
 
             });
 
         }
 
 
-        calendarDays.appendChild(dayElement);
-    }
-}
+        calendarDays.appendChild(
+            dayElement
+        );
 
+    }
+
+}
 // =========================================
 // SELECCIONAR DÍA
 // =========================================
