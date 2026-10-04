@@ -168,11 +168,15 @@ function getBotResponse(question) {
 /* =========================================
    ENVIAR MENSAJE
 ========================================= */
+
 /* =========================================
    MEMORIA DE LA CONVERSACIÓN
 ========================================= */
 
 let conversationHistory = [];
+
+/* Petición actual al Worker */
+let currentController = null;
 
 async function sendMessage() {
 
@@ -181,6 +185,17 @@ async function sendMessage() {
     if (text === "") {
         return;
     }
+
+    /* Cancelar la petición anterior si todavía está pendiente */
+    if (currentController) {
+        currentController.abort();
+    }
+
+    /* Crear controlador para esta nueva petición */
+    currentController = new AbortController();
+
+    const signal = currentController.signal;
+
 
     /* =========================================
        IDENTIFICAR ESTA PETICIÓN
