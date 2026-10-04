@@ -1,3 +1,4 @@
+
 /* =========================================
    SPAANS LEREN - CALENDARIO MASTER
 ========================================= */
@@ -11,7 +12,7 @@ const WORKER_URL =
 ========================================= */
 
 const reservationList =
-    document.getElementById("reservationList");
+    document.getElementById("allReservations");
 
 
 /* =========================================
@@ -23,18 +24,19 @@ async function loadAllReservations() {
     if (!reservationList) {
 
         console.error(
-            "No se encontró #reservationList en calendario-master.html"
+            "No se encontró #allReservations en calendario-master.html"
         );
 
         return;
     }
+
 
     /* -----------------------------------------
        MENSAJE DE CARGA
     ----------------------------------------- */
 
     reservationList.innerHTML = `
-        <p>
+        <p class="no-reservations">
             Cargando reservas...
         </p>
     `;
@@ -42,13 +44,28 @@ async function loadAllReservations() {
 
     try {
 
+        /* -----------------------------------------
+           CONSULTAR WORKER
+        ----------------------------------------- */
+
         const response = await fetch(
-            `${WORKER_URL}?master=reservations`
+            WORKER_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    action: "master_reservations"
+                })
+            }
         );
 
 
         /* -----------------------------------------
-           COMPROBAR RESPUESTA
+           COMPROBAR RESPUESTA HTTP
         ----------------------------------------- */
 
         if (!response.ok) {
@@ -58,6 +75,10 @@ async function loadAllReservations() {
             );
         }
 
+
+        /* -----------------------------------------
+           CONVERTIR RESPUESTA A JSON
+        ----------------------------------------- */
 
         const data =
             await response.json();
@@ -79,6 +100,7 @@ async function loadAllReservations() {
         ) {
 
             throw new Error(
+                data.error ||
                 "Respuesta de reservas no válida."
             );
         }
@@ -102,7 +124,7 @@ async function loadAllReservations() {
 
 
         reservationList.innerHTML = `
-            <p>
+            <p class="no-reservations">
                 No se pudieron cargar las reservas.
             </p>
         `;
@@ -111,7 +133,7 @@ async function loadAllReservations() {
 
 
 /* =========================================
-   MOSTRAR RESERVAS
+   MOSTRAR TODAS LAS RESERVAS
 ========================================= */
 
 function renderReservations(
@@ -132,8 +154,8 @@ function renderReservations(
     ) {
 
         reservationList.innerHTML = `
-            <p>
-                No hay reservas.
+            <p class="no-reservations">
+                No hay reservas registradas.
             </p>
         `;
 
@@ -188,7 +210,7 @@ function renderReservations(
 
 
             /* ---------------------------------
-               FECHA
+               FECHA Y HORA
             --------------------------------- */
 
             const date =
@@ -198,7 +220,7 @@ function renderReservations(
                 "reservation-list-date";
 
             date.textContent =
-                `${reservation.date} — ${reservation.time}`;
+                `${reservation.date} · ${reservation.time}`;
 
 
             /* ---------------------------------
@@ -277,25 +299,34 @@ function renderReservations(
             } else {
 
                 status.textContent =
-                    reservation.status;
+                    reservation.status ||
+                    "Estado desconocido";
             }
 
 
             /* ---------------------------------
-               AÑADIR ELEMENTOS
+               AÑADIR INFORMACIÓN
             --------------------------------- */
 
-            item.appendChild(date);
+            item.appendChild(
+                date
+            );
 
-            item.appendChild(name);
+            item.appendChild(
+                name
+            );
 
-            item.appendChild(type);
+            item.appendChild(
+                type
+            );
 
-            item.appendChild(status);
+            item.appendChild(
+                status
+            );
 
 
             /* ---------------------------------
-               CLICK EN RESERVA
+               CLICK EN LA RESERVA
             --------------------------------- */
 
             item.addEventListener(
@@ -313,6 +344,7 @@ function renderReservations(
             reservationList.appendChild(
                 item
             );
+
         }
     );
 }
@@ -332,37 +364,140 @@ function showReservationDetails(
     );
 
 
-    /*
-       De momento mostramos la información
-       en una ventana sencilla.
+    /* -----------------------------------------
+       CONVERTIR ESTADO A TEXTO
+    ----------------------------------------- */
 
-       Después sustituiremos esto por un
-       panel profesional con botones:
+    let statusText =
+        reservation.status;
 
-       CONFIRMAR
-       CANCELAR
-    */
 
-    const message = `
+    if (
+        reservation.status ===
+        "pre_reserved"
+    ) {
 
-Fecha: ${reservation.date}
+        statusText =
+            "Pendiente de confirmación";
 
-Hora: ${reservation.time}
+    } else if (
+        reservation.status ===
+        "booked"
+    ) {
 
-Nombre: ${reservation.name || "—"}
+        statusText =
+            "Confirmada";
 
-Contacto: ${reservation.contact || "—"}
+    } else if (
+        reservation.status ===
+        "cancelled"
+    ) {
 
-Clase: ${reservation.class_type || "—"}
+        statusText =
+            "Cancelada";
 
-Estado: ${reservation.status}
+    } else if (
+        reservation.status ===
+        "expired"
+    ) {
+
+        statusText =
+            "Expirada";
+    }
+
+
+    /* -----------------------------------------
+       MOSTRAR EN EL PANEL DE DETALLES
+    ----------------------------------------- */
+
+    const details =
+        document.getElementById(
+            "dayReservations"
+        );
+
+    const title =
+        document.getElementById(
+            "selectedDayTitle"
+        );
+
+
+    if (
+        !details ||
+        !title
+    ) {
+
+        console.error(
+            "No se encontró el panel de detalles."
+        );
+
+        return;
+    }
+
+
+    title.textContent =
+        "Detalle de la reserva";
+
+
+    details.innerHTML = `
+
+        <div class="
+            reservation-detail
+            ${reservation.status === "pre_reserved"
+                ? "pending"
+                : ""}
+            ${reservation.status === "booked"
+                ? "confirmed"
+                : ""}
+        ">
+
+            <p>
+                <strong>Fecha:</strong>
+                ${reservation.date || "—"}
+            </p>
+
+            <p>
+                <strong>Hora:</strong>
+                ${reservation.time || "—"}
+            </p>
+
+            <p>
+                <strong>Nombre:</strong>
+                ${reservation.name || "No indicado"}
+            </p>
+
+            <p>
+                <strong>Contacto:</strong>
+                ${reservation.contact || "No indicado"}
+            </p>
+
+            <p>
+                <strong>Clase:</strong>
+                ${reservation.class_type || "No especificada"}
+            </p>
+
+            <p>
+                <strong>Estado:</strong>
+                ${statusText || "—"}
+            </p>
+
+            <p>
+                <strong>Origen:</strong>
+                ${reservation.source || "No indicado"}
+            </p>
+
+        </div>
 
     `;
 
 
-    alert(
-        message
-    );
+    /* -----------------------------------------
+       LLEVAR AL USUARIO AL DETALLE
+    ----------------------------------------- */
+
+    details.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 
@@ -378,3 +513,4 @@ document.addEventListener(
 
     }
 );
+
