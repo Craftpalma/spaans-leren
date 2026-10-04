@@ -13,7 +13,12 @@ const WORKER_URL =
 let currentDate = new Date();
 let selectedDate = null;
 
-
+/*
+   Todas las reservas cargadas desde D1.
+   Se utilizan también para pintar
+   el estado de cada día del calendario.
+*/
+let masterReservations = [];
 /* =========================================
    ELEMENTOS DEL DOM
 ========================================= */
@@ -169,7 +174,98 @@ document.addEventListener(
 
     }
 );
+/* =========================================
+   OBTENER ESTADO DE UN DÍA
+========================================= */
 
+function getDayReservationStatus(date) {
+
+    const dayReservations =
+        masterReservations.filter(
+            reservation =>
+                reservation.date === date &&
+                (
+                    reservation.status === "pre_reserved" ||
+                    reservation.status === "booked"
+                )
+        );
+
+
+    const preReservedTimes = new Set();
+
+    const bookedTimes = new Set();
+
+
+    dayReservations.forEach(
+        reservation => {
+
+            if (
+                reservation.status === "pre_reserved"
+            ) {
+
+                preReservedTimes.add(
+                    reservation.time
+                );
+
+            }
+
+
+            if (
+                reservation.status === "booked"
+            ) {
+
+                bookedTimes.add(
+                    reservation.time
+                );
+
+            }
+
+        }
+    );
+
+
+    const hasPreReserved =
+        preReservedTimes.size > 0;
+
+
+    const hasBooked =
+        bookedTimes.size > 0;
+
+
+    const hasBoth =
+        hasPreReserved &&
+        hasBooked;
+
+
+    /*
+       Horarios del calendario:
+       09:00 hasta 19:00
+       = 11 franjas
+    */
+
+    const totalSlots = 11;
+
+
+    const fullyPreReserved =
+        preReservedTimes.size === totalSlots;
+
+
+    const fullyBooked =
+        bookedTimes.size === totalSlots;
+
+
+    return {
+
+        hasPreReserved,
+        hasBooked,
+        hasBoth,
+
+        fullyPreReserved,
+        fullyBooked
+
+    };
+
+}
 
 /* =========================================
    MOSTRAR CALENDARIO
@@ -280,7 +376,76 @@ function renderCalendar() {
 
         dayElement.className =
             "day";
+       
+/* -----------------------------------------
+   FECHA DEL DÍA
+----------------------------------------- */
 
+const dateString =
+    `${year}-` +
+    `${(month + 1)
+        .toString()
+        .padStart(2, "0")}-` +
+    `${day
+        .toString()
+        .padStart(2, "0")}`;
+
+
+/* -----------------------------------------
+   ESTADO DE LAS RESERVAS
+----------------------------------------- */
+
+const dayStatus =
+    getDayReservationStatus(
+        dateString
+    );
+
+
+/* -----------------------------------------
+   AÑADIR CLASE VISUAL
+----------------------------------------- */
+
+if (
+    dayStatus.fullyPreReserved
+) {
+
+    dayElement.classList.add(
+        "fully-pre-reserved"
+    );
+
+} else if (
+    dayStatus.fullyBooked
+) {
+
+    dayElement.classList.add(
+        "fully-booked"
+    );
+
+} else if (
+    dayStatus.hasBoth
+) {
+
+    dayElement.classList.add(
+        "both"
+    );
+
+} else if (
+    dayStatus.hasPreReserved
+) {
+
+    dayElement.classList.add(
+        "pre-reserved"
+    );
+
+} else if (
+    dayStatus.hasBooked
+) {
+
+    dayElement.classList.add(
+        "booked"
+    );
+
+}
 
         const dayNumber =
             document.createElement("div");
@@ -483,10 +648,13 @@ async function loadAllReservations() {
 
         }
 
+       masterReservations = data.reservations;
 
-        renderAllReservations(
-            data.reservations
-        );
+         renderAllReservations(
+             masterReservations
+         );
+
+renderCalendar();
 
 
     } catch (error) {
