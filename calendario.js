@@ -160,64 +160,75 @@ async function renderCalendar() {
                 }
 
 
-                // =========================
-                // COMPROBAR ESTADOS
-                // =========================
+// =========================
+// COMPROBAR ESTADO DEL DÍA
+// =========================
 
-                const hasPreReserved =
-                    data.availability.some(
-                        slot =>
-                            slot.status === "pre_reserved"
-                    );
+const totalSlots =
+    data.availability.length;
 
 
-                const hasBooked =
-                    data.availability.some(
-                        slot =>
-                            slot.status === "booked"
-                    );
+const preReservedSlots =
+    data.availability.filter(
+        slot =>
+            slot.status === "pre_reserved"
+    ).length;
 
 
-                // =========================
-                // PRE-RESERVA
-                // =========================
-
-                if (hasPreReserved) {
-
-                    dayElement.classList.add(
-                        "pre-reserved"
-                    );
-
-                }
+const bookedSlots =
+    data.availability.filter(
+        slot =>
+            slot.status === "booked"
+    ).length;
 
 
-                // =========================
-                // RESERVADA
-                // =========================
-
-                if (hasBooked) {
-
-                    dayElement.classList.add(
-                        "booked"
-                    );
-
-                }
+const availableSlots =
+    data.availability.filter(
+        slot =>
+            slot.status === "available"
+    ).length;
 
 
-                // =========================
-                // AMBAS
-                // =========================
+// =========================
+// DÍA COMPLETAMENTE OCUPADO
+// =========================
 
-                if (
-                    hasPreReserved &&
-                    hasBooked
-                ) {
+if (
+    availableSlots === 0 &&
+    totalSlots > 0
+) {
 
-                    dayElement.classList.add(
-                        "both"
-                    );
+    /*
+       Todas las horas están ocupadas.
 
-                }
+       Si todas son pre-reservas:
+       🟡 amarillo
+
+       Si todas son reservas:
+       🔴 rojo
+
+       Si hay mezcla:
+       🔴 rojo porque el día
+       está completamente ocupado.
+    */
+
+    if (
+        preReservedSlots === totalSlots
+    ) {
+
+        dayElement.classList.add(
+            "fully-pre-reserved"
+        );
+
+    } else {
+
+        dayElement.classList.add(
+            "fully-booked"
+        );
+
+    }
+
+}
 
             })
             .catch(error => {
