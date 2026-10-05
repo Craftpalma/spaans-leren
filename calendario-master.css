@@ -288,7 +288,7 @@
 
     font-size: 36px;
     font-weight: bold;
-
+   margin: 0; 
     z-index: 2;
 }
 
