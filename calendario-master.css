@@ -327,3 +327,23 @@
 
     color: #d99a9a;
 }
+/* =========================================
+   MASTER - NÚMERO DEL DÍA
+   REGLA FINAL
+========================================= */
+
+.calendar-grid .day .day-number {
+    position: absolute !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    font-size: 32px !important;
+    font-weight: bold !important;
+
+    margin: 0 !important;
+
+    z-index: 10 !important;
+}
