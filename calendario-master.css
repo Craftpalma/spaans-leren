@@ -277,18 +277,16 @@
     position: relative;
 }
 
-
 /* Número del día */
-
 .day-number {
     position: absolute;
 
-    top: 7px;
+    top: 50px;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform: translateX(-50%,-50%);
 
-    font-size: 28px;
+    font-size: 36px;
     font-weight: bold;
 
     z-index: 2;
