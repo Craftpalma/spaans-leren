@@ -299,3 +299,48 @@
 
     color: #d99a9a;
 }
+/* Número del día */
+.day-number {
+    position: absolute;
+
+    top: 7px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 28px;
+    font-weight: bold;
+
+    z-index: 2;
+}
+
+
+/* Contadores */
+.day-reservation-count {
+    position: absolute;
+
+    top: 10px;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    line-height: 1;
+
+    z-index: 2;
+}
+
+
+/* Pre-reservas → izquierda */
+.pre-reserved-count {
+    left: 8px;
+
+    color: #e7b65c;
+}
+
+
+/* Confirmadas → derecha */
+.booked-count {
+    right: 8px;
+
+    color: #d99a9a;
+}
