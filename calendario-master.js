@@ -236,6 +236,12 @@ function getDayReservationStatus(date) {
         hasPreReserved &&
         hasBooked;
 
+   const preReservedCount =
+       preReservedTimes.size;
+
+
+      const bookedCount =
+          bookedTimes.size;
 
     /*
        Horarios del calendario:
