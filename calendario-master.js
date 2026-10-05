@@ -267,7 +267,10 @@ function getDayReservationStatus(date) {
         hasBoth,
 
         fullyPreReserved,
-        fullyBooked
+        fullyBooked,
+
+         preReservedCount,
+         bookedCount
 
     };
 
@@ -468,7 +471,48 @@ if (
         dayElement.appendChild(
             dayNumber
         );
+ /* -----------------------------------------
+   CONTADORES DE RESERVAS
+----------------------------------------- */
 
+if (
+    dayStatus.preReservedCount > 0
+) {
+
+    const preReservedCount =
+        document.createElement("div");
+
+    preReservedCount.className =
+        "day-reservation-count pre-reserved-count";
+
+    preReservedCount.textContent =
+        dayStatus.preReservedCount;
+
+    dayElement.appendChild(
+        preReservedCount
+    );
+
+}
+
+
+if (
+    dayStatus.bookedCount > 0
+) {
+
+    const bookedCount =
+        document.createElement("div");
+
+    bookedCount.className =
+        "day-reservation-count booked-count";
+
+    bookedCount.textContent =
+        dayStatus.bookedCount;
+
+    dayElement.appendChild(
+        bookedCount
+    );
+
+}
 
         /* -----------------------------------------
            CLICK EN EL DÍA
