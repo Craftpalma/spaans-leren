@@ -260,36 +260,6 @@
 
     border: 2px solid #d99a9a;
 }
-/* =========================================
-   CONTADORES DE RESERVAS EN EL DÍA
-========================================= */
-
-.day {
-    position: relative;
-}
-
-
-/* Contador de pre-reservas */
-
-.day-reservation-count {
-    position: absolute;
-
-    right: 6px;
-
-    font-size: 13px;
-    font-weight: bold;
-
-    line-height: 1;
-}
-
-
-/* Pre-reservas - amarillo */
-
-.pre-reserved-count {
-    top: 6px;
-
-    color: #e7b65c;
-}
 
 
 /* Reservas confirmadas - rojo */
@@ -299,7 +269,17 @@
 
     color: #d99a9a;
 }
+/* =========================================
+   NÚMEROS DEL DÍA Y RESERVAS - MASTER
+========================================= */
+
+.day {
+    position: relative;
+}
+
+
 /* Número del día */
+
 .day-number {
     position: absolute;
 
@@ -316,6 +296,7 @@
 
 
 /* Contadores */
+
 .day-reservation-count {
     position: absolute;
 
@@ -331,6 +312,7 @@
 
 
 /* Pre-reservas → izquierda */
+
 .pre-reserved-count {
     left: 8px;
 
@@ -339,6 +321,7 @@
 
 
 /* Confirmadas → derecha */
+
 .booked-count {
     right: 8px;
 
