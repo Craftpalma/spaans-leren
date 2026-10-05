@@ -236,12 +236,12 @@ function getDayReservationStatus(date) {
         hasPreReserved &&
         hasBooked;
 
-   const preReservedCount =
-       preReservedTimes.size;
+	const preReservedCount =
+    preReservedTimes.size;
 
 
-      const bookedCount =
-          bookedTimes.size;
+	const bookedCount =
+    bookedTimes.size;
 
     /*
        Horarios del calendario:
@@ -269,8 +269,8 @@ function getDayReservationStatus(date) {
         fullyPreReserved,
         fullyBooked,
 
-         preReservedCount,
-         bookedCount
+		preReservedCount,
+    	bookedCount
 
     };
 
@@ -471,49 +471,49 @@ if (
         dayElement.appendChild(
             dayNumber
         );
- /* -----------------------------------------
-   CONTADORES DE RESERVAS
------------------------------------------ */
 
-if (
-    dayStatus.preReservedCount > 0
-) {
+		/* -----------------------------------------
+		CONTADORES DE RESERVAS
+		----------------------------------------- */
 
-    const preReservedCount =
-        document.createElement("div");
+		if (
+			dayStatus.preReservedCount > 0
+		) {
 
-    preReservedCount.className =
-        "day-reservation-count pre-reserved-count";
+			const preReservedCount =
+				document.createElement("div");
 
-    preReservedCount.textContent =
-        dayStatus.preReservedCount;
+			preReservedCount.className =
+				"day-reservation-count pre-reserved-count";
 
-    dayElement.appendChild(
-        preReservedCount
-    );
+			preReservedCount.textContent =
+				dayStatus.preReservedCount;
 
-}
+			dayElement.appendChild(
+				preReservedCount
+			);
+
+		}
 
 
-if (
-    dayStatus.bookedCount > 0
-) {
+		if (
+			dayStatus.bookedCount > 0
+		) {
 
-    const bookedCount =
-        document.createElement("div");
+			const bookedCount =
+				document.createElement("div");
 
-    bookedCount.className =
-        "day-reservation-count booked-count";
+			bookedCount.className =
+				"day-reservation-count booked-count";
 
-    bookedCount.textContent =
-        dayStatus.bookedCount;
+			bookedCount.textContent =
+				dayStatus.bookedCount;
 
-    dayElement.appendChild(
-        bookedCount
-    );
+			dayElement.appendChild(
+				bookedCount
+			);
 
-}
-
+		}
         /* -----------------------------------------
            CLICK EN EL DÍA
         ----------------------------------------- */
