@@ -217,23 +217,23 @@
         ) border-box;
 }
 /* =========================================
-   ESTADOS DE DÍA - CALENDARIO MASTER
+   ESTADOS DE LOS DÍAS - CALENDARIO MASTER
 ========================================= */
 
-/* Día completamente pre-reservado */
-.master-day.pre-reserved {
-    background: #fff1a8;
+/* Día con una o más pre-reservas */
+.day.pre-reserved {
     border: 2px solid #e7b65c;
 }
 
-/* Día completamente reservado */
-.master-day.booked {
-    background: #f5d6d6;
+
+/* Día con una o más reservas confirmadas */
+.day.booked {
     border: 2px solid #d99a9a;
 }
 
-/* Día con pre-reservas + reservas */
-.master-day.both {
+
+/* Día con mezcla de pre-reservas y reservas */
+.day.both {
     border: 2px solid transparent;
 
     background:
@@ -243,4 +243,20 @@
             #e7b65c 50%,
             #d99a9a 50%
         ) border-box;
+}
+
+
+/* Día completamente pre-reservado */
+.day.fully-pre-reserved {
+    background: #fff1a8;
+
+    border: 2px solid #e7b65c;
+}
+
+
+/* Día completamente reservado */
+.day.fully-booked {
+    background: #f5d6d6;
+
+    border: 2px solid #d99a9a;
 }
