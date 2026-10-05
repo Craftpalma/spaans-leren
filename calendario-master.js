@@ -1,4 +1,3 @@
-
 /* =========================================
    SPAANS LEREN - CALENDARIO MASTER
 ========================================= */
@@ -12,42 +11,25 @@ const WORKER_URL =
 ========================================= */
 
 let currentDate = new Date();
-
 let selectedDate = null;
-
 
 /*
    Todas las reservas cargadas desde D1.
-
-   Se utilizan para:
-
-   - pintar el calendario
-   - mostrar todas las reservas
-   - mostrar las reservas del día
-   - mostrar canceladas / expiradas
+   Se utilizan también para pintar
+   el estado de cada día del calendario.
 */
 let masterReservations = [];
-
-
 /* =========================================
    ELEMENTOS DEL DOM
 ========================================= */
 
 let calendarGrid;
-
 let currentDateElement;
-
 let previousMonthButton;
-
 let nextMonthButton;
-
 let selectedDayTitle;
-
 let dayReservations;
-
 let allReservations;
-
-let cancelledExpiredReservations;
 
 
 /* =========================================
@@ -55,7 +37,6 @@ let cancelledExpiredReservations;
 ========================================= */
 
 const monthNames = [
-
     "Enero",
     "Febrero",
     "Marzo",
@@ -68,7 +49,6 @@ const monthNames = [
     "Octubre",
     "Noviembre",
     "Diciembre"
-
 ];
 
 
@@ -85,46 +65,34 @@ document.addEventListener(
                 "calendarGrid"
             );
 
-
         currentDateElement =
             document.getElementById(
                 "currentDate"
             );
-
 
         previousMonthButton =
             document.getElementById(
                 "previousMonth"
             );
 
-
         nextMonthButton =
             document.getElementById(
                 "nextMonth"
             );
-
 
         selectedDayTitle =
             document.getElementById(
                 "selectedDayTitle"
             );
 
-
         dayReservations =
             document.getElementById(
                 "dayReservations"
             );
 
-
         allReservations =
             document.getElementById(
                 "allReservations"
-            );
-
-
-        cancelledExpiredReservations =
-            document.getElementById(
-                "cancelledExpiredReservations"
             );
 
 
@@ -139,7 +107,6 @@ document.addEventListener(
             );
 
             return;
-
         }
 
 
@@ -152,26 +119,8 @@ document.addEventListener(
         }
 
 
-        if (!dayReservations) {
-
-            console.error(
-                "No se encontró #dayReservations"
-            );
-
-        }
-
-
-        if (!cancelledExpiredReservations) {
-
-            console.error(
-                "No se encontró #cancelledExpiredReservations"
-            );
-
-        }
-
-
         /* -----------------------------------------
-           BOTÓN MES ANTERIOR
+           BOTONES DEL MES
         ----------------------------------------- */
 
         if (previousMonthButton) {
@@ -184,7 +133,6 @@ document.addEventListener(
                         currentDate.getMonth() - 1
                     );
 
-
                     renderCalendar();
 
                 }
@@ -192,10 +140,6 @@ document.addEventListener(
 
         }
 
-
-        /* -----------------------------------------
-           BOTÓN MES SIGUIENTE
-        ----------------------------------------- */
 
         if (nextMonthButton) {
 
@@ -206,7 +150,6 @@ document.addEventListener(
                     currentDate.setMonth(
                         currentDate.getMonth() + 1
                     );
-
 
                     renderCalendar();
 
@@ -224,231 +167,40 @@ document.addEventListener(
 
 
         /* -----------------------------------------
-           CARGAR RESERVAS
+           CARGAR TODAS LAS RESERVAS
         ----------------------------------------- */
 
         loadAllReservations();
 
     }
 );
-
-
-/* =========================================
-   FORMATEAR created_at
-========================================= */
-
-/*
-   D1 normalmente devuelve created_at
-   como una fecha/hora de SQLite.
-
-   Ejemplos posibles:
-
-   2026-10-05 01:37:00
-   2026-10-05T01:37:00
-   2026-10-05T01:37:00Z
-
-   Para los formatos sin zona horaria
-   asumimos que D1 está guardando UTC.
-
-   Después lo mostramos en Europe/Madrid.
-*/
-
-function formatCreatedAt(
-    createdAt
-) {
-
-    if (!createdAt) {
-
-        return "—";
-
-    }
-
-
-    try {
-
-        let value =
-            String(createdAt).trim();
-
-
-        /*
-           Si viene de SQLite como:
-
-           YYYY-MM-DD HH:mm:ss
-
-           lo convertimos a ISO UTC.
-        */
-
-        if (
-            /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
-                .test(value)
-        ) {
-
-            value =
-                value.replace(
-                    " ",
-                    "T"
-                ) + "Z";
-
-        }
-
-
-        /*
-           Si viene sin zona horaria
-           pero con T, asumimos UTC.
-        */
-
-        else if (
-            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
-                .test(value)
-        ) {
-
-            value += "Z";
-
-        }
-
-
-        const date =
-            new Date(value);
-
-
-        if (
-            Number.isNaN(
-                date.getTime()
-            )
-        ) {
-
-            return createdAt;
-
-        }
-
-
-        return new Intl.DateTimeFormat(
-            "es-ES",
-            {
-                timeZone:
-                    "Europe/Madrid",
-
-                day:
-                    "2-digit",
-
-                month:
-                    "2-digit",
-
-                year:
-                    "numeric",
-
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit",
-
-                hour12:
-                    false
-            }
-        ).format(date);
-
-
-    } catch (error) {
-
-        console.error(
-            "Error formateando created_at:",
-            error
-        );
-
-
-        return createdAt;
-
-    }
-
-}
-
-
-/* =========================================
-   TEXTO DEL ESTADO
-========================================= */
-
-function getStatusText(
-    status
-) {
-
-    if (
-        status === "pre_reserved"
-    ) {
-
-        return "🟡 Pendiente de confirmación";
-
-    }
-
-
-    if (
-        status === "booked"
-    ) {
-
-        return "🔴 Confirmada";
-
-    }
-
-
-    if (
-        status === "cancelled"
-    ) {
-
-        return "Cancelada";
-
-    }
-
-
-    if (
-        status === "expired"
-    ) {
-
-        return "Expirada";
-
-    }
-
-
-    return status || "Estado desconocido";
-
-}
-
-
 /* =========================================
    OBTENER ESTADO DE UN DÍA
 ========================================= */
 
-function getDayReservationStatus(
-    date
-) {
+function getDayReservationStatus(date) {
 
     const dayReservations =
         masterReservations.filter(
             reservation =>
                 reservation.date === date &&
                 (
-                    reservation.status ===
-                        "pre_reserved" ||
-
-                    reservation.status ===
-                        "booked"
+                    reservation.status === "pre_reserved" ||
+                    reservation.status === "booked"
                 )
         );
 
 
-    const preReservedTimes =
-        new Set();
+    const preReservedTimes = new Set();
 
-
-    const bookedTimes =
-        new Set();
+    const bookedTimes = new Set();
 
 
     dayReservations.forEach(
         reservation => {
 
             if (
-                reservation.status ===
-                "pre_reserved"
+                reservation.status === "pre_reserved"
             ) {
 
                 preReservedTimes.add(
@@ -459,8 +211,7 @@ function getDayReservationStatus(
 
 
             if (
-                reservation.status ===
-                "booked"
+                reservation.status === "booked"
             ) {
 
                 bookedTimes.add(
@@ -485,30 +236,16 @@ function getDayReservationStatus(
         hasPreReserved &&
         hasBooked;
 
+	const preReservedCount =
+    preReservedTimes.size;
 
-    const preReservedCount =
-        preReservedTimes.size;
 
-
-    const bookedCount =
-        bookedTimes.size;
-
+	const bookedCount =
+    bookedTimes.size;
 
     /*
        Horarios del calendario:
-
-       09:00
-       10:00
-       11:00
-       12:00
-       13:00
-       14:00
-       15:00
-       16:00
-       17:00
-       18:00
-       19:00
-
+       09:00 hasta 19:00
        = 11 franjas
     */
 
@@ -516,35 +253,28 @@ function getDayReservationStatus(
 
 
     const fullyPreReserved =
-        preReservedTimes.size ===
-        totalSlots;
+        preReservedTimes.size === totalSlots;
 
 
     const fullyBooked =
-        bookedTimes.size ===
-        totalSlots;
+        bookedTimes.size === totalSlots;
 
 
     return {
 
         hasPreReserved,
-
         hasBooked,
-
         hasBoth,
 
         fullyPreReserved,
-
         fullyBooked,
 
-        preReservedCount,
-
-        bookedCount
+		preReservedCount,
+    	bookedCount
 
     };
 
 }
-
 
 /* =========================================
    MOSTRAR CALENDARIO
@@ -553,9 +283,7 @@ function getDayReservationStatus(
 function renderCalendar() {
 
     if (!calendarGrid) {
-
         return;
-
     }
 
 
@@ -629,14 +357,10 @@ function renderCalendar() {
     ) {
 
         const emptyDay =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         emptyDay.className =
             "day empty";
-
 
         calendarGrid.appendChild(
             emptyDay
@@ -656,102 +380,84 @@ function renderCalendar() {
     ) {
 
         const dayElement =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         dayElement.className =
             "day";
+       
+/* -----------------------------------------
+   FECHA DEL DÍA
+----------------------------------------- */
+
+const dateString =
+    `${year}-` +
+    `${(month + 1)
+        .toString()
+        .padStart(2, "0")}-` +
+    `${day
+        .toString()
+        .padStart(2, "0")}`;
 
 
-        /* -----------------------------------------
-           FECHA DEL DÍA
-        ----------------------------------------- */
+/* -----------------------------------------
+   ESTADO DE LAS RESERVAS
+----------------------------------------- */
 
-        const dateString =
-            `${year}-` +
-            `${(month + 1)
-                .toString()
-                .padStart(2, "0")}-` +
-            `${day
-                .toString()
-                .padStart(2, "0")}`;
+const dayStatus =
+    getDayReservationStatus(
+        dateString
+    );
 
 
-        /* -----------------------------------------
-           ESTADO DE LAS RESERVAS
-        ----------------------------------------- */
+/* -----------------------------------------
+   AÑADIR CLASE VISUAL
+----------------------------------------- */
 
-        const dayStatus =
-            getDayReservationStatus(
-                dateString
-            );
+if (
+    dayStatus.fullyPreReserved
+) {
 
+    dayElement.classList.add(
+        "fully-pre-reserved"
+    );
 
-        /* -----------------------------------------
-           AÑADIR CLASE VISUAL
-        ----------------------------------------- */
+} else if (
+    dayStatus.fullyBooked
+) {
 
-        if (
-            dayStatus.fullyPreReserved
-        ) {
+    dayElement.classList.add(
+        "fully-booked"
+    );
 
-            dayElement.classList.add(
-                "fully-pre-reserved"
-            );
+} else if (
+    dayStatus.hasBoth
+) {
 
-        }
+    dayElement.classList.add(
+        "both"
+    );
 
-        else if (
-            dayStatus.fullyBooked
-        ) {
+} else if (
+    dayStatus.hasPreReserved
+) {
 
-            dayElement.classList.add(
-                "fully-booked"
-            );
+    dayElement.classList.add(
+        "pre-reserved"
+    );
 
-        }
+} else if (
+    dayStatus.hasBooked
+) {
 
-        else if (
-            dayStatus.hasBoth
-        ) {
+    dayElement.classList.add(
+        "booked"
+    );
 
-            dayElement.classList.add(
-                "both"
-            );
-
-        }
-
-        else if (
-            dayStatus.hasPreReserved
-        ) {
-
-            dayElement.classList.add(
-                "pre-reserved"
-            );
-
-        }
-
-        else if (
-            dayStatus.hasBooked
-        ) {
-
-            dayElement.classList.add(
-                "booked"
-            );
-
-        }
-
-
-        /* -----------------------------------------
-           NÚMERO DEL DÍA
-        ----------------------------------------- */
+}
 
         const dayNumber =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         dayNumber.className =
@@ -766,63 +472,48 @@ function renderCalendar() {
             dayNumber
         );
 
+		/* -----------------------------------------
+		CONTADORES DE RESERVAS
+		----------------------------------------- */
 
-        /* -----------------------------------------
-           CONTADORES
-        ----------------------------------------- */
+		if (
+			dayStatus.preReservedCount > 0
+		) {
 
-        if (
-            dayStatus.preReservedCount > 0
-        ) {
+			const preReservedCount =
+				document.createElement("div");
 
-            const preReservedCount =
-                document.createElement(
-                    "div"
-                );
+			preReservedCount.className =
+				"day-reservation-count pre-reserved-count";
 
+			preReservedCount.textContent =
+				dayStatus.preReservedCount;
 
-            preReservedCount.className =
-                "day-reservation-count " +
-                "pre-reserved-count";
+			dayElement.appendChild(
+				preReservedCount
+			);
 
-
-            preReservedCount.textContent =
-                dayStatus.preReservedCount;
-
-
-            dayElement.appendChild(
-                preReservedCount
-            );
-
-        }
+		}
 
 
-        if (
-            dayStatus.bookedCount > 0
-        ) {
+		if (
+			dayStatus.bookedCount > 0
+		) {
 
-            const bookedCount =
-                document.createElement(
-                    "div"
-                );
+			const bookedCount =
+				document.createElement("div");
 
+			bookedCount.className =
+				"day-reservation-count booked-count";
 
-            bookedCount.className =
-                "day-reservation-count " +
-                "booked-count";
+			bookedCount.textContent =
+				dayStatus.bookedCount;
 
+			dayElement.appendChild(
+				bookedCount
+			);
 
-            bookedCount.textContent =
-                dayStatus.bookedCount;
-
-
-            dayElement.appendChild(
-                bookedCount
-            );
-
-        }
-
-
+		}
         /* -----------------------------------------
            CLICK EN EL DÍA
         ----------------------------------------- */
@@ -901,7 +592,9 @@ function selectDay(
         dayReservations.innerHTML = `
 
             <p class="no-reservations">
+
                 Cargando reservas...
+
             </p>
 
         `;
@@ -929,30 +622,18 @@ async function loadAllReservations() {
         );
 
         return;
-
     }
 
 
     allReservations.innerHTML = `
 
         <p class="no-reservations">
+
             Cargando reservas...
+
         </p>
 
     `;
-
-
-    if (cancelledExpiredReservations) {
-
-        cancelledExpiredReservations.innerHTML = `
-
-            <p class="no-reservations">
-                Cargando reservas...
-            </p>
-
-        `;
-
-    }
 
 
     try {
@@ -966,24 +647,19 @@ async function loadAllReservations() {
             await fetch(
                 WORKER_URL,
                 {
-
-                    method:
-                        "POST",
+                    method: "POST",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
-                    body:
-                        JSON.stringify({
+                    body: JSON.stringify({
 
-                            action:
-                                "master_reservations"
+                        action:
+                            "master_reservations"
 
-                        })
+                    })
 
                 }
             );
@@ -1022,36 +698,13 @@ async function loadAllReservations() {
 
         }
 
+       masterReservations = data.reservations;
 
-        /*
-           Guardamos las reservas
-           en memoria.
-        */
+         renderAllReservations(
+             masterReservations
+         );
 
-        masterReservations =
-            data.reservations;
-
-
-        /*
-           Pintar las dos columnas.
-        */
-
-        renderAllReservations(
-            masterReservations
-        );
-
-
-        renderCancelledExpiredReservations(
-            masterReservations
-        );
-
-
-        /*
-           Actualizar colores
-           y contadores del calendario.
-        */
-
-        renderCalendar();
+renderCalendar();
 
 
     } catch (error) {
@@ -1065,245 +718,15 @@ async function loadAllReservations() {
         allReservations.innerHTML = `
 
             <p class="no-reservations">
+
                 No se pudieron cargar
                 las reservas.
+
             </p>
 
         `;
 
-
-        if (
-            cancelledExpiredReservations
-        ) {
-
-            cancelledExpiredReservations.innerHTML = `
-
-                <p class="no-reservations">
-                    No se pudieron cargar
-                    las reservas.
-                </p>
-
-            `;
-
-        }
-
     }
-
-}
-
-
-/* =========================================
-   CREAR ELEMENTO DE LISTA DE RESERVA
-========================================= */
-
-function createReservationListItem(
-    reservation
-) {
-
-    const item =
-        document.createElement(
-            "div"
-        );
-
-
-    item.className =
-        "reservation-list-item";
-
-
-    /* -----------------------------------------
-       CLASE SEGÚN ESTADO
-    ----------------------------------------- */
-
-    if (
-        reservation.status ===
-        "pre_reserved"
-    ) {
-
-        item.classList.add(
-            "pending"
-        );
-
-    }
-
-    else if (
-        reservation.status ===
-        "booked"
-    ) {
-
-        item.classList.add(
-            "confirmed"
-        );
-
-    }
-
-    else if (
-        reservation.status ===
-        "cancelled"
-    ) {
-
-        item.classList.add(
-            "cancelled"
-        );
-
-    }
-
-    else if (
-        reservation.status ===
-        "expired"
-    ) {
-
-        item.classList.add(
-            "expired"
-        );
-
-    }
-
-
-    /* -----------------------------------------
-       FECHA Y HORA
-    ----------------------------------------- */
-
-    const date =
-        document.createElement(
-            "div"
-        );
-
-
-    date.className =
-        "reservation-list-date";
-
-
-    date.textContent =
-        `${reservation.date || "—"} · ` +
-        `${reservation.time || "—"}`;
-
-
-    /* -----------------------------------------
-       NOMBRE
-    ----------------------------------------- */
-
-    const name =
-        document.createElement(
-            "div"
-        );
-
-
-    name.className =
-        "reservation-list-name";
-
-
-    name.textContent =
-        reservation.name ||
-        "Sin nombre";
-
-
-    /* -----------------------------------------
-       TIPO DE CLASE
-    ----------------------------------------- */
-
-    const type =
-        document.createElement(
-            "div"
-        );
-
-
-    type.className =
-        "reservation-list-type";
-
-
-    type.textContent =
-        reservation.class_type ||
-        "Sin especificar";
-
-
-    /* -----------------------------------------
-       ESTADO
-    ----------------------------------------- */
-
-    const status =
-        document.createElement(
-            "div"
-        );
-
-
-    status.className =
-        "reservation-list-status";
-
-
-    status.textContent =
-        getStatusText(
-            reservation.status
-        );
-
-
-    /* -----------------------------------------
-       CREATED_AT
-    ----------------------------------------- */
-
-    const created =
-        document.createElement(
-            "div"
-        );
-
-
-    created.className =
-        "reservation-list-created";
-
-
-    created.textContent =
-        `Creada: ${
-            formatCreatedAt(
-                reservation.created_at
-            )
-        }`;
-
-
-    /* -----------------------------------------
-       AÑADIR ELEMENTOS
-    ----------------------------------------- */
-
-    item.appendChild(
-        date
-    );
-
-
-    item.appendChild(
-        name
-    );
-
-
-    item.appendChild(
-        type
-    );
-
-
-    item.appendChild(
-        status
-    );
-
-
-    item.appendChild(
-        created
-    );
-
-
-    /* -----------------------------------------
-       CLICK
-    ----------------------------------------- */
-
-    item.addEventListener(
-        "click",
-        () => {
-
-            showReservationDetails(
-                reservation
-            );
-
-        }
-    );
-
-
-    return item;
 
 }
 
@@ -1317,38 +740,20 @@ function renderAllReservations(
 ) {
 
     if (!allReservations) {
-
         return;
-
     }
 
 
-    /*
-       Solo reservas activas:
-
-       - pre_reserved
-       - booked
-    */
-
-    const activeReservations =
-        reservations.filter(
-            reservation =>
-                reservation.status ===
-                    "pre_reserved" ||
-
-                reservation.status ===
-                    "booked"
-        );
-
-
     if (
-        activeReservations.length === 0
+        reservations.length === 0
     ) {
 
         allReservations.innerHTML = `
 
             <p class="no-reservations">
-                No hay reservas activas.
+
+                No hay reservas registradas.
+
             </p>
 
         `;
@@ -1362,28 +767,17 @@ function renderAllReservations(
 
 
     /*
-       Copia para no modificar
-       masterReservations.
+       Ordenar por fecha y hora
     */
 
-    const sortedReservations =
-        [...activeReservations];
-
-
-    /*
-       Ordenar por fecha y hora.
-    */
-
-    sortedReservations.sort(
+    reservations.sort(
         (a, b) => {
 
             const dateA =
-                `${a.date || ""} ${a.time || ""}`;
-
+                `${a.date} ${a.time}`;
 
             const dateB =
-                `${b.date || ""} ${b.time || ""}`;
-
+                `${b.date} ${b.time}`;
 
             return dateA.localeCompare(
                 dateB
@@ -1393,110 +787,193 @@ function renderAllReservations(
     );
 
 
-    sortedReservations.forEach(
+    reservations.forEach(
         reservation => {
 
             const item =
-                createReservationListItem(
-                    reservation
+                document.createElement(
+                    "div"
                 );
+
+
+            item.className =
+                "reservation-list-item";
+
+
+            /* ---------------------------------
+               ESTADO
+            --------------------------------- */
+
+            if (
+                reservation.status ===
+                "pre_reserved"
+            ) {
+
+                item.classList.add(
+                    "pending"
+                );
+
+            } else if (
+                reservation.status ===
+                "booked"
+            ) {
+
+                item.classList.add(
+                    "confirmed"
+                );
+
+            }
+
+
+            /* ---------------------------------
+               FECHA
+            --------------------------------- */
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+
+            date.className =
+                "reservation-list-date";
+
+
+            date.textContent =
+                `${reservation.date} · ${reservation.time}`;
+
+
+            /* ---------------------------------
+               NOMBRE
+            --------------------------------- */
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+
+            name.className =
+                "reservation-list-name";
+
+
+            name.textContent =
+                reservation.name ||
+                "Sin nombre";
+
+
+            /* ---------------------------------
+               TIPO DE CLASE
+            --------------------------------- */
+
+            const type =
+                document.createElement(
+                    "div"
+                );
+
+
+            type.className =
+                "reservation-list-type";
+
+
+            type.textContent =
+                reservation.class_type ||
+                "Sin especificar";
+
+
+            /* ---------------------------------
+               ESTADO
+            --------------------------------- */
+
+            const status =
+                document.createElement(
+                    "div"
+                );
+
+
+            status.className =
+                "reservation-list-status";
+
+
+            if (
+                reservation.status ===
+                "pre_reserved"
+            ) {
+
+                status.textContent =
+                    "🟡 Pendiente de confirmación";
+
+            } else if (
+                reservation.status ===
+                "booked"
+            ) {
+
+                status.textContent =
+                    "🔴 Confirmada";
+
+            } else if (
+                reservation.status ===
+                "cancelled"
+            ) {
+
+                status.textContent =
+                    "Cancelada";
+
+            } else if (
+                reservation.status ===
+                "expired"
+            ) {
+
+                status.textContent =
+                    "Expirada";
+
+            } else {
+
+                status.textContent =
+                    reservation.status ||
+                    "Estado desconocido";
+
+            }
+
+
+            /* ---------------------------------
+               AÑADIR
+            --------------------------------- */
+
+            item.appendChild(
+                date
+            );
+
+            item.appendChild(
+                name
+            );
+
+            item.appendChild(
+                type
+            );
+
+            item.appendChild(
+                status
+            );
+
+
+            /* ---------------------------------
+               CLICK
+            --------------------------------- */
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    showReservationDetails(
+                        reservation
+                    );
+
+                }
+            );
 
 
             allReservations.appendChild(
-                item
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   MOSTRAR CANCELADAS / EXPIRADAS
-========================================= */
-
-function renderCancelledExpiredReservations(
-    reservations
-) {
-
-    if (!cancelledExpiredReservations) {
-
-        return;
-
-    }
-
-
-    const historicalReservations =
-        reservations.filter(
-            reservation =>
-                reservation.status ===
-                    "cancelled" ||
-
-                reservation.status ===
-                    "expired"
-        );
-
-
-    if (
-        historicalReservations.length === 0
-    ) {
-
-        cancelledExpiredReservations.innerHTML = `
-
-            <p class="no-reservations">
-                No hay reservas canceladas
-                o expiradas.
-            </p>
-
-        `;
-
-        return;
-
-    }
-
-
-    cancelledExpiredReservations.innerHTML =
-        "";
-
-
-    const sortedReservations =
-        [...historicalReservations];
-
-
-    /*
-       Ordenar por fecha y hora.
-    */
-
-    sortedReservations.sort(
-        (a, b) => {
-
-            const dateA =
-                `${a.date || ""} ${a.time || ""}`;
-
-
-            const dateB =
-                `${b.date || ""} ${b.time || ""}`;
-
-
-            return dateA.localeCompare(
-                dateB
-            );
-
-        }
-    );
-
-
-    sortedReservations.forEach(
-        reservation => {
-
-            const item =
-                createReservationListItem(
-                    reservation
-                );
-
-
-            cancelledExpiredReservations.appendChild(
                 item
             );
 
@@ -1515,30 +992,66 @@ async function loadReservationsForDay(
 ) {
 
     if (!dayReservations) {
-
         return;
-
     }
 
 
-    /*
-       IMPORTANTE:
-
-       Ya tenemos todas las reservas
-       cargadas en masterReservations.
-
-       No necesitamos volver a consultar
-       el Worker cada vez que se pincha
-       un día.
-    */
-
     try {
 
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        action:
+                            "master_reservations"
+
+                    })
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Error HTTP ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !data.ok ||
+            !Array.isArray(
+                data.reservations
+            )
+        ) {
+
+            throw new Error(
+                data.error ||
+                "Respuesta no válida."
+            );
+
+        }
+
+
         const reservations =
-            masterReservations.filter(
+            data.reservations.filter(
                 reservation =>
-                    reservation.date ===
-                    date
+                    reservation.date === date
             );
 
 
@@ -1549,7 +1062,9 @@ async function loadReservationsForDay(
             dayReservations.innerHTML = `
 
                 <p class="no-reservations">
+
                     No hay reservas para este día.
+
                 </p>
 
             `;
@@ -1562,32 +1077,7 @@ async function loadReservationsForDay(
         dayReservations.innerHTML = "";
 
 
-        /*
-           Ordenar por hora.
-        */
-
-        const sortedReservations =
-            [...reservations];
-
-
-        sortedReservations.sort(
-            (a, b) => {
-
-                return (
-                    String(
-                        a.time || ""
-                    ).localeCompare(
-                        String(
-                            b.time || ""
-                        )
-                    )
-                );
-
-            }
-        );
-
-
-        sortedReservations.forEach(
+        reservations.forEach(
             reservation => {
 
                 const detail =
@@ -1615,8 +1105,10 @@ async function loadReservationsForDay(
         dayReservations.innerHTML = `
 
             <p class="no-reservations">
+
                 No se pudieron cargar
                 las reservas.
+
             </p>
 
         `;
@@ -1653,9 +1145,7 @@ function createReservationDetail(
             "pending"
         );
 
-    }
-
-    else if (
+    } else if (
         reservation.status ===
         "booked"
     ) {
@@ -1667,10 +1157,43 @@ function createReservationDetail(
     }
 
 
-    const statusText =
-        getStatusText(
-            reservation.status
-        );
+    let statusText =
+        reservation.status;
+
+
+    if (
+        reservation.status ===
+        "pre_reserved"
+    ) {
+
+        statusText =
+            "Pendiente de confirmación";
+
+    } else if (
+        reservation.status ===
+        "booked"
+    ) {
+
+        statusText =
+            "Confirmada";
+
+    } else if (
+        reservation.status ===
+        "cancelled"
+    ) {
+
+        statusText =
+            "Cancelada";
+
+    } else if (
+        reservation.status ===
+        "expired"
+    ) {
+
+        statusText =
+            "Expirada";
+
+    }
 
 
     detail.innerHTML = `
@@ -1680,44 +1203,30 @@ function createReservationDetail(
             ${reservation.date || "—"}
         </p>
 
-
         <p>
             <strong>Hora:</strong>
             ${reservation.time || "—"}
         </p>
-
 
         <p>
             <strong>Nombre:</strong>
             ${reservation.name || "—"}
         </p>
 
-
         <p>
             <strong>Contacto:</strong>
             ${reservation.contact || "—"}
         </p>
-
 
         <p>
             <strong>Clase:</strong>
             ${reservation.class_type || "—"}
         </p>
 
-
         <p>
             <strong>Estado:</strong>
             ${statusText}
         </p>
-
-
-        <p>
-            <strong>Creada:</strong>
-            ${formatCreatedAt(
-                reservation.created_at
-            )}
-        </p>
-
 
         <p>
             <strong>Origen:</strong>
@@ -1756,26 +1265,16 @@ function showReservationDetails(
             reservation.date.split("-");
 
 
-        if (
-            parts.length === 3
-        ) {
+        if (parts.length === 3) {
 
             const year =
-                Number(
-                    parts[0]
-                );
-
+                Number(parts[0]);
 
             const month =
-                Number(
-                    parts[1]
-                ) - 1;
-
+                Number(parts[1]) - 1;
 
             const day =
-                Number(
-                    parts[2]
-                );
+                Number(parts[2]);
 
 
             currentDate =
@@ -1805,9 +1304,7 @@ function showReservationDetails(
     ----------------------------------------- */
 
     if (!dayReservations) {
-
         return;
-
     }
 
 
@@ -1815,10 +1312,43 @@ function showReservationDetails(
        TEXTO DEL ESTADO
     ----------------------------------------- */
 
-    const statusText =
-        getStatusText(
-            reservation.status
-        );
+    let statusText =
+        reservation.status;
+
+
+    if (
+        reservation.status ===
+        "pre_reserved"
+    ) {
+
+        statusText =
+            "🟡 Pendiente de confirmación";
+
+    } else if (
+        reservation.status ===
+        "booked"
+    ) {
+
+        statusText =
+            "🔴 Confirmada";
+
+    } else if (
+        reservation.status ===
+        "cancelled"
+    ) {
+
+        statusText =
+            "Cancelada";
+
+    } else if (
+        reservation.status ===
+        "expired"
+    ) {
+
+        statusText =
+            "Expirada";
+
+    }
 
 
     /* -----------------------------------------
@@ -1845,7 +1375,6 @@ function showReservationDetails(
                     ✓ Confirmar reserva
                 </button>
 
-
                 <button
                     type="button"
                     class="master-action-button master-cancel-button"
@@ -1858,9 +1387,7 @@ function showReservationDetails(
 
         `;
 
-    }
-
-    else if (
+    } else if (
         reservation.status ===
         "booked"
     ) {
@@ -1978,21 +1505,6 @@ function showReservationDetails(
             <div class="reservation-detail-row">
 
                 <div class="reservation-detail-label">
-                    Creada
-                </div>
-
-                <div class="reservation-detail-value">
-                    ${formatCreatedAt(
-                        reservation.created_at
-                    )}
-                </div>
-
-            </div>
-
-
-            <div class="reservation-detail-row">
-
-                <div class="reservation-detail-label">
                     Origen
                 </div>
 
@@ -2074,6 +1586,9 @@ function showReservationDetails(
     }
 
 }
+
+
+
 
 
 /* =========================================
