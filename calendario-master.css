@@ -284,9 +284,9 @@
     top: 50px;
     left: 50%;
 
-    transform: translateX(-50%,-50%);
+    transform: translate(-50%,-50%);
 
-    font-size: 80px;
+    font-size: 36px;
     font-weight: bold;
    
       margin: 0; 
