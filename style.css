@@ -1483,6 +1483,18 @@ section {
 .calendar-day.unavailable {
     background: #eeeeee;
 }
+/*si esta completo */
+
+.calendar-day.fully-pre-reserved {
+    background: #fff1a8;
+    border: 2px solid #e7b65c;
+}
+
+.calendar-day.fully-booked {
+    background: #f8d7da;
+    border: 2px solid #d99a9a;
+}
+
 /* LEYENDA COLOR */
 .calendar-legend {
     display: flex;
