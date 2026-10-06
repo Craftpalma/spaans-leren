@@ -588,7 +588,6 @@ function selectDay(
 
 
     if (dayReservations) {
-console.log("VA A CREAR EL PANEL");
         dayReservations.innerHTML = `
 
             <p class="no-reservations">
@@ -990,12 +989,10 @@ function renderAllReservations(
 async function loadReservationsForDay(
     date
 ) {
-console.log("dayReservations:", dayReservations);
+
     if (!dayReservations) {
-		 console.log("NO EXISTE dayReservations");
         return;
     }
-console.log("SÍ EXISTE dayReservations");
     if (!dayReservations) {
         return;
     }
