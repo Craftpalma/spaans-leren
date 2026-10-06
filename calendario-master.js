@@ -1527,7 +1527,16 @@ function showReservationDetails(
 				"PANEL DE RESERVA CREADO:",
 				dayReservations.innerHTML
 			);
+	/*COMPROVANDO PARA ENCONTRAR ERRORES BORRAR*/
+console.log(
+    "BOTÓN CONFIRMAR:",
+    document.getElementById("masterConfirmButton")
+);
 
+console.log(
+    "BOTÓN CANCELAR:",
+    document.getElementById("masterCancelButton")
+);
     /* -----------------------------------------
        BOTÓN CONFIRMAR
     ----------------------------------------- */
