@@ -588,7 +588,7 @@ function selectDay(
 
 
     if (dayReservations) {
-
+console.log("VA A CREAR EL PANEL");
         dayReservations.innerHTML = `
 
             <p class="no-reservations">
