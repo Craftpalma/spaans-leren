@@ -1546,29 +1546,257 @@ console.log(
             "masterConfirmButton"
         );
 
+	if (confirmButton) {
 
-    if (confirmButton) {
+    confirmButton.addEventListener(
+        "click",
+        async () => {
 
-        confirmButton.addEventListener(
-            "click",
-            () => {
-					   console.log("CLICK EN CONFIRMAR DETECTADO");
+            console.log(
+                "CLICK EN CONFIRMAR DETECTADO"
+            );
+
+            console.log(
+                "CONFIRMAR:",
+                reservation
+            );
+
+
+            /* =====================================
+               COMPROBAR ID
+            ===================================== */
+
+            if (!reservation.id) {
+
+                console.error(
+                    "La reserva no tiene ID."
+                );
+
+                alert(
+                    "No se puede confirmar la reserva: falta el ID."
+                );
+
+                return;
+
+            }
+
+
+            /* =====================================
+               EVITAR DOBLE CLIC
+            ===================================== */
+
+            confirmButton.disabled = true;
+
+            confirmButton.textContent =
+                "Confirmando...";
+
+
+            try {
+
                 console.log(
-                    "CONFIRMAR:",
-                    reservation
+                    "ENVIANDO CONFIRMACIÓN AL WORKER:",
+                    reservation.id
+                );
+
+
+                const response =
+                    await fetch(
+                        WORKER_URL,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                action:
+                                    "confirm_reservation",
+
+                                id:
+                                    reservation.id
+
+                            })
+
+                        }
+                    );
+
+
+                console.log(
+                    "RESPUESTA HTTP:",
+                    response.status
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "RESPUESTA CONFIRMAR:",
+                    data
+                );
+
+
+                /* =================================
+                   CONFIRMACIÓN CORRECTA
+                ================================= */
+
+                if (
+                    response.ok &&
+                    data.ok &&
+                    data.confirmed
+                ) {
+
+                    alert(
+                        "Reserva confirmada correctamente."
+                    );
+
+
+                    /* Actualizar objeto local */
+
+                    reservation.status =
+                        "booked";
+
+
+                    /* Actualizar reserva
+                       dentro de la lista */
+
+                    const index =
+                        masterReservations.findIndex(
+                            item =>
+                                item.id ===
+                                reservation.id
+                        );
+
+
+                    if (index !== -1) {
+
+                        masterReservations[
+                            index
+                        ].status = "booked";
+
+                    }
+
+
+                    /* Actualizar calendario */
+
+                    renderCalendar();
+
+
+                    /* Actualizar lista */
+
+                    renderAllReservations(
+                        masterReservations
+                    );
+
+
+                    /* Volver a mostrar
+                       el detalle actualizado */
+
+                    showReservationDetails(
+                        reservation
+                    );
+
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   YA ESTABA CONFIRMADA
+                ================================= */
+
+                if (
+                    data.already_confirmed
+                ) {
+
+                    alert(
+                        "Esta reserva ya estaba confirmada."
+                    );
+
+
+                    reservation.status =
+                        "booked";
+
+
+                    renderCalendar();
+
+
+                    renderAllReservations(
+                        masterReservations
+                    );
+
+
+                    showReservationDetails(
+                        reservation
+                    );
+
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   ERROR DEL WORKER
+                ================================= */
+
+                console.error(
+                    "Error al confirmar:",
+                    data
                 );
 
 
                 alert(
-                    "La confirmación la conectaremos al Worker en el siguiente paso."
+                    data.error ||
+                    "No se pudo confirmar la reserva."
                 );
 
+
+            } catch (error) {
+
+                console.error(
+                    "Error conectando con el Worker:",
+                    error
+                );
+
+
+                alert(
+                    "No se pudo conectar con el Worker."
+                );
+
+
+            } finally {
+
+                /* Si sigue siendo
+                   pre-reserva, restaurar botón */
+
+                if (
+                    reservation.status ===
+                    "pre_reserved"
+                ) {
+
+                    confirmButton.disabled =
+                        false;
+
+                    confirmButton.textContent =
+                        "✓ Confirmar reserva";
+
+                }
+
             }
-        );
 
-    }
+        }
+    );
+
+}
 
 
+ 
     /* -----------------------------------------
        BOTÓN CANCELAR
     ----------------------------------------- */
