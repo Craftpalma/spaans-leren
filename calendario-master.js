@@ -1552,7 +1552,7 @@ console.log(
         confirmButton.addEventListener(
             "click",
             () => {
-
+					   console.log("CLICK EN CONFIRMAR DETECTADO");
                 console.log(
                     "CONFIRMAR:",
                     reservation
@@ -1584,7 +1584,7 @@ console.log(
         cancelButton.addEventListener(
             "click",
             () => {
-
+					 console.log("CLICK EN CANCELAR DETECTADO");
                 console.log(
                     "CANCELAR:",
                     reservation
