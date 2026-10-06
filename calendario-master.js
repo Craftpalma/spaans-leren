@@ -1288,11 +1288,11 @@ function showReservationDetails(
             renderCalendar();
 
 
-            selectDay(
+         /*   selectDay(
                 year,
                 month,
                 day
-            );
+            );*/
 
         }
 
