@@ -347,5 +347,80 @@
 
     z-index: 10 !important;
 }
+/* =========================================
+   MASTER - TRES COLUMNAS
+========================================= */
+
+.master-reservations-columns {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    gap: 20px;
+
+    margin-top: 20px;
+
+    align-items: start;
+}
+
+
+/* =========================================
+   PANELES
+========================================= */
+
+.master-reservations-columns
+.all-reservations,
+
+.master-reservations-columns
+.day-details,
+
+.master-reservations-columns
+.old-reservations {
+
+    margin-top: 0;
+
+    background: white;
+
+    border: 1px solid #e1e8eb;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    min-width: 0;
+}
+
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+.master-reservations-columns h2 {
+
+    margin-top: 0;
+
+    color: #176b87;
+
+    font-size: 20px;
+}
+
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 900px) {
+
+    .master-reservations-columns {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
 
 
