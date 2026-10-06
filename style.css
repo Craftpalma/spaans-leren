@@ -1491,7 +1491,8 @@ section {
 }
 
 .calendar-day.fully-booked {
-    background: #f8d7da;
+  /*  background: #f8d7da;*/
+      background: #f2caca;
     border: 2px solid #d66a6a;
 }
 
