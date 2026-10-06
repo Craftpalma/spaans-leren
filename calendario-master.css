@@ -201,7 +201,7 @@
 
 /* Todas las horas del día están confirmadas */
 .day.all-confirmed {
-    border: 2px solid #d99a9a;
+    border: 2px solid #d66a6a;
 }
 
 /* Día con pre-reservas + confirmadas */
@@ -213,7 +213,7 @@
         linear-gradient(
             90deg,
             #e7b65c 50%,
-            #d99a9a 50%
+            #d66a6a 50%
         ) border-box;
 }
 /* =========================================
@@ -228,7 +228,7 @@
 
 /* Día con una o más reservas confirmadas */
 .day.booked {
-    border: 2px solid #d99a9a;
+    border: 2px solid #d66a6a;
 }
 
 
@@ -258,7 +258,7 @@
 .day.fully-booked {
     background: #f5d6d6;
 
-    border: 2px solid #d99a9a;
+    border: 2px solid #d66a6a;
 }
 
 
