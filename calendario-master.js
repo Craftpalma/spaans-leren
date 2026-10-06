@@ -990,7 +990,12 @@ function renderAllReservations(
 async function loadReservationsForDay(
     date
 ) {
-
+console.log("dayReservations:", dayReservations);
+    if (!dayReservations) {
+		 console.log("NO EXISTE dayReservations");
+        return;
+    }
+console.log("SÍ EXISTE dayReservations");
     if (!dayReservations) {
         return;
     }
