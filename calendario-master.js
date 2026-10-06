@@ -1520,7 +1520,11 @@ function showReservationDetails(
         </div>
 
     `;
-
+	//PRUEBA DE PANEL
+			console.log(
+				"PANEL DE RESERVA CREADO:",
+				dayReservations.innerHTML
+			);
 
     /* -----------------------------------------
        BOTÓN CONFIRMAR
