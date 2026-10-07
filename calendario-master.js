@@ -1206,6 +1206,44 @@ async function loadReservationsForDay(
                 reservation =>
                     reservation.date === date
             );
+		/* -----------------------------------------
+			   ORDENAR RESERVAS DEL DÍA
+			   ACTIVAS PRIMERO
+			   CANCELADAS / EXPIRADAS DESPUÉS
+		----------------------------------------- */
+
+		reservations.sort(
+		    (a, b) => {
+		
+		        const aOld =
+		            a.status === "cancelled" ||
+		            a.status === "expired";
+		
+		        const bOld =
+		            b.status === "cancelled" ||
+		            b.status === "expired";
+		
+		
+		        /* Activas antes que canceladas/expiradas */
+		
+		        if (aOld && !bOld) {
+		            return 1;
+		        }
+		
+		        if (!aOld && bOld) {
+		            return -1;
+		        }
+		
+		
+		        /* Dentro del mismo grupo,
+		           ordenar por hora */
+		
+		        return (a.time || "").localeCompare(
+		            b.time || ""
+		        );
+		
+		    }
+		);
 
 
         if (
