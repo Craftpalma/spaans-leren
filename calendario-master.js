@@ -1339,7 +1339,13 @@ async function loadReservationsForDay(
                 detail.addEventListener(
                     "click",
                     () => {
+							showReservationDetails(
+                            		reservation
+                        	);
 
+                    	}
+                );
+							
 
                 dayReservations.appendChild(
                     detail
