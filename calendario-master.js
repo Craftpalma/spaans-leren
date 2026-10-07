@@ -1623,6 +1623,50 @@ function openReservationConfirmModal(
 	
 	    }
 	);
+	/* =========================================
+	   CERRAR MODAL 2 CON X
+	========================================= */
+	
+	document.addEventListener(
+	    "click",
+	    (event) => {
+	
+	        if (
+	            event.target &&
+	            event.target.id ===
+	            "reservationConfirmModalClose"
+	        ) {
+	
+	            closeReservationConfirmModal();
+	
+	        }
+	
+	    }
+	);
+	/* =========================================
+	   CERRAR MODAL 2 AL PULSAR FUERA
+	========================================= */
+	
+	document.addEventListener(
+	    "click",
+	    (event) => {
+	
+	        const modal =
+	            document.getElementById(
+	                "reservationConfirmModal"
+	            );
+	
+	        if (
+	            modal &&
+	            event.target === modal
+	        ) {
+	
+	            closeReservationConfirmModal();
+	
+	        }
+	
+	    }
+	);
 
 }
 /* =========================================
