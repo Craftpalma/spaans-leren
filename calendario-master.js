@@ -1488,15 +1488,32 @@ function showReservationDetails(
         }
 
     }
+	/* -----------------------------------------
+	   CONTENEDOR DEL MODAL
+	----------------------------------------- */
+	
+	const reservationModal =
+	    document.getElementById(
+	        "reservationModal"
+	    );
+	
+	const reservationModalBody =
+	    document.getElementById(
+	        "reservationModalBody"
+	    );
+	
+	if (
+	    !reservationModal ||
+	    !reservationModalBody
+	) {
+	    console.error(
+	        "No se encontró el modal de reserva."
+	    );
+	
+	    return;
+	}
 
-
-    /* -----------------------------------------
-       CONTENEDOR
-    ----------------------------------------- */
-
-    if (!dayReservations) {
-        return;
-    }
+ 
 
 
     /* -----------------------------------------
@@ -1606,7 +1623,7 @@ function showReservationDetails(
        MOSTRAR PANEL
     ----------------------------------------- */
 
-    dayReservations.innerHTML = `
+    reservationModalBody.innerHTML = `
 
         <div class="reservation-detail-panel">
 
@@ -1711,6 +1728,12 @@ function showReservationDetails(
         </div>
 
     `;
+	
+	 /* -----------------------------------------
+       ABRIR MODAL
+    ----------------------------------------- */
+
+    reservationModal.style.display = "flex";
 	//PRUEBA DE PANEL
 			console.log(
 				"PANEL DE RESERVA CREADO:",
