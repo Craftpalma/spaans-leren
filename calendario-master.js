@@ -13,6 +13,8 @@ const WORKER_URL =
 let currentDate = new Date();
 let selectedDate = null;
 
+let confirmationReservation = null;
+let confirmationAction = null;
 /*
    Todas las reservas cargadas desde D1.
    Se utilizan también para pintar
@@ -1508,6 +1510,11 @@ function openReservationConfirmModal(
     reservation,
     action
 ) {
+	    confirmationReservation =
+        	reservation;
+
+	    confirmationAction =
+	        action;
 
     const modal =
         document.getElementById(
