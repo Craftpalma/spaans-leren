@@ -1649,6 +1649,10 @@ function openReservationConfirmModal(
 						  console.log(
 						        "DESPUÉS DE CERRAR MODAL 2"
 						    );
+					console.log(
+						    "BOTÓN ORIGINAL CONFIRMAR DESPUÉS DE CERRAR:",
+						    document.getElementById("masterConfirmButton")
+						);
 
                     const originalConfirmButton =
                         document.getElementById(
