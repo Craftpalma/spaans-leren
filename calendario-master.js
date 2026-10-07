@@ -1631,50 +1631,34 @@ function openReservationConfirmModal(
                     confirmationReservation
                 );
 
-
-                /* ---------------------------------
-                   CONFIRMAR
-                --------------------------------- */
-
-                if (
-                    confirmationAction ===
-                    "confirm"
-                ) {
-					  console.log(
-					        "ANTES DE CERRAR MODAL 2"
-					    );
-
-
-                    closeReservationConfirmModal();
-						  console.log(
-						        "DESPUÉS DE CERRAR MODAL 2"
-						    );
-					console.log(
-						    "BOTÓN ORIGINAL CONFIRMAR DESPUÉS DE CERRAR:",
-						    document.getElementById("masterConfirmButton")
-						);
-
-                    const originalConfirmButton =
-                        document.getElementById(
-                            "masterConfirmButton"
-                        );
-	
-
-                    if (originalConfirmButton) {
-								console.log(
-								    "VOY A EJECUTAR CLICK DEL BOTÓN ORIGINAL"
-								);
-
-                        originalConfirmButton.click();
-							
-						console.log(
-							    "CLICK DEL BOTÓN ORIGINAL EJECUTADO"
-							);
-
-                    }
-				
-
-                }
+					/* ---------------------------------
+					   CONFIRMAR
+					--------------------------------- */
+					
+					if (
+					    confirmationAction ===
+					    "confirm"
+					) {
+					
+					    closeReservationConfirmModal();
+					
+					
+					    /* ---------------------------------
+					       EJECUTAR CONFIRMACIÓN REAL
+					    --------------------------------- */
+					
+					    if (
+					        confirmationReservation
+					    ) {
+					
+					        confirmReservation(
+					            confirmationReservation
+					        );
+					
+					    }
+					
+					}
+					 
 
 
                 /* ---------------------------------
@@ -2391,7 +2375,208 @@ console.log(
     );
 
 }
+/* =========================================
+   CONFIRMAR RESERVA DESDE MODAL 2
+========================================= */
 
+async function confirmReservation(
+    reservation
+) {
+
+    console.log(
+        "CONFIRMANDO RESERVA DESDE MODAL 2:",
+        reservation
+    );
+
+
+    /* =====================================
+       COMPROBAR ID
+    ===================================== */
+
+    if (!reservation.id) {
+
+        console.error(
+            "La reserva no tiene ID."
+        );
+
+        alert(
+            "No se puede confirmar la reserva: falta el ID."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        console.log(
+            "ENVIANDO CONFIRMACIÓN AL WORKER:",
+            reservation.id
+        );
+
+
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        action:
+                            "confirm_reservation",
+
+                        id:
+                            reservation.id
+
+                    })
+
+                }
+            );
+
+
+        console.log(
+            "RESPUESTA HTTP:",
+            response.status
+        );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "RESPUESTA CONFIRMAR:",
+            data
+        );
+
+
+        /* =================================
+           CONFIRMACIÓN CORRECTA
+        ================================= */
+
+        if (
+            response.ok &&
+            data.ok &&
+            data.confirmed
+        ) {
+
+            alert(
+                "Reserva confirmada correctamente."
+            );
+
+
+            reservation.status =
+                "booked";
+
+
+            const index =
+                masterReservations.findIndex(
+                    item =>
+                        item.id ===
+                        reservation.id
+                );
+
+
+            if (index !== -1) {
+
+                masterReservations[
+                    index
+                ].status = "booked";
+
+            }
+
+
+            renderCalendar();
+
+
+            renderAllReservations(
+                masterReservations
+            );
+
+
+            showReservationDetails(
+                reservation
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================
+           YA ESTABA CONFIRMADA
+        ================================= */
+
+        if (
+            data.already_confirmed
+        ) {
+
+            alert(
+                "Esta reserva ya estaba confirmada."
+            );
+
+
+            reservation.status =
+                "booked";
+
+
+            renderCalendar();
+
+
+            renderAllReservations(
+                masterReservations
+            );
+
+
+            showReservationDetails(
+                reservation
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================
+           ERROR DEL WORKER
+        ================================= */
+
+        console.error(
+            "Error al confirmar:",
+            data
+        );
+
+
+        alert(
+            data.error ||
+            "No se pudo confirmar la reserva."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error conectando con el Worker:",
+            error
+        );
+
+
+        alert(
+            "No se pudo conectar con el Worker."
+        );
+
+    }
+
+}
 
  
     	/* -----------------------------------------
