@@ -1589,7 +1589,17 @@ function openReservationConfirmModal(
         </div>
 
     `;
+		    const detailModal =
+        		document.getElementById(
+            		"reservationModal"
+        		);
 
+    if (detailModal) {
+
+        detailModal.style.display =
+            "none";
+
+    }
 
     modal.style.display =
         "flex";
