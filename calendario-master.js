@@ -1500,7 +1500,101 @@ function createReservationDetail(
     return detail;
 
 }
+/* =========================================
+   ABRIR MODAL DE CONFIRMACIÓN
+========================================= */
 
+function openReservationConfirmModal(
+    reservation,
+    action
+) {
+
+    const modal =
+        document.getElementById(
+            "reservationConfirmModal"
+        );
+
+    const body =
+        document.getElementById(
+            "reservationConfirmModalBody"
+        );
+
+
+    if (!modal || !body) {
+        return;
+    }
+
+
+    let title = "";
+    let message = "";
+    let confirmText = "";
+
+
+    if (action === "confirm") {
+
+        title =
+            "¿Confirmar reserva?";
+
+        message =
+            `¿Seguro que quieres confirmar la reserva de ${reservation.name || "esta persona"} para el ${reservation.date || "—"} a las ${reservation.time || "—"}?`;
+
+        confirmText =
+            "✓ Sí, confirmar";
+
+    }
+
+
+    if (action === "cancel") {
+
+        title =
+            "¿Cancelar reserva?";
+
+        message =
+            `¿Seguro que quieres cancelar la reserva de ${reservation.name || "esta persona"} para el ${reservation.date || "—"} a las ${reservation.time || "—"}?`;
+
+        confirmText =
+            "✕ Sí, cancelar";
+
+    }
+
+
+    body.innerHTML = `
+
+        <h3>
+            ${title}
+        </h3>
+
+        <p class="reservation-confirm-message">
+            ${message}
+        </p>
+
+        <div class="reservation-confirm-actions">
+
+            <button
+                type="button"
+                id="reservationConfirmNo"
+                class="master-action-button"
+            >
+                No, volver
+            </button>
+
+            <button
+                type="button"
+                id="reservationConfirmYes"
+                class="master-action-button"
+            >
+                ${confirmText}
+            </button>
+
+        </div>
+
+    `;
+
+
+    modal.style.display =
+        "flex";
+
+}
 
 /* =========================================
    MOSTRAR DETALLES DE UNA RESERVA
@@ -1833,6 +1927,12 @@ console.log(
     confirmButton.addEventListener(
         "click",
         async () => {
+			   openReservationConfirmModal(
+                reservation,
+                "confirm"
+            );
+
+            return;
 
             console.log(
                 "CLICK EN CONFIRMAR DETECTADO"
