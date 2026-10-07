@@ -98,7 +98,64 @@ document.addEventListener(
    		 	document.getElementById(
         		"oldReservations"
    			 );
+		/* -----------------------------------------
+		   ELEMENTOS DEL MODAL
+		----------------------------------------- */
+		
+		const reservationModal =
+		    document.getElementById(
+		        "reservationModal"
+		    );
+		
+		const reservationModalClose =
+		    document.getElementById(
+		        "reservationModalClose"
+		    );
+		
+		
+		/* -----------------------------------------
+		   CERRAR MODAL CON X
+		----------------------------------------- */
+		
+		if (reservationModalClose) {
+		
+		    reservationModalClose.addEventListener(
+		        "click",
+		        () => {
+		
+		            reservationModal.style.display =
+		                "none";
+		
+		        }
+		    );
+		
+		}
 
+
+/* -----------------------------------------
+   CERRAR MODAL AL PULSAR FUERA
+----------------------------------------- */
+
+if (reservationModal) {
+
+    reservationModal.addEventListener(
+        "click",
+        (event) => {
+
+            if (
+                event.target ===
+                reservationModal
+            ) {
+
+                reservationModal.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
 
         /* -----------------------------------------
            COMPROBAR ELEMENTOS
