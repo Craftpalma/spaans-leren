@@ -1610,6 +1610,85 @@ function openReservationConfirmModal(
 
     modal.style.display =
         "flex";
+	    /* =========================================
+       BOTÓN SÍ, CONFIRMAR / CANCELAR
+    ========================================= */
+
+    const confirmActionButton =
+        document.getElementById(
+            "reservationConfirmYes"
+        );
+
+    if (confirmActionButton) {
+
+        confirmActionButton.addEventListener(
+            "click",
+            () => {
+
+                console.log(
+                    "ACCIÓN CONFIRMADA EN MODAL 2:",
+                    confirmationAction,
+                    confirmationReservation
+                );
+
+
+                /* ---------------------------------
+                   CONFIRMAR
+                --------------------------------- */
+
+                if (
+                    confirmationAction ===
+                    "confirm"
+                ) {
+
+                    closeReservationConfirmModal();
+
+
+                    const originalConfirmButton =
+                        document.getElementById(
+                            "masterConfirmButton"
+                        );
+
+
+                    if (originalConfirmButton) {
+
+                        originalConfirmButton.click();
+
+                    }
+
+                }
+
+
+                /* ---------------------------------
+                   CANCELAR
+                --------------------------------- */
+
+                if (
+                    confirmationAction ===
+                    "cancel"
+                ) {
+
+                    closeReservationConfirmModal();
+
+
+                    const originalCancelButton =
+                        document.getElementById(
+                            "masterCancelButton"
+                        );
+
+
+                    if (originalCancelButton) {
+
+                        originalCancelButton.click();
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
 	/* =========================================
 	   BOTÓN NO, VOLVER
 	========================================= */
