@@ -1782,6 +1782,10 @@ function closeReservationConfirmModal() {
 
         modal.style.display =
             "none";
+		console.log(
+		    "MODAL 2 DISPLAY DESPUÉS DE CERRAR:",
+		    modal.style.display
+		);
 
     }
 
