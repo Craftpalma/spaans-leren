@@ -1658,13 +1658,21 @@ function openReservationConfirmModal(
                         document.getElementById(
                             "masterConfirmButton"
                         );
-
+	
 
                     if (originalConfirmButton) {
+								console.log(
+								    "VOY A EJECUTAR CLICK DEL BOTÓN ORIGINAL"
+								);
 
                         originalConfirmButton.click();
+							
+						console.log(
+							    "CLICK DEL BOTÓN ORIGINAL EJECUTADO"
+							);
 
                     }
+				
 
                 }
 
