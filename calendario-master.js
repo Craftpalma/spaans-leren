@@ -1332,6 +1332,13 @@ async function loadReservationsForDay(
                     createReservationDetail(
                         reservation
                     );
+				      /* ---------------------------------
+                   			CLICK EN RESERVA
+              		  --------------------------------- */
+
+                detail.addEventListener(
+                    "click",
+                    () => {
 
 
                 dayReservations.appendChild(
