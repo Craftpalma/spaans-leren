@@ -1640,9 +1640,15 @@ function openReservationConfirmModal(
                     confirmationAction ===
                     "confirm"
                 ) {
+					  console.log(
+					        "ANTES DE CERRAR MODAL 2"
+					    );
+
 
                     closeReservationConfirmModal();
-
+						  console.log(
+						        "DESPUÉS DE CERRAR MODAL 2"
+						    );
 
                     const originalConfirmButton =
                         document.getElementById(
