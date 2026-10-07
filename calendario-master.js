@@ -1603,6 +1603,59 @@ function openReservationConfirmModal(
 
     modal.style.display =
         "flex";
+	/* =========================================
+	   BOTÓN NO, VOLVER
+	========================================= */
+	
+	document.addEventListener(
+	    "click",
+	    (event) => {
+	
+	        if (
+	            event.target &&
+	            event.target.id ===
+	            "reservationConfirmNo"
+	        ) {
+	
+	            closeReservationConfirmModal();
+	
+	        }
+	
+	    }
+	);
+
+}
+/* =========================================
+   CERRAR MODAL DE CONFIRMACIÓN
+========================================= */
+
+function closeReservationConfirmModal() {
+
+    const modal =
+        document.getElementById(
+            "reservationConfirmModal"
+        );
+
+    const detailModal =
+        document.getElementById(
+            "reservationModal"
+        );
+
+
+    if (modal) {
+
+        modal.style.display =
+            "none";
+
+    }
+
+
+    if (detailModal) {
+
+        detailModal.style.display =
+            "flex";
+
+    }
 
 }
 
