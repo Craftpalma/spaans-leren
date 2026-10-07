@@ -262,6 +262,44 @@
 .reservation-modal-close:hover {
     background: #f5f8f9;
 }
+
+/* =========================================
+   MODAL DE CONFIRMACIÓN
+========================================= */
+
+#reservationConfirmModal .reservation-modal-content {
+    max-width: 480px;
+}
+
+#reservationConfirmModalBody {
+    text-align: center;
+}
+
+#reservationConfirmModalBody h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+
+    color: #176b87;
+    font-size: 22px;
+}
+
+.reservation-confirm-message {
+    margin-bottom: 25px;
+
+    color: #17252d;
+
+    line-height: 1.5;
+}
+
+.reservation-confirm-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
 /* =========================================
    ESTADOS COMPLETOS DEL DÍA - MASTER
 ========================================= */
