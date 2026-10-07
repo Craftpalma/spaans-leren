@@ -30,7 +30,7 @@ let nextMonthButton;
 let selectedDayTitle;
 let dayReservations;
 let allReservations;
-
+let oldReservations;
 
 /* =========================================
    NOMBRES DE LOS MESES
@@ -94,6 +94,10 @@ document.addEventListener(
             document.getElementById(
                 "allReservations"
             );
+		oldReservations =
+   		 	document.getElementById(
+        		"oldReservations"
+   			 );
 
 
         /* -----------------------------------------
@@ -702,6 +706,9 @@ async function loadAllReservations() {
          renderAllReservations(
              masterReservations
          );
+		renderOldReservations(
+    		masterReservations
+		);
 
 renderCalendar();
 
@@ -737,6 +744,11 @@ renderCalendar();
 function renderAllReservations(
     reservations
 ) {
+	    reservations = reservations.filter(
+        reservation =>
+            reservation.status === "pre_reserved" ||
+            reservation.status === "booked"
+    );
 
     if (!allReservations) {
         return;
@@ -981,6 +993,145 @@ function renderAllReservations(
 
 }
 
+/* =========================================
+   MOSTRAR CANCELADAS Y EXPIRADAS
+========================================= */
+
+function renderOldReservations(
+    reservations
+) {
+
+    if (!oldReservations) {
+        return;
+    }
+
+
+    const old = reservations.filter(
+        reservation =>
+            reservation.status === "cancelled" ||
+            reservation.status === "expired"
+    );
+
+
+    if (old.length === 0) {
+
+        oldReservations.innerHTML = `
+
+            <p class="no-reservations">
+                No hay reservas canceladas o expiradas.
+            </p>
+
+        `;
+
+        return;
+    }
+
+
+    oldReservations.innerHTML = "";
+
+
+    old.sort(
+        (a, b) => {
+
+            const dateA =
+                `${a.date} ${a.time}`;
+
+            const dateB =
+                `${b.date} ${b.time}`;
+
+            return dateB.localeCompare(
+                dateA
+            );
+
+        }
+    );
+
+
+    old.forEach(
+        reservation => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "old-reservation-item";
+
+
+            if (
+                reservation.status === "cancelled"
+            ) {
+
+                item.classList.add(
+                    "cancelled"
+                );
+
+            } else {
+
+                item.classList.add(
+                    "expired"
+                );
+
+            }
+
+
+            let statusText =
+                "Expirada";
+
+
+            if (
+                reservation.status === "cancelled"
+            ) {
+
+                statusText =
+                    "Cancelada";
+
+            }
+
+
+            item.innerHTML = `
+
+                <div class="reservation-list-date">
+                    ${reservation.date} · ${reservation.time}
+                </div>
+
+                <div class="reservation-list-name">
+                    ${reservation.name || "Sin nombre"}
+                </div>
+
+                <div class="reservation-list-type">
+                    ${reservation.class_type || "Sin especificar"}
+                </div>
+
+                <div class="reservation-list-status">
+                    ${statusText}
+                </div>
+
+            `;
+
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    showReservationDetails(
+                        reservation
+                    );
+
+                }
+            );
+
+
+            oldReservations.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
 
 /* =========================================
    CARGAR RESERVAS DE UN DÍA
