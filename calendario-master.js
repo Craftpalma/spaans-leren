@@ -2512,9 +2512,9 @@ async function confirmReservation(
             );
 
 
-            showReservationDetails(
+         /*   showReservationDetails(
                 reservation
-            );
+            );**/
 
 
             return;
@@ -2547,9 +2547,9 @@ async function confirmReservation(
             );
 
 
-            showReservationDetails(
+          /*  showReservationDetails(
                 reservation
-            );
+            );*/
 
 
             return;
