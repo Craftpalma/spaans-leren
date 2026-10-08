@@ -2595,6 +2595,13 @@ if (cancelButton) {
         "click",
         async () => {
 
+			 openReservationConfirmModal(
+                reservation,
+                "cancel"
+            );
+
+            return;
+
             console.log(
                 "CLICK EN CANCELAR DETECTADO"
             );
