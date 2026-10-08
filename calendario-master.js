@@ -2601,6 +2601,9 @@ async function confirmReservation(
             alert(
                 "Reserva confirmada correctamente."
             );
+			    document.getElementById(
+			        "reservationModal"
+			    ).style.display = "none";
 
 
             reservation.status =
@@ -2806,6 +2809,9 @@ async function cancelReservation(
                 "Reserva cancelada correctamente."
             );
 
+			    document.getElementById(
+			        "reservationModal"
+			    ).style.display = "none";
 
             /* ---------------------------------
                RECARGAR TODAS LAS RESERVAS
