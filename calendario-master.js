@@ -1672,18 +1672,20 @@ function openReservationConfirmModal(
 
                     closeReservationConfirmModal();
 
-
-                    const originalCancelButton =
-                        document.getElementById(
-                            "masterCancelButton"
-                        );
-
-
-                    if (originalCancelButton) {
-
-                        originalCancelButton.click();
-
-                    }
+				    /* ---------------------------------
+				       EJECUTAR CANCELACIÓN REAL
+				    --------------------------------- */
+				
+				    if (
+				        confirmationReservation
+				    ) {
+				
+				        cancelReservation(
+				            confirmationReservation
+				        );
+				
+				    }	
+					
 
                 }
 
@@ -2578,7 +2580,161 @@ async function confirmReservation(
 
 }
 
- 
+ /* =========================================
+   CANCELAR RESERVA DESDE MODAL 2
+========================================= */
+
+async function cancelReservation(
+    reservation
+) {
+
+    console.log(
+        "CANCELANDO RESERVA DESDE MODAL 2:",
+        reservation
+    );
+
+
+    /* =====================================
+       COMPROBAR ID
+    ===================================== */
+
+    if (!reservation.id) {
+
+        console.error(
+            "La reserva no tiene ID."
+        );
+
+        alert(
+            "No se puede cancelar la reserva: falta el ID."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        console.log(
+            "ENVIANDO CANCELACIÓN AL WORKER:",
+            reservation.id
+        );
+
+
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        action:
+                            "cancel_reservation",
+
+                        id:
+                            reservation.id,
+
+                        contact:
+                            reservation.contact
+
+                    })
+
+                }
+            );
+
+
+        console.log(
+            "RESPUESTA HTTP:",
+            response.status
+        );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "RESPUESTA CANCELACIÓN:",
+            data
+        );
+
+
+        /* =================================
+           CANCELACIÓN CORRECTA
+        ================================= */
+
+        if (
+            response.ok &&
+            data.ok
+        ) {
+
+            alert(
+                "Reserva cancelada correctamente."
+            );
+
+
+            /* ---------------------------------
+               RECARGAR TODAS LAS RESERVAS
+            --------------------------------- */
+
+            await loadAllReservations();
+
+
+            /* ---------------------------------
+               ACTUALIZAR EL DÍA
+            --------------------------------- */
+
+            if (reservation.date) {
+
+                loadReservationsForDay(
+                    reservation.date
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* =================================
+           ERROR DEL WORKER
+        ================================= */
+
+        console.error(
+            "Error al cancelar:",
+            data
+        );
+
+
+        alert(
+            data.error ||
+            "No se pudo cancelar la reserva."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error conectando con el Worker:",
+            error
+        );
+
+
+        alert(
+            "No se pudo conectar con el Worker."
+        );
+
+    }
+
+}
     	/* -----------------------------------------
    				BOTÓN CANCELAR
 		----------------------------------------- */
