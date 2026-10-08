@@ -1624,7 +1624,6 @@ function openReservationConfirmModal(
         confirmActionButton.addEventListener(
             "click",
             () => {
-///1628 consola mirar
                 console.log(
                     "ACCIÓN CONFIRMADA EN MODAL 2:",
                     confirmationAction,
@@ -1650,7 +1649,7 @@ function openReservationConfirmModal(
 					    if (
 					        confirmationReservation
 					    ) {
-///1654 consola mirar					
+					
 					        confirmReservation(
 					            confirmationReservation
 					        );
@@ -2104,17 +2103,6 @@ function showReservationDetails(
 				"PANEL DE RESERVA CREADO:",
 				dayReservations.innerHTML
 			);
-	/*COMPROVANDO PARA ENCONTRAR ERRORES BORRAR*/
-console.log(
-    "BOTÓN CONFIRMAR:",
-    document.getElementById("masterConfirmButton")
-);
-
-console.log(
-    "BOTÓN CANCELAR:",
-    document.getElementById("masterCancelButton")
-);
-//enseñar desde aqui
 
     /* -----------------------------------------
        BOTÓN CONFIRMAR
@@ -2379,11 +2367,143 @@ console.log(
     );
 
 }
-///CORTAR DESDE AQUI
+    	/* -----------------------------------------
+   				BOTÓN CANCELAR
+		----------------------------------------- */
 
-/////CORTAR HASTA AQUI
-////CORTAR DESDE AQUI
+const cancelButton =
+    document.getElementById(
+        "masterCancelButton"
+    );
 
+
+if (cancelButton) {
+				    console.log(
+					        "LISTENER CANCELAR REGISTRADO:",
+					        cancelButton
+					)
+    cancelButton.addEventListener(	
+        "click",
+        async () => {
+
+			    console.log(
+			        "CLICK EN BOTÓN CANCELAR"
+			    );
+			 openReservationConfirmModal(
+                reservation,
+                "cancel"
+            );
+
+            return;
+
+       /*     console.log(
+                "CLICK EN CANCELAR DETECTADO"
+            );para borrar*/
+
+            /*console.log(
+                "CANCELAR:",
+                reservation
+            );*/
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        WORKER_URL,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                action:
+                                    "cancel_reservation",
+
+                                id:
+                                    reservation.id,
+
+                                contact:
+                                    reservation.contact
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "RESPUESTA CANCELACIÓN:",
+                    data
+                );
+
+
+                if (
+                    !response.ok ||
+                    !data.ok
+                ) {
+
+                    throw new Error(
+                        data.error ||
+                        "No se pudo cancelar la reserva."
+                    );
+
+                }
+
+
+                alert(
+                    "Reserva cancelada correctamente."
+                );
+
+
+                /* ---------------------------------
+                   RECARGAR TODAS LAS RESERVAS
+                --------------------------------- */
+
+                await loadAllReservations();
+
+
+                /* ---------------------------------
+                   ACTUALIZAR EL DÍA
+                --------------------------------- */
+
+                if (reservation.date) {
+
+                    loadReservationsForDay(
+                        reservation.date
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error cancelando reserva:",
+                    error
+                );
+
+
+                alert(
+                    "No se pudo cancelar la reserva: " +
+                    error.message
+                );
+
+            }
+
+        }
+    );
+
+	}
+	
 
 }
 /* =========================================
@@ -2744,142 +2864,7 @@ async function cancelReservation(
 
 }
 
-    	/* -----------------------------------------
-   				BOTÓN CANCELAR
-		----------------------------------------- */
 
-const cancelButton =
-    document.getElementById(
-        "masterCancelButton"
-    );
-
-
-if (cancelButton) {
-				    console.log(
-					        "LISTENER CANCELAR REGISTRADO:",
-					        cancelButton
-					)
-    cancelButton.addEventListener(	
-        "click",
-        async () => {
-
-			    console.log(
-			        "CLICK EN BOTÓN CANCELAR"
-			    );
-			 openReservationConfirmModal(
-                reservation,
-                "cancel"
-            );
-
-            return;
-
-       /*     console.log(
-                "CLICK EN CANCELAR DETECTADO"
-            );para borrar*/
-
-            /*console.log(
-                "CANCELAR:",
-                reservation
-            );*/
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        WORKER_URL,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-
-                                action:
-                                    "cancel_reservation",
-
-                                id:
-                                    reservation.id,
-
-                                contact:
-                                    reservation.contact
-
-                            })
-
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                console.log(
-                    "RESPUESTA CANCELACIÓN:",
-                    data
-                );
-
-
-                if (
-                    !response.ok ||
-                    !data.ok
-                ) {
-
-                    throw new Error(
-                        data.error ||
-                        "No se pudo cancelar la reserva."
-                    );
-
-                }
-
-
-                alert(
-                    "Reserva cancelada correctamente."
-                );
-
-
-                /* ---------------------------------
-                   RECARGAR TODAS LAS RESERVAS
-                --------------------------------- */
-
-                await loadAllReservations();
-
-
-                /* ---------------------------------
-                   ACTUALIZAR EL DÍA
-                --------------------------------- */
-
-                if (reservation.date) {
-
-                    loadReservationsForDay(
-                        reservation.date
-                    );
-
-                }
-
-
-            } catch (error) {
-
-                console.error(
-                    "Error cancelando reserva:",
-                    error
-                );
-
-
-                alert(
-                    "No se pudo cancelar la reserva: " +
-                    error.message
-                );
-
-            }
-
-        }
-    );
-
-	}
 /* =========================================
    FIN
 ========================================= */
