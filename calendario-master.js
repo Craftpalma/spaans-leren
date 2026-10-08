@@ -2755,11 +2755,17 @@ const cancelButton =
 
 
 if (cancelButton) {
-
-    cancelButton.addEventListener(
+				    console.log(
+					        "LISTENER CANCELAR REGISTRADO:",
+					        cancelButton
+					)
+    cancelButton.addEventListener(	
         "click",
         async () => {
 
+			    console.log(
+			        "CLICK EN BOTÓN CANCELAR"
+			    );
 			 openReservationConfirmModal(
                 reservation,
                 "cancel"
@@ -2767,9 +2773,9 @@ if (cancelButton) {
 
             return;
 
-            console.log(
+       /*     console.log(
                 "CLICK EN CANCELAR DETECTADO"
-            );
+            );para borrar*/
 
             console.log(
                 "CANCELAR:",
