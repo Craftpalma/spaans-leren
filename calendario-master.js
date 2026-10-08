@@ -1624,7 +1624,7 @@ function openReservationConfirmModal(
         confirmActionButton.addEventListener(
             "click",
             () => {
-
+///1628 consola mirar
                 console.log(
                     "ACCIÓN CONFIRMADA EN MODAL 2:",
                     confirmationAction,
@@ -1650,7 +1650,7 @@ function openReservationConfirmModal(
 					    if (
 					        confirmationReservation
 					    ) {
-					
+///1654 consola mirar					
 					        confirmReservation(
 					            confirmationReservation
 					        );
@@ -1679,7 +1679,7 @@ function openReservationConfirmModal(
 				    if (
 				        confirmationReservation
 				    ) {
-				
+	///1683 consola mirar
 				        cancelReservation(
 				            confirmationReservation
 				        );
@@ -1759,7 +1759,7 @@ function openReservationConfirmModal(
 	);
 
 }
-/* =========================================
+/* =========================================A
    CERRAR MODAL DE CONFIRMACIÓN
 ========================================= */
 
@@ -1804,7 +1804,7 @@ function closeReservationConfirmModal() {
 function showReservationDetails(
     reservation
 ) {
-
+///1808 consola mirar
     console.log(
         "Reserva seleccionada:",
         reservation
@@ -2114,6 +2114,8 @@ console.log(
     "BOTÓN CANCELAR:",
     document.getElementById("masterCancelButton")
 );
+//enseñar desde aqui
+
     /* -----------------------------------------
        BOTÓN CONFIRMAR
     ----------------------------------------- */
@@ -2377,6 +2379,13 @@ console.log(
     );
 
 }
+///CORTAR DESDE AQUI
+
+/////CORTAR HASTA AQUI
+////CORTAR DESDE AQUI
+
+
+}
 /* =========================================
    CONFIRMAR RESERVA DESDE MODAL 2
 ========================================= */
@@ -2579,7 +2588,6 @@ async function confirmReservation(
     }
 
 }
-
  /* =========================================
    CANCELAR RESERVA DESDE MODAL 2
 ========================================= */
@@ -2735,6 +2743,7 @@ async function cancelReservation(
     }
 
 }
+
     	/* -----------------------------------------
    				BOTÓN CANCELAR
 		----------------------------------------- */
@@ -2865,9 +2874,6 @@ if (cancelButton) {
     );
 
 	}
-
-}
-
 /* =========================================
    FIN
 ========================================= */
