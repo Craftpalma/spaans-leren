@@ -2777,10 +2777,10 @@ if (cancelButton) {
                 "CLICK EN CANCELAR DETECTADO"
             );para borrar*/
 
-            console.log(
+            /*console.log(
                 "CANCELAR:",
                 reservation
-            );
+            );*/
 
 
             try {
