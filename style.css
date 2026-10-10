@@ -267,6 +267,8 @@ section {
     align-items: center;
     justify-content: space-between;
     gap: 50px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .hero-text {
