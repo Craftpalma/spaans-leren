@@ -271,7 +271,10 @@ section {
 }
 
 .hero-text {
+    flex: 1;
+    min-width: 0;
     max-width: 720px;
+    text-align: center;
 }
 
 .hero-logo {
