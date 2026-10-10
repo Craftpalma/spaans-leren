@@ -270,14 +270,14 @@ section {
 }
 
 .hero-text {
+    flex: 1;
+    min-width: 0;
     max-width: 720px;
 }
+
 .hero-logo {
-   /* flex: 0 0 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;*/
-    flex: 1;
+    flex: 0 1 400px;
+    min-width: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -285,7 +285,7 @@ section {
 
 .hero-logo img {
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
     height: auto;
     display: block;
 }
