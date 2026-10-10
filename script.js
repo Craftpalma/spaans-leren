@@ -782,6 +782,15 @@ interestButtons.forEach((button) => {
             a1Item4: "Eenvoudige beschrijvingen",
             a1Item5: "Dagelijkse gesprekken",
             a1Objective: "Communiceren in eenvoudige alledaagse situaties.",
+      
+            a2Description: "Heb je al enige kennis van het Spaans? Deze cursus helpt je je spreekvaardigheid, grammatica en woordenschat te verbeteren.",
+            a2Item1: "Verleden tijd en nabije toekomst",
+            a2Item2: "Dagelijkse routines en persoonlijke ervaringen",
+            a2Item3: "Winkelen, reizen en vrije tijd",
+            a2Item4: "Basis luistervaardigheid",
+            a2Item5: "Begeleide gesprekken",
+            a2Objective: "Eenvoudige gesprekken met vertrouwen voeren.",
+
    
             b2Description: "Verbeter je Spaans zodat je het vloeiend kunt gebruiken in sociale, academische en professionele situaties.",
             b2Item1: "De aanvoegende wijs en complexe zinsconstructies",
@@ -874,6 +883,15 @@ interestButtons.forEach((button) => {
             a1Item4: "Descripciones simples",
             a1Item5: "Conversaciones cotidianas",
             a1Objective: "Comunicarte en situaciones básicas del día a día.",
+
+            a2Description: "Si ya tienes algunas nociones de español, este curso te ayudará a mejorar tu fluidez, gramática y vocabulario.",
+            a2Item1: "Pasado y futuro próximo",
+            a2Item2: "Rutinas y experiencias personales",
+            a2Item3: "Compras, viajes y ocio",
+            a2Item4: "Comprensión oral básica",
+            a2Item5: "Conversaciones guiadas",
+            a2Objective: "Mantener conversaciones sencillas con confianza.",
+
            
             b2Description: "Perfecciona tu español para utilizarlo con soltura en contextos sociales, académicos y laborales.",
             b2Item1: "Subjuntivo y estructuras complejas",
