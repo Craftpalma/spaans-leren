@@ -273,14 +273,14 @@ section {
 
 .hero-text {
     flex: 1;
-    min-width: 0;
-    max-width: 720px;
+    min-width: 720;
+    max-width: center;
 }
 
 .hero-logo {
     flex: 0 0 400px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
