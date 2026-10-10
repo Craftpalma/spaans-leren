@@ -797,7 +797,17 @@ interestButtons.forEach((button) => {
             b1Item3: "Meningen en argumenten",
             b1Item4: "Authentieke teksten en audiofragmenten",
             b1Item5: "Spontane gesprekken",
-            b1Objective: "Zelfstandig kunnen communiceren in de meeste situaties."
+            b1Objective: "Zelfstandig kunnen communiceren in de meeste situaties.",
+
+           
+            conversationQuote: "“Praten, oefenen en zelfvertrouwen opbouwen”",
+            conversationDescription: "Lessen die volledig gericht zijn op spreekvaardigheid.",
+            conversationItem1: "Studenten die Spaans begrijpen",
+            conversationItem2: "Mensen die gemakkelijker willen leren spreken",
+            conversationItem3: "Gespreksoefeningen",
+            conversationItem4: "De uitspraak verbeteren",
+            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten."
+
 
 
 
@@ -858,7 +868,16 @@ interestButtons.forEach((button) => {
             b1Item3: "Opiniones y argumentos",
             b1Item4: "Textos y audios reales",
             b1Item5: "Conversación espontánea",
-            b1Objective: "Desenvolverte con autonomía en la mayoría de situaciones."
+            b1Objective: "Desenvolverte con autonomía en la mayoría de situaciones.",
+           
+            conversationQuote: "“Praten, oefenen en zelfvertrouwen opbouwen”",
+            conversationDescription: "Lessen die volledig gericht zijn op spreekvaardigheid.",
+            conversationItem1: "Studenten die Spaans begrijpen",
+            conversationItem2: "Mensen die gemakkelijker willen leren spreken",
+            conversationItem3: "Gespreksoefeningen",
+            conversationItem4: "De uitspraak verbeteren",
+            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten."
+
 
 
 
