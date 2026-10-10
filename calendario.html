@@ -39,16 +39,19 @@
 
         <section class="calendar-section">
 
-            <h1>Calendario de clases</h1>
-
-            <p class="calendar-intro">
-                Consulta nuestra disponibilidad para clases de español.
-            </p>
-
-            <div class="calendar-info">
-                <strong>Horario habitual</strong>
-                <p>Lunes a viernes · 09:00 - 20:00</p>
-            </div>
+          
+          <h1 data-i18n="title">Calendario de clases</h1>
+          
+          <p class="calendar-intro" data-i18n="intro">
+              Consulta nuestra disponibilidad para clases de español.
+          </p>
+           
+           
+             
+           <div class="calendar-info">
+               <strong data-i18n="usualHours">Horario habitual</strong>
+               <p data-i18n="hours">Lunes a viernes · 09:00 - 20:00</p>
+           </div>
 
 
             <!-- CABECERA DEL CALENDARIO -->
@@ -82,21 +85,22 @@
             <!-- DÍAS -->
             <div id="calendarDays" class="calendar-days"></div>
             <!-- LEYENDA -->
-          <div class="calendar-legend">
 
-            <div>
-            <span class="legend-color available"></span>
-                 Disponible
-           </div>
+<div class="calendar-legend">
 
-      <div>
-            <span class="legend-color pre-reserved"></span>
-                 Pre-reserva
-       </div>
+    <div>
+        <span class="legend-color available"></span>
+        <span data-i18n="available">Disponible</span>
+    </div>
+
+    <div>
+        <span class="legend-color pre-reserved"></span>
+        <span data-i18n="preReserved">Pre-reserva</span>
+    </div>
 
     <div>
         <span class="legend-color booked"></span>
-        Reservada
+        <span data-i18n="booked">Reservada</span>
     </div>
 
 </div>
@@ -111,16 +115,21 @@
                 </p>
 
             </div>
-         <div class="calendar-assistant-info">
+        
+<div class="calendar-assistant-info">
 
-    <strong>🤖 ¿Necesitas cancelar o modificar una reserva?</strong>
+    <strong data-i18n="assistantTitle">
+        🤖 ¿Necesitas cancelar o modificar una reserva?
+    </strong>
 
-    <p>
+    <p data-i18n="assistantDescription">
         Puedes gestionar tus reservas fácilmente a través de nuestro
         asistente virtual.
     </p>
 
-    <a href="index.html?openChat=true" class="assistant-link">
+    <a href="index.html?openChat=true"
+       class="assistant-link"
+       data-i18n="assistantLink">
         Hablar con el asistente
     </a>
 
