@@ -2112,17 +2112,6 @@ if (reservation.created_at) {
 
             </div>
 					
-            <div class="reservation-detail-row">
-
-                <div class="reservation-detail-label">
-                    Origen
-                </div>
-
-                <div class="reservation-detail-value">
-                    ${reservation.source || "—"}
-                </div>
-
-            </div>
 
                         <div class="reservation-detail-row">
 
@@ -2136,14 +2125,6 @@ if (reservation.created_at) {
 
             </div>
 
-
-
-            ${actions}
-
-        </div>
-
-    `;
-	
 
             ${actions}
 
