@@ -736,6 +736,104 @@ interestButtons.forEach((button) => {
     });
 
 });
+/* =========================================
+   IDIOMAS - SPAANS LEREN
+   Neerlandés predeterminado + español
+========================================= */
+
+(function () {
+    const translations = {
+        nl: {
+            navInicio: "Home",
+            navCursos: "Cursussen",
+            navPrecios: "Prijzen",
+            navCalendario: "Kalender",
+            navContacto: "Contact",
+            heroEyebrow: "LEER SPAANS",
+            heroTitleFirst: "Vind de cursus",
+            heroTitleSecond: "die bij je past",
+            heroDescription:
+                "Spaanse lessen afgestemd op jouw niveau, doelen en manier van leren.",
+            heroButton: "Gratis proefles"
+        },
+
+        es: {
+            navInicio: "Inicio",
+            navCursos: "Cursos",
+            navPrecios: "Precios",
+            navCalendario: "Calendario",
+            navContacto: "Contacto",
+            heroEyebrow: "APRENDE ESPAÑOL",
+            heroTitleFirst: "Encuentra el curso",
+            heroTitleSecond: "perfecto para ti",
+            heroDescription:
+                "Cursos de español adaptados a tu nivel, tus objetivos y tu forma de aprender.",
+            heroButton: "Clase de prueba gratis"
+        }
+    };
+
+    function initLanguageSelector() {
+        const button = document.getElementById("languageToggle");
+
+        if (!button) return;
+
+        let currentLanguage = "nl";
+
+        try {
+            const savedLanguage = localStorage.getItem("spaansLerenLanguage");
+
+            if (savedLanguage === "nl" || savedLanguage === "es") {
+                currentLanguage = savedLanguage;
+            }
+        } catch (error) {
+            // Si el almacenamiento no está disponible,
+            // se utiliza neerlandés por defecto.
+        }
+
+        function applyLanguage(language) {
+            currentLanguage = language;
+
+            document.documentElement.lang = language;
+
+            document.querySelectorAll("[data-i18n]").forEach(function (element) {
+                const key = element.dataset.i18n;
+                const translatedText = translations[language][key];
+
+                if (translatedText !== undefined) {
+                    element.textContent = translatedText;
+                }
+            });
+
+            button.setAttribute(
+                "aria-label",
+                language === "nl"
+                    ? "Verander de taal naar Spaans"
+                    : "Cambiar idioma a neerlandés"
+            );
+
+            try {
+                localStorage.setItem("spaansLerenLanguage", language);
+            } catch (error) {
+                // La web seguirá funcionando sin guardar la elección.
+            }
+        }
+
+        button.addEventListener("click", function () {
+            applyLanguage(currentLanguage === "nl" ? "es" : "nl");
+        });
+
+        applyLanguage(currentLanguage);
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initLanguageSelector
+        );
+    } else {
+        initLanguageSelector();
+    }
+})();
 
 
 
