@@ -304,9 +304,13 @@ section {
     margin-bottom: 25px;
 }
 
-.hero h1 span {
+.hero h1 .hero-title-first {
     display: block;
+    color: var(--dark);
+}
 
+.hero h1 .hero-title-second {
+    display: block;
     color: var(--primary);
 }
 
