@@ -816,7 +816,16 @@ interestButtons.forEach((button) => {
             courseBusiness: "Español para negocios",
             courseTalk: "HABLA",
             courseIdealFor: "Ideal para:",
-            courseTopics: "Temas:"
+            courseTopics: "Temas:",
+            
+            a1Description: "¿Acabas de empezar con el español? Este curso te dará una base sólida para comunicarte en situaciones cotidianas.",
+            a1Item1: "Saludos y presentaciones",
+            a1Item2: "Números, fechas y horarios",
+            a1Item3: "Verbos básicos en presente",
+            a1Item4: "Descripciones simples",
+            a1Item5: "Conversaciones cotidianas",
+            a1Objective: "Comunicarte en situaciones básicas del día a día."
+
 
         }
     };
