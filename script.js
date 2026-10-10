@@ -852,7 +852,9 @@ interestButtons.forEach((button) => {
             trialEyebrow: "WEET JE NIET WELK NIVEAU JE HEBT?",
             trialTitle: "Begin met een proefles",
             trialDescription: "Een eerste gratis sessie van 30 minuten om je niveau te bepalen en je doelen vast te stellen.",
-            trialButton: "Gratis proefles boeken"
+            trialButton: "Gratis proefles boeken",
+
+
 
 
 
@@ -971,7 +973,10 @@ interestButtons.forEach((button) => {
             trialEyebrow: "¿NO SABES QUÉ NIVEL TIENES?",
             trialTitle: "Empieza con una clase de prueba",
             trialDescription: "Una primera sesión gratuita de 30 minutos para conocer tu nivel y definir tus objetivos.",
-            trialButton: "Reservar prueba gratuita"
+            trialButton: "Reservar prueba gratuita",
+
+
+
 
 
 
