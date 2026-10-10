@@ -1877,7 +1877,33 @@ function showReservationDetails(
 	    return;
 	}
 
- 
+ 		
+/* -----------------------------------------
+   FECHA DE CREACIÓN - HORA ESPAÑOLA
+----------------------------------------- */
+
+let createdAtText = "—";
+
+if (reservation.created_at) {
+    const createdAtUTC =
+        reservation.created_at.replace(" ", "T") + "Z";
+
+    createdAtText =
+        new Date(createdAtUTC).toLocaleString(
+            "es-ES",
+            {
+                timeZone: "Europe/Madrid",
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            }
+        );
+}
+
 
 
     /* -----------------------------------------
@@ -2085,7 +2111,39 @@ function showReservationDetails(
                 </div>
 
             </div>
+					
+            <div class="reservation-detail-row">
 
+                <div class="reservation-detail-label">
+                    Origen
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${reservation.source || "—"}
+                </div>
+
+            </div>
+
+                        <div class="reservation-detail-row">
+
+                <div class="reservation-detail-label">
+                    Creada
+                </div>
+
+                <div class="reservation-detail-value">
+                    ${createdAtText}
+                </div>
+
+            </div>
+
+
+
+            ${actions}
+
+        </div>
+
+    `;
+	
 
             ${actions}
 
