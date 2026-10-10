@@ -1344,7 +1344,7 @@ section {
 
 
 /* CABECERA */
-
+/*
 .calendar-header {
     display: flex;
     align-items: center;
@@ -1363,7 +1363,7 @@ section {
     border-radius: 50%;
     cursor: pointer;
     font-size: 20px;
-}
+}*/
 
 
 /* DÍAS DE LA SEMANA */
