@@ -717,80 +717,81 @@
                 </div>
 
 
-                <form class="contact-form" id="contactForm">
+ 
+<form class="contact-form" id="contactForm">
 
-                    <label for="name">
-                        Nombre
-                    </label>
+    <label for="name" data-i18n="formName">
+        Nombre
+    </label>
 
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Tu nombre"
-                        required
-                    >
+    <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Tu nombre"
+        data-i18n-placeholder="formNamePlaceholder"
+        required
+    >
 
+    <label for="email" data-i18n="formEmail">
+        Email
+    </label>
 
-                    <label for="email">
-                        Email
-                    </label>
+    <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="tu@email.com"
+        data-i18n-placeholder="formEmailPlaceholder"
+        required
+    >
 
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="tu@email.com"
-                        required
-                    >
+    <label for="course" data-i18n="formCourse">
+        Curso que te interesa
+    </label>
 
+    <select id="course" name="course">
 
-                    <label for="course">
-                        Curso que te interesa
-                    </label>
+        <option value="" data-i18n="formSelectOption">
+            Selecciona una opción
+        </option>
 
-                    <select id="course" name="course">
+        <option value="A1 - Principiantes" data-i18n="formCourseA1">A1 - Principiantes</option>
+        <option value="A2" data-i18n="formCourseA2">A2</option>
+        <option value="B1 - Nivel intermedio" data-i18n="formCourseB1">B1 - Nivel intermedio</option>
+        <option value="B2 - Nivel avanzado" data-i18n="formCourseB2">B2 - Nivel avanzado</option>
+        <option value="Conversación en español" data-i18n="formCourseConversation">Conversación en español</option>
+        <option value="Cursos para fines específicos" data-i18n="formCourseSpecific">Cursos para fines específicos</option>
+        <option value="Español para negocios" data-i18n="formCourseBusiness">Español para negocios</option>
+        <option value="Clase de prueba gratuita" data-i18n="formCourseTrial">Clase de prueba gratuita</option>
 
-                        <option value="">
-                            Selecciona una opción
-                        </option>
+    </select>
 
-                        <option>A1 - Principiantes</option>
-                        <option>A2</option>
-                        <option>B1 - Nivel intermedio</option>
-                        <option>B2 - Nivel avanzado</option>
-                        <option>Conversación en español</option>
-                        <option>Cursos para fines específicos</option>
-                        <option>Español para negocios</option>
-                        <option>Clase de prueba gratuita</option>
+    <label for="message" data-i18n="formMessage">
+        Mensaje
+    </label>
 
-                    </select>
+    <textarea
+        id="message"
+        name="message"
+        rows="5"
+        placeholder="Cuéntanos qué necesitas..."
+        data-i18n-placeholder="formMessagePlaceholder"
+    ></textarea>
 
+    <button
+        type="submit"
+        class="button button-primary"
+        data-i18n="formSubmit"
+    >
+        Enviar consulta
+    </button>
 
-                    <label for="message">
-                        Mensaje
-                    </label>
+    <p class="form-note" data-i18n="formNote">
+        * Déjanos tu mensaje y nos pondremos en contacto contigo lo antes posible.
+    </p>
 
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="5"
-                        placeholder="Cuéntanos qué necesitas..."
-                    ></textarea>
-
-
-                    <button
-                        type="submit"
-                        class="button button-primary"
-                    >
-                        Enviar consulta
-                    </button>
-
-                    <p class="form-note">
-                        * Déjanos tu mensaje y nos pondremos en contacto contigo lo antes posible.
-                    </p>
-
-                </form>
+</form>
 
             </div>
 
