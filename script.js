@@ -834,7 +834,20 @@ interestButtons.forEach((button) => {
             businessItem3: "Presentaties",
             businessItem4: "Onderhandelen",
             businessItem5: "Zakelijke woordenschat",
-            businessObjective: "Met vertrouwen in het Spaans werken."
+            businessObjective: "Met vertrouwen in het Spaans werken.",
+
+
+            calendarTitle: "KALENDER",
+            weekdayMon: "M",
+            weekdayTue: "D",
+            weekdayWed: "W",
+            weekdayThu: "D",
+            weekdayFri: "V",
+            weekdaySat: "Z",
+            weekdaySun: "Z",
+            calendarSubtitle: "Bekijk je lesmogelijkheden",
+            calendarDescription: "Bekijk de beschikbare dagen en tijden voor je Spaanse lessen."
+
 
 
 
@@ -933,7 +946,20 @@ interestButtons.forEach((button) => {
             businessItem3: "Presentaciones",
             businessItem4: "Negociación",
             businessItem5: "Vocabulario corporativo",
-            businessObjective: "Trabajar en español con seguridad."
+            businessObjective: "Trabajar en español con seguridad.",
+
+
+            calendarTitle: "CALENDARIO",
+            weekdayMon: "L",
+            weekdayTue: "M",
+            weekdayWed: "X",
+            weekdayThu: "J",
+            weekdayFri: "V",
+            weekdaySat: "S",
+            weekdaySun: "D",
+            calendarSubtitle: "Consulta tu clase",
+            calendarDescription: "Comprueba los días y horarios disponibles para tus clases de español."
+
 
 
 
