@@ -781,7 +781,16 @@ interestButtons.forEach((button) => {
             a1Item3: "Basiswerkwoorden in de tegenwoordige tijd",
             a1Item4: "Eenvoudige beschrijvingen",
             a1Item5: "Dagelijkse gesprekken",
-            a1Objective: "Communiceren in eenvoudige alledaagse situaties."
+            a1Objective: "Communiceren in eenvoudige alledaagse situaties.",
+   
+            b2Description: "Verbeter je Spaans zodat je het vloeiend kunt gebruiken in sociale, academische en professionele situaties.",
+            b2Item1: "De aanvoegende wijs en complexe zinsconstructies",
+            b2Item2: "Debatteren en argumenteren",
+            b2Item3: "Idiomatische uitdrukkingen",
+            b2Item4: "Gevorderde schrijfvaardigheid",
+            b2Item5: "Uitspraak en natuurlijk taalgebruik",
+            b2Objective: "Vloeiend en nauwkeurig communiceren."
+
 
 
         },
@@ -824,7 +833,16 @@ interestButtons.forEach((button) => {
             a1Item3: "Verbos básicos en presente",
             a1Item4: "Descripciones simples",
             a1Item5: "Conversaciones cotidianas",
-            a1Objective: "Comunicarte en situaciones básicas del día a día."
+            a1Objective: "Comunicarte en situaciones básicas del día a día.",
+           
+            b2Description: "Perfecciona tu español para utilizarlo con soltura en contextos sociales, académicos y laborales.",
+            b2Item1: "Subjuntivo y estructuras complejas",
+            b2Item2: "Debate y argumentación",
+            b2Item3: "Expresiones idiomáticas",
+            b2Item4: "Producción escrita avanzada",
+            b2Item5: "Pronunciación y naturalidad",
+            b2Objective: "Comunicarte con soltura y precisión."
+
 
 
         }
