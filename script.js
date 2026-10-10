@@ -773,7 +773,16 @@ interestButtons.forEach((button) => {
             courseBusiness: "Zakelijk Spaans",
             courseTalk: "SPREKEN",
             courseIdealFor: "Ideaal voor:",
-            courseTopics: "Onderwerpen:"
+            courseTopics: "Onderwerpen:",
+                       
+            a1Description: "Begin je net met Spaans? Deze cursus geeft je een stevige basis om in alledaagse situaties te communiceren.",
+            a1Item1: "Begroetingen en kennismaking",
+            a1Item2: "Getallen, datums en tijden",
+            a1Item3: "Basiswerkwoorden in de tegenwoordige tijd",
+            a1Item4: "Eenvoudige beschrijvingen",
+            a1Item5: "Dagelijkse gesprekken",
+            a1Objective: "Communiceren in eenvoudige alledaagse situaties."
+
 
         },
 
