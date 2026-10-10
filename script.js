@@ -789,7 +789,16 @@ interestButtons.forEach((button) => {
             b2Item3: "Idiomatische uitdrukkingen",
             b2Item4: "Gevorderde schrijfvaardigheid",
             b2Item5: "Uitspraak en natuurlijk taalgebruik",
-            b2Objective: "Vloeiend en nauwkeurig communiceren."
+            b2Objective: "Vloeiend en nauwkeurig communiceren.",
+   
+            b1Description: "Voor iedereen die zijn spreek- en schrijfvaardigheid wil verbeteren en zelfstandiger Spaans wil gebruiken.",
+            b1Item1: "De belangrijkste werkwoordstijden",
+            b1Item2: "Ervaringen vertellen",
+            b1Item3: "Meningen en argumenten",
+            b1Item4: "Authentieke teksten en audiofragmenten",
+            b1Item5: "Spontane gesprekken",
+            b1Objective: "Zelfstandig kunnen communiceren in de meeste situaties."
+
 
 
 
@@ -841,7 +850,16 @@ interestButtons.forEach((button) => {
             b2Item3: "Expresiones idiomáticas",
             b2Item4: "Producción escrita avanzada",
             b2Item5: "Pronunciación y naturalidad",
-            b2Objective: "Comunicarte con soltura y precisión."
+            b2Objective: "Comunicarte con soltura y precisión.",
+
+            b1Description: "Para quienes quieren mejorar su expresión oral y escrita y desenvolverse con mayor autonomía en español.",
+            b1Item1: "Tiempos verbales principales",
+            b1Item2: "Narración de experiencias",
+            b1Item3: "Opiniones y argumentos",
+            b1Item4: "Textos y audios reales",
+            b1Item5: "Conversación espontánea",
+            b1Objective: "Desenvolverte con autonomía en la mayoría de situaciones."
+
 
 
 
