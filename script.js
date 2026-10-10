@@ -854,6 +854,11 @@ interestButtons.forEach((button) => {
             trialDescription: "Een eerste gratis sessie van 30 minuten om je niveau te bepalen en je doelen vast te stellen.",
             trialButton: "Gratis proefles boeken",
 
+            contactEyebrow: "CONTACT",
+            contactTitle: "Klaar om te beginnen?",
+            contactDescription: "Vertel ons wat je nodig hebt en we helpen je de juiste cursus te vinden.",
+
+
 
 
 
@@ -974,6 +979,11 @@ interestButtons.forEach((button) => {
             trialTitle: "Empieza con una clase de prueba",
             trialDescription: "Una primera sesión gratuita de 30 minutos para conocer tu nivel y definir tus objetivos.",
             trialButton: "Reservar prueba gratuita",
+            
+            contactEyebrow: "CONTACTO",
+            contactTitle: "¿Listo para empezar?",
+            contactDescription: "Cuéntanos qué necesitas y te ayudaremos a encontrar el curso adecuado para ti.",
+
 
 
 
