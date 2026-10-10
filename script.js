@@ -838,13 +838,13 @@ interestButtons.forEach((button) => {
 
 
             calendarTitle: "KALENDER",
-            weekdayMon: "M",
-            weekdayTue: "D",
-            weekdayWed: "W",
-            weekdayThu: "D",
-            weekdayFri: "V",
-            weekdaySat: "Z",
-            weekdaySun: "Z",
+            weekdayMon: "Ma",
+            weekdayTue: "Di",
+            weekdayWed: "Wo",
+            weekdayThu: "Do",
+            weekdayFri: "Vr",
+            weekdaySat: "Za",
+            weekdaySun: "Zo",
             calendarSubtitle: "Bekijk je lesmogelijkheden",
             calendarDescription: "Bekijk de beschikbare dagen en tijden voor je Spaanse lessen.",
 
