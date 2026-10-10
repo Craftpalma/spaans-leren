@@ -815,7 +815,18 @@ interestButtons.forEach((button) => {
             conversationItem2: "Mensen die gemakkelijker willen leren spreken",
             conversationItem3: "Gespreksoefeningen",
             conversationItem4: "De uitspraak verbeteren",
-            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten."
+            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",
+
+            businessLabel: "ZAKELIJK",
+            businessQuote: "“Effectieve professionele communicatie”",
+            businessDescription: "Gericht op zakelijke en professionele situaties.",
+            businessItem1: "Vergaderingen",
+            businessItem2: "Formele e-mails",
+            businessItem3: "Presentaties",
+            businessItem4: "Onderhandelen",
+            businessItem5: "Zakelijke woordenschat",
+            businessObjective: "Met vertrouwen in het Spaans werken."
+
 
 
 
@@ -894,8 +905,18 @@ interestButtons.forEach((button) => {
             conversationItem2: "Personas que necesitan soltarse",
             conversationItem3: "Práctica de conversación",
             conversationItem4: "Mejorar pronunciación",
-            conversationTopics: "Actualidad, cultura, viajes, experiencias personales y debates."
-            
+            conversationTopics: "Actualidad, cultura, viajes, experiencias personales y debates.",
+
+            businessLabel: "NEGOCIOS",
+            businessQuote: "“Comunicación profesional efectiva”",
+            businessDescription: "Enfocado en contextos empresariales y laborales.",
+            businessItem1: "Reuniones",
+            businessItem2: "Correos formales",
+            businessItem3: "Presentaciones",
+            businessItem4: "Negociación",
+            businessItem5: "Vocabulario corporativo",
+            businessObjective: "Trabajar en español con seguridad."
+
 
 
 
