@@ -806,7 +806,17 @@ interestButtons.forEach((button) => {
             conversationItem2: "Mensen die gemakkelijker willen leren spreken",
             conversationItem3: "Gespreksoefeningen",
             conversationItem4: "De uitspraak verbeteren",
+            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",
+
+
+            conversationQuote: "“Praten, oefenen en zelfvertrouwen opbouwen”",
+            conversationDescription: "Lessen die volledig gericht zijn op spreekvaardigheid.",
+            conversationItem1: "Studenten die Spaans begrijpen",
+            conversationItem2: "Mensen die gemakkelijker willen leren spreken",
+            conversationItem3: "Gespreksoefeningen",
+            conversationItem4: "De uitspraak verbeteren",
             conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten."
+
 
 
 
@@ -876,7 +886,16 @@ interestButtons.forEach((button) => {
             conversationItem2: "Mensen die gemakkelijker willen leren spreken",
             conversationItem3: "Gespreksoefeningen",
             conversationItem4: "De uitspraak verbeteren",
-            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten."
+            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",
+   
+            conversationQuote: "“Hablar, practicar y ganar confianza”",
+            conversationDescription: "Clases centradas exclusivamente en la producción oral.",
+            conversationItem1: "Estudiantes que entienden español",
+            conversationItem2: "Personas que necesitan soltarse",
+            conversationItem3: "Práctica de conversación",
+            conversationItem4: "Mejorar pronunciación",
+            conversationTopics: "Actualidad, cultura, viajes, experiencias personales y debates."
+            
 
 
 
