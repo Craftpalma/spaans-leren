@@ -26,13 +26,20 @@
                 ☰
             </button>
 
-            <nav class="nav" id="navMenu">
-                <a href="#inicio">Inicio</a>
-                <a href="#cursos">Cursos</a>
-                <a href="#precios">Precios</a>
-                <a href="calendario.html">Calendario</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
+<nav class="nav" id="navMenu">
+    <a href="#inicio" data-i18n="navInicio">Inicio</a>
+    <a href="#cursos" data-i18n="navCursos">Cursos</a>
+    <a href="#precios" data-i18n="navPrecios">Precios</a>
+    <a href="calendario.html" data-i18n="navCalendario">Calendario</a>
+    <a href="#contacto" data-i18n="navContacto">Contacto</a>
+
+    <div class="language-selector">
+        <button type="button" id="languageToggle"
+                aria-label="Cambiar idioma">
+            🇳🇱 🇪🇸
+        </button>
+    </div>
+</nav>
 
         </div>
     </header>
@@ -41,29 +48,29 @@
     <!-- HERO -->
     <main>
 
-        <section class="hero" id="inicio">
-            <div class="container hero-content">
 
                 <div class="hero-text">
 
-                    <span class="eyebrow">
+                    <span class="eyebrow" data-i18n="heroEyebrow">
                         APRENDE ESPAÑOL
                     </span>
 
                     <h1>
-                        Encuentra el curso
-                        <span>perfecto para ti</span>
+                        <span data-i18n="heroTitleFirst">Encuentra el curso</span>
+                        <span data-i18n="heroTitleSecond">perfecto para ti</span>
                     </h1>
 
-                    <p>
+                    <p data-i18n="heroDescription">
                         Cursos de español adaptados a tu nivel,
                         tus objetivos y tu forma de aprender.
                     </p>
 
-                    <a href="#contacto" class="button button-primary">
+                    <a href="#contacto" class="button button-primary" data-i18n="heroButton">
                         Clase de prueba gratis
                     </a>
+
                 </div>
+
                 <div class="hero-logo">
                     <img src="images/logo4.png" alt="Español con Gloria - Málaga">
                 </div>
