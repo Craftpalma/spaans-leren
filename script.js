@@ -857,6 +857,21 @@ interestButtons.forEach((button) => {
             contactEyebrow: "CONTACT",
             contactTitle: "Klaar om te beginnen?",
             contactDescription: "Vertel ons wat je nodig hebt en we helpen je de juiste cursus te vinden.",
+           
+            pricingEyebrow: "PRIJZEN",
+            pricingTitle: "Begin vrijblijvend",
+            pricingDescription: "Probeer een les en kies daarna het lespakket dat het beste bij je past.",
+            priceTrial: "PROEFLES",
+            priceFree: "Gratis",
+            priceDuration: "30 minuten",
+            priceDiagnosis: "Eerste niveaubepaling",
+            priceReserve: "Reserveren",
+            pricePack5: "PAKKET 5",
+            priceFiveClasses: "5 lessen",
+            priceIndividual: "Individuele lessen",
+            pricePack10: "PAKKET 10",
+            priceTenClasses: "10 lessen",
+
 
 
 
@@ -983,6 +998,21 @@ interestButtons.forEach((button) => {
             contactEyebrow: "CONTACTO",
             contactTitle: "¿Listo para empezar?",
             contactDescription: "Cuéntanos qué necesitas y te ayudaremos a encontrar el curso adecuado para ti.",
+         
+            pricingEyebrow: "PRECIOS",
+            pricingTitle: "Empieza sin compromiso",
+            pricingDescription: "Prueba una clase y después elige el bono que mejor se adapte a ti.",
+            priceTrial: "PRUEBA",
+            priceFree: "Gratis",
+            priceDuration: "30 minutos",
+            priceDiagnosis: "Diagnóstico inicial",
+            priceReserve: "Reservar",
+            pricePack5: "PACK 5",
+            priceFiveClasses: "5 clases",
+            priceIndividual: "Clases individuales",
+            pricePack10: "PACK 10",
+            priceTenClasses: "10 clases",
+
 
 
 
