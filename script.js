@@ -685,7 +685,7 @@ interestButtons.forEach((button) => {
 
             for (let option of courseSelect.options) {
 
-                if (option.text === selectedCourse) {
+                if (option.value === selectedCourse) {
 
                     courseSelect.value = selectedCourse;
 
