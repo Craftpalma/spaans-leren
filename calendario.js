@@ -426,18 +426,17 @@ async function selectTime(dayName, time, timeButton) {
                     placeholder="Tu nombre"
                     required
                 >
-
-                <label for="studentContact">
-                    Email o teléfono / WhatsApp
-                </label>
-
-                <input
-                    type="text"
-                    id="studentContact"
-                    placeholder="Tu email o teléfono"
-                    required
-                >
-
+                  <label for="studentContact">
+                      Teléfono / WhatsApp
+                  </label>
+                  
+                  <input
+                      type="tel"
+                      id="studentContact"
+                      placeholder="Tu teléfono / WhatsApp"
+                      required
+                  >
+   
                 <button type="button" id="requestClass">
                     🟡 Solicitar esta hora
                 </button>
@@ -473,36 +472,30 @@ async function selectTime(dayName, time, timeButton) {
         if (!studentName || !studentContact) {
 
             alert(
-                "Por favor, introduce tu nombre y un email o teléfono."
+                "Por favor, introduce tu nombre y tu teléfono."
             );
 
             return;
         }
 
-
+         
         // =====================================
-        // COMPROBAR EMAIL / TELÉFONO
+        // COMPROBAR TELÉFONO
         // =====================================
-
-        const emailPattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         const phonePattern =
             /^\+?[0-9\s().-]{7,20}$/;
 
-
-        if (
-            !emailPattern.test(studentContact) &&
-            !phonePattern.test(studentContact)
-        ) {
+        if (!phonePattern.test(studentContact)) {
 
             alert(
-                "Por favor, introduce un email o un teléfono válido."
+                "Por favor, introduce un número de teléfono válido."
             );
 
             return;
         }
 
+  
 
         // =====================================
         // OBTENER FECHA
