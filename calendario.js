@@ -5,77 +5,6 @@
 // Fecha actual
 let currentDate = new Date();
 
-/* =========================================
-   IDIOMAS DEL CALENDARIO
-========================================= */
-
-
-let calendarLanguage = "nl";
-
-try {
-    const savedCalendarLanguage =
-        localStorage.getItem("spaansLerenLanguage");
-
-    if (savedCalendarLanguage === "nl" ||
-        savedCalendarLanguage === "es") {
-        calendarLanguage = savedCalendarLanguage;
-    }
-} catch (error) {}
-
-function calendarText(key) {
-    return calendarTranslations[calendarLanguage][key];
-}
-
-function applyCalendarLanguage() {
-    document.documentElement.lang = calendarLanguage;
-
-    document.querySelectorAll("[data-i18n]").forEach(element => {
-        const key = element.dataset.i18n;
-        const translation = calendarText(key);
-
-        if (typeof translation === "string") {
-            element.textContent = translation;
-        }
-    });
-
-    document.querySelectorAll(".calendar-weekdays div").forEach((element, index) => {
-        element.textContent =
-            calendarTranslations[calendarLanguage].weekdays[index];
-    });
-
-    const languageButton = document.getElementById("languageToggle");
-
-    if (languageButton) {
-        languageButton.setAttribute(
-            "aria-label",
-            calendarLanguage === "nl"
-                ? "Cambiar idioma a español"
-                : "Verander de taal naar Nederlands"
-        );
-    }
-}
-
-const calendarLanguageButton =
-    document.getElementById("languageToggle");
-
-if (calendarLanguageButton) {
-    calendarLanguageButton.addEventListener("click", function () {
-        calendarLanguage = calendarLanguage === "nl" ? "es" : "nl";
-
-        try {
-            localStorage.setItem(
-                "spaansLerenLanguage",
-                calendarLanguage
-            );
-        } catch (error) {}
-
-        applyCalendarLanguage();
-        renderCalendar();
-    });
-}
-
-applyCalendarLanguage();
-
 // =========================================
 // IDIOMAS DEL CALENDARIO
 // =========================================
@@ -160,6 +89,79 @@ const calendarTranslations = {
         months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"]
     }
 };
+
+/* =========================================
+   IDIOMAS DEL CALENDARIO
+========================================= */
+
+
+let calendarLanguage = "nl";
+
+try {
+    const savedCalendarLanguage =
+        localStorage.getItem("spaansLerenLanguage");
+
+    if (savedCalendarLanguage === "nl" ||
+        savedCalendarLanguage === "es") {
+        calendarLanguage = savedCalendarLanguage;
+    }
+} catch (error) {}
+
+function calendarText(key) {
+    return calendarTranslations[calendarLanguage][key];
+}
+
+function applyCalendarLanguage() {
+    document.documentElement.lang = calendarLanguage;
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.dataset.i18n;
+        const translation = calendarText(key);
+
+        if (typeof translation === "string") {
+            element.textContent = translation;
+        }
+    });
+
+    document.querySelectorAll(".calendar-weekdays div").forEach((element, index) => {
+        element.textContent =
+            calendarTranslations[calendarLanguage].weekdays[index];
+    });
+
+    const languageButton = document.getElementById("languageToggle");
+
+    if (languageButton) {
+        languageButton.setAttribute(
+            "aria-label",
+            calendarLanguage === "nl"
+                ? "Cambiar idioma a español"
+                : "Verander de taal naar Nederlands"
+        );
+    }
+}
+
+const calendarLanguageButton =
+    document.getElementById("languageToggle");
+
+if (calendarLanguageButton) {
+    calendarLanguageButton.addEventListener("click", function () {
+        calendarLanguage = calendarLanguage === "nl" ? "es" : "nl";
+
+        try {
+            localStorage.setItem(
+                "spaansLerenLanguage",
+                calendarLanguage
+            );
+        } catch (error) {}
+
+        applyCalendarLanguage();
+        renderCalendar();
+    });
+}
+
+applyCalendarLanguage();
+
+
 
 
 // =========================================
