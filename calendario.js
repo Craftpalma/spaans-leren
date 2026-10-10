@@ -354,7 +354,10 @@ async function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
-    currentMonth.textContent = `${months[month]} ${year}`;
+  
+currentMonth.textContent =
+    `${calendarTranslations[calendarLanguage].months[month]} ${year}`;
+
 
     calendarDays.innerHTML = "";
 
