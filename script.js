@@ -754,7 +754,27 @@ interestButtons.forEach((button) => {
             heroTitleSecond: "die bij je past",
             heroDescription:
                 "Spaanse lessen afgestemd op jouw niveau, doelen en manier van leren.",
-            heroButton: "Gratis proefles"
+            heroButton: "Gratis proefles",
+           
+            coursesEyebrow: "ONZE CURSUSSEN",
+            coursesTitle: "Leer in je eigen tempo",
+            coursesDescription: "Van je eerste Spaanse woorden tot gevorderde gesprekken en professionele communicatie.",
+            courseBeginner: "Beginners",
+            courseBasic: "Basisniveau",
+            courseIntermediate: "Gemiddeld niveau",
+            courseAdvanced: "Gevorderd niveau",
+            courseIncludes: "Inbegrepen:",
+            courseObjective: "Doel:",
+            courseInterested: "Ik heb interesse",
+            coursePopular: "MEEST GEKOZEN",
+            courseConversation: "Gesprekken in het Spaans",
+            courseSpecial: "SPECIAAL",
+            courseSpecific: "Cursussen voor specifieke doelen",
+            courseBusiness: "Zakelijk Spaans",
+            courseTalk: "SPREKEN",
+            courseIdealFor: "Ideaal voor:",
+            courseTopics: "Onderwerpen:"
+
         },
 
         es: {
@@ -768,7 +788,27 @@ interestButtons.forEach((button) => {
             heroTitleSecond: "perfecto para ti",
             heroDescription:
                 "Cursos de español adaptados a tu nivel, tus objetivos y tu forma de aprender.",
-            heroButton: "Clase de prueba gratis"
+            heroButton: "Clase de prueba gratis",
+           
+            coursesEyebrow: "NUESTROS CURSOS",
+            coursesTitle: "Aprende a tu ritmo",
+            coursesDescription: "Desde tus primeras palabras en español hasta conversaciones avanzadas y comunicación profesional.",
+            courseBeginner: "Principiantes",
+            courseBasic: "Nivel básico",
+            courseIntermediate: "Nivel intermedio",
+            courseAdvanced: "Nivel avanzado",
+            courseIncludes: "Incluye:",
+            courseObjective: "Objetivo:",
+            courseInterested: "Me interesa",
+            coursePopular: "MÁS ELEGIDO",
+            courseConversation: "Conversación en español",
+            courseSpecial: "ESPECIAL",
+            courseSpecific: "Cursos para fines específicos",
+            courseBusiness: "Español para negocios",
+            courseTalk: "HABLA",
+            courseIdealFor: "Ideal para:",
+            courseTopics: "Temas:"
+
         }
     };
 
