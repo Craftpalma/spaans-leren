@@ -871,6 +871,26 @@ interestButtons.forEach((button) => {
             priceIndividual: "Individuele lessen",
             pricePack10: "PAKKET 10",
             priceTenClasses: "10 lessen",
+           
+            formName: "Naam",
+            formNamePlaceholder: "Je naam",
+            formEmail: "E-mailadres",
+            formEmailPlaceholder: "jouw@email.com",
+            formCourse: "Welke cursus interesseert je?",
+            formSelectOption: "Kies een optie",
+            formCourseA1: "A1 - Beginners",
+            formCourseA2: "A2",
+            formCourseB1: "B1 - Gemiddeld niveau",
+            formCourseB2: "B2 - Gevorderd niveau",
+            formCourseConversation: "Gesprekken in het Spaans",
+            formCourseSpecific: "Cursussen voor specifieke doelen",
+            formCourseBusiness: "Zakelijk Spaans",
+            formCourseTrial: "Gratis proefles",
+            formMessage: "Bericht",
+            formMessagePlaceholder: "Vertel ons wat je nodig hebt...",
+            formSubmit: "Verstuur bericht",
+            formNote: "* Laat ons je bericht achter. We nemen zo snel mogelijk contact met je op."
+
 
 
 
@@ -1012,6 +1032,26 @@ interestButtons.forEach((button) => {
             priceIndividual: "Clases individuales",
             pricePack10: "PACK 10",
             priceTenClasses: "10 clases",
+           
+            formName: "Nombre",
+            formNamePlaceholder: "Tu nombre",
+            formEmail: "Email",
+            formEmailPlaceholder: "tu@email.com",
+            formCourse: "Curso que te interesa",
+            formSelectOption: "Selecciona una opción",
+            formCourseA1: "A1 - Principiantes",
+            formCourseA2: "A2",
+            formCourseB1: "B1 - Nivel intermedio",
+            formCourseB2: "B2 - Nivel avanzado",
+            formCourseConversation: "Conversación en español",
+            formCourseSpecific: "Cursos para fines específicos",
+            formCourseBusiness: "Español para negocios",
+            formCourseTrial: "Clase de prueba gratuita",
+            formMessage: "Mensaje",
+            formMessagePlaceholder: "Cuéntanos qué necesitas...",
+            formSubmit: "Enviar consulta",
+            formNote: "* Déjanos tu mensaje y nos pondremos en contacto contigo lo antes posible."
+
 
 
 
@@ -1059,6 +1099,16 @@ interestButtons.forEach((button) => {
                     element.textContent = translatedText;
                 }
             });
+           
+            document.querySelectorAll("[data-i18n-placeholder]").forEach(function (element) {
+                const key = element.dataset.i18nPlaceholder;
+                const translatedText = translations[language][key];
+            
+                if (translatedText !== undefined) {
+                    element.placeholder = translatedText;
+                }
+            });
+            
 
             button.setAttribute(
                 "aria-label",
