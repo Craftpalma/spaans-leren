@@ -261,26 +261,23 @@ section {
         );
 }
 
+
 .hero-content {
     padding: 100px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 50px;
-
 }
 
 .hero-text {
-    flex: 1;
-    min-width: 720;
-    margin-left: auto;
-    max-width: center;
+    max-width: 720px;
 }
 
 .hero-logo {
-    flex: 0 0 400px;
+    flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 }
 
@@ -290,6 +287,7 @@ section {
     height: auto;
     display: block;
 }
+
 
 .hero h1 {
     color: var(--dark);
