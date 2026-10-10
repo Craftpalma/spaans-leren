@@ -846,7 +846,14 @@ interestButtons.forEach((button) => {
             weekdaySat: "Z",
             weekdaySun: "Z",
             calendarSubtitle: "Bekijk je lesmogelijkheden",
-            calendarDescription: "Bekijk de beschikbare dagen en tijden voor je Spaanse lessen."
+            calendarDescription: "Bekijk de beschikbare dagen en tijden voor je Spaanse lessen.",
+
+         
+            trialEyebrow: "WEET JE NIET WELK NIVEAU JE HEBT?",
+            trialTitle: "Begin met een proefles",
+            trialDescription: "Een eerste gratis sessie van 30 minuten om je niveau te bepalen en je doelen vast te stellen.",
+            trialButton: "Gratis proefles boeken"
+
 
 
 
@@ -958,7 +965,14 @@ interestButtons.forEach((button) => {
             weekdaySat: "S",
             weekdaySun: "D",
             calendarSubtitle: "Consulta tu clase",
-            calendarDescription: "Comprueba los días y horarios disponibles para tus clases de español."
+            calendarDescription: "Comprueba los días y horarios disponibles para tus clases de español.",
+
+  
+            trialEyebrow: "¿NO SABES QUÉ NIVEL TIENES?",
+            trialTitle: "Empieza con una clase de prueba",
+            trialDescription: "Una primera sesión gratuita de 30 minutos para conocer tu nivel y definir tus objetivos.",
+            trialButton: "Reservar prueba gratuita"
+
 
 
 
