@@ -226,8 +226,9 @@ async function sendMessage() {
     waitingMessage.classList.add("bot-message");
 
     waitingMessage.textContent =
-        "Espera un momento...";
-
+        localStorage.getItem("spaansLerenLanguage") === "nl"
+                 ? "Even geduld..."
+                 : "Espera un momento...";
     chatbotMessages.appendChild(waitingMessage);
 
     chatbotMessages.scrollTop =
@@ -889,19 +890,17 @@ interestButtons.forEach((button) => {
             formMessage: "Bericht",
             formMessagePlaceholder: "Vertel ons wat je nodig hebt...",
             formSubmit: "Verstuur bericht",
-            formNote: "* Laat ons je bericht achter. We nemen zo snel mogelijk contact met je op."
+            formNote: "* Laat ons je bericht achter. We nemen zo snel mogelijk contact met je op.",
 
-
-
-
-
-
-
-
-
-
-
-
+            chatTitle: "Spaans Leren-assistent",
+            chatOnline: "● Online",
+            chatGreeting: "👋 Hallo! Ik ben de assistent van Spaans Leren.",
+            chatHelp: "Waarmee kan ik je helpen?",
+            chatCourses: "📚 Informatie over cursussen",
+            chatPrices: "💰 Prijzen",
+            chatTrial: "🎓 Gratis proefles",
+            chatReserve: "📅 Ik wil een les reserveren",
+            chatPlaceholder: "Typ je vraag..."
 
 
         },
@@ -1050,7 +1049,17 @@ interestButtons.forEach((button) => {
             formMessage: "Mensaje",
             formMessagePlaceholder: "Cuéntanos qué necesitas...",
             formSubmit: "Enviar consulta",
-            formNote: "* Déjanos tu mensaje y nos pondremos en contacto contigo lo antes posible."
+            formNote: "* Déjanos tu mensaje y nos pondremos en contacto contigo lo antes posible.",
+
+            chatTitle: "Asistente Spaans Leren",
+            chatOnline: "● En línea",
+            chatGreeting: "👋 ¡Hola! Soy el asistente de Spaans Leren.",
+            chatHelp: "¿En qué puedo ayudarte?",
+            chatCourses: "📚 Información sobre cursos",
+            chatPrices: "💰 Precios",
+            chatTrial: "🎓 Clase de prueba gratis",
+            chatReserve: "📅 Quiero reservar",
+            chatPlaceholder: "Escribe tu pregunta..."
 
 
 
