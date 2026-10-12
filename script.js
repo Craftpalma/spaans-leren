@@ -452,13 +452,14 @@ chatbotOptions.forEach((button) => {
 
         const question =
             button.getAttribute(
-                "data-question"
+                language === "nl"
+                    ? "data-question-nl"
+                    : "data-question"
             );
 
-        /* Enviar la pregunta al Worker */
         chatbotInput.value = question;
 
-        sendMessage();
+        chatbotInput.focus();
 
     });
 
