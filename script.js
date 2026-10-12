@@ -446,24 +446,35 @@ const chatbotOptions =
     );
 
 
+
 chatbotOptions.forEach((button) => {
 
     button.addEventListener("click", () => {
 
-        const question =
-            button.getAttribute(
-                language === "nl"
-                    ? "data-question-nl"
-                    : "data-question"
+        const currentLanguage =
+            document.documentElement.lang || "nl";
+
+        const question = button.getAttribute(
+            currentLanguage === "nl"
+                ? "data-question-nl"
+                : "data-question"
+        );
+
+        if (!question) {
+            console.error(
+                "No se encontró la pregunta para el idioma:",
+                currentLanguage
             );
+            return;
+        }
 
         chatbotInput.value = question;
-
         chatbotInput.focus();
 
     });
 
 });
+
 
 /* =========================================
    ABRIR CHATBOT DESDE ENLACE EXTERNO
