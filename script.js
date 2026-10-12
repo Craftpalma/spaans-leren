@@ -248,7 +248,8 @@ async function sendMessage() {
 
                 body: JSON.stringify({
                     message: text,
-                    history: conversationHistory
+                    history: conversationHistory,
+                   language: document.documentElement.lang || "nl"
                 }),
 
                 signal: signal
