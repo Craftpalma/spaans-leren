@@ -55,7 +55,7 @@ const calendarTranslations = {
         navPrices: "Prijzen",
         navCalendar: "Kalender",
         navContact: "Contact",
-        title: "Leskalender",
+        title: "Beschikbare lestijden",
         intro: "Bekijk de beschikbaarheid voor Spaanse lessen.",
         usualHours: "Gebruikelijke lestijden",
         hours: "Maandag t/m vrijdag · 09:00 - 20:00",
