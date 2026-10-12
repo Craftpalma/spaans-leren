@@ -262,12 +262,17 @@ section {
 }
 
 
+
 .hero-content {
-    padding: 100px 0;
+    padding: 60px 20px 80px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 50px;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .hero-text {
@@ -275,10 +280,11 @@ section {
     min-width: 0;
     max-width: 720px;
     text-align: center;
+    width: 100%;
 }
 
 .hero-logo {
-    flex: 1;
+    flex:  0 1 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -319,6 +325,8 @@ section {
     font-size: 1.2rem;
 
     margin-bottom: 35px;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 
