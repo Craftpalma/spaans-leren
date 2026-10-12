@@ -47,7 +47,17 @@ const calendarTranslations = {
         assistantDescription: "Puedes gestionar tus reservas fácilmente a través de nuestro asistente virtual.",
         assistantLink: "Hablar con el asistente",
         weekdays: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+
+       selected: "Has seleccionado:",
+      timeAvailable: "Esta hora está disponible para solicitar una clase.",
+      name: "Nombre",
+      namePlaceholder: "Tu nombre",
+      phone: "Teléfono / WhatsApp",
+      phonePlaceholder: "Tu teléfono / WhatsApp",
+      request: "🟡 Solicitar esta hora"
+    
+    
     },
     nl: {
         navHome: "Home",
@@ -86,7 +96,15 @@ const calendarTranslations = {
         assistantDescription: "Je kunt je reserveringen eenvoudig beheren via onze virtuele assistent.",
         assistantLink: "Chat met de assistent",
         weekdays: ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"],
-        months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"]
+        months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"],
+
+          selected: "Je hebt geselecteerd:",
+         timeAvailable: "Dit tijdstip is beschikbaar om een les aan te vragen.",
+         name: "Naam",
+         namePlaceholder: "Je naam",
+         phone: "Telefoon / WhatsApp",
+         phonePlaceholder: "Je telefoonnummer / WhatsApp",
+         request: "🟡 Dit tijdstip aanvragen"
     }
 };
 
@@ -572,39 +590,39 @@ async function selectTime(dayName, time, timeButton) {
 
         <div class="selected-time">
 
-            <p>Has seleccionado:</p>
+          <p>${calendarText("selected")}</p>
 
             <strong>${time}</strong>
 
             <p>
-                Esta hora está disponible para solicitar una clase.
+                ${calendarText("timeAvailable")}
             </p>
 
             <div class="reservation-form">
 
                 <label for="studentName">
-                    Nombre
+                     ${calendarText("name")}
                 </label>
 
                 <input
                     type="text"
                     id="studentName"
-                    placeholder="Tu nombre"
+                    placeholder="${calendarText("namePlaceholder")}"
                     required
                 >
                   <label for="studentContact">
-                      Teléfono / WhatsApp
+                       ${calendarText("phone")}
                   </label>
                   
                   <input
                       type="tel"
                       id="studentContact"
-                      placeholder="Tu teléfono / WhatsApp"
+                      placeholder="${calendarText("phonePlaceholder")}"
                       required
                   >
    
                 <button type="button" id="requestClass">
-                    🟡 Solicitar esta hora
+                    ${calendarText("request")}
                 </button>
 
             </div>
