@@ -747,7 +747,7 @@ interestButtons.forEach((button) => {
             navInicio: "Home",
             navCursos: "Cursussen",
             navPrecios: "Prijzen",
-            navCalendario: "Kalender",
+            navCalendario: "Afspraak maken",
             navContacto: "Contact",
             heroEyebrow: "LEER SPAANS",
             heroTitleFirst: "Vind de cursus",
