@@ -1105,40 +1105,40 @@ section {
 
 .chatbot-options {
     display: flex;
-
     flex-direction: column;
-
-    gap: 8px;
+    align-items: flex-start;
+    gap: 5px;
+    margin-top: 10px;
 }
 
+.chatbot-options p {
+    margin: 0 0 5px;
+    color: var(--dark);
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+
 .chatbot-options button {
-    padding: 10px 12px;
-
+    padding: 3px 0;
     text-align: left;
-
-    border: 1px solid var(--border);
-
-    border-radius: 10px;
-
-    background: var(--white);
-
+    border: none;
+    border-radius: 0;
+    background: transparent;
     color: var(--primary);
-
     font-size: 0.85rem;
-
-    font-weight: 600;
-
+    font-weight: 500;
     cursor: pointer;
-
-    transition: 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .chatbot-options button:hover {
-    background: var(--light);
-
-    border-color: var(--primary);
+    background: transparent;
+    border-color: transparent;
+    color: var(--primary-dark);
+    transform: translateX(3px);
+    text-decoration: underline;
 }
-
 
 /* Zona de escribir */
 
