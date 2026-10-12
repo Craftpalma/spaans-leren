@@ -837,7 +837,7 @@ interestButtons.forEach((button) => {
             businessObjective: "Met vertrouwen in het Spaans werken.",
 
 
-            calendarTitle: "KALENDER",
+            calendarTitle: "Afspraak maken",
             weekdayMon: "Ma",
             weekdayTue: "Di",
             weekdayWed: "Wo",
