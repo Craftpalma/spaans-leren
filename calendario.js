@@ -419,11 +419,16 @@ async function selectDay(year, month, day) {
 
     const selectedDate = new Date(year, month, day);
 
-    const dayName = selectedDate.toLocaleDateString("es-ES", {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    });
+
+      const dayName = selectedDate.toLocaleDateString(
+          calendarLanguage === "nl" ? "nl-NL" : "es-ES",
+          {
+              weekday: "long",
+              day: "numeric",
+              month: "long"
+          }
+      );
+
 
     // Fecha en formato YYYY-MM-DD
     const dateString =
@@ -433,7 +438,7 @@ async function selectDay(year, month, day) {
 
         <h3>${dayName}</h3>
 
-        <p>Comprobando disponibilidad...</p>
+        <p>${calendarText("checking")}</p>
 
         <div class="time-list"></div>
 
@@ -683,8 +688,8 @@ async function selectTime(dayName, time, timeButton) {
 
         requestClass.disabled = true;
 
-        requestClass.textContent =
-            "⏳ Comprobando disponibilidad...";
+         requestClass.textContent =
+             calendarText("checkingButton");
 
 
         try {
