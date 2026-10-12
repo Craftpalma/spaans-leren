@@ -941,11 +941,11 @@
 
         <div class="chatbot-header">
             <div>
-                <strong>Asistente Spaans Leren</strong>
-                <span>● En línea</span>
+                <strong data-i18n="chatTitle">Asistente Spaans Leren</strong>
+                <span data-i18n="chatOnline">● En línea</span>
             </div>
 
-            <button id="chatbotClose" aria-label="Cerrar chat">
+            <button id="chatbotClose" aria-label="Cerrar chat" data-i18n-aria="chatClose">
                 ×
             </button>
         </div>
@@ -953,27 +953,42 @@
         <div class="chatbot-messages" id="chatbotMessages">
 
             <div class="bot-message">
-                👋 ¡Hola! Soy el asistente de Spaans Leren.
+                <span data-i18n="chatGreeting">
+                    👋 ¡Hola! Soy el asistente de Spaans Leren.
+                </span>
+                
                 <br><br>
-                ¿En qué puedo ayudarte?
+                
+                  <span data-i18n="chatHelp">
+                    ¿En qué puedo ayudarte?
+                </span>
+                
             </div>
 
             <div class="chatbot-options">
 
                 <button data-question="Quiero información sobre los cursos">
-                    📚 Información sobre cursos
+                    <span data-i18n="chatCourses">
+                        📚 Información sobre cursos
+                    </span>
                 </button>
 
                 <button data-question="Quiero conocer los precios">
-                    💰 Precios
+                    <span data-i18n="chatPrices">
+                        💰 Precios
+                    </span>
                 </button>
-
+                
                 <button data-question="Quiero hacer una clase de prueba">
-                    🎓 Clase de prueba gratis
+                    <span data-i18n="chatTrial">
+                        🎓 Clase de prueba gratis
+                    </span>
                 </button>
-
+                
                 <button data-question="Quiero reservar una clase">
-                    📅 Quiero reservar
+                    <span data-i18n="chatReserve">
+                        📅 Quiero reservar
+                    </span>
                 </button>
 
             </div>
@@ -986,6 +1001,7 @@
                 type="text"
                 id="chatbotInput"
                 placeholder="Escribe tu pregunta..."
+                data-i18n-placeholder="chatPlaceholder"
             >
 
             <button id="chatbotSend" aria-label="Enviar mensaje">
