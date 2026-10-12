@@ -53,7 +53,7 @@ const calendarTranslations = {
         navHome: "Home",
         navCourses: "Cursussen",
         navPrices: "Prijzen",
-        navCalendar: "Kalender",
+        navCalendar: "Afspraak maken",
         navContact: "Contact",
         title: "Beschikbare lestijden",
         intro: "Bekijk de beschikbaarheid voor Spaanse lessen.",
