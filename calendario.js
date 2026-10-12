@@ -726,7 +726,7 @@ async function selectTime(dayName, time, timeButton) {
             ) {
 
                 requestClass.textContent =
-                    "🟡 Pre-reserva realizada";
+                   calendarTranslations[currentLanguage].preReservation;
 
 
                 timeButton.classList.add(
@@ -734,14 +734,15 @@ async function selectTime(dayName, time, timeButton) {
                 );
 
                 timeButton.disabled = true;
-
+               
+                const t = calendarTranslations[currentLanguage];
 
                 alert(
-                    `Solicitud enviada:\n\n` +
+                    `${t.requestSent}\n\n` +
                     `${dayName} a las ${time}\n` +
-                    `Nombre: ${studentName}\n` +
-                    `Contacto: ${studentContact}\n\n` +
-                    `La profesora debe confirmar la reserva.`
+                    `${t.name}: ${studentName}\n` +
+                    `${t.phone}: ${studentContact}\n\n` +
+                    `${t.teacherConfirmation}`
                 );
 
 
