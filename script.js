@@ -900,7 +900,8 @@ interestButtons.forEach((button) => {
             chatPrices: "💰 Prijzen",
             chatTrial: "🎓 Gratis proefles",
             chatReserve: "📅 Ik wil een les reserveren",
-            chatPlaceholder: "Typ je vraag..."
+            chatPlaceholder: "Typ je vraag...",
+           chatSuggestions: "Je kunt ook vragen naar:",
 
 
         },
@@ -1059,7 +1060,8 @@ interestButtons.forEach((button) => {
             chatPrices: "💰 Precios",
             chatTrial: "🎓 Clase de prueba gratis",
             chatReserve: "📅 Quiero reservar",
-            chatPlaceholder: "Escribe tu pregunta..."
+            chatPlaceholder: "Escribe tu pregunta...",
+           chatSuggestions: "También puedes consultar:",
 
 
 
