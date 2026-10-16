@@ -264,22 +264,24 @@ section {
 
 
 .hero-content {
-    padding: 60px 20px 80px;
+    padding: 40px 4% 60px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     align-items: center;
-    justify-content: center;
-    gap: 25px;
+    justify-content: space-between;
+    gap: 40px;
     width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
     box-sizing: border-box;
-    text-align: center;
+    text-align: left;
 }
 
 .hero-text {
-    flex: 1;
+    flex: 1 1 55%;
     min-width: 0;
     max-width: 720px;
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 
