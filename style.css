@@ -290,11 +290,12 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 0;
 }
 
 .hero-logo img {
-    width: 100%;
-    max-width: 500px;
+    width: 500%;
+    max-width: 620px;
     height: auto;
     display: block;
 }
@@ -327,8 +328,7 @@ section {
     font-size: 1.2rem;
 
     margin-bottom: 35px;
-   margin-left: auto;
-   margin-right: auto;
+
 }
 
 
@@ -1239,15 +1239,11 @@ section {
 
 @media (max-width: 768px) {
 
-    /* Ocultamos el logo grande del Hero */
-    .hero-logo {
-        display: none;
-    }
+/* =========================================
+   CABECERA Y HERO MÓVIL
+========================================= */
 
-    /* Ocultamos "Spaans Leren" de la cabecera */
-    .logo {
-        display: none;
-    }
+@media (max-width: 768px) {
 
     /* Cabecera móvil */
     .nav-container {
@@ -1255,18 +1251,16 @@ section {
         padding: 0 15px;
     }
 
-    /* Logo de la izquierda */
+    /* Volvemos a mostrar Spaans Leren */
+    .logo {
+        display: block;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    /* Quitamos el logo pequeño añadido por CSS */
     .header::after {
-        content: "";
-        position: absolute;
-        left: 15px;
-        top: 7px;
-        width: 65px;
-        height: 58px;
-        background-image: url("images/logo4.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
+        content: none;
     }
 
     /* Menú a la derecha */
@@ -1274,7 +1268,51 @@ section {
         margin-left: auto;
     }
 
+    /* Logo grande de Gloria primero */
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+        padding: 30px 20px 50px;
+    }
+
+    .hero-logo {
+        display: flex;
+        order: 1;
+        flex: 0 1 auto;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-logo img {
+        width: 100%;
+        max-width: 360px;
+        height: auto;
+    }
+
+    /* Texto debajo del logo */
+    .hero-text {
+        order: 2;
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }
+
+
+    /* Menú a la derecha */
+ /*   .menu-button {
+        margin-left: auto;
+    }
+
+}*/
 /* =========================================
    BUSINESS FEATURE
 ========================================= */
