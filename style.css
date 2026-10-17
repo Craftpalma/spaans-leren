@@ -266,7 +266,7 @@ section {
 .hero-content {
     padding: 40px 4% 60px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
@@ -283,6 +283,7 @@ section {
     max-width: 720px;
     text-align: left;
     width: 100%;
+    order: 1;
 }
 
 .hero-logo {
@@ -291,10 +292,11 @@ section {
     justify-content: center;
     align-items: center;
     min-width: 0;
+    order: 2;
 }
 
 .hero-logo img {
-    width: 500%;
+    width: 100%;
     max-width: 620px;
     height: auto;
     display: block;
