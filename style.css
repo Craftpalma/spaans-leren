@@ -249,19 +249,14 @@ section {
     min-height: 600px;
     display: flex;
     align-items: center;
-    background: linear-gradient(
-        135deg,
-        #eef7f9 0%,
-        #ffffff 60%,
-        #f8f1df 100%
-    );
-    overflow: hidden; /* Evita scroll horizontal si la imagen es grande */
+    background: linear-gradient(135deg, #eef7f9 0%, #ffffff 60%, #f8f1df 100%);
+    overflow: hidden;
 }
 
 .hero-content {
     padding: 40px 4% 60px;
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Horizontal en ordenador */
     align-items: center;
     justify-content: space-between;
     gap: 40px;
@@ -273,7 +268,7 @@ section {
 }
 
 .hero-text {
-    flex: 1 1 55%;
+    flex: 1 1 55%; /* El texto ocupa el 55% del ancho */
     min-width: 0;
     max-width: 720px;
     text-align: left;
@@ -281,7 +276,7 @@ section {
 }
 
 .hero-logo {
-    flex: 0 1 500px; /* Un poco más ancho para que luzca el logo */
+    flex: 0 1 500px; /* El logo ocupa 500px máximo */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,7 +285,7 @@ section {
 
 .hero-logo img {
     width: 100%;
-    max-width: 500px; /* CORREGIDO: Antes tenías 100px, ahora 500px */
+    max-width: 500px; /* Tamaño máximo del logo */
     height: auto;
     display: block;
     object-fit: contain;
@@ -1262,7 +1257,7 @@ section {
     }
 
     .hero-logo img {
-        max-width: 350px; /* Buen tamaño para móvil */
+        max-width: 350px; /* Tamaño ideal en móvil */
         margin-top: 30px;
     }
 
