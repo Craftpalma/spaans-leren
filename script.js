@@ -1211,5 +1211,20 @@ interestButtons.forEach((button) => {
     }
 })();
 
+// Esperar 15 segundos para abrir el chatbot automáticamente
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        const chatbotWindow = document.querySelector('.chatbot-window');
+        
+        // Si la ventana del chat existe y NO está activa (cerrada)
+        if (chatbotWindow && !chatbotWindow.classList.contains('active')) {
+            // Hacemos clic en el botón del chat para abrirlo
+            const chatbotButton = document.querySelector('.chatbot-button');
+            if (chatbotButton) {
+                chatbotButton.click();
+            }
+        }
+    }, 30000); // 30000 ms = 30 segundos
+});
 
 
