@@ -283,7 +283,7 @@ section {
     max-width: 720px;
     text-align: left;
     width: 100%;
-    order: 1;
+ 
 }
 
 .hero-logo {
@@ -292,14 +292,15 @@ section {
     justify-content: center;
     align-items: center;
     min-width: 0;
-    order: 2;
+
 }
 
 .hero-logo img {
     width: 100%;
-    max-width: 620px;
+    max-width: 100px;
     height: auto;
     display: block;
+   object-fit: contain;
 }
 
 .hero h1 {
@@ -330,7 +331,7 @@ section {
     font-size: 1.2rem;
 
     margin-bottom: 35px;
-
+   color:var(--dark);/*asegurese de que este cpolor contraste bien*/
 }
 
 
@@ -1245,7 +1246,7 @@ section {
    CABECERA Y HERO MÓVIL
 ========================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
     /* Cabecera móvil */
     .nav-container {
@@ -1275,8 +1276,9 @@ section {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 20px;
-        padding: 30px 20px 50px;
+       padding: 40px 20px; /*ds ayuda*/
+    /*    gap: 20px;
+        padding: 30px 20px 50px;*//*deepseep ayuda*/
     }
 
     .hero-logo {
@@ -1288,17 +1290,24 @@ section {
     }
 
     .hero-logo img {
-        width: 100%;
+       max-width: 350px;
+       margin-top: 30px;
+       /* width: 100%;
         max-width: 360px;
-        height: auto;
+        height: auto;*//*original antes de sd */
     }
 
     /* Texto debajo del logo */
     .hero-text {
-        order: 2;
+       text-align: center;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       
+      /*  order: 2;
         width: 100%;
         max-width: 600px;
-        text-align: center;
+        text-align: center;*/
     }
 
     .hero p {
