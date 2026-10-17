@@ -2131,5 +2131,136 @@ section {
     }
 
 }
+/* =========================================
+   PRESENTACIÓN DE LA PROFESORA
+========================================= */
 
+.about-teacher {
+    padding: 100px 0;
+    background: var(--white);
+}
 
+.about-teacher .container {
+    max-width: 1000px;
+}
+
+/* Bloque 1: Foto + intro */
+.about-teacher-intro {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.about-teacher-image {
+    flex: 0 0 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-teacher-image img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.about-teacher-text {
+    flex: 1;
+    text-align: left;
+}
+
+.about-teacher-text h2 {
+    color: var(--dark);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.about-teacher-text p {
+    font-size: 1.05rem;
+    margin-bottom: 15px;
+    color: var(--text);
+}
+
+/* Bloques de texto */
+.about-teacher-block {
+    margin-bottom: 45px;
+}
+
+.about-teacher-block h3,
+.about-teacher-cta h3 {
+    color: var(--dark);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.about-teacher-block p,
+.about-teacher-cta p {
+    font-size: 1.05rem;
+    margin-bottom: 15px;
+    color: var(--text);
+}
+
+.about-list {
+    padding-left: 25px;
+    margin-bottom: 20px;
+}
+
+.about-list li {
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+/* Bloque final (CTA) */
+.about-teacher-cta {
+    text-align: center;
+    padding: 45px 30px;
+    background: var(--light);
+    border-radius: var(--radius);
+    margin-top: 20px;
+}
+
+.about-teacher-cta .button {
+    margin-top: 15px;
+}
+
+/* =========================================
+   RESPONSIVE (MÓVIL)
+========================================= */
+
+@media (max-width: 900px) {
+    .about-teacher {
+        padding: 70px 0;
+    }
+
+    .about-teacher-intro {
+        flex-direction: column;
+        text-align: center;
+        gap: 35px;
+        margin-bottom: 50px;
+    }
+
+    .about-teacher-text {
+        text-align: center;
+    }
+
+    .about-teacher-image img {
+        max-width: 250px;
+    }
+
+    .about-teacher-block h3,
+    .about-teacher-cta h3 {
+        font-size: 1.3rem;
+    }
+
+    .about-teacher-cta {
+        padding: 35px 20px;
+    }
+}
