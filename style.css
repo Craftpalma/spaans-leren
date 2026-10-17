@@ -247,21 +247,16 @@ section {
 
 .hero {
     min-height: 600px;
-
     display: flex;
-
     align-items: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eef7f9 0%,
-            #ffffff 60%,
-            #f8f1df 100%
-        );
+    background: linear-gradient(
+        135deg,
+        #eef7f9 0%,
+        #ffffff 60%,
+        #f8f1df 100%
+    );
+    overflow: hidden; /* Evita scroll horizontal si la imagen es grande */
 }
-
-
 
 .hero-content {
     padding: 40px 4% 60px;
@@ -283,35 +278,29 @@ section {
     max-width: 720px;
     text-align: left;
     width: 100%;
- 
 }
 
 .hero-logo {
-    flex:  0 1 400px;
+    flex: 0 1 500px; /* Un poco más ancho para que luzca el logo */
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: 0;
-
 }
 
 .hero-logo img {
     width: 100%;
-    max-width: 100px;
+    max-width: 500px; /* CORREGIDO: Antes tenías 100px, ahora 500px */
     height: auto;
     display: block;
-   object-fit: contain;
+    object-fit: contain;
 }
 
 .hero h1 {
     color: var(--dark);
-
     font-size: clamp(2.7rem, 6vw, 5rem);
-
     line-height: 1.03;
-
     letter-spacing: -2px;
-
     margin-bottom: 25px;
 }
 
@@ -327,12 +316,11 @@ section {
 
 .hero p {
     max-width: 600px;
-
     font-size: 1.2rem;
-
     margin-bottom: 35px;
-   color:var(--dark);/*asegurese de que este cpolor contraste bien*/
+    color: var(--dark);
 }
+
 
 
 /* =========================================
@@ -1237,93 +1225,61 @@ section {
     }
 }
 /* =========================================
-   CABECERA MÓVIL
-========================================= */
-
-@media (max-width: 768px) {
-
-/* =========================================
    CABECERA Y HERO MÓVIL
 ========================================= */
-
 @media (max-width: 900px) {
-
     /* Cabecera móvil */
     .nav-container {
         min-height: 72px;
         padding: 0 15px;
     }
-
-    /* Volvemos a mostrar Spaans Leren */
     .logo {
         display: block;
         font-size: 1.25rem;
         flex-shrink: 0;
     }
-
-    /* Quitamos el logo pequeño añadido por CSS */
     .header::after {
         content: none;
     }
-
-    /* Menú a la derecha */
     .menu-button {
         margin-left: auto;
     }
 
-    /* Logo grande de Gloria primero */
+    /* Hero en móvil: Logo arriba, texto abajo */
     .hero-content {
         flex-direction: column;
         align-items: center;
         text-align: center;
-       padding: 40px 20px; /*ds ayuda*/
-    /*    gap: 20px;
-        padding: 30px 20px 50px;*//*deepseep ayuda*/
+        padding: 40px 20px;
     }
 
     .hero-logo {
         display: flex;
-        order: 1;
+        order: 1; /* El logo va primero */
         flex: 0 1 auto;
         width: 100%;
         justify-content: center;
     }
 
     .hero-logo img {
-       max-width: 350px;
-       margin-top: 30px;
-       /* width: 100%;
-        max-width: 360px;
-        height: auto;*//*original antes de sd */
+        max-width: 350px; /* Buen tamaño para móvil */
+        margin-top: 30px;
     }
 
-    /* Texto debajo del logo */
     .hero-text {
-       text-align: center;
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       
-      /*  order: 2;
-        width: 100%;
-        max-width: 600px;
-        text-align: center;*/
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        order: 2; /* El texto va después */
     }
 
     .hero p {
         margin-left: auto;
         margin-right: auto;
     }
-
 }
 
-
-    /* Menú a la derecha */
- /*   .menu-button {
-        margin-left: auto;
-    }
-
-}*/
 /* =========================================
    BUSINESS FEATURE
 ========================================= */
