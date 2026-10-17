@@ -2264,3 +2264,21 @@ section {
         padding: 35px 20px;
     }
 }
+
+/* Añadir al final de tu style.css botmolesto probar */
+.chatbot-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    background-color: #ff3b30; /* Rojo */
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Asegurarse de que el botón sea relativo para que el punto se posicione bien */
+.chatbot-button {
+    position: relative;
+}
