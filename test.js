@@ -17,10 +17,29 @@ if (testForm) {
         let score = 0;
         const formData = new FormData(this);
 
-        // 2. Comparar respuestas
+      // 2. Comparar respuestas y pintar de colores
         for (let [question, answer] of formData.entries()) {
-            if (answerKey[question] === answer) {
+            const isCorrect = answerKey[question] === answer;
+            
+            if (isCorrect) {
                 score++;
+            } else {
+                console.log(`❌ Fallo en ${question}: Tú elegiste "${answer}", pero la correcta es "${answerKey[question]}".`);
+            }
+
+            // Pintar la opción seleccionada de verde o rojo
+            const selectedInput = document.querySelector(`input[name="${question}"][value="${answer}"]`);
+            if (selectedInput) {
+                const label = selectedInput.closest('.option-label');
+                if (isCorrect) {
+                    label.style.backgroundColor = '#dff5df'; // Verde
+                    label.style.borderColor = '#9acb9a';
+                    label.style.color = '#245b24';
+                } else {
+                    label.style.backgroundColor = '#f5d6d6'; // Rojo
+                    label.style.borderColor = '#d99a9a';
+                    label.style.color = '#7a2222';
+                }
             }
         }
 
