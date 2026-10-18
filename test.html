@@ -4,39 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test de Nivel - Spaans met Gloria</title>
+    
+    <!-- Tu CSS principal (para los colores y el menú) -->
     <link rel="stylesheet" href="style.css">
+    <!-- El CSS del test -->
+    <link rel="stylesheet" href="test.css">
 </head>
 <body>
 
-       <!-- NAVEGACIÓN -->
-    <header class="header">
-        <div class="container nav-container">
-
-            <a href="#" class="logo">
-                Spaans <span>Leren</span>
-            </a>
-
-            <button class="menu-button" id="menuButton" aria-label="Abrir menú">
-                ☰
-            </button>
-
-<nav class="nav" id="navMenu">
-    <a href="#inicio" data-i18n="navInicio">Inicio</a>
-    <a href="#cursos" data-i18n="navCursos">Cursos</a>
-    <a href="#precios" data-i18n="navPrecios">Precios</a>
-    <a href="calendario.html" data-i18n="navCalendario">Calendario</a>
-    <a href="#contacto" data-i18n="navContacto">Contacto</a>
-
-    <div class="language-selector">
-        <button type="button" id="languageToggle"
-                aria-label="Cambiar idioma">
-            🇳🇱 🇪🇸
-        </button>
-    </div>
-</nav>
-
-        </div>
-    </header>
+    <!-- AQUÍ PONES TU HEADER (Copia y pega el de tu index.html) -->
 
     <main>
         <section class="level-test-section">
@@ -50,166 +26,9 @@
 
                 <div class="test-card" id="testCard">
                     <form id="levelTestForm">
-                        <!-- PREGUNTA 1 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>1.</strong> ¿Cómo te llamas?</p>
-                            <label class="option-label"><input type="radio" name="q1" value="A" required> A. Me llamo Ana.</label>
-                            <label class="option-label"><input type="radio" name="q1" value="B"> B. Tengo Ana.</label>
-                            <label class="option-label"><input type="radio" name="q1" value="C"> C. Soy llamo Ana.</label>
-                        </div>
-
-                        <!-- PREGUNTA 2 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>2.</strong> Yo ___ de Holanda.</p>
-                            <label class="option-label"><input type="radio" name="q2" value="A" required> A. es</label>
-                            <label class="option-label"><input type="radio" name="q2" value="B"> B. soy</label>
-                            <label class="option-label"><input type="radio" name="q2" value="C"> C. estoy</label>
-                        </div>
-
-                        <!-- PREGUNTA 3 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>3.</strong> Todos los días ___ café por la mañana.</p>
-                            <label class="option-label"><input type="radio" name="q3" value="A" required> A. bebo</label>
-                            <label class="option-label"><input type="radio" name="q3" value="B"> B. bebes</label>
-                            <label class="option-label"><input type="radio" name="q3" value="C"> C. beber</label>
-                        </div>
-
-                        <!-- PREGUNTA 4 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>4.</strong> Ayer ___ al cine con mis amigos.</p>
-                            <label class="option-label"><input type="radio" name="q4" value="A" required> A. voy</label>
-                            <label class="option-label"><input type="radio" name="q4" value="B"> B. iba</label>
-                            <label class="option-label"><input type="radio" name="q4" value="C"> C. fui</label>
-                        </div>
-
-                        <!-- PREGUNTA 5 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>5.</strong> ¿Dónde ___ las llaves? No las encuentro.</p>
-                            <label class="option-label"><input type="radio" name="q5" value="A" required> A. son</label>
-                            <label class="option-label"><input type="radio" name="q5" value="B"> B. están</label>
-                            <label class="option-label"><input type="radio" name="q5" value="C"> C. hay</label>
-                        </div>
-
-                        <!-- PREGUNTA 6 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>6.</strong> Mi hermano es ___ que yo.</p>
-                            <label class="option-label"><input type="radio" name="q6" value="A" required> A. más alto</label>
-                            <label class="option-label"><input type="radio" name="q6" value="B"> B. muy alto que</label>
-                            <label class="option-label"><input type="radio" name="q6" value="C"> C. el más alto que</label>
-                        </div>
-
-                        <!-- PREGUNTA 7 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>7.</strong> ¿Has ___ alguna vez en España?</p>
-                            <label class="option-label"><input type="radio" name="q7" value="A" required> A. estar</label>
-                            <label class="option-label"><input type="radio" name="q7" value="B"> B. estuvo</label>
-                            <label class="option-label"><input type="radio" name="q7" value="C"> C. estado</label>
-                        </div>
-
-                        <!-- PREGUNTA 8 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>8.</strong> Cuando era pequeña, ___ en una casa cerca del mar.</p>
-                            <label class="option-label"><input type="radio" name="q8" value="A" required> A. viví</label>
-                            <label class="option-label"><input type="radio" name="q8" value="B"> B. vivía</label>
-                            <label class="option-label"><input type="radio" name="q8" value="C"> C. he vivido</label>
-                        </div>
-
-                        <!-- PREGUNTA 9 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>9.</strong> No creo que María ___ hoy a la fiesta.</p>
-                            <label class="option-label"><input type="radio" name="q9" value="A" required> A. viene</label>
-                            <label class="option-label"><input type="radio" name="q9" value="B"> B. vendrá</label>
-                            <label class="option-label"><input type="radio" name="q9" value="C"> C. venga</label>
-                        </div>
-
-                        <!-- PREGUNTA 10 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>10.</strong> Si tuviera más dinero, ___ por América Latina.</p>
-                            <label class="option-label"><input type="radio" name="q10" value="A" required> A. viajaría</label>
-                            <label class="option-label"><input type="radio" name="q10" value="B"> B. viajaré</label>
-                            <label class="option-label"><input type="radio" name="q10" value="C"> C. viajaba</label>
-                        </div>
-
-                        <!-- PREGUNTA 11 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>11.</strong> Me gusta mucho ___ música española.</p>
-                            <label class="option-label"><input type="radio" name="q11" value="A" required> A. escuchar</label>
-                            <label class="option-label"><input type="radio" name="q11" value="B"> B. escucho</label>
-                            <label class="option-label"><input type="radio" name="q11" value="C"> C. escuchando</label>
-                        </div>
-
-                        <!-- PREGUNTA 12 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>12.</strong> ¿Puedes decirme dónde ___ una farmacia?</p>
-                            <label class="option-label"><input type="radio" name="q12" value="A" required> A. está</label>
-                            <label class="option-label"><input type="radio" name="q12" value="B"> B. es</label>
-                            <label class="option-label"><input type="radio" name="q12" value="C"> C. esté</label>
-                        </div>
-
-                        <!-- PREGUNTA 13 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>13.</strong> Llevo tres años ___ español.</p>
-                            <label class="option-label"><input type="radio" name="q13" value="A" required> A. estudio</label>
-                            <label class="option-label"><input type="radio" name="q13" value="B"> B. estudiando</label>
-                            <label class="option-label"><input type="radio" name="q13" value="C"> C. estudiar</label>
-                        </div>
-
-                        <!-- PREGUNTA 14 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>14.</strong> Aunque ___ cansado, terminó el trabajo.</p>
-                            <label class="option-label"><input type="radio" name="q14" value="A" required> A. estaba</label>
-                            <label class="option-label"><input type="radio" name="q14" value="B"> B. estuviera</label>
-                            <label class="option-label"><input type="radio" name="q14" value="C"> C. estará</label>
-                        </div>
-
-                        <!-- PREGUNTA 15 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>15.</strong> Ojalá mañana no ___.</p>
-                            <label class="option-label"><input type="radio" name="q15" value="A" required> A. llueve</label>
-                            <label class="option-label"><input type="radio" name="q15" value="B"> B. lloverá</label>
-                            <label class="option-label"><input type="radio" name="q15" value="C"> C. llueva</label>
-                        </div>
-
-                        <!-- PREGUNTA 16 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>16.</strong> Si me lo hubieras dicho, te ___ ayudado.</p>
-                            <label class="option-label"><input type="radio" name="q16" value="A" required> A. habría</label>
-                            <label class="option-label"><input type="radio" name="q16" value="B"> B. hubiera</label>
-                            <label class="option-label"><input type="radio" name="q16" value="C"> C. habré</label>
-                        </div>
-
-                        <!-- PREGUNTA 17 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>17.</strong> No soporto que la gente ___ mientras hablo.</p>
-                            <label class="option-label"><input type="radio" name="q17" value="A" required> A. interrumpe</label>
-                            <label class="option-label"><input type="radio" name="q17" value="B"> B. interrumpa</label>
-                            <label class="option-label"><input type="radio" name="q17" value="C"> C. interrumpirá</label>
-                        </div>
-
-                        <!-- PREGUNTA 18 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>18.</strong> El informe, ___ conclusiones no comparto, se publicó ayer.</p>
-                            <label class="option-label"><input type="radio" name="q18" value="A" required> A. que</label>
-                            <label class="option-label"><input type="radio" name="q18" value="B"> B. cuyas</label>
-                            <label class="option-label"><input type="radio" name="q18" value="C"> C. las que</label>
-                        </div>
-
-                        <!-- PREGUNTA 19 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>19.</strong> De haberlo sabido, no ___ de esa manera.</p>
-                            <label class="option-label"><input type="radio" name="q19" value="A" required> A. habría actuado</label>
-                            <label class="option-label"><input type="radio" name="q19" value="B"> B. actuaría</label>
-                            <label class="option-label"><input type="radio" name="q19" value="C"> C. habré actuado</label>
-                        </div>
-
-                        <!-- PREGUNTA 20 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>20.</strong> Por mucho que ___, no conseguirá convencerme.</p>
-                            <label class="option-label"><input type="radio" name="q20" value="A" required> A. insiste</label>
-                            <label class="option-label"><input type="radio" name="q20" value="B"> B. insistirá</label>
-                            <label class="option-label"><input type="radio" name="q20" value="C"> C. insista</label>
-                        </div>
-
+                        <!-- AQUÍ VAN LAS 20 PREGUNTAS QUE TE PASÉ ANTES -->
+                        <!-- (Pega todo el bloque de preguntas aquí) -->
+                        
                         <button type="submit" class="button button-primary test-submit-btn" id="submitTestBtn">
                             Ver mi nivel ahora
                         </button>
@@ -228,65 +47,9 @@
         </section>
     </main>
 
-    <!-- PON AQUÍ TU FOOTER -->
+    <!-- AQUÍ PONES TU FOOTER (Copia y pega el de tu index.html) -->
 
-    <script>
-        document.getElementById('levelTestForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita que la página se recargue
-
-            // 1. Clave de respuestas correctas
-            const answerKey = {
-                q1: "A", q2: "B", q3: "A", q4: "C", q5: "B",
-                q6: "A", q7: "C", q8: "B", q9: "C", q10: "A",
-                q11: "A", q12: "A", q13: "B", q14: "A", q15: "C",
-                q16: "A", q17: "B", q18: "B", q19: "A", q20: "C"
-            };
-
-            let score = 0;
-            const formData = new FormData(this);
-
-            // 2. Comparar respuestas
-            for (let [question, answer] of formData.entries()) {
-                if (answerKey[question] === answer) {
-                    score++;
-                }
-            }
-
-            // 3. Calcular Nivel (Baremo)
-            let level = "";
-            let recommendation = "";
-
-            if (score <= 5) {
-                level = "A1 (Inicial)";
-                recommendation = "Te recomendamos el curso de Nivel A1 - Principiantes. ¡Empezarás con una base sólida!";
-            } else if (score <= 9) {
-                level = "A2 (Básico)";
-                recommendation = "Te recomendamos el curso de Nivel A2. Mejorarás tu fluidez y gramática básica.";
-            } else if (score <= 13) {
-                level = "B1 (Intermedio)";
-                recommendation = "¡Muy bien! Tu nivel es B1. Te vendrá genial el curso de Nivel Intermedio para soltarte a hablar.";
-            } else if (score <= 17) {
-                level = "B2 (Avanzado)";
-                recommendation = "¡Impresionante! Tienes un gran control. Te recomendamos el curso B2 o nuestras clases de conversación.";
-            } else {
-                level = "C1 (Superior)";
-                recommendation = "¡Felicidades! Tienes un nivel muy alto. Te recomendamos perfeccionar con clases de conversación avanzada o español de negocios.";
-            }
-
-            // 4. Mostrar resultados
-            document.getElementById('levelTestForm').style.display = 'none'; // Ocultar preguntas
-            const resultBox = document.getElementById('testResult');
-            resultBox.style.display = 'block'; // Mostrar caja
-            
-            document.getElementById('resultText').innerHTML = `
-                <strong>Has acertado ${score} de 20 preguntas.</strong><br><br>
-                Tu nivel estimado es: <strong style="color: var(--primary); font-size: 1.4rem;">${level}</strong><br><br>
-                ${recommendation}
-            `;
-            
-            // Hacer scroll hacia arriba para ver el resultado
-            resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-    </script>
+    <!-- El JavaScript del test -->
+    <script src="test.js"></script>
 </body>
 </html>
