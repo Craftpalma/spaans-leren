@@ -5,10 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test de Nivel - Spaans met Gloria</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- ESTILOS DEL TEST (Integrados aquí) -->
+    <style>
+        .level-test-section {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .test-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        /* Contenedor de las 2 columnas */
+        .questions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .question-block:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .question-text {
+            color: var(--dark);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        /* Estilos de las opciones (A, B, C) */
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .option-label:hover {
+            border-color: var(--primary);
+            background: #f0f8fa;
+        }
+
+        .option-label input[type="radio"] {
+            margin-top: 3px;
+            margin-right: 12px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .option-label:has(input:checked) {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .test-submit-btn {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: block;
+            font-size: 1.1rem;
+            padding: 15px;
+        }
+
+        .test-result-box {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #eef7f9 0%, #ffffff 100%);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius);
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .test-result-box h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .test-result-box p {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            .questions-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .test-column {
+                display: contents;
+            }
+            .test-card {
+                padding: 25px 20px;
+            }
+            .question-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- PON AQUÍ TU HEADER (el menú de navegación) -->
+    <!-- PON AQUÍ TU HEADER -->
 
     <main>
         <section class="level-test-section">
@@ -22,164 +155,135 @@
 
                 <div class="test-card" id="testCard">
                     <form id="levelTestForm">
-                        <!-- PREGUNTA 1 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>1.</strong> ¿Cómo te llamas?</p>
-                            <label class="option-label"><input type="radio" name="q1" value="A" required> A. Me llamo Ana.</label>
-                            <label class="option-label"><input type="radio" name="q1" value="B"> B. Tengo Ana.</label>
-                            <label class="option-label"><input type="radio" name="q1" value="C"> C. Soy llamo Ana.</label>
-                        </div>
+                        
+                        <div class="questions-grid">
+                            <!-- COLUMNA IZQUIERDA (1-10) -->
+                            <div class="test-column">
+                                <div class="question-block">
+                                    <p class="question-text"><strong>1.</strong> ¿Cómo te llamas?</p>
+                                    <label class="option-label"><input type="radio" name="q1" value="A" required> A. Me llamo Ana.</label>
+                                    <label class="option-label"><input type="radio" name="q1" value="B"> B. Tengo Ana.</label>
+                                    <label class="option-label"><input type="radio" name="q1" value="C"> C. Soy llamo Ana.</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>2.</strong> Yo ___ de Holanda.</p>
+                                    <label class="option-label"><input type="radio" name="q2" value="A" required> A. es</label>
+                                    <label class="option-label"><input type="radio" name="q2" value="B"> B. soy</label>
+                                    <label class="option-label"><input type="radio" name="q2" value="C"> C. estoy</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>3.</strong> Todos los días ___ café por la mañana.</p>
+                                    <label class="option-label"><input type="radio" name="q3" value="A" required> A. bebo</label>
+                                    <label class="option-label"><input type="radio" name="q3" value="B"> B. bebes</label>
+                                    <label class="option-label"><input type="radio" name="q3" value="C"> C. beber</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>4.</strong> Ayer ___ al cine con mis amigos.</p>
+                                    <label class="option-label"><input type="radio" name="q4" value="A" required> A. voy</label>
+                                    <label class="option-label"><input type="radio" name="q4" value="B"> B. iba</label>
+                                    <label class="option-label"><input type="radio" name="q4" value="C"> C. fui</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>5.</strong> ¿Dónde ___ las llaves? No las encuentro.</p>
+                                    <label class="option-label"><input type="radio" name="q5" value="A" required> A. son</label>
+                                    <label class="option-label"><input type="radio" name="q5" value="B"> B. están</label>
+                                    <label class="option-label"><input type="radio" name="q5" value="C"> C. hay</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>6.</strong> Mi hermano es ___ que yo.</p>
+                                    <label class="option-label"><input type="radio" name="q6" value="A" required> A. más alto</label>
+                                    <label class="option-label"><input type="radio" name="q6" value="B"> B. muy alto que</label>
+                                    <label class="option-label"><input type="radio" name="q6" value="C"> C. el más alto que</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>7.</strong> ¿Has ___ alguna vez en España?</p>
+                                    <label class="option-label"><input type="radio" name="q7" value="A" required> A. estar</label>
+                                    <label class="option-label"><input type="radio" name="q7" value="B"> B. estuvo</label>
+                                    <label class="option-label"><input type="radio" name="q7" value="C"> C. estado</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>8.</strong> Cuando era pequeña, ___ en una casa cerca del mar.</p>
+                                    <label class="option-label"><input type="radio" name="q8" value="A" required> A. viví</label>
+                                    <label class="option-label"><input type="radio" name="q8" value="B"> B. vivía</label>
+                                    <label class="option-label"><input type="radio" name="q8" value="C"> C. he vivido</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>9.</strong> No creo que María ___ hoy a la fiesta.</p>
+                                    <label class="option-label"><input type="radio" name="q9" value="A" required> A. viene</label>
+                                    <label class="option-label"><input type="radio" name="q9" value="B"> B. vendrá</label>
+                                    <label class="option-label"><input type="radio" name="q9" value="C"> C. venga</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>10.</strong> Si tuviera más dinero, ___ por América Latina.</p>
+                                    <label class="option-label"><input type="radio" name="q10" value="A" required> A. viajaría</label>
+                                    <label class="option-label"><input type="radio" name="q10" value="B"> B. viajaré</label>
+                                    <label class="option-label"><input type="radio" name="q10" value="C"> C. viajaba</label>
+                                </div>
+                            </div>
 
-                        <!-- PREGUNTA 2 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>2.</strong> Yo ___ de Holanda.</p>
-                            <label class="option-label"><input type="radio" name="q2" value="A" required> A. es</label>
-                            <label class="option-label"><input type="radio" name="q2" value="B"> B. soy</label>
-                            <label class="option-label"><input type="radio" name="q2" value="C"> C. estoy</label>
-                        </div>
-
-                        <!-- PREGUNTA 3 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>3.</strong> Todos los días ___ café por la mañana.</p>
-                            <label class="option-label"><input type="radio" name="q3" value="A" required> A. bebo</label>
-                            <label class="option-label"><input type="radio" name="q3" value="B"> B. bebes</label>
-                            <label class="option-label"><input type="radio" name="q3" value="C"> C. beber</label>
-                        </div>
-
-                        <!-- PREGUNTA 4 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>4.</strong> Ayer ___ al cine con mis amigos.</p>
-                            <label class="option-label"><input type="radio" name="q4" value="A" required> A. voy</label>
-                            <label class="option-label"><input type="radio" name="q4" value="B"> B. iba</label>
-                            <label class="option-label"><input type="radio" name="q4" value="C"> C. fui</label>
-                        </div>
-
-                        <!-- PREGUNTA 5 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>5.</strong> ¿Dónde ___ las llaves? No las encuentro.</p>
-                            <label class="option-label"><input type="radio" name="q5" value="A" required> A. son</label>
-                            <label class="option-label"><input type="radio" name="q5" value="B"> B. están</label>
-                            <label class="option-label"><input type="radio" name="q5" value="C"> C. hay</label>
-                        </div>
-
-                        <!-- PREGUNTA 6 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>6.</strong> Mi hermano es ___ que yo.</p>
-                            <label class="option-label"><input type="radio" name="q6" value="A" required> A. más alto</label>
-                            <label class="option-label"><input type="radio" name="q6" value="B"> B. muy alto que</label>
-                            <label class="option-label"><input type="radio" name="q6" value="C"> C. el más alto que</label>
-                        </div>
-
-                        <!-- PREGUNTA 7 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>7.</strong> ¿Has ___ alguna vez en España?</p>
-                            <label class="option-label"><input type="radio" name="q7" value="A" required> A. estar</label>
-                            <label class="option-label"><input type="radio" name="q7" value="B"> B. estuvo</label>
-                            <label class="option-label"><input type="radio" name="q7" value="C"> C. estado</label>
-                        </div>
-
-                        <!-- PREGUNTA 8 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>8.</strong> Cuando era pequeña, ___ en una casa cerca del mar.</p>
-                            <label class="option-label"><input type="radio" name="q8" value="A" required> A. viví</label>
-                            <label class="option-label"><input type="radio" name="q8" value="B"> B. vivía</label>
-                            <label class="option-label"><input type="radio" name="q8" value="C"> C. he vivido</label>
-                        </div>
-
-                        <!-- PREGUNTA 9 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>9.</strong> No creo que María ___ hoy a la fiesta.</p>
-                            <label class="option-label"><input type="radio" name="q9" value="A" required> A. viene</label>
-                            <label class="option-label"><input type="radio" name="q9" value="B"> B. vendrá</label>
-                            <label class="option-label"><input type="radio" name="q9" value="C"> C. venga</label>
-                        </div>
-
-                        <!-- PREGUNTA 10 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>10.</strong> Si tuviera más dinero, ___ por América Latina.</p>
-                            <label class="option-label"><input type="radio" name="q10" value="A" required> A. viajaría</label>
-                            <label class="option-label"><input type="radio" name="q10" value="B"> B. viajaré</label>
-                            <label class="option-label"><input type="radio" name="q10" value="C"> C. viajaba</label>
-                        </div>
-
-                        <!-- PREGUNTA 11 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>11.</strong> Me gusta mucho ___ música española.</p>
-                            <label class="option-label"><input type="radio" name="q11" value="A" required> A. escuchar</label>
-                            <label class="option-label"><input type="radio" name="q11" value="B"> B. escucho</label>
-                            <label class="option-label"><input type="radio" name="q11" value="C"> C. escuchando</label>
-                        </div>
-
-                        <!-- PREGUNTA 12 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>12.</strong> ¿Puedes decirme dónde ___ una farmacia?</p>
-                            <label class="option-label"><input type="radio" name="q12" value="A" required> A. está</label>
-                            <label class="option-label"><input type="radio" name="q12" value="B"> B. es</label>
-                            <label class="option-label"><input type="radio" name="q12" value="C"> C. esté</label>
-                        </div>
-
-                        <!-- PREGUNTA 13 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>13.</strong> Llevo tres años ___ español.</p>
-                            <label class="option-label"><input type="radio" name="q13" value="A" required> A. estudio</label>
-                            <label class="option-label"><input type="radio" name="q13" value="B"> B. estudiando</label>
-                            <label class="option-label"><input type="radio" name="q13" value="C"> C. estudiar</label>
-                        </div>
-
-                        <!-- PREGUNTA 14 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>14.</strong> Aunque ___ cansado, terminó el trabajo.</p>
-                            <label class="option-label"><input type="radio" name="q14" value="A" required> A. estaba</label>
-                            <label class="option-label"><input type="radio" name="q14" value="B"> B. estuviera</label>
-                            <label class="option-label"><input type="radio" name="q14" value="C"> C. estará</label>
-                        </div>
-
-                        <!-- PREGUNTA 15 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>15.</strong> Ojalá mañana no ___.</p>
-                            <label class="option-label"><input type="radio" name="q15" value="A" required> A. llueve</label>
-                            <label class="option-label"><input type="radio" name="q15" value="B"> B. lloverá</label>
-                            <label class="option-label"><input type="radio" name="q15" value="C"> C. llueva</label>
-                        </div>
-
-                        <!-- PREGUNTA 16 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>16.</strong> Si me lo hubieras dicho, te ___ ayudado.</p>
-                            <label class="option-label"><input type="radio" name="q16" value="A" required> A. habría</label>
-                            <label class="option-label"><input type="radio" name="q16" value="B"> B. hubiera</label>
-                            <label class="option-label"><input type="radio" name="q16" value="C"> C. habré</label>
-                        </div>
-
-                        <!-- PREGUNTA 17 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>17.</strong> No soporto que la gente ___ mientras hablo.</p>
-                            <label class="option-label"><input type="radio" name="q17" value="A" required> A. interrumpe</label>
-                            <label class="option-label"><input type="radio" name="q17" value="B"> B. interrumpa</label>
-                            <label class="option-label"><input type="radio" name="q17" value="C"> C. interrumpirá</label>
-                        </div>
-
-                        <!-- PREGUNTA 18 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>18.</strong> El informe, ___ conclusiones no comparto, se publicó ayer.</p>
-                            <label class="option-label"><input type="radio" name="q18" value="A" required> A. que</label>
-                            <label class="option-label"><input type="radio" name="q18" value="B"> B. cuyas</label>
-                            <label class="option-label"><input type="radio" name="q18" value="C"> C. las que</label>
-                        </div>
-
-                        <!-- PREGUNTA 19 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>19.</strong> De haberlo sabido, no ___ de esa manera.</p>
-                            <label class="option-label"><input type="radio" name="q19" value="A" required> A. habría actuado</label>
-                            <label class="option-label"><input type="radio" name="q19" value="B"> B. actuaría</label>
-                            <label class="option-label"><input type="radio" name="q19" value="C"> C. habré actuado</label>
-                        </div>
-
-                        <!-- PREGUNTA 20 -->
-                        <div class="question-block">
-                            <p class="question-text"><strong>20.</strong> Por mucho que ___, no conseguirá convencerme.</p>
-                            <label class="option-label"><input type="radio" name="q20" value="A" required> A. insiste</label>
-                            <label class="option-label"><input type="radio" name="q20" value="B"> B. insistirá</label>
-                            <label class="option-label"><input type="radio" name="q20" value="C"> C. insista</label>
+                            <!-- COLUMNA DERECHA (11-20) -->
+                            <div class="test-column">
+                                <div class="question-block">
+                                    <p class="question-text"><strong>11.</strong> Me gusta mucho ___ música española.</p>
+                                    <label class="option-label"><input type="radio" name="q11" value="A" required> A. escuchar</label>
+                                    <label class="option-label"><input type="radio" name="q11" value="B"> B. escucho</label>
+                                    <label class="option-label"><input type="radio" name="q11" value="C"> C. escuchando</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>12.</strong> ¿Puedes decirme dónde ___ una farmacia?</p>
+                                    <label class="option-label"><input type="radio" name="q12" value="A" required> A. está</label>
+                                    <label class="option-label"><input type="radio" name="q12" value="B"> B. es</label>
+                                    <label class="option-label"><input type="radio" name="q12" value="C"> C. esté</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>13.</strong> Llevo tres años ___ español.</p>
+                                    <label class="option-label"><input type="radio" name="q13" value="A" required> A. estudio</label>
+                                    <label class="option-label"><input type="radio" name="q13" value="B"> B. estudiando</label>
+                                    <label class="option-label"><input type="radio" name="q13" value="C"> C. estudiar</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>14.</strong> Aunque ___ cansado, terminó el trabajo.</p>
+                                    <label class="option-label"><input type="radio" name="q14" value="A" required> A. estaba</label>
+                                    <label class="option-label"><input type="radio" name="q14" value="B"> B. estuviera</label>
+                                    <label class="option-label"><input type="radio" name="q14" value="C"> C. estará</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>15.</strong> Ojalá mañana no ___.</p>
+                                    <label class="option-label"><input type="radio" name="q15" value="A" required> A. llueve</label>
+                                    <label class="option-label"><input type="radio" name="q15" value="B"> B. lloverá</label>
+                                    <label class="option-label"><input type="radio" name="q15" value="C"> C. llueva</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>16.</strong> Si me lo hubieras dicho, te ___ ayudado.</p>
+                                    <label class="option-label"><input type="radio" name="q16" value="A" required> A. habría</label>
+                                    <label class="option-label"><input type="radio" name="q16" value="B"> B. hubiera</label>
+                                    <label class="option-label"><input type="radio" name="q16" value="C"> C. habré</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>17.</strong> No soporto que la gente ___ mientras hablo.</p>
+                                    <label class="option-label"><input type="radio" name="q17" value="A" required> A. interrumpe</label>
+                                    <label class="option-label"><input type="radio" name="q17" value="B"> B. interrumpa</label>
+                                    <label class="option-label"><input type="radio" name="q17" value="C"> C. interrumpirá</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>18.</strong> El informe, ___ conclusiones no comparto, se publicó ayer.</p>
+                                    <label class="option-label"><input type="radio" name="q18" value="A" required> A. que</label>
+                                    <label class="option-label"><input type="radio" name="q18" value="B"> B. cuyas</label>
+                                    <label class="option-label"><input type="radio" name="q18" value="C"> C. las que</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>19.</strong> De haberlo sabido, no ___ de esa manera.</p>
+                                    <label class="option-label"><input type="radio" name="q19" value="A" required> A. habría actuado</label>
+                                    <label class="option-label"><input type="radio" name="q19" value="B"> B. actuaría</label>
+                                    <label class="option-label"><input type="radio" name="q19" value="C"> C. habré actuado</label>
+                                </div>
+                                <div class="question-block">
+                                    <p class="question-text"><strong>20.</strong> Por mucho que ___, no conseguirá convencerme.</p>
+                                    <label class="option-label"><input type="radio" name="q20" value="A" required> A. insiste</label>
+                                    <label class="option-label"><input type="radio" name="q20" value="B"> B. insistirá</label>
+                                    <label class="option-label"><input type="radio" name="q20" value="C"> C. insista</label>
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" class="button button-primary test-submit-btn" id="submitTestBtn">
@@ -202,11 +306,11 @@
 
     <!-- PON AQUÍ TU FOOTER -->
 
+    <!-- JAVASCRIPT DEL TEST (Integrado aquí) -->
     <script>
         document.getElementById('levelTestForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita que la página se recargue
+            e.preventDefault(); 
 
-            // 1. Clave de respuestas correctas
             const answerKey = {
                 q1: "A", q2: "B", q3: "A", q4: "C", q5: "B",
                 q6: "A", q7: "C", q8: "B", q9: "C", q10: "A",
@@ -217,14 +321,33 @@
             let score = 0;
             const formData = new FormData(this);
 
-            // 2. Comparar respuestas
+            // Bucle para comparar y pintar de colores
             for (let [question, answer] of formData.entries()) {
-                if (answerKey[question] === answer) {
+                const isCorrect = answerKey[question] === answer;
+                
+                if (isCorrect) {
                     score++;
+                } else {
+                    // ESTO TE DIRÁ EN LA CONSOLA (F12) QUÉ HAS FALLADO
+                    console.log(`❌ Fallo en ${question}: Elegiste "${answer}", pero la correcta es "${answerKey[question]}".`);
+                }
+
+                // Pintar la opción seleccionada de verde o rojo
+                const selectedInput = document.querySelector(`input[name="${question}"][value="${answer}"]`);
+                if (selectedInput) {
+                    const label = selectedInput.closest('.option-label');
+                    if (isCorrect) {
+                        label.style.backgroundColor = '#dff5df'; 
+                        label.style.borderColor = '#9acb9a';
+                        label.style.color = '#245b24';
+                    } else {
+                        label.style.backgroundColor = '#f5d6d6'; 
+                        label.style.borderColor = '#d99a9a';
+                        label.style.color = '#7a2222';
+                    }
                 }
             }
 
-            // 3. Calcular Nivel (Baremo)
             let level = "";
             let recommendation = "";
 
@@ -245,10 +368,8 @@
                 recommendation = "¡Felicidades! Tienes un nivel muy alto. Te recomendamos perfeccionar con clases de conversación avanzada o español de negocios.";
             }
 
-            // 4. Mostrar resultados
-            document.getElementById('levelTestForm').style.display = 'none'; // Ocultar preguntas
             const resultBox = document.getElementById('testResult');
-            resultBox.style.display = 'block'; // Mostrar caja
+            resultBox.style.display = 'block'; 
             
             document.getElementById('resultText').innerHTML = `
                 <strong>Has acertado ${score} de 20 preguntas.</strong><br><br>
@@ -256,10 +377,8 @@
                 ${recommendation}
             `;
             
-            // Hacer scroll hacia arriba para ver el resultado
             resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
     </script>
 </body>
 </html>
-
