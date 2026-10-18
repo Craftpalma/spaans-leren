@@ -76,7 +76,7 @@ if (chatbotClose) {
 
 
 /* =========================================
-   AÑADIR MENSAJE AL CHAT
+   AÑADIR MENSAJE AL CHAT (CON BOTONES)
 ========================================= */
 
 function addMessage(text, type) {
@@ -89,14 +89,25 @@ function addMessage(text, type) {
             : "bot-message"
     );
 
-    message.textContent = text;
+    // Convierte el enlace del test en un botón, y el resto en enlaces normales
+    let formattedText = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+        
+        if (url.includes("test.html")) {
+            // Botón grande para el test
+            return `<a href="${url}" class="chat-action-button">${linkText}</a>`;
+        } else {
+            // Enlace normal para otras URLs
+            return `<a href="${url}" target="_blank" style="color: #176b87; text-decoration: underline; font-weight: bold;">${linkText}</a>`;
+        }
+    });
+    
+    message.innerHTML = formattedText;
 
     chatbotMessages.appendChild(message);
 
     chatbotMessages.scrollTop =
         chatbotMessages.scrollHeight;
 }
-
 
 /* =========================================
    RESPUESTAS TEMPORALES
