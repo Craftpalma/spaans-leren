@@ -79,3 +79,25 @@ if (testForm) {
         resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
+
+// Modify the test.js to visually show which were wrong
+for (let [question, answer] of formData.entries()) {
+    const isCorrect = answerKey[question] === answer;
+    if (isCorrect) {
+        score++;
+    }
+    // We could find the input element and highlight the label
+    const selectedInput = document.querySelector(`input[name="${question}"][value="${answer}"]`);
+    if (selectedInput) {
+        const label = selectedInput.closest('.option-label');
+        if (isCorrect) {
+            label.style.backgroundColor = '#dff5df'; // greenish
+            label.style.borderColor = '#9acb9a';
+            label.style.color = '#245b24';
+        } else {
+            label.style.backgroundColor = '#f5d6d6'; // reddish
+            label.style.borderColor = '#d99a9a';
+            label.style.color = '#7a2222';
+        }
+    }
+}
