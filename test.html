@@ -8,7 +8,35 @@
 </head>
 <body>
 
-    <!-- PON AQUÍ TU HEADER (el menú de navegación) -->
+       <!-- NAVEGACIÓN -->
+    <header class="header">
+        <div class="container nav-container">
+
+            <a href="#" class="logo">
+                Spaans <span>Leren</span>
+            </a>
+
+            <button class="menu-button" id="menuButton" aria-label="Abrir menú">
+                ☰
+            </button>
+
+<nav class="nav" id="navMenu">
+    <a href="#inicio" data-i18n="navInicio">Inicio</a>
+    <a href="#cursos" data-i18n="navCursos">Cursos</a>
+    <a href="#precios" data-i18n="navPrecios">Precios</a>
+    <a href="calendario.html" data-i18n="navCalendario">Calendario</a>
+    <a href="#contacto" data-i18n="navContacto">Contacto</a>
+
+    <div class="language-selector">
+        <button type="button" id="languageToggle"
+                aria-label="Cambiar idioma">
+            🇳🇱 🇪🇸
+        </button>
+    </div>
+</nav>
+
+        </div>
+    </header>
 
     <main>
         <section class="level-test-section">
