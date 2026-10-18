@@ -1,0 +1,105 @@
+/* =========================================
+   TEST DE NIVEL
+========================================= */
+.level-test-section {
+    padding: 100px 0;
+    background: var(--light);
+}
+
+.test-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.question-block {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.question-block:last-of-type {
+    border-bottom: none;
+}
+
+.question-text {
+    color: var(--dark);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.option-label {
+    display: block;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: var(--light);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.option-label:hover {
+    background: #eef7f9;
+    border-color: var(--primary);
+}
+
+.option-label input[type="radio"] {
+    margin-right: 10px;
+    accent-color: var(--primary);
+}
+
+.option-label:has(input:checked) {
+    background: #eef7f9;
+    border-color: var(--primary);
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.test-submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+.test-result-box {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #eef7f9 0%, #ffffff 100%);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.test-result-box h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.test-result-box p {
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 25px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .test-card {
+        padding: 25px 20px;
+    }
+    .question-text {
+        font-size: 1rem;
+    }
+}
