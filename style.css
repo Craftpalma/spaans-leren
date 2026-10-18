@@ -2282,3 +2282,27 @@ section {
 .chatbot-button {
     position: relative;
 }
+/* =========================================
+   BOTÓN DE ACCIÓN DENTRO DEL CHAT
+========================================= */
+.chat-action-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 20px;
+    background-color: var(--primary);
+    color: var(--white) !important;
+    text-decoration: none !important;
+    border-radius: 50px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(23, 107, 135, 0.3);
+    transition: all 0.2s ease;
+}
+
+.chat-action-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(23, 107, 135, 0.4);
+}
