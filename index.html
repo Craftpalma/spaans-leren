@@ -1034,18 +1034,21 @@
 
     <!-- Ventana del chat -->
     <div class="chatbot-window" id="chatbotWindow">
-
         <div class="chatbot-header">
             <div>
                 <strong data-i18n="chatTitle">Asistente Spaans Leren</strong>
                 <span data-i18n="chatOnline">● En línea</span>
             </div>
-                <!-- NUEVOS BOTONES CRISTAL -->
-                    <div class="chatbot-header-actions">
-                        <button id="chatbotReset" class="glass-btn" title="Reiniciar chat">🔄</button>
-                        <button id="chatbotClose" class="glass-btn" title="Cerrar chat">✕</button>
-                    </div>
-
+            
+            <!-- BOTONES: NORMAL, CRISTAL Y CERRAR -->
+            <div class="chatbot-header-actions">
+                <!-- Modo Normal (Opaco) -->
+                <button id="chatbotNormal" class="solid-btn" title="Modo normal">🔄</button>
+                <!-- Modo Cristal (Transparente) -->
+                <button id="chatbotGlass" class="glass-btn" title="Modo cristal">👁️</button>
+                <!-- Cerrar Chat -->
+                <button id="chatbotClose" class="solid-btn" title="Cerrar chat">✕</button>
+            </div>
          </div> <!-- Fin del chatbot-header -->
 
         <div class="chatbot-messages" id="chatbotMessages">
