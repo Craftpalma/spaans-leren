@@ -1,4 +1,19 @@
 /* =========================================
+      REGISTRAR VISITA 
+========================================= */
+
+window.addEventListener("load", function() {
+    fetch("https://spaans-leren-chatbot.newpalma.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "record_visit" })
+    })
+    .then(res => res.json())
+    .then(data => console.log("Visita registrada:", data))
+    .catch(err => console.log("Error registrando visita:", err));
+});
+
+/* =========================================
    MENÚ MÓVIL
 ========================================= */
 
