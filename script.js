@@ -88,6 +88,11 @@ function addMessage(text, type) {
             ? "user-message"
             : "bot-message"
     );
+      // LIMPIADOR DE ESPACIOS: Convierte 3 o más saltos de línea en solo 1.
+    let cleanText = text.replace(/(\r\n|\r|\n){3,}/g, '$1\n\n'); 
+    
+    // ... el resto del código ...
+    let formattedText = cleanText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) 
 
     // Convierte el enlace del test en un botón, y el resto en enlaces normales
     let formattedText = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
