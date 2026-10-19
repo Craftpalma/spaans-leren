@@ -1256,8 +1256,8 @@ window.addEventListener("load", function() {
                 chatButton.click();
                 console.log("Chatbot abierto automáticamente.");
             }
-        } else {
-            console.error("No se encontró el botón o la ventana del chat.");
+     /*   } else {
+            console.error("No se encontró el botón o la ventana del chat.");*/
         }
     }, 30000); // 30 segundos
 });
