@@ -464,6 +464,22 @@
             else if (score <= 17) { levelKey = "B2"; levelDisplay = "B2 (Avanzado / Gevorderd)"; }
             else { levelKey = "C1"; levelDisplay = "C1 (Superior / Vergevorderd)"; }
 
+                        // 👇 PEGA ESTO AQUÍ 👇
+            fetch("https://spaans-leren-chatbot.newpalma.workers.dev/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    action: "save_test_result", 
+                    score: score, 
+                    level: levelKey 
+                })
+            })
+            .then(res => res.json())
+            .then(data => console.log("✅ Test guardado en la base de datos:", data))
+            .catch(err => console.log("❌ Error guardando test:", err));
+            // 👆 HASTA AQUÍ 👆
+            
+
             const resultBox = document.getElementById('testResult');
             resultBox.style.display = 'block'; 
             
