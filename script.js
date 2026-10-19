@@ -88,14 +88,12 @@ function addMessage(text, type) {
             ? "user-message"
             : "bot-message"
     );
-      // LIMPIADOR DE ESPACIOS: Convierte 3 o más saltos de línea en solo 1.
-    let cleanText = text.replace(/(\r\n|\r|\n){3,}/g, '$1\n\n'); 
-    
-    // ... el resto del código ...
-    let formattedText = cleanText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) 
 
-    // Convierte el enlace del test en un botón, y el resto en enlaces normales
-    let formattedText = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+    // 1. Limpiar los saltos de línea extraños de la IA
+    let cleanText = text.replace(/(\r\n|\r|\n){3,}/g, '$1\n\n');
+
+    // 2. Convertir el enlace del test en un botón
+    let formattedText = cleanText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
         
         if (url.includes("test.html")) {
             // Botón grande para el test
@@ -106,14 +104,13 @@ function addMessage(text, type) {
         }
     });
     
+    // 3. Insertar el texto en el mensaje
     message.innerHTML = formattedText;
 
     chatbotMessages.appendChild(message);
 
-    chatbotMessages.scrollTop =
-        chatbotMessages.scrollHeight;
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }
-
 /* =========================================
    RESPUESTAS TEMPORALES
 ========================================= */
