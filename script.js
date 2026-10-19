@@ -1246,4 +1246,22 @@ window.addEventListener("load", function() {
         }
     }, 30000); // 30 segundos
 });
+/* =========================================
+   REINICIAR CHATBOT
+========================================= */
+const chatbotReset = document.getElementById("chatbotReset");
 
+if (chatbotReset) {
+    chatbotReset.addEventListener("click", () => {
+        conversationHistory = []; // Borra la memoria de la IA
+        chatbotMessages.innerHTML = ""; // Limpia la pantalla
+        
+        // Vuelve a poner el saludo inicial
+        const currentLang = document.documentElement.lang || "nl";
+        const greeting = currentLang === "nl" 
+            ? "👋 Hallo! Ik ben de assistent van Spaans Leren.<br>Waarmee kan ik je helpen?"
+            : "👋 ¡Hola! Soy el asistente de Spaans Leren.<br>¿En qué puedo ayudarte?";
+            
+        addMessage(greeting, "bot");
+    });
+}
