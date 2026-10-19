@@ -2392,3 +2392,20 @@ section {
     -webkit-backdrop-filter: blur(10px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
+/* =========================================
+   CHAT ARRASTRABLE
+========================================= */
+.chatbot-header {
+    cursor: grab; /* Cursor de mano abierta */
+    user-select: none; /* Evita que se seleccione el texto al arrastrar */
+}
+
+.chatbot-header:active {
+    cursor: grabbing; /* Cursor de mano cerrada mientras arrastras */
+}
+
+/* Evitamos que los botones de la cabecera (ojo, reciclar, cerrar) 
+   se comporten como si fueran para arrastrar */
+.chatbot-header-actions {
+    cursor: default;
+}
