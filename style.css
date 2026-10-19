@@ -2353,3 +2353,28 @@ section {
 }
 
 .solid-btn:hover { background: #eef7f9 !important; transform: scale(1.1) !important; }
+/* =========================================
+   MODO CRISTAL (GLASSMORPHISM)
+========================================= */
+.chatbot-window.glass-active {
+    background: rgba(255, 255, 255, 0.65) !important; /* Fondo semitransparente */
+    backdrop-filter: blur(12px) !important; /* Desenfoque de fondo */
+    -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.chatbot-window.glass-active .chatbot-messages {
+    background: transparent !important; /* El fondo de los mensajes también se vuelve transparente */
+}
+
+/* Hacemos que los mensajes del bot sigan siendo legibles (blanco semitransparente) */
+.chatbot-window.glass-active .bot-message {
+    background: rgba(255, 255, 255, 0.9) !important; 
+}
+
+/* Ajuste para que los botones de la cabecera no se descoloquen */
+.chatbot-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0; /* Evita que se aplasten */
+}
