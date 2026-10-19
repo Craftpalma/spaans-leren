@@ -2306,3 +2306,34 @@ section {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(23, 107, 135, 0.4);
 }
+/* =========================================
+   BOTONES TIPO CRISTAL (GLASSMORPHISM)
+========================================= */
+.chatbot-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.15); /* Fondo semitransparente */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque */
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde de cristal */
+    border-radius: 50%; /* Forma redonda */
+    width: 32px;
+    height: 32px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
