@@ -2378,3 +2378,7 @@ section {
     align-items: center;
     flex-shrink: 0; /* Evita que se aplasten */
 }
+.solid-btn svg {
+    width: 18px;
+    height: 18px;
+}
