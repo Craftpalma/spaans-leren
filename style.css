@@ -2382,3 +2382,13 @@ section {
     width: 18px;
     height: 18px;
 }
+/* =========================================
+   EFECTO CRISTAL EN LA CABECERA
+========================================= */
+.chatbot-window.glass-active .chatbot-header {
+    /* Azul petróleo con transparencia (70% de opacidad) */
+    background: rgba(23, 107, 135, 0.75) !important; 
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
