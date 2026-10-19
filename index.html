@@ -1063,41 +1063,35 @@
                 
             </div>
 
-    <div class="chatbot-options chatbot-suggestions">
-        <p data-i18n="chatSuggestions">También puedes consultar:</p>
+   <div class="chatbot-options chatbot-suggestions">
+    <p data-i18n="chatSuggestions">También puedes consultar:</p>
 
-                <button type="button" data-question="Quiero información sobre los cursos"
-                    data-question-nl="Ik wil graag informatie over de cursussen">
-                    <span data-i18n="chatCourses">
-                        📚 Información sobre cursos
-                    </span>
-                </button>
+    <!-- 1. NUEVA OPCIÓN: TEST DE NIVEL (Abre la página directamente) -->
+    <button type="button" onclick="window.open('test.html', '_blank')">
+        <span>📝 <span data-i18n="chatTest">Hacer el test de nivel</span></span>
+    </button>
 
-                <button data-question="Quiero conocer los precios"
-                    data-question-nl="Ik wil graag de prijzen weten">
-                    <span data-i18n="chatPrices">
-                        💰 Precios
-                    </span>
-                </button>
-                
-                <button data-question="Quiero hacer una clase de prueba"
-                        data-question-nl="Ik wil graag een proefles volgen">
-                    <span data-i18n="chatTrial">
-                        🎓 Clase de prueba gratis
-                    </span>
-                </button>
-                
-                                  <button
-                        data-question="Quiero reservar una clase"
-                        data-question-nl="Ik wil graag een les reserveren"
-                    >
-                    <span data-i18n="chatReserve">
-                        📅 Quiero reservar
-                    </span>
-                </button>
+    <!-- 2. RESTO DE OPCIONES (Envían un mensaje al bot) -->
+    <button type="button" data-question="Quiero información sobre los cursos"
+        data-question-nl="Ik wil graag informatie over de cursussen">
+        <span>📚 <span data-i18n="chatCourses">Información sobre cursos</span></span>
+    </button>
 
-            </div>
-
+    <button type="button" data-question="Quiero conocer los precios"
+        data-question-nl="Ik wil graag de prijzen weten">
+        <span>💰 <span data-i18n="chatPrices">Precios</span></span>
+    </button>
+    
+    <button type="button" data-question="Quiero hacer una clase de prueba"
+            data-question-nl="Ik wil graag een proefles volgen">
+        <span>🎓 <span data-i18n="chatTrial">Clase de prueba gratis</span></span>
+    </button>
+    
+    <button type="button" data-question="Quiero reservar una clase"
+            data-question-nl="Ik wil graag een les reserveren">
+        <span>📅 <span data-i18n="chatReserve">Quiero reservar</span></span>
+    </button>
+</div>
         </div>
 
         <div class="chatbot-input">
