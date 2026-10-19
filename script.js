@@ -1284,3 +1284,59 @@ if (chatbotGlass) {
         chatbotWindow.classList.add("glass-active");
     });
 }
+/* =========================================
+   HACER EL CHAT ARRASTRABLE
+========================================= */
+const dragWindow = document.getElementById("chatbotWindow");
+const dragHeader = document.querySelector(".chatbot-header");
+
+let isDragging = false;
+let startX, startY, initialLeft, initialTop;
+
+if (dragWindow && dragHeader) {
+    // Al hacer clic en la cabecera (o tocar con el dedo)
+    dragHeader.addEventListener("pointerdown", (e) => {
+        // Si el usuario hace clic en un botón (cerrar, cristal, reiniciar), no arrastramos
+        if (e.target.closest("button")) return;
+
+        isDragging = true;
+        dragHeader.style.cursor = "grabbing";
+
+        // Calculamos la posición inicial
+        const rect = dragWindow.getBoundingClientRect();
+        
+        // Como el chat usa 'right' y 'bottom' por defecto, 
+        // lo pasamos a 'left' y 'top' para que sea más fácil moverlo
+        dragWindow.style.right = "auto";
+        dragWindow.style.bottom = "auto";
+        dragWindow.style.left = rect.left + "px";
+        dragWindow.style.top = rect.top + "px";
+
+        // Guardamos la posición del ratón/dedo respecto a la esquina del chat
+        startX = e.clientX;
+        startY = e.clientY;
+        initialLeft = rect.left;
+        initialTop = rect.top;
+    });
+
+    // Al mover el ratón/dedo por la pantalla
+    window.addEventListener("pointermove", (e) => {
+        if (!isDragging) return;
+
+        // Calculamos cuánto se ha movido
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        // Aplicamos el movimiento
+        dragWindow.style.left = `${initialLeft + dx}px`;
+        dragWindow.style.top = `${initialTop + dy}px`;
+    });
+
+    // Al soltar el clic o el dedo
+    window.addEventListener("pointerup", () => {
+        if (isDragging) {
+            isDragging = false;
+            dragHeader.style.cursor = "grab";
+        }
+    });
+}
