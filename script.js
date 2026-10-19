@@ -1247,21 +1247,42 @@ window.addEventListener("load", function() {
     }, 30000); // 30 segundos
 });
 /* =========================================
-   REINICIAR CHATBOT
+   CONTROLADOR DE LA CABECERA DEL CHAT
+   (Modo Normal, Modo Cristal y Cerrar)
 ========================================= */
-const chatbotReset = document.getElementById("chatbotReset");
 
-if (chatbotReset) {
-    chatbotReset.addEventListener("click", () => {
-        conversationHistory = []; // Borra la memoria de la IA
-        chatbotMessages.innerHTML = ""; // Limpia la pantalla
+// 1. BOTÓN NORMAL (🔄): Reinicia el chat y quita el efecto cristal
+const chatbotNormal = document.getElementById("chatbotNormal");
+
+if (chatbotNormal) {
+    chatbotNormal.addEventListener("click", () => {
+        // A) Reiniciar conversación
+        conversationHistory = []; 
+        chatbotMessages.innerHTML = ""; 
         
-        // Vuelve a poner el saludo inicial
         const currentLang = document.documentElement.lang || "nl";
         const greeting = currentLang === "nl" 
             ? "👋 Hallo! Ik ben de assistent van Spaans Leren.<br>Waarmee kan ik je helpen?"
             : "👋 ¡Hola! Soy el asistente de Spaans Leren.<br>¿En qué puedo ayudarte?";
             
         addMessage(greeting, "bot");
+
+        // B) Quitar el efecto cristal y volver al fondo blanco normal
+        chatbotWindow.style.backgroundColor = "";
+        chatbotWindow.style.backdropFilter = "";
+        chatbotWindow.style.webkitBackdropFilter = "";
+        chatbotMessages.style.backgroundColor = ""; 
+    });
+}
+
+// 2. BOTÓN CRISTAL (👁️): Hace el chat transparente
+const chatbotGlass = document.getElementById("chatbotGlass");
+
+if (chatbotGlass) {
+    chatbotGlass.addEventListener("click", () => {
+        chatbotWindow.style.backgroundColor = "rgba(255, 255, 255, 0.75)"; // Transparencia
+        chatbotWindow.style.backdropFilter = "blur(12px)"; // Desenfoque
+        chatbotWindow.style.webkitBackdropFilter = "blur(12px)";
+        chatbotMessages.style.backgroundColor = "transparent"; 
     });
 }
