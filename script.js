@@ -78,7 +78,7 @@ if (chatbotClose) {
 /* =========================================
    AÑADIR MENSAJE AL CHAT (CON BOTONES)
 ========================================= */
-/*
+
 function addMessage(text, type) {
 
     const message = document.createElement("div");
@@ -107,7 +107,7 @@ function addMessage(text, type) {
 
     chatbotMessages.scrollTop =
         chatbotMessages.scrollHeight;
-}*/
+}
 
 /* =========================================
    RESPUESTAS TEMPORALES
