@@ -1285,58 +1285,73 @@ if (chatbotGlass) {
     });
 }
 /* =========================================
-   HACER EL CHAT ARRASTRABLE
+   CONTROLES DEL CHAT (Cristal, Normal y Arrastre)
 ========================================= */
-const dragWindow = document.getElementById("chatbotWindow");
+
+// 1. BOTÓN CRISTAL (👁️)
+const btnGlass = document.getElementById("chatbotGlass");
+if (btnGlass) {
+    btnGlass.addEventListener("click", () => {
+        chatbotWindow.classList.add("glass-active");
+    });
+}
+
+// 2. BOTÓN NORMAL / REINICIAR (🔄)
+const btnNormal = document.getElementById("chatbotNormal");
+if (btnNormal) {
+    btnNormal.addEventListener("click", () => {
+        // Quitar cristal
+        chatbotWindow.classList.remove("glass-active");
+
+        // Reiniciar mensajes (manteniendo los botones de abajo)
+        const messages = chatbotWindow.querySelectorAll('.bot-message, .user-message');
+        messages.forEach(msg => msg.remove());
+        
+        const currentLang = document.documentElement.lang || "nl";
+        const greeting = currentLang === "nl" 
+            ? "👋 Hallo! Ik ben de assistent van Spaans Leren.<br>Waarmee kan ik je helpen?"
+            : "👋 ¡Hola! Soy el asistente de Spaans Leren.<br>¿En qué puedo ayudarte?";
+            
+        const greetingDiv = document.createElement("div");
+        greetingDiv.classList.add("bot-message");
+        greetingDiv.innerHTML = greeting;
+        chatbotMessages.prepend(greetingDiv);
+    });
+}
+
+// 3. HACER EL CHAT ARRASTRABLE (Usando transform)
 const dragHeader = document.querySelector(".chatbot-header");
-
 let isDragging = false;
-let startX, startY, initialLeft, initialTop;
+let startX, startY;
+let translateX = 0;
+let translateY = 0;
 
-if (dragWindow && dragHeader) {
-    // Al hacer clic en la cabecera (o tocar con el dedo)
+if (dragHeader) {
     dragHeader.addEventListener("pointerdown", (e) => {
-        // Si el usuario hace clic en un botón (cerrar, cristal, reiniciar), no arrastramos
+        // Si hace clic en un botón (X, ojo, etc.), no arrastramos
         if (e.target.closest("button")) return;
 
         isDragging = true;
         dragHeader.style.cursor = "grabbing";
-
-        // Calculamos la posición inicial
-        const rect = dragWindow.getBoundingClientRect();
         
-        // Como el chat usa 'right' y 'bottom' por defecto, 
-        // lo pasamos a 'left' y 'top' para que sea más fácil moverlo
-        dragWindow.style.right = "auto";
-        dragWindow.style.bottom = "auto";
-        dragWindow.style.left = rect.left + "px";
-        dragWindow.style.top = rect.top + "px";
-
-        // Guardamos la posición del ratón/dedo respecto a la esquina del chat
-        startX = e.clientX;
-        startY = e.clientY;
-        initialLeft = rect.left;
-        initialTop = rect.top;
+        // Calculamos la posición inicial restando lo que ya se ha movido
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
     });
 
-    // Al mover el ratón/dedo por la pantalla
     window.addEventListener("pointermove", (e) => {
         if (!isDragging) return;
+        e.preventDefault(); // Evita seleccionar texto al arrastrar
 
-        // Calculamos cuánto se ha movido
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-
-        // Aplicamos el movimiento
-        dragWindow.style.left = `${initialLeft + dx}px`;
-        dragWindow.style.top = `${initialTop + dy}px`;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        
+        // Movemos usando transform (mucho más fluido)
+        chatbotWindow.style.transform = `translate(${translateX}px, ${translateY}px)`;
     });
 
-    // Al soltar el clic o el dedo
     window.addEventListener("pointerup", () => {
-        if (isDragging) {
-            isDragging = false;
-            dragHeader.style.cursor = "grab";
-        }
+        isDragging = false;
+        dragHeader.style.cursor = "grab";
     });
 }
