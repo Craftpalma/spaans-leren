@@ -1256,33 +1256,31 @@ const chatbotNormal = document.getElementById("chatbotNormal");
 
 if (chatbotNormal) {
     chatbotNormal.addEventListener("click", () => {
-        // A) Reiniciar conversación
-        conversationHistory = []; 
-        chatbotMessages.innerHTML = ""; 
+        // A) Borrar SOLO los mensajes, manteniendo los botones de opciones
+        const messages = chatbotMessages.querySelectorAll('.bot-message, .user-message');
+        messages.forEach(msg => msg.remove());
         
+        // B) Volver a poner el saludo inicial arriba del todo
         const currentLang = document.documentElement.lang || "nl";
         const greeting = currentLang === "nl" 
             ? "👋 Hallo! Ik ben de assistent van Spaans Leren.<br>Waarmee kan ik je helpen?"
             : "👋 ¡Hola! Soy el asistente de Spaans Leren.<br>¿En qué puedo ayudarte?";
             
-        addMessage(greeting, "bot");
+        const greetingDiv = document.createElement("div");
+        greetingDiv.classList.add("bot-message");
+        greetingDiv.innerHTML = greeting;
+        chatbotMessages.prepend(greetingDiv); // prepend lo pone al principio
 
-        // B) Quitar el efecto cristal y volver al fondo blanco normal
-        chatbotWindow.style.backgroundColor = "";
-        chatbotWindow.style.backdropFilter = "";
-        chatbotWindow.style.webkitBackdropFilter = "";
-        chatbotMessages.style.backgroundColor = ""; 
+        // C) Quitar el modo cristal (volver al fondo blanco)
+        chatbotWindow.classList.remove("glass-active");
     });
 }
 
-// 2. BOTÓN CRISTAL (👁️): Hace el chat transparente
+// 2. BOTÓN CRISTAL (👁️): Activa el modo transparente
 const chatbotGlass = document.getElementById("chatbotGlass");
 
 if (chatbotGlass) {
     chatbotGlass.addEventListener("click", () => {
-        chatbotWindow.style.backgroundColor = "rgba(255, 255, 255, 0.75)"; // Transparencia
-        chatbotWindow.style.backdropFilter = "blur(12px)"; // Desenfoque
-        chatbotWindow.style.webkitBackdropFilter = "blur(12px)";
-        chatbotMessages.style.backgroundColor = "transparent"; 
+        chatbotWindow.classList.add("glass-active");
     });
 }
