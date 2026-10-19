@@ -2317,25 +2317,39 @@ section {
     align-items: center;
 }
 
+/* Botón Cristal (Transparente) */
 .glass-btn {
-    background: rgba(255, 255, 255, 0.15); /* Fondo semitransparente */
-    backdrop-filter: blur(8px); /* Efecto de desenfoque */
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde de cristal */
-    border-radius: 50%; /* Forma redonda */
-    width: 32px;
-    height: 32px;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    padding: 0;
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important; 
+    border-radius: 50% !important; 
+    width: 32px !important;
+    height: 32px !important;
+    color: white !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
 }
 
-.glass-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: scale(1.1);
+.glass-btn:hover { background: rgba(255, 255, 255, 0.4) !important; transform: scale(1.1) !important; }
+
+/* Botón Opaco (Sólido) */
+.solid-btn {
+    background: var(--white) !important;
+    border: none !important; 
+    border-radius: 50% !important; 
+    width: 32px !important;
+    height: 32px !important;
+    color: var(--primary) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    transition: all 0.2s ease !important;
 }
+
+.solid-btn:hover { background: #eef7f9 !important; transform: scale(1.1) !important; }
