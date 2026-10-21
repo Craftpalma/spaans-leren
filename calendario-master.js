@@ -2,8 +2,8 @@
    SPAANS LEREN - CALENDARIO MASTER
 ========================================= */
 
-const WORKER_URL =
-    "https://spaans-leren-chatbot.newpalma.workers.dev/";
+const WORKER_URL = "/api/chat";
+   /* "https://spaans-leren-chatbot.newpalma.workers.dev/";*//*antiguo...*/
 
 
 /* =========================================
