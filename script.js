@@ -1,14 +1,24 @@
 /* =========================================
       REGISTRAR VISITA 
 ========================================= */
-
-window.addEventListener("load", function() {
+/*antiguo script*/
+/*window.addEventListener("load", function() {
     fetch("https://spaans-leren-chatbot.newpalma.workers.dev/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "record_visit" })
     })
     .then(res => res.json())
+    .then(data => console.log("Visita registrada:", data))
+    .catch(err => console.log("Error registrando visita:", err));
+});*/
+window.addEventListener("load", function() {
+    fetch("/api/chat", { // <--- CAMBIO AQUÍ
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "record_visit" })
+    })
+       .then(res => res.json())
     .then(data => console.log("Visita registrada:", data))
     .catch(err => console.log("Error registrando visita:", err));
 });
@@ -266,7 +276,8 @@ async function sendMessage() {
     try {
 
         const response = await fetch(
-            "https://spaans-leren-chatbot.newpalma.workers.dev/",
+           /* "https://spaans-leren-chatbot.newpalma.workers.dev/",*//*antiguo script*/
+              "/api/chat",
             {
                 method: "POST",
 
@@ -599,7 +610,8 @@ if (contactForm) {
 
                 const response =
                     await fetch(
-                        "https://spaans-leren-chatbot.newpalma.workers.dev/",
+                          "/api/chat",
+                       /* "https://spaans-leren-chatbot.newpalma.workers.dev/",*//*antiguo..*/
                         {
                             method: "POST",
 
