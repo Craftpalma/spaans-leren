@@ -532,5 +532,14 @@
     }
 
 }
+/* =========================================
+   ACCIONES DE LA CABECERA (BOTONES)
+========================================= */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Separación entre los botones */
+    flex-wrap: wrap; /* Para que bajen si la pantalla es muy pequeña */
+}
 
 
