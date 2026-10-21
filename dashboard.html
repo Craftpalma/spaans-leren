@@ -143,7 +143,7 @@
                 });
                 const data = await response.json();
 
-              if (data.ok && data.visitors) {
+                if (data.ok && data.visitors) {
                     list.innerHTML = '';
                     data.visitors.forEach((v, index) => {
                         const li = document.createElement('li');
@@ -151,14 +151,22 @@
                         li.style.borderBottom = '1px solid #eee';
                         li.style.fontFamily = 'sans-serif';
                         
-                        // Aquí creamos el texto con la ciudad y el país
-                        const location = v.city && v.country ? ` (${v.city}, ${v.country})` : '';
+                        // Si hay ciudad, la mostramos. Si no, mostramos un texto genérico.
+                        const city = v.city && v.city !== "Desconocida" ? v.city : "Ubicación desconocida";
+                        const country = v.country && v.country !== "Desconocido" ? v.country : "";
                         
-                        // Y aquí lo insertamos en la lista
-                        li.innerHTML = `<strong>${index + 1}. ${v.ip}</strong> <span style="color: #666; font-size: 0.9rem;">${location}</span>`;
+                        // Formateamos el texto (ej: "Málaga, ES")
+                        const location = country ? `${city}, ${country}` : city;
+                        
+                        // Ponemos la ubicación en grande y la IP en pequeño y gris por si acaso
+                        li.innerHTML = `
+                            <strong>${index + 1}. ${location}</strong> 
+                            <span style="color: #999; font-size: 0.8rem; margin-left: 10px;">(${v.ip})</span>
+                        `;
                         
                         list.appendChild(li);
                     });
+                    
                 } else {
                     list.innerHTML = '<li>Error al cargar las IPs.</li>';
                 }
