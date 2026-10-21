@@ -2389,3 +2389,33 @@ section {
     background: rgba(255, 255, 255, 0.65) !important; /* Burbujas legibles */
     backdrop-filter: blur(5px);
 }
+/* =========================================
+   BOTONES DE NAVEGACIÓN (ESTILO COMPARTIDO)
+========================================= */
+.back-button {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #ffffff;
+    color: #176b87;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #e1e8eb; /* Borde sutil */
+    transition: all 0.2s ease;
+}
+
+/* El efecto amarillo al pasar el ratón */
+.back-button:hover {
+    background: #e7b65c;
+    color: #17252d;
+    border-color: #e7b65c;
+}
+
+/* Contenedor para el calendario-master */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
