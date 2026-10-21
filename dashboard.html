@@ -49,11 +49,9 @@
 </head>
 <body>
     <header class="header">
-        <!-- Añadimos display flex para separar el logo del botón -->
         <div class="container nav-container" style="display: flex; justify-content: space-between; align-items: center;">
             <a href="index.html" class="logo">Spaans <span>Leren</span> - Dashboard</a>
             
-            <!-- NUEVO BOTÓN: Va al calendario privado -->
             <a href="calendario-master.html" class="back-button">
                 📅 Ir a Calendario Máster
             </a>
@@ -62,31 +60,45 @@
 
     <main>
         <div id="loading" class="loading">Cargando estadísticas... ⏳</div>
+        
         <div id="dashboard" class="dashboard-grid" style="display: none;">
+            <!-- TARJETA 1: TESTS -->
             <div class="stat-card">
                 <div class="icon">📝</div>
                 <h3>Tests Completados</h3>
                 <div id="stat-tests" class="number">0</div>
             </div>
-            <div class="stat-card">
+
+            <!-- TARJETA 2: VISITANTES (Modificada para ser clickeable) -->
+            <div class="stat-card" onclick="verVisitantes()" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                 <div class="icon">👥</div>
                 <h3>Visitantes Únicos</h3>
                 <div id="stat-visitors" class="number">0</div>
+                <div style="font-size: 0.8rem; color: var(--primary); margin-top: 10px;">👁️ Clic para ver IPs</div>
             </div>
+
+            <!-- TARJETA 3: RESERVAS -->
             <div class="stat-card">
                 <div class="icon">📅</div>
                 <h3>Reservas Realizadas</h3>
                 <div id="stat-reservations" class="number">0</div>
             </div>
         </div>
+
+        <!-- MODAL PARA VER VISITANTES (Añadido aquí, antes de cerrar main) -->
+        <div id="visitorsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 25px; border-radius: 10px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                <button onclick="cerrarVisitantes()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #666;">&times;</button>
+                <h2 style="margin-top: 0; color: var(--primary); font-size: 1.5rem;">Lista de IPs</h2>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Estas son las direcciones IP únicas que han entrado a la web:</p>
+                <ul id="visitorsList" style="list-style-type: none; padding: 0; margin: 0;"></ul>
+            </div>
+        </div>
     </main>
 
     <script>
-
-
         async function fetchStats() {
             try {
-              /*  const response = await fetch('https://spaans-leren-chatbot.newpalma.workers.dev/', {*/
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -109,6 +121,50 @@
         }
 
         fetchStats();
+
+        /* =========================================
+           NUEVAS FUNCIONES PARA VER LAS IPs
+        ========================================= */
+        
+        async function verVisitantes() {
+            const modal = document.getElementById('visitorsModal');
+            const list = document.getElementById('visitorsList');
+            
+            // Mostrar el modal
+            modal.style.display = 'flex';
+            list.innerHTML = '<li>Cargando...</li>';
+
+            try {
+                // Llamar al worker para obtener las IPs
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'get_visitors' })
+                });
+                const data = await response.json();
+
+                if (data.ok && data.visitors) {
+                    list.innerHTML = '';
+                    data.visitors.forEach((v, index) => {
+                        const li = document.createElement('li');
+                        li.style.padding = '10px';
+                        li.style.borderBottom = '1px solid #eee';
+                        li.style.fontFamily = 'monospace';
+                        li.style.fontSize = '1rem';
+                        li.textContent = `${index + 1}. ${v.ip}`;
+                        list.appendChild(li);
+                    });
+                } else {
+                    list.innerHTML = '<li>Error al cargar las IPs.</li>';
+                }
+            } catch (error) {
+                list.innerHTML = '<li>Error de conexión con el servidor.</li>';
+            }
+        }
+
+        function cerrarVisitantes() {
+            document.getElementById('visitorsModal').style.display = 'none';
+        }
     </script>
 </body>
 </html>
