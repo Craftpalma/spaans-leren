@@ -326,7 +326,8 @@ currentMonth.textContent =
 
 
             fetch(
-                `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`
+              /*  `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`*//*antiguo...*/
+               `/api/chat?day=true&date=${dateString}`
             )
             .then(response => response.json())
             .then(data => {
@@ -469,7 +470,8 @@ async function selectDay(year, month, day) {
     try {
 
         const response = await fetch(
-            `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`
+            `/api/chat?day=true&date=${dateString}`
+           /* `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`*//*antiguo...*/
         );
 
         const data = await response.json();
@@ -713,7 +715,8 @@ async function selectTime(dayName, time, timeButton) {
         try {
 
             const response = await fetch(
-                "https://spaans-leren-chatbot.newpalma.workers.dev/",
+               /* "https://spaans-leren-chatbot.newpalma.workers.dev/",*/
+                "/api/chat",
                 {
                     method: "POST",
 
