@@ -465,7 +465,8 @@
             else { levelKey = "C1"; levelDisplay = "C1 (Superior / Vergevorderd)"; }
 
                         // 👇 PEGA ESTO AQUÍ 👇
-            fetch("https://spaans-leren-chatbot.newpalma.workers.dev/", {
+          /*  fetch("https://spaans-leren-chatbot.newpalma.workers.dev/", {*/
+             fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
