@@ -143,15 +143,20 @@
                 });
                 const data = await response.json();
 
-                if (data.ok && data.visitors) {
+              if (data.ok && data.visitors) {
                     list.innerHTML = '';
                     data.visitors.forEach((v, index) => {
                         const li = document.createElement('li');
                         li.style.padding = '10px';
                         li.style.borderBottom = '1px solid #eee';
-                        li.style.fontFamily = 'monospace';
-                        li.style.fontSize = '1rem';
-                        li.textContent = `${index + 1}. ${v.ip}`;
+                        li.style.fontFamily = 'sans-serif';
+                        
+                        // Aquí creamos el texto con la ciudad y el país
+                        const location = v.city && v.country ? ` (${v.city}, ${v.country})` : '';
+                        
+                        // Y aquí lo insertamos en la lista
+                        li.innerHTML = `<strong>${index + 1}. ${v.ip}</strong> <span style="color: #666; font-size: 0.9rem;">${location}</span>`;
+                        
                         list.appendChild(li);
                     });
                 } else {
