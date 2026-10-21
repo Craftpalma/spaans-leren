@@ -82,12 +82,7 @@
     </main>
 
     <script>
-        // Protección básica: solo accesible si se pasa ?pass=gloria2024 en la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('pass') !== 'gloria2024') {
-            document.body.innerHTML = '<h1 style="text-align:center; margin-top:100px; color:red;">Acceso denegado</h1>';
-            throw new Error('Acceso no autorizado');
-        }
+
 
         async function fetchStats() {
             try {
