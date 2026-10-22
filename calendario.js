@@ -285,7 +285,7 @@ currentMonth.textContent =
 
 
         // =================================
-        // FIN DE SEMANA
+        // FIN DE SEMANA (Mantener el color gris)
         // =================================
 
         if (
@@ -293,14 +293,11 @@ currentMonth.textContent =
             date.getDay() === 6
         ) {
 
-            dayElement.classList.add(
-                "weekend"
-            );
+            dayElement.classList.add("weekend");
 
-        } else {
 
             // =============================
-            // CLICK EN DÍA
+            // CLICK EN DÍA (Para todos los días)
             // =============================
 
             dayElement.addEventListener(
@@ -318,17 +315,14 @@ currentMonth.textContent =
 
 
             // =============================
-            // COMPROBAR RESERVAS DEL DÍA
+            // COMPROBAR RESERVAS DEL DÍA (Para todos los días)
             // =============================
 
             const dateString =
                 `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
 
-            fetch(
-              /*  `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`*//*antiguo...*/
-               `/api/chat?day=true&date=${dateString}`
-            )
+            fetch( `/api/chat?day=true&date=${dateString}` )
             .then(response => response.json())
             .then(data => {
 
@@ -419,9 +413,6 @@ if (
                 );
 
             });
-
-        }
-
 
         calendarDays.appendChild(
             dayElement
