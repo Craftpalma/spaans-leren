@@ -294,7 +294,8 @@ currentMonth.textContent =
         ) {
 
             dayElement.classList.add("weekend");
-
+           
+           }
 
             // =============================
             // CLICK EN DÍA (Para todos los días)
