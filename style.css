@@ -1424,11 +1424,16 @@ section {
 }
 
 .calendar-day.weekend {
-    background: #eeeeee;
-    color: #999;
-    cursor: default;
+    background: #f5f5f5; /* Un gris muy suave y elegante */
+    color: #666; /* Texto un poco más legible */
+    cursor: pointer; /* Para que el ratón cambie y se sepa que se puede pulsar */
+    border: 1px dashed #ccc; /* Un borde punteado sutil para diferenciarlo */
 }
 
+/* Efecto al pasar el ratón por encima del fin de semana */
+.calendar-day.weekend:hover {
+    background: #e0e0e0;
+}
 
 /* HORARIOS */
 
