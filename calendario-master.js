@@ -312,7 +312,7 @@ function getDayReservationStatus(date) {
        = 11 franjas
     */
 
-    const totalSlots = 11;
+    const totalSlots = 14;
 
 
     const fullyPreReserved =
