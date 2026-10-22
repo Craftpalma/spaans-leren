@@ -84,6 +84,64 @@
                 <div id="stat-reservations" class="number">0</div>
             </div>
         </div>
+               <!-- HERRAMIENTA PARA BLOQUEAR HORAS -->
+        <div style="max-width: 1000px; margin: 20px auto; padding: 25px; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e1e8eb;">
+            <h2 style="color: #176b87; margin-top: 0; font-size: 1.3rem;">🔒 Bloquear Días / Horas (Vacaciones)</h2>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Selecciona un rango de fechas y horas. Estas horas se marcarán como "Reservadas" en rojo y no se podrán solicitar.</p>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+                <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px;">Desde el día:</label>
+                    <input type="date" id="blockStartDate" style="padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px;">Hasta el día:</label>
+                    <input type="date" id="blockEndDate" style="padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px;">Desde la hora:</label>
+                    <select id="blockStartTime" style="padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px;">Hasta la hora:</label>
+                    <select id="blockEndTime" style="padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00" selected>22:00</option>
+                    </select>
+                </div>
+                <button onclick="bloquearHoras()" style="padding: 9px 20px; background: #d99a9a; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s;">
+                    🚫 Bloquear Horas
+                </button>
+            </div>
+            <p id="blockMessage" style="margin-top: 15px; font-weight: bold; display: none;"></p>
+        </div> 
 
         <!-- MODAL PARA VER VISITANTES (Añadido aquí, antes de cerrar main) -->
         <div id="visitorsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
@@ -177,6 +235,50 @@
 
         function cerrarVisitantes() {
             document.getElementById('visitorsModal').style.display = 'none';
+        }
+   /*funciones para bloquear horas*/
+                // Función para enviar el bloqueo al Worker
+        async function bloquearHoras() {
+            const startDate = document.getElementById('blockStartDate').value;
+            const endDate = document.getElementById('blockEndDate').value;
+            const startTime = document.getElementById('blockStartTime').value;
+            const endTime = document.getElementById('blockEndTime').value;
+            const msg = document.getElementById('blockMessage');
+
+            if (!startDate || !endDate) {
+                alert("Por favor, selecciona las fechas de inicio y fin.");
+                return;
+            }
+
+            msg.style.display = 'block';
+            msg.style.color = '#666';
+            msg.textContent = "Bloqueando horas... ⏳";
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'block_slots',
+                        startDate,
+                        endDate,
+                        startTime,
+                        endTime
+                    })
+                });
+                const data = await response.json();
+
+                if (data.ok) {
+                    msg.style.color = 'green';
+                    msg.textContent = `✅ ${data.message}`;
+                } else {
+                    msg.style.color = 'red';
+                    msg.textContent = `❌ Error: ${data.error}`;
+                }
+            } catch (error) {
+                msg.style.color = 'red';
+                msg.textContent = "❌ Error de conexión.";
+            }
         }
     </script>
 </body>
