@@ -726,10 +726,11 @@ section {
 .footer {
     padding: 40px 0;
 
-  /*  color: #d9e4e8;*/
- background: #eef2f6;
+    color: #d9e4e8;
+/* background: #eef2f6;*
    /* background: var(--dark);*/
-    background:  #34495e ; 
+   background:  #2c3e50;
+  /*  background:  #34495e ; */
    /* color: #44545c; */
 }
 footer strong {
