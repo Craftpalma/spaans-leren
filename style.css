@@ -2450,7 +2450,7 @@ footer {
 }
 
 footer img.logo-flowtalkia {
-  height: 28px; /* Ajusta la altura de tu logo */
+  height: 40px; /* Ajusta la altura de tu logo */
   width: auto;
   object-fit: contain;
 }
