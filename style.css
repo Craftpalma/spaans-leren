@@ -2442,7 +2442,18 @@ section {
         text-align: center !important;
     }
 }
+/*fono foooter*/
+footer {
+  background-color: #1e293b; /* Fondo más claro y legible */
+  color: #ffffff;
+  padding: 2rem 1rem;
+}
 
+footer img.logo-flowtalkia {
+  height: 28px; /* Ajusta la altura de tu logo */
+  width: auto;
+  object-fit: contain;
+}
 /* =========================================
    FIRMA FLOWTALKIA (BADGE)
 ========================================= */
