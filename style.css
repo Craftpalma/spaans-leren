@@ -726,10 +726,16 @@ section {
 .footer {
     padding: 40px 0;
 
-    color: #d9e4e8;
-
+  /*  color: #d9e4e8;*/
+ background: #eef2f6;
    /* background: var(--dark);*/
-    background:  #34495e ; /* Un gris azulado más claro */
+    /*background:  #34495e ; /* Un gris azulado más claro */
+    color: #44545c; 
+}
+footer strong {
+    /* El nombre "Spaans Leren" en azul oscuro para que resalte */
+    color: #17252d; 
+    font-size: 1.2rem;
 }
 
 .footer-content {
