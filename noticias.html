@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias y Novedades | Spaans met Gloria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+
+    <div style="text-align: center; width: 100%; max-width: 800px; padding: 0 20px; margin: 0 auto;">
+        <a href="index.html" style="color: #176b87; text-decoration: none; font-weight: bold; font-size: 0.9rem;">← Volver al inicio</a>
+        
+        <h1 style="font-size: 3rem; margin-top: 20px; color: #17252d;">Noticias y Novedades</h1>
+        <p style="color: #666; margin-bottom: 40px;">Mantente al día sobre clases, eventos y consejos para aprender español.</p>
+
+        <!-- Aquí se cargarán las noticias -->
+        <div id="newsContainer" style="display: flex; flex-direction: column; gap: 30px; text-align: left;">
+            <p style="text-align: center; color: #999;">Cargando noticias...</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="margin-top: 60px;">
+        <p class="footer-copy">© <span id="year"></span> Spaans met Gloria. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        async function cargarNoticias() {
+            const container = document.getElementById('newsContainer');
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'get_news' })
+                });
+                const data = await res.json();
+
+                if (data.ok && data.news.length > 0) {
+                    container.innerHTML = '';
+                    data.news.forEach(item => {
+                        // Formatear la fecha
+                        const date = new Date(item.created_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                        
+                        // Si tiene imagen, la mostramos
+                        const imgHtml = item.image_url ? `<img src="${item.image_url}" alt="Imagen de noticia" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;">` : '';
+
+                        container.innerHTML += `
+                            <article style="background: white; border: 1px solid #e1e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                                ${imgHtml}
+                                <div style="padding: 25px;">
+                                    <p style="color: #999; font-size: 0.85rem; margin-bottom: 5px;">${date}</p>
+                                    <h2 style="color: #17252d; font-size: 1.5rem; margin-bottom: 15px;">${item.title}</h2>
+                                    <p style="color: #44545c; line-height: 1.6; white-space: pre-wrap;">${item.content}</p>
+                                </div>
+                            </article>
+                        `;
+                    });
+                } else {
+                    container.innerHTML = '<p style="text-align: center; color: #999;">Todavía no hay noticias publicadas.</p>';
+                }
+            } catch (error) {
+                container.innerHTML = '<p style="text-align: center; color: red;">Error al cargar las noticias.</p>';
+            }
+        }
+
+        // Iniciar carga
+        cargarNoticias();
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
