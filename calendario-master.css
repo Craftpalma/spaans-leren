@@ -526,20 +526,34 @@
 @media (max-width: 900px) {
 
     .master-reservations-columns {
-
         grid-template-columns: 1fr;
+    }
 
+    /* NUEVO: Ocultamos el panel de "Todas las reservas" en móvil */
+    .master-reservations-columns .all-reservations {
+        display: none !important;
+    }
+
+    /* NUEVO: Ocultamos el panel de "Canceladas / expiradas" en móvil */
+    .master-reservations-columns .old-reservations {
+        display: none !important;
+    }
+
+    /* NUEVO: Aseguramos que el panel del día seleccionado se quede arriba */
+    .master-reservations-columns .day-details {
+        margin-top: 0;
     }
 
 }
+
 /* =========================================
    ACCIONES DE LA CABECERA (BOTONES)
 ========================================= */
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 10px; /* Separación entre los botones */
-    flex-wrap: wrap; /* Para que bajen si la pantalla es muy pequeña */
+    gap: 10px; 
+    flex-wrap: wrap; 
 }
 
 
