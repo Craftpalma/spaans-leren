@@ -280,6 +280,40 @@
                 msg.textContent = "❌ Error de conexión.";
             }
         }
+                async function publicarNoticia() {
+            const title = document.getElementById('newsTitle').value;
+            const content = document.getElementById('newsContent').value;
+            const image_url = document.getElementById('newsImage').value;
+            const status = document.getElementById('newsStatus');
+
+            if (!title || !content) { alert("Faltan el título o el contenido."); return; }
+
+            status.textContent = "Publicando...";
+            status.style.color = "#666";
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'create_news', title, content, image_url })
+                });
+                const data = await res.json();
+                
+                if (data.ok) {
+                    status.textContent = "✅ ¡Noticia publicada con éxito!";
+                    status.style.color = "green";
+                    document.getElementById('newsTitle').value = '';
+                    document.getElementById('newsContent').value = '';
+                    document.getElementById('newsImage').value = '';
+                } else {
+                    status.textContent = "❌ Error: " + data.error;
+                    status.style.color = "red";
+                }
+            } catch (error) {
+                status.textContent = "❌ Error de conexión.";
+                status.style.color = "red";
+            }
+        }
     </script>
 </body>
 </html>
