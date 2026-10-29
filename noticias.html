@@ -4,48 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noticias y Novedades | Spaans met Gloria</title>
+    
+    <!-- Hoja de estilos (solo una vez) -->
     <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="style.css">
     
     <style>
         /* SOLO PARA ESTA PÁGINA: Marca de agua con el logo */
         body.subpage {
             position: relative;
-            background-color: #f8f9fa; /* Un fondo gris muy suave para que resalte el blanco de las noticias */
+            background-color: #f8f9fa; 
         }
 
         body.subpage::before {
             content: "";
-            position: fixed; /* Se queda fijo aunque hagas scroll */
+            position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Lo centra perfectamente */
-            
-            /* Ajusta el tamaño del logo aquí */
+            transform: translate(-50%, -50%);
             width: 80vw; 
             max-width: 800px; 
             height: 80vh; 
-            
-            /* RUTA DE TU LOGO */
             background-image: url('images/logo4.png'); 
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            
-            /* LA MAGIA DEL FUNDIDO */
-            opacity: 0.1; /* 0.05 es casi invisible. Súbelo a 0.1 o 0.15 si lo quieres más visible */
-            
-            z-index: -1; /* Lo manda detrás de todo el contenido */
-            pointer-events: none; /* Evita que el usuario haga clic en el logo sin querer */
+            opacity: 0.1; 
+            z-index: -1; 
+            pointer-events: none; 
         }
         
-        /* Aseguramos que el contenido esté por encima del logo */
         main, header.header, footer.footer {
             position: relative;
             z-index: 1;
         }
 
-        /* En móviles, lo hacemos un poco más pequeño para que no sature */
         @media (max-width: 768px) {
             body.subpage::before {
                 width: 120vw; 
@@ -60,7 +52,6 @@
     <header class="header">
         <div class="container nav-container">
 
-            <!-- Arreglado el doble span del logo -->
             <a href="index.html#inicio" class="logo">
                 Spaans <span>met Gloria</span>
             </a>
@@ -88,7 +79,6 @@
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <!-- He vuelto a abrir este contenedor para que todo quede centrado -->
     <div style="text-align: center; width: 100%; max-width: 800px; padding: 0 20px; margin: 0 auto;">
         
         <h1 style="font-size: 3rem; margin-top: 40px; margin-bottom: 15px; color: #17252d;" data-i18n="noticiasTitle">Noticias y Novedades</h1>
@@ -99,36 +89,31 @@
             <p style="text-align: center; color: #999;">Cargando noticias...</p>
         </div>
 
-    </div> <!-- Cerramos el contenedor principal -->
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer" style="background-color: #17252d; padding: 30px 20px; margin-top: 60px; position: static;">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%;">
             
-            <!-- COPYRIGHT -->
             <p class="footer-copy" style="margin-bottom: 15px; color: #d9e4e8; font-size: 0.9rem;">
                 © <span id="year"></span> Spaans met Gloria. Todos los derechos reservados.
             </p>
        
-            <!-- CREATED BY -->
             <a href="https://flowtalkia.com" target="_blank" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
                 <span style="color: #a0aec0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;">Created by</span>
                 <img src="images/frowtalkiaLSmall.png" alt="Flowtalkia" style="height: 30px; width: auto; object-fit: contain;">
             </a>
 
-        </div> <!-- Cerramos el contenedor del footer -->
+        </div> 
     </footer>
+
     <!-- MODAL PARA LEER NOTICIA COMPLETA -->
     <div id="newsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
-        <!-- Contenido del modal -->
         <div style="background: white; border-radius: 12px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-            <!-- Botón de cerrar -->
             <button onclick="cerrarModalNoticia()" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; transition: background 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">✕</button>
             
-            <!-- Imagen en grande -->
             <img id="modalNewsImage" src="" alt="Imagen Noticia" style="width: 100%; max-height: 50vh; object-fit: contain; background: #f8f9fa; border-radius: 12px 12px 0 0; display: none;">
             
-            <!-- Texto -->
             <div style="padding: 30px;">
                 <p id="modalNewsDate" style="color: #999; font-size: 0.9rem; margin-bottom: 10px;"></p>
                 <h2 id="modalNewsTitle" style="color: #17252d; font-size: 2rem; margin-bottom: 20px;"></h2>
@@ -136,8 +121,9 @@
             </div>
         </div>
     </div>
+
     <!-- SCRIPTS -->
-    <script src="script.js"></script> <!-- Enlazamos tu script global (menú móvil, etc) -->
+    <script src="script.js"></script>
     
     <script>
         async function cargarNoticias() {
@@ -156,27 +142,22 @@
                     data.news.forEach(item => {
                         const date = item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
                         
-                        // Creamos la tarjeta (article)
                         const article = document.createElement('article');
                         article.style.cssText = "background: white; border: 1px solid #e1e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;";
                         
-                        // Efecto al pasar el ratón por encima
                         article.onmouseover = function() { this.style.transform = 'translateY(-4px)'; this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)'; };
                         article.onmouseout = function() { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.05)'; };
                         
-                        // Guardamos los datos de la noticia en la tarjeta (para leerlos al hacer clic)
                         article.dataset.title = item.title;
                         article.dataset.date = date;
                         article.dataset.content = item.content;
                         article.dataset.image = item.image_url || '';
 
-                        // Imagen de la tarjeta
                         let imgHtml = '';
                         if (item.image_url) {
                             imgHtml = `<img src="${item.image_url}" alt="Imagen de noticia" style="width: 100%; height: auto; max-height: 400px; object-fit: contain; background-color: #f8f9fa; border-radius: 12px 12px 0 0;">`;
                         }
 
-                        // Contenido de la tarjeta (con el texto cortado a 3 líneas para que quede limpio)
                         article.innerHTML = `
                             ${imgHtml}
                             <div style="padding: 25px;">
@@ -187,7 +168,6 @@
                             </div>
                         `;
 
-                        // Evento al hacer clic en la tarjeta: Abrir modal
                         article.addEventListener('click', function() {
                             document.getElementById('modalNewsTitle').textContent = this.dataset.title;
                             document.getElementById('modalNewsDate').textContent = this.dataset.date;
@@ -202,7 +182,7 @@
                             }
                             
                             document.getElementById('newsModal').style.display = 'flex';
-                            document.body.style.overflow = 'hidden'; // Evita que la página de fondo haga scroll
+                            document.body.style.overflow = 'hidden';
                         });
 
                         container.appendChild(article);
@@ -215,21 +195,17 @@
             }
         }
 
-        // Función para cerrar el modal
         function cerrarModalNoticia() {
             document.getElementById('newsModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Devuelve el scroll a la página
+            document.body.style.overflow = 'auto';
         }
 
-        // Cerrar el modal si el usuario hace clic fuera de la caja blanca
         document.getElementById('newsModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 cerrarModalNoticia();
             }
         });
 
-
-        // Iniciar carga
         cargarNoticias();
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
