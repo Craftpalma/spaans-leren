@@ -5,6 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noticias y Novedades | Spaans met Gloria</title>
     <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* SOLO PARA ESTA PÁGINA: Marca de agua con el logo */
+        body.subpage {
+            position: relative;
+            background-color: #f8f9fa; /* Un fondo gris muy suave para que resalte el blanco de las noticias */
+        }
+
+        body.subpage::before {
+            content: "";
+            position: fixed; /* Se queda fijo aunque hagas scroll */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Lo centra perfectamente */
+            
+            /* Ajusta el tamaño del logo aquí */
+            width: 80vw; 
+            max-width: 800px; 
+            height: 80vh; 
+            
+            /* RUTA DE TU LOGO */
+            background-image: url('images/logo4.png'); 
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* LA MAGIA DEL FUNDIDO */
+            opacity: 0.05; /* 0.05 es casi invisible. Súbelo a 0.1 o 0.15 si lo quieres más visible */
+            
+            z-index: -1; /* Lo manda detrás de todo el contenido */
+            pointer-events: none; /* Evita que el usuario haga clic en el logo sin querer */
+        }
+        
+        /* Aseguramos que el contenido esté por encima del logo */
+        main, header.header, footer.footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* En móviles, lo hacemos un poco más pequeño para que no sature */
+        @media (max-width: 768px) {
+            body.subpage::before {
+                width: 120vw; 
+                opacity: 0.03;
+            }
+        }
+    </style>
 </head>
 <body class="subpage">
 
