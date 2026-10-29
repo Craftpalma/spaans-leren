@@ -106,26 +106,18 @@
 
         </div> 
     </footer>
-
-    <!-- MODAL PARA LEER NOTICIA COMPLETA -->
-    <div id="newsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
-        <div style="background: white; border-radius: 12px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-            <button onclick="cerrarModalNoticia()" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; transition: background 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">✕</button>
-            
-            <img id="modalNewsImage" src="" alt="Imagen Noticia" style="width: 100%; max-height: 50vh; object-fit: contain; background: #f8f9fa; border-radius: 12px 12px 0 0; display: none;">
-            
-            <div style="padding: 30px;">
-                <p id="modalNewsDate" style="color: #999; font-size: 0.9rem; margin-bottom: 10px;"></p>
-                <h2 id="modalNewsTitle" style="color: #17252d; font-size: 2rem; margin-bottom: 20px;"></h2>
-                <p id="modalNewsContent" style="color: #44545c; font-size: 1.1rem; line-height: 1.8; white-space: pre-wrap;"></p>
-            </div>
-        </div>
+    <!-- MODAL SOLO PARA AMPLIAR LA IMAGEN -->
+    <div id="imageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out;" onclick="cerrarImagen()">
+        <!-- Botón de cerrar -->
+        <button style="position: absolute; top: 20px; right: 20px; background: white; color: black; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; font-weight: bold;">✕</button>
+        
+        <!-- Imagen ampliada -->
+        <img id="expandedImage" src="" alt="Imagen ampliada" style="max-width: 95%; max-height: 95%; object-fit: contain; border-radius: 8px; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
     </div>
 
     <!-- SCRIPTS -->
     <script src="script.js"></script>
-    
-    <script>
+        <script>
         async function cargarNoticias() {
             const container = document.getElementById('newsContainer');
             try {
@@ -143,47 +135,31 @@
                         const date = item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
                         
                         const article = document.createElement('article');
-                        article.style.cssText = "background: white; border: 1px solid #e1e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;";
+                        article.style.cssText = "background: white; border: 1px solid #e1e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);";
                         
-                        article.onmouseover = function() { this.style.transform = 'translateY(-4px)'; this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)'; };
-                        article.onmouseout = function() { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.05)'; };
-                        
-                        article.dataset.title = item.title;
-                        article.dataset.date = date;
-                        article.dataset.content = item.content;
-                        article.dataset.image = item.image_url || '';
-
+                        // Si tiene imagen, le añadimos el evento de clic SOLO a la imagen
                         let imgHtml = '';
                         if (item.image_url) {
-                            imgHtml = `<img src="${item.image_url}" alt="Imagen de noticia" style="width: 100%; height: auto; max-height: 400px; object-fit: contain; background-color: #f8f9fa; border-radius: 12px 12px 0 0;">`;
+                            imgHtml = `
+                                <div style="overflow: hidden;">
+                                    <img src="${item.image_url}" alt="Imagen de noticia" 
+                                         style="width: 100%; height: auto; max-height: 400px; object-fit: contain; background-color: #f8f9fa; cursor: zoom-in; transition: transform 0.3s;" 
+                                         onmouseover="this.style.transform='scale(1.02)'" 
+                                         onmouseout="this.style.transform='scale(1)'"
+                                         onclick="abrirImagen('${item.image_url}')">
+                                </div>
+                            `;
                         }
 
+                        // El texto de la noticia ahora se muestra completo (sin "Leer más")
                         article.innerHTML = `
                             ${imgHtml}
                             <div style="padding: 25px;">
                                 <p style="color: #999; font-size: 0.85rem; margin-bottom: 5px;">${date}</p>
                                 <h2 style="color: #17252d; font-size: 1.5rem; margin-bottom: 15px;">${item.title}</h2>
-                                <p style="color: #44545c; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${item.content}</p>
-                                <p style="color: #176b87; font-weight: bold; margin-top: 15px; font-size: 0.9rem;">Leer más →</p>
+                                <p style="color: #44545c; line-height: 1.6; white-space: pre-wrap;">${item.content}</p>
                             </div>
                         `;
-
-                        article.addEventListener('click', function() {
-                            document.getElementById('modalNewsTitle').textContent = this.dataset.title;
-                            document.getElementById('modalNewsDate').textContent = this.dataset.date;
-                            document.getElementById('modalNewsContent').textContent = this.dataset.content;
-                            
-                            const modalImg = document.getElementById('modalNewsImage');
-                            if (this.dataset.image) {
-                                modalImg.src = this.dataset.image;
-                                modalImg.style.display = 'block';
-                            } else {
-                                modalImg.style.display = 'none';
-                            }
-                            
-                            document.getElementById('newsModal').style.display = 'flex';
-                            document.body.style.overflow = 'hidden';
-                        });
 
                         container.appendChild(article);
                     });
@@ -195,19 +171,22 @@
             }
         }
 
-        function cerrarModalNoticia() {
-            document.getElementById('newsModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+        // Funciones para abrir y cerrar la imagen ampliada
+        function abrirImagen(url) {
+            document.getElementById('expandedImage').src = url;
+            document.getElementById('imageModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Bloquea el scroll de la página
         }
 
-        document.getElementById('newsModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                cerrarModalNoticia();
-            }
-        });
+        function cerrarImagen() {
+            document.getElementById('imageModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Devuelve el scroll
+        }
 
+        // Iniciar carga
         cargarNoticias();
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+   
 </body>
 </html>
