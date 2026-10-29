@@ -7,9 +7,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="subpage">
+        <!-- HEADER -->
+<!-- NAVEGACIÓN -->
+<header class="header">
+    <div class="container nav-container">
 
-    <div style="text-align: center; width: 100%; max-width: 800px; padding: 0 20px; margin: 0 auto;">
-        <a href="index.html" style="color: #176b87; text-decoration: none; font-weight: bold; font-size: 0.9rem;">← Volver al inicio</a>
+        <a href="index.html#inicio" class="logo">
+             Spaans <span>met <span>Gloria</span>
+        </a>
+
+        <button class="menu-button" id="menuButton"
+                aria-label="Abrir menú">
+            ☰
+        </button>
+
+        <nav class="nav" id="navMenu">
+            <a href="index.html#inicio" data-i18n="navHome">Inicio</a>
+            <a href="index.html#cursos" data-i18n="navCourses">Cursos</a>
+            <a href="index.html#precios" data-i18n="navPrices">Precios</a>
+            <a href="calendario.html" data-i18n="navCalendar">Calendario</a>
+            <a href="test.html" data-i18n="navtest">Test de nivel</a>
+            <a href="index.html#contacto" data-i18n="navContact">Contacto</a>
+
+            <div class="language-selector">
+                <button type="button" id="languageToggle"
+                        aria-label="Cambiar idioma">
+                    🇳🇱 🇪🇸
+                </button>
+            </div>
+        </nav>
+
+    </div>
+</header>
+///nuevo hasta aqui
+    <!--<div style="text-align: center; width: 100%; max-width: 800px; padding: 0 20px; margin: 0 auto;">
+        <a href="index.html" style="color: #176b87; text-decoration: none; font-weight: bold; font-size: 0.9rem;">← Volver al inicio</a>-->
         
         <h1 style="font-size: 3rem; margin-top: 20px; color: #17252d;">Noticias y Novedades</h1>
         <p style="color: #666; margin-bottom: 40px;">Mantente al día sobre clases, eventos y consejos para aprender español.</p>
