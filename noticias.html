@@ -118,7 +118,24 @@
 
         </div> <!-- Cerramos el contenedor del footer -->
     </footer>
-
+    <!-- MODAL PARA LEER NOTICIA COMPLETA -->
+    <div id="newsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
+        <!-- Contenido del modal -->
+        <div style="background: white; border-radius: 12px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            <!-- Botón de cerrar -->
+            <button onclick="cerrarModalNoticia()" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; transition: background 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">✕</button>
+            
+            <!-- Imagen en grande -->
+            <img id="modalNewsImage" src="" alt="Imagen Noticia" style="width: 100%; max-height: 50vh; object-fit: contain; background: #f8f9fa; border-radius: 12px 12px 0 0; display: none;">
+            
+            <!-- Texto -->
+            <div style="padding: 30px;">
+                <p id="modalNewsDate" style="color: #999; font-size: 0.9rem; margin-bottom: 10px;"></p>
+                <h2 id="modalNewsTitle" style="color: #17252d; font-size: 2rem; margin-bottom: 20px;"></h2>
+                <p id="modalNewsContent" style="color: #44545c; font-size: 1.1rem; line-height: 1.8; white-space: pre-wrap;"></p>
+            </div>
+        </div>
+    </div>
     <!-- SCRIPTS -->
     <script src="script.js"></script> <!-- Enlazamos tu script global (menú móvil, etc) -->
     
@@ -135,22 +152,81 @@
 
                 if (data.ok && data.news.length > 0) {
                     container.innerHTML = '';
+                    
                     data.news.forEach(item => {
                         const date = item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
                         
-                        const imgHtml = item.image_url ? `<img src="${item.image_url}" alt="Imagen de noticia" style="width: 100%; height: auto; max-height: 400px; object-fit: contain; background-color: #f8f9fa; border-radius: 12px 12px 0 0;">` : '';
+                        // Creamos la tarjeta (article)
+                        const article = document.createElement('article');
+                        article.style.cssText = "background: white; border: 1px solid #e1e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;";
+                        
+                        // Efecto al pasar el ratón por encima
+                        article.onmouseover = function() { this.style.transform = 'translateY(-4px)'; this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)'; };
+                        article.onmouseout = function() { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.05)'; };
+                        
+                        // Guardamos los datos de la noticia en la tarjeta (para leerlos al hacer clic)
+                        article.dataset.title = item.title;
+                        article.dataset.date = date;
+                        article.dataset.content = item.content;
+                        article.dataset.image = item.image_url || '';
 
-                        container.innerHTML += `
-                            <article style="background: white; border: 1px solid #e1e8eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-                                ${imgHtml}
-                                <div style="padding: 25px;">
-                                    <p style="color: #999; font-size: 0.85rem; margin-bottom: 5px;">${date}</p>
-                                    <h2 style="color: #17252d; font-size: 1.5rem; margin-bottom: 15px;">${item.title}</h2>
-                                    <p style="color: #44545c; line-height: 1.6; white-space: pre-wrap;">${item.content}</p>
-                                </div>
-                            </article>
+                        // Imagen de la tarjeta
+                        let imgHtml = '';
+                        if (item.image_url) {
+                            imgHtml = `<img src="${item.image_url}" alt="Imagen de noticia" style="width: 100%; height: auto; max-height: 400px; object-fit: contain; background-color: #f8f9fa; border-radius: 12px 12px 0 0;">`;
+                        }
+
+                        // Contenido de la tarjeta (con el texto cortado a 3 líneas para que quede limpio)
+                        article.innerHTML = `
+                            ${imgHtml}
+                            <div style="padding: 25px;">
+                                <p style="color: #999; font-size: 0.85rem; margin-bottom: 5px;">${date}</p>
+                                <h2 style="color: #17252d; font-size: 1.5rem; margin-bottom: 15px;">${item.title}</h2>
+                                <p style="color: #44545c; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${item.content}</p>
+                                <p style="color: #176b87; font-weight: bold; margin-top: 15px; font-size: 0.9rem;">Leer más →</p>
+                            </div>
                         `;
+
+                        // Evento al hacer clic en la tarjeta: Abrir modal
+                        article.addEventListener('click', function() {
+                            document.getElementById('modalNewsTitle').textContent = this.dataset.title;
+                            document.getElementById('modalNewsDate').textContent = this.dataset.date;
+                            document.getElementById('modalNewsContent').textContent = this.dataset.content;
+                            
+                            const modalImg = document.getElementById('modalNewsImage');
+                            if (this.dataset.image) {
+                                modalImg.src = this.dataset.image;
+                                modalImg.style.display = 'block';
+                            } else {
+                                modalImg.style.display = 'none';
+                            }
+                            
+                            document.getElementById('newsModal').style.display = 'flex';
+                            document.body.style.overflow = 'hidden'; // Evita que la página de fondo haga scroll
+                        });
+
+                        container.appendChild(article);
                     });
+                } else {
+                    container.innerHTML = '<p style="text-align: center; color: #999;">Todavía no hay noticias publicadas.</p>';
+                }
+            } catch (error) {
+                container.innerHTML = '<p style="text-align: center; color: red;">Error al cargar las noticias.</p>';
+            }
+        }
+
+        // Función para cerrar el modal
+        function cerrarModalNoticia() {
+            document.getElementById('newsModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Devuelve el scroll a la página
+        }
+
+        // Cerrar el modal si el usuario hace clic fuera de la caja blanca
+        document.getElementById('newsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarModalNoticia();
+            }
+        });
                 } else {
                     container.innerHTML = '<p style="text-align: center; color: #999;">Todavía no hay noticias publicadas.</p>';
                 }
