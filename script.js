@@ -794,6 +794,11 @@ interestButtons.forEach((button) => {
             navCalendario: "Afspraak maken",
             navtest: "Niveau Test",
             navNew: "Nieuws",
+               // NUEVAS LÍNEAS PARA NOTICIAS
+            noticiasTitle: "Nieuws en Updates",
+            noticiasIntro: "Blijf op de hoogte van lessen, evenementen en tips om Spaans te leren.",
+    
+            heroEyebrow: "LEER SPAANS",
             navContacto: "Contact",
             heroEyebrow: "LEER SPAANS",
             heroTitleFirst: "Vind de cursus",
@@ -980,6 +985,9 @@ interestButtons.forEach((button) => {
             navCalendario: "Calendario",
             navtest: "Test de Nivel",
             navNew: "Noticias",
+            noticiasTitle: "Noticias y Novedades",
+            noticiasIntro: "Mantente al día sobre clases, eventos y consejos para aprender español.",
+            heroEyebrow: "APRENDE ESPAÑOL",
             navContacto: "Contacto",
             heroEyebrow: "APRENDE ESPAÑOL",
             heroTitleFirst: "Encuentra el curso",
