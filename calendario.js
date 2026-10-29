@@ -18,10 +18,10 @@ const calendarTranslations = {
         navtest: "Test de Nivel",
         navContact: "Contacto",
          // NUEVAS LÍNEAS PARA NOTICIAS
-            noticiasTitle: "Nieuws en Updates",
-            noticiasIntro: "Blijf op de hoogte van lessen, evenementen en tips om Spaans te leren.",
+            noticiasTitle: "Noticias y Novedades",
+            noticiasIntro: "Mantente al día sobre clases, eventos y consejos para aprender español.",
             
-            heroEyebrow: "LEER SPAANS",
+            heroEyebrow: "APRENDE ESPAÑOL",
         title: "Calendario de clases",
         intro: "Consulta nuestra disponibilidad para clases de español.",
         usualHours: "Horario habitual",
