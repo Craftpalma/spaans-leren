@@ -798,8 +798,7 @@ interestButtons.forEach((button) => {
             heroEyebrow: "LEER SPAANS",
             heroTitleFirst: "Vind de cursus",
             heroTitleSecond: "die bij je past",
-            heroDescription:
-                "Spaanse lessen afgestemd op jouw niveau, doelen en manier van leren.",
+            heroDescription: "Spaanse lessen afgestemd op jouw niveau, doelen en manier van leren.",
             heroButton: "Gratis proefles",
                        // Presentación profesora
             aboutEyebrow: "OVER MIJ",
@@ -985,8 +984,7 @@ interestButtons.forEach((button) => {
             heroEyebrow: "APRENDE ESPAÑOL",
             heroTitleFirst: "Encuentra el curso",
             heroTitleSecond: "perfecto para ti",
-            heroDescription:
-                "Cursos de español adaptados a tu nivel, tus objetivos y tu forma de aprender.",
+            heroDescription: "Cursos de español adaptados a tu nivel, tus objetivos y tu forma de aprender.",
             heroButton: "Clase de prueba gratis",
                        // Presentación profesora
             aboutEyebrow: "SOBRE MÍ",
