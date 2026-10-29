@@ -17,6 +17,11 @@ const calendarTranslations = {
         navCalendar: "Calendario",
         navtest: "Test de Nivel",
         navContact: "Contacto",
+         // NUEVAS LÍNEAS PARA NOTICIAS
+            noticiasTitle: "Nieuws en Updates",
+            noticiasIntro: "Blijf op de hoogte van lessen, evenementen en tips om Spaans te leren.",
+            
+            heroEyebrow: "LEER SPAANS",
         title: "Calendario de clases",
         intro: "Consulta nuestra disponibilidad para clases de español.",
         usualHours: "Horario habitual",
@@ -67,6 +72,11 @@ const calendarTranslations = {
         navCalendar: "Afspraak maken",
         navtest: "Niveau Test",
         navContact: "Contact",
+       // NUEVAS LÍNEAS PARA NOTICIAS
+            noticiasTitle: "Noticias y Novedades",
+            noticiasIntro: "Mantente al día sobre clases, eventos y consejos para aprender español.",
+            
+            heroEyebrow: "APRENDE ESPAÑOL", 
         title: "Beschikbare lestijden",
         intro: "Bekijk de beschikbaarheid voor Spaanse lessen.",
         usualHours: "Gebruikelijke lestijden",
