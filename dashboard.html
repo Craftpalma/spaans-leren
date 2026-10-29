@@ -163,6 +163,13 @@
                 <ul id="visitorsList" style="list-style-type: none; padding: 0; margin: 0;"></ul>
             </div>
         </div>
+                <!-- LISTA DE NOTICIAS PUBLICADAS (PARA BORRAR) -->
+        <div style="max-width: 1000px; margin: 20px auto; padding: 25px; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e1e8eb;">
+            <h2 style="color: #176b87; margin-top: 0; font-size: 1.3rem;">🗑️ Gestionar Noticias Publicadas</h2>
+            <div id="newsListDashboard" style="display: flex; flex-direction: column; gap: 10px;">
+                <p style="color: #666;">Cargando noticias...</p>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -291,6 +298,68 @@
                 msg.textContent = "❌ Error de conexión.";
             }
         }
+                // =========================================
+        // FUNCIONES PARA CARGAR Y BORRAR NOTICIAS
+        // =========================================
+
+        async function cargarNoticiasDashboard() {
+            const container = document.getElementById('newsListDashboard');
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'get_news' })
+                });
+                const data = await res.json();
+
+                if (data.ok && data.news.length > 0) {
+                    container.innerHTML = '';
+                    data.news.forEach(item => {
+                        container.innerHTML += `
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px solid #eee; border-radius: 5px; background: #fafafa;">
+                                <div>
+                                    <strong style="color: #17252d;">${item.title}</strong>
+                                    <p style="margin: 0; font-size: 0.8rem; color: #666;">${item.content.substring(0, 50)}...</p>
+                                </div>
+                                <button onclick="borrarNoticia('${item.id}')" style="background: #d99a9a; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                                    🗑️ Borrar
+                                </button>
+                            </div>
+                        `;
+                    });
+                } else {
+                    container.innerHTML = '<p style="color: #666;">No hay noticias publicadas todavía.</p>';
+                }
+            } catch (error) {
+                container.innerHTML = '<p style="color: red;">Error al cargar noticias.</p>';
+            }
+        }
+
+        async function borrarNoticia(id) {
+            if (!confirm("¿Seguro que quieres borrar esta noticia?")) return;
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'delete_news', id: id })
+                });
+                const data = await res.json();
+
+                if (data.ok) {
+                    alert("Noticia borrada.");
+                    cargarNoticiasDashboard(); // Recargar la lista
+                } else {
+                    alert("Error al borrar: " + data.error);
+                }
+            } catch (error) {
+                alert("Error de conexión.");
+            }
+        }
+
+        // Y AQUÍ DEBAJO PUEDES DEJAR TU FUNCIÓN publicarNoticia()
+        async function publicarNoticia() {
+            // ... (tu código actual de publicarNoticia)
+        /*****PUBLICAR NOTICIA**********/
                 async function publicarNoticia() {
             const title = document.getElementById('newsTitle').value;
             const content = document.getElementById('newsContent').value;
