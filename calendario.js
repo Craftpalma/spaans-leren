@@ -72,11 +72,11 @@ const calendarTranslations = {
         navCalendar: "Afspraak maken",
         navtest: "Niveau Test",
         navContact: "Contact",
-       // NUEVAS LÍNEAS PARA NOTICIAS
-            noticiasTitle: "Noticias y Novedades",
-            noticiasIntro: "Mantente al día sobre clases, eventos y consejos para aprender español.",
+                // NUEVAS LÍNEAS PARA NOTICIAS
+            noticiasTitle: "Nieuws en Updates",
+            noticiasIntro: "Blijf op de hoogte van lessen, evenementen en tips om Spaans te leren.",
             
-            heroEyebrow: "APRENDE ESPAÑOL", 
+            heroEyebrow: "LEER SPAANS", 
         title: "Beschikbare lestijden",
         intro: "Bekijk de beschikbaarheid voor Spaanse lessen.",
         usualHours: "Gebruikelijke lestijden",
