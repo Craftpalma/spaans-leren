@@ -136,7 +136,7 @@
                 if (data.ok && data.news.length > 0) {
                     container.innerHTML = '';
                     data.news.forEach(item => {
-                        const date = new Date(item.created_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                        const date = item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
                         
                         const imgHtml = item.image_url ? `<img src="${item.image_url}" alt="Imagen de noticia" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;">` : '';
 
