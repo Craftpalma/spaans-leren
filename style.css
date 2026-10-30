@@ -2495,8 +2495,8 @@ body.subpage::before {
     left: 50%;
     transform: translate(-50%, -50%);
        /* CAMBIOS AQUÍ PARA HACERLO GIGANTE */
-    width: 120vw; /* 150% del ancho de la pantalla (se sale por los lados) */
-    height: 120vh; /* 150% del alto de la pantalla (se sale por arriba y abajo) */
+    width: 90vw; /* 150% del ancho de la pantalla (se sale por los lados) */
+    height: 90vh; /* 150% del alto de la pantalla (se sale por arriba y abajo) */
     max-width: none; /* Quitamos el límite de 800px para que crezca libremente */
    
   /*  width: 80vw; 
