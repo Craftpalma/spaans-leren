@@ -354,9 +354,10 @@
     </footer>
 
        <!-- <div class="footer-social"> -->
-      <!--  <script src="script.js"></script> -->
+      <  <script src="script.js"></script> 
     <!-- JAVASCRIPT TRADUCTOR Y CALCULADORA -->
     <script>
+    (function() { 
         // 1. Detectar idioma guardado (por defecto neerlandés)
         const currentLang = localStorage.getItem("spaansLerenLanguage") || "nl";
 
@@ -493,6 +494,7 @@
             
             resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
+     })();
     </script>
 </body>
 </html>
