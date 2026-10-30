@@ -2495,8 +2495,8 @@ body.subpage::before {
     left: 50%;
     transform: translate(-50%, -50%);
        /* CAMBIOS AQUÍ PARA HACERLO GIGANTE */
-    width: 150vw; /* 150% del ancho de la pantalla (se sale por los lados) */
-    height: 150vh; /* 150% del alto de la pantalla (se sale por arriba y abajo) */
+    width: 300vw; /* 150% del ancho de la pantalla (se sale por los lados) */
+    height: 300vh; /* 150% del alto de la pantalla (se sale por arriba y abajo) */
     max-width: none; /* Quitamos el límite de 800px para que crezca libremente */
    
   /*  width: 80vw; 
@@ -2520,6 +2520,7 @@ main, header.header, footer.footer {
 @media (max-width: 768px) {
     body.subpage::before {
         width: 120vw; 
+       height: 120vh;
         opacity: 0.05;
     }
 }
