@@ -855,13 +855,13 @@ nextMonth.addEventListener("click", function () {
 // AÑO DEL FOOTER
 // =========================================
 
-const currentYear = document.getElementById("currentYear");
+/*const currentYear = document.getElementById("currentYear");
 
 if (currentYear) {
 
     currentYear.textContent = new Date().getFullYear();
 
-}
+}*/
 
 
 /* =========================================
