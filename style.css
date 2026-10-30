@@ -2480,7 +2480,18 @@ footer strong {
     width: auto;
     object-fit: contain;
 }
+/* =========================================
+   MARCA DE AGUA SUBPÁGINAS
+========================================= */
+body.subpage {
+    position: relative;
+    background-color: #f8f9fa; 
+}
 
+body.subpage::before {
+    content: "";
+    position: fixed;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80vw; 
@@ -2491,11 +2502,18 @@ footer strong {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0.15; 
-    z-index: 0; /* <--- CAMBIA EL -1.2 POR 0 */
+    z-index: 0; /* La capa justa para que se vea sobre el fondo pero detrás del texto */
     pointer-events: none; 
 }
 
 main, header.header, footer.footer {
     position: relative;
     z-index: 1;
+}
+
+@media (max-width: 768px) {
+    body.subpage::before {
+        width: 120vw; 
+        opacity: 0.05;
+    }
 }
