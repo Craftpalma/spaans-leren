@@ -49,15 +49,15 @@ const calendarTranslations = {
         assistantDescription: "Puedes gestionar tus reservas fácilmente a través de nuestro asistente virtual.",
         assistantLink: "Hablar con el asistente",
         weekdays: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-       selected: "Has seleccionado:",
+      /* selected: "Has seleccionado:",
       timeAvailable: "Esta hora está disponible para solicitar una clase.",
       name: "Nombre",
       namePlaceholder: "Tu nombre",
       phone: "Teléfono / WhatsApp",
       phonePlaceholder: "Tu teléfono / WhatsApp",
-      request: "🟡 Solicitar esta hora"
+      request: "🟡 Solicitar esta hora"*/
     
     
     },
@@ -100,15 +100,15 @@ const calendarTranslations = {
         assistantDescription: "Je kunt je reserveringen eenvoudig beheren via onze virtuele assistent.",
         assistantLink: "Chat met de assistent",
         weekdays: ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"],
-        months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"],
+        months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"]
 
-          selected: "Je hebt geselecteerd:",
+       /*   selected: "Je hebt geselecteerd:",
          timeAvailable: "Dit tijdstip is beschikbaar om een les aan te vragen.",
          name: "Naam",
          namePlaceholder: "Je naam",
          phone: "Telefoon / WhatsApp",
          phonePlaceholder: "Je telefoonnummer / WhatsApp",
-         request: "🟡 Dit tijdstip aanvragen"
+         request: "🟡 Dit tijdstip aanvragen"*/
     }
 };
 
@@ -868,7 +868,7 @@ if (currentYear) {
    MENÚ MÓVIL DE NAVEGACIÓN
 ========================================= */
 
-const menuButton = document.getElementById("menuButton");
+/*const menuButton = document.getElementById("menuButton");
 const navMenu = document.getElementById("navMenu");
 
 if (menuButton && navMenu) {
@@ -896,7 +896,7 @@ if (menuButton && navMenu) {
 
     });
 
-}
+}*/
 
 // =========================================
 // INICIAR CALENDARIO
