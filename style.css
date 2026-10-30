@@ -2521,6 +2521,6 @@ main, header.header, footer.footer {
     body.subpage::before {
         width: 120vw; 
        height: 120vh;
-        opacity: 0.05;
+        opacity: 0.09;
     }
 }
