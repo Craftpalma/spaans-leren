@@ -2480,3 +2480,38 @@ footer strong {
     width: auto;
     object-fit: contain;
 }
+   /* SOLO PARA ESTA PÁGINA: Marca de agua con el logo */
+        body.subpage {
+            position: relative;
+            background-color: #f8f9fa; 
+        }
+
+        body.subpage::before {
+            content: "";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw; 
+            max-width: 800px; 
+            height: 80vh; 
+            background-image: url('images/logo4.png'); 
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.1; 
+            z-index: -1.2; 
+            pointer-events: none; 
+        }
+        
+        main, header.header, footer.footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            body.subpage::before {
+                width: 120vw; 
+                opacity: 0.03;
+            }
+        }
