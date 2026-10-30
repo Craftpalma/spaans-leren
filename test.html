@@ -17,7 +17,12 @@
         .test-card {
             max-width: 900px;
             margin: 0 auto;
-            background: var(--white);
+          /*  background: var(--white);*/
+             /* CAMBIO AQUÍ: Blanco con 85% de opacidad */
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            
             padding: 40px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
