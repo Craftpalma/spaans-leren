@@ -11,7 +11,9 @@
        
         .level-test-section {
             padding: 100px 0;
-            background: var(--light);
+               /* QUITAMOS EL BACKGROUND SÓLIDO */
+            background: transparent; 
+            /*background: var(--light);*/
         }
 
         .test-card {
@@ -19,9 +21,9 @@
             margin: 0 auto;
           /*  background: var(--white);*/
              /* CAMBIO AQUÍ: Blanco con 85% de opacidad */
-            background: rgba(255, 255, 255, 1); 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
             
             padding: 40px;
             border-radius: var(--radius);
