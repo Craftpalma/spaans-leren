@@ -2494,9 +2494,15 @@ body.subpage::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80vw; 
+       /* CAMBIOS AQUÍ PARA HACERLO GIGANTE */
+    width: 150vw; /* 150% del ancho de la pantalla (se sale por los lados) */
+    height: 150vh; /* 150% del alto de la pantalla (se sale por arriba y abajo) */
+    max-width: none; /* Quitamos el límite de 800px para que crezca libremente */
+   
+  /*  width: 80vw; 
     max-width: 800px; 
-    height: 80vh; 
+    height: 80vh; */
+   
     background-image: url('images/logo4.png'); 
     background-size: contain;
     background-position: center;
