@@ -2516,11 +2516,11 @@ main, header.header, footer.footer {
     position: relative;
     z-index: 1;
 }
-
+/*
 @media (max-width: 768px) {
     body.subpage::before {
         width: 120vw; 
        height: 120vh;
         opacity: 0.15;
     }
-}
+}*/
