@@ -13,9 +13,27 @@ window.addEventListener("load", function() {
     .catch(err => console.log("Error registrando visita:", err));
 });
 /* =========================================
-   MENÚ MÓVIL DE NAVEGACIÓN
+   MENÚ MÓVIL (A PRUEBA DE BALAS)
 ========================================= */
 
+document.addEventListener("DOMContentLoaded", function() {
+    const menuButton = document.getElementById("menuButton");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuButton && navMenu) {
+        menuButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            console.log("Botón de menú pulsado"); // Esto saldrá en la consola
+            navMenu.classList.toggle("active");
+        });
+    } else {
+        console.error("No se encontró el botón o el menú en el HTML");
+    }
+});
+/* =========================================
+   MENÚ MÓVIL DE NAVEGACIÓN
+========================================= */
+/*
 const menuButton = document.getElementById("menuButton");
 const navMenu = document.getElementById("navMenu");
 
@@ -44,7 +62,7 @@ if (menuButton && navMenu) {
 
     });
 
-}
+}*/
 /* =========================================
    MENÚ MÓVIL
 ========================================= */
