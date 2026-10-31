@@ -891,13 +891,8 @@ interestButtons.forEach((button) => {
             conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",
 
 
-            conversationQuote: "“Praten, oefenen en zelfvertrouwen opbouwen”",
-            conversationDescription: "Lessen die volledig gericht zijn op spreekvaardigheid.",
-            conversationItem1: "Studenten die Spaans begrijpen",
-            conversationItem2: "Mensen die gemakkelijker willen leren spreken",
-            conversationItem3: "Gespreksoefeningen",
-            conversationItem4: "De uitspraak verbeteren",
-            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",
+              //aqui estaba el duplicado y seguro falta la traducion de fines especificos
+              
 
             businessLabel: "ZAKELIJK",
             businessQuote: "“Effectieve professionele communicatie”",
@@ -1069,14 +1064,14 @@ interestButtons.forEach((button) => {
             b1Item4: "Textos y audios reales",
             b1Item5: "Conversación espontánea",
             b1Objective: "Desenvolverte con autonomía en la mayoría de situaciones.",
-           
+           /*
             conversationQuote: "“Praten, oefenen en zelfvertrouwen opbouwen”",
             conversationDescription: "Lessen die volledig gericht zijn op spreekvaardigheid.",
             conversationItem1: "Studenten die Spaans begrijpen",
             conversationItem2: "Mensen die gemakkelijker willen leren spreken",
             conversationItem3: "Gespreksoefeningen",
             conversationItem4: "De uitspraak verbeteren",
-            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",
+            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",*/
    
             conversationQuote: "“Hablar, practicar y ganar confianza”",
             conversationDescription: "Clases centradas exclusivamente en la producción oral.",
