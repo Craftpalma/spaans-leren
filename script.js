@@ -13,7 +13,7 @@ window.addEventListener("load", function() {
     .catch(err => console.log("Error registrando visita:", err));
 });
 /* =========================================
-   MENÚ MÓVIL (VERSIÓN DEFINITIVA)
+   MENÚ MÓVIL (VERSIÓN FINAL)
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -24,21 +24,22 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // 1. Abrir y cerrar el menú al pulsar la hamburguesa
         menuButton.addEventListener("click", function(e) {
-            e.preventDefault(); // Evita que el botón recargue o redirija
+            e.preventDefault(); 
             const isOpen = navMenu.classList.toggle("active");
             
-            // Mejoras de accesibilidad
+            // Accesibilidad
             menuButton.setAttribute("aria-expanded", isOpen);
             menuButton.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
         });
 
-        // 2. Cerrar el menú automáticamente al pulsar un enlace
-        navMenu.querySelectorAll("a").forEach(function(link) {
-            link.addEventListener("click", function() {
+        // 2. Cerrar el menú si se hace clic en CUALQUIER enlace dentro del menú
+        navMenu.addEventListener("click", function(e) {
+            // Si el elemento en el que se ha hecho clic es un enlace (A)
+            if (e.target.tagName === "A") {
                 navMenu.classList.remove("active");
                 menuButton.setAttribute("aria-expanded", "false");
                 menuButton.setAttribute("aria-label", "Abrir menú");
-            });
+            }
         });
 
     } else {
