@@ -48,7 +48,7 @@ if (menuButton && navMenu) {
 /* =========================================
    MENÚ MÓVIL
 ========================================= */
-
+/*
 const menuButton = document.getElementById("menuButton");
 const navMenu = document.getElementById("navMenu");
 
@@ -58,17 +58,17 @@ if (menuButton && navMenu) {
         navMenu.classList.toggle("active");
     });
 }
-
+*/
 
 /* Cerrar menú al pulsar un enlace */
-
+/*
 const navLinks = document.querySelectorAll(".nav a");
 
 navLinks.forEach((link) => {
     link.addEventListener("click", () => {
         navMenu.classList.remove("active");
     });
-});
+});*/
 
 
 /* =========================================
