@@ -21,7 +21,8 @@ const menuButton = document.getElementById("menuButton");
 const navMenu = document.getElementById("navMenu");
 
 if (menuButton && navMenu) {
-    menuButton.addEventListener("click", () => {
+    menuButton.addEventListener("click", (e) => {
+        e.preventDefault(); // <--- AÑADE ESTA LÍNEA
         navMenu.classList.toggle("active");
     });
 }
