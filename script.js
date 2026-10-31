@@ -13,7 +13,7 @@ window.addEventListener("load", function() {
     .catch(err => console.log("Error registrando visita:", err));
 });
 /* =========================================
-   MENÚ MÓVIL (A PRUEBA DE BALAS)
+   MENÚ MÓVIL (VERSIÓN DEFINITIVA)
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -21,73 +21,30 @@ document.addEventListener("DOMContentLoaded", function() {
     const navMenu = document.getElementById("navMenu");
 
     if (menuButton && navMenu) {
+        
+        // 1. Abrir y cerrar el menú al pulsar la hamburguesa
         menuButton.addEventListener("click", function(e) {
-            e.preventDefault();
-            console.log("Botón de menú pulsado"); // Esto saldrá en la consola
-            navMenu.classList.toggle("active");
+            e.preventDefault(); // Evita que el botón recargue o redirija
+            const isOpen = navMenu.classList.toggle("active");
+            
+            // Mejoras de accesibilidad
+            menuButton.setAttribute("aria-expanded", isOpen);
+            menuButton.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
         });
+
+        // 2. Cerrar el menú automáticamente al pulsar un enlace
+        navMenu.querySelectorAll("a").forEach(function(link) {
+            link.addEventListener("click", function() {
+                navMenu.classList.remove("active");
+                menuButton.setAttribute("aria-expanded", "false");
+                menuButton.setAttribute("aria-label", "Abrir menú");
+            });
+        });
+
     } else {
         console.error("No se encontró el botón o el menú en el HTML");
     }
 });
-/* =========================================
-   MENÚ MÓVIL DE NAVEGACIÓN
-========================================= */
-/*
-const menuButton = document.getElementById("menuButton");
-const navMenu = document.getElementById("navMenu");
-
-if (menuButton && navMenu) {
-
-    menuButton.addEventListener("click", function () {
-
-        const isOpen = navMenu.classList.toggle("active");
-
-        menuButton.setAttribute("aria-expanded", isOpen);
-
-        menuButton.setAttribute(
-            "aria-label",
-            isOpen ? "Cerrar menú" : "Abrir menú"
-        );
-
-    });
-
-    navMenu.querySelectorAll("a").forEach(function (link) {
-
-        link.addEventListener("click", function () {
-            navMenu.classList.remove("active");
-            menuButton.setAttribute("aria-expanded", "false");
-            menuButton.setAttribute("aria-label", "Abrir menú");
-        });
-
-    });
-
-}*/
-/* =========================================
-   MENÚ MÓVIL
-========================================= */
-/*
-const menuButton = document.getElementById("menuButton");
-const navMenu = document.getElementById("navMenu");
-
-if (menuButton && navMenu) {
-    menuButton.addEventListener("click", (e) => {
-        e.preventDefault(); // <--- AÑADE ESTA LÍNEA
-        navMenu.classList.toggle("active");
-    });
-}
-*/
-
-/* Cerrar menú al pulsar un enlace */
-/*
-const navLinks = document.querySelectorAll(".nav a");
-
-navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-        navMenu.classList.remove("active");
-    });
-});*/
-
 
 /* =========================================
    AÑO DEL FOOTER
