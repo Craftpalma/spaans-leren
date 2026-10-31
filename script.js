@@ -891,8 +891,11 @@ interestButtons.forEach((button) => {
             conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",
 
 
-              //aqui estaba el duplicado y seguro falta la traducion de fines especificos
-              
+            specificDescription: "Op maat gemaakt voor specifieke behoeften. Of je nu een officieel examen wilt voorbereiden of Spaans wilt leren voor jouw sector, dit is jouw cursus.",
+            specificItem1: "Voorbereiding op examens (DELE, SIELE).",
+            specificItem2: "Spaans voor professionals (gezondheidszorg, horeca, etc.).",
+            specificItem3: "Specifieke culturele en conversatieworkshops.",
+            specificObjective: "Het beheersen van de woordenschat en structuren van jouw interessegebied.",  
 
             businessLabel: "ZAKELIJK",
             businessQuote: "“Effectieve professionele communicatie”",
@@ -1064,14 +1067,9 @@ interestButtons.forEach((button) => {
             b1Item4: "Textos y audios reales",
             b1Item5: "Conversación espontánea",
             b1Objective: "Desenvolverte con autonomía en la mayoría de situaciones.",
-           /*
-            conversationQuote: "“Praten, oefenen en zelfvertrouwen opbouwen”",
-            conversationDescription: "Lessen die volledig gericht zijn op spreekvaardigheid.",
-            conversationItem1: "Studenten die Spaans begrijpen",
-            conversationItem2: "Mensen die gemakkelijker willen leren spreken",
-            conversationItem3: "Gespreksoefeningen",
-            conversationItem4: "De uitspraak verbeteren",
-            conversationTopics: "Actualiteit, cultuur, reizen, persoonlijke ervaringen en debatten.",*/
+
+
+    
    
             conversationQuote: "“Hablar, practicar y ganar confianza”",
             conversationDescription: "Clases centradas exclusivamente en la producción oral.",
@@ -1080,6 +1078,12 @@ interestButtons.forEach((button) => {
             conversationItem3: "Práctica de conversación",
             conversationItem4: "Mejorar pronunciación",
             conversationTopics: "Actualidad, cultura, viajes, experiencias personales y debates.",
+
+            specificDescription: "Diseñados a medida para necesidades concretas. Si buscas preparar un examen oficial o aprender el español de tu sector, este es tu curso.",
+            specificItem1: "Preparación de exámenes (DELE, SIELE).",
+            specificItem2: "Español para profesionales (sanidad, hostelería, etc.).",
+            specificItem3: "Talleres culturales y de conversación específicos.",
+            specificObjective: "Dominar el vocabulario y las estructuras de tu área de interés.",
 
             businessLabel: "NEGOCIOS",
             businessQuote: "“Comunicación profesional efectiva”",
