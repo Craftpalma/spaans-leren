@@ -851,52 +851,6 @@ nextMonth.addEventListener("click", function () {
 });
 
 
-// =========================================
-// AÑO DEL FOOTER
-// =========================================
-
-/*const currentYear = document.getElementById("currentYear");
-
-if (currentYear) {
-
-    currentYear.textContent = new Date().getFullYear();
-
-}*/
-
-
-/* =========================================
-   MENÚ MÓVIL DE NAVEGACIÓN
-========================================= */
-
-/*const menuButton = document.getElementById("menuButton");
-const navMenu = document.getElementById("navMenu");
-
-if (menuButton && navMenu) {
-
-    menuButton.addEventListener("click", function () {
-
-        const isOpen = navMenu.classList.toggle("active");
-
-        menuButton.setAttribute("aria-expanded", isOpen);
-
-        menuButton.setAttribute(
-            "aria-label",
-            isOpen ? "Cerrar menú" : "Abrir menú"
-        );
-
-    });
-
-    navMenu.querySelectorAll("a").forEach(function (link) {
-
-        link.addEventListener("click", function () {
-            navMenu.classList.remove("active");
-            menuButton.setAttribute("aria-expanded", "false");
-            menuButton.setAttribute("aria-label", "Abrir menú");
-        });
-
-    });
-
-}*/
 
 // =========================================
 // INICIAR CALENDARIO
