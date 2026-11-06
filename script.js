@@ -1388,3 +1388,38 @@ if (dragHeader) {
         dragHeader.style.cursor = "grab";
     });
 }
+/* =========================================
+   MODAL PROMOCIONAL ZUTPHEN (AUTOMÁTICO)
+========================================= */
+window.addEventListener("load", function() {
+    // 1. Temporizador: Salta a los 4 segundos (4000 ms). Puedes cambiarlo aquí.
+    setTimeout(function() {
+        const promoModal = document.getElementById("promoModal");
+        
+        // Comprobamos que existe y que el usuario NO lo ha cerrado ya en esta sesión
+        if (promoModal && !sessionStorage.getItem("promoVisto")) {
+            promoModal.style.display = "flex";
+        }
+    }, 4000); 
+
+    // 2. Lógica para cerrar el modal
+    const promoModal = document.getElementById("promoModal");
+    const promoModalClose = document.getElementById("promoModalClose");
+
+    if (promoModal && promoModalClose) {
+        // Al hacer clic en la "X"
+        promoModalClose.addEventListener("click", function() {
+            promoModal.style.display = "none";
+            // Guardamos que ya lo ha visto para que no le vuelva a salir si recarga la página
+            sessionStorage.setItem("promoVisto", "true");
+        });
+
+        // Al hacer clic fuera del recuadro de la imagen (en el fondo oscuro)
+        promoModal.addEventListener("click", function(e) {
+            if (e.target === promoModal) {
+                promoModal.style.display = "none";
+                sessionStorage.setItem("promoVisto", "true");
+            }
+        });
+    }
+});
