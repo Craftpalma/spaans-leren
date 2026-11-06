@@ -810,8 +810,10 @@ interestButtons.forEach((button) => {
             heroEyebrow: "LEER SPAANS",
             navContacto: "Contact",
             heroEyebrow: "LEER SPAANS",
-            heroTitleFirst: "Vind de cursus",
-            heroTitleSecond: "die bij je past",
+           /* heroTitleFirst: "Vind de cursus",
+            heroTitleSecond: "die bij je past",*/
+            heroTitleFirst: "Spaanse lessen in",
+            heroTitleSecond: "Zutphen - nu in november",
             heroDescription: "Spaanse lessen afgestemd op jouw niveau, doelen en manier van leren.",
             heroButton: "Gratis proefles",
                        // Presentación profesora
@@ -997,8 +999,10 @@ interestButtons.forEach((button) => {
             heroEyebrow: "APRENDE ESPAÑOL",
             navContacto: "Contacto",
             heroEyebrow: "APRENDE ESPAÑOL",
-            heroTitleFirst: "Encuentra el curso",
-            heroTitleSecond: "perfecto para ti",
+           /* heroTitleFirst: "Encuentra el curso",
+            heroTitleSecond: "perfecto para ti",*/
+            heroTitleFirst: "Clases de español en",
+            heroTitleSecond: "Zutphen - ahora en noviembre",
             heroDescription: "Cursos de español adaptados a tu nivel, tus objetivos y tu forma de aprender.",
             heroButton: "Clase de prueba gratis",
                        // Presentación profesora
