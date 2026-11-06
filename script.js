@@ -1389,32 +1389,33 @@ if (dragHeader) {
     });
 }
 /* =========================================
-   MODAL PROMOCIONAL ZUTPHEN (AUTOMÁTICO)
+   MODAL PROMOCIONAL ZUTPHEN (COMPLETO)
 ========================================= */
 window.addEventListener("load", function() {
-    // 1. Temporizador: Salta a los 4 segundos (4000 ms). Puedes cambiarlo aquí.
+    
+    // 1. Capturamos todos los elementos del DOM
+    const promoModal = document.getElementById("promoModal");
+    const promoModalClose = document.getElementById("promoModalClose");
+    const promoModalLink = document.getElementById("promoModalLink");
+
+    // 2. Temporizador para mostrar el modal a los 4 segundos
     setTimeout(function() {
-        const promoModal = document.getElementById("promoModal");
-        
-        // Comprobamos que existe y que el usuario NO lo ha cerrado ya en esta sesión
+        // Si el modal existe y el usuario no lo ha cerrado ya en esta sesión
         if (promoModal && !sessionStorage.getItem("promoVisto")) {
             promoModal.style.display = "flex";
         }
     }, 4000); 
 
-    // 2. Lógica para cerrar el modal
-    const promoModal = document.getElementById("promoModal");
-    const promoModalClose = document.getElementById("promoModalClose");
-
-    if (promoModal && promoModalClose) {
-        // Al hacer clic en la "X"
+    // 3. Cerrar el modal con la "X"
+    if (promoModalClose) {
         promoModalClose.addEventListener("click", function() {
             promoModal.style.display = "none";
-            // Guardamos que ya lo ha visto para que no le vuelva a salir si recarga la página
             sessionStorage.setItem("promoVisto", "true");
         });
+    }
 
-        // Al hacer clic fuera del recuadro de la imagen (en el fondo oscuro)
+    // 4. Cerrar el modal haciendo clic fuera de la imagen (en el fondo oscuro)
+    if (promoModal) {
         promoModal.addEventListener("click", function(e) {
             if (e.target === promoModal) {
                 promoModal.style.display = "none";
@@ -1422,4 +1423,36 @@ window.addEventListener("load", function() {
             }
         });
     }
-});
+
+    // 5. Hacer clic en la imagen: cerrar modal, ir a contacto y autoseleccionar
+    if (promoModalLink) {
+        promoModalLink.addEventListener("click", function() {
+            
+            // Ocultamos el modal
+            promoModal.style.display = "none";
+            sessionStorage.setItem("promoVisto", "true");
+
+            // Esperamos 100ms para que el navegador haga el scroll hacia #contacto
+            setTimeout(function() {
+                const courseSelect = document.getElementById("course");
+                const messageField = document.getElementById("message");
+                
+                // Seleccionamos la opción "Oferta Zutphen"
+                if (courseSelect) {
+                    for (let i = 0; i < courseSelect.options.length; i++) {
+                        if (courseSelect.options[i].value === "Oferta Zutphen") {
+                            courseSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                
+                // Rellenamos el mensaje automáticamente
+                if (messageField) {
+                    messageField.value = "Estoy interesado/a en la oferta de clases presenciales en Zutphen.";
+                }
+            }, 100); 
+        });
+    }
+
+}); // <-- ESTA ES LA LLAVE QUE FALTABA
