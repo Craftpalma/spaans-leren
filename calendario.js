@@ -50,16 +50,6 @@ const calendarTranslations = {
         assistantLink: "Hablar con el asistente",
         weekdays: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
         months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-
-      /* selected: "Has seleccionado:",
-      timeAvailable: "Esta hora está disponible para solicitar una clase.",
-      name: "Nombre",
-      namePlaceholder: "Tu nombre",
-      phone: "Teléfono / WhatsApp",
-      phonePlaceholder: "Tu teléfono / WhatsApp",
-      request: "🟡 Solicitar esta hora"*/
-    
-    
     },
     nl: {
         navHome: "Home",
@@ -101,33 +91,19 @@ const calendarTranslations = {
         assistantLink: "Chat met de assistent",
         weekdays: ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"],
         months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"]
-
-       /*   selected: "Je hebt geselecteerd:",
-         timeAvailable: "Dit tijdstip is beschikbaar om een les aan te vragen.",
-         name: "Naam",
-         namePlaceholder: "Je naam",
-         phone: "Telefoon / WhatsApp",
-         phonePlaceholder: "Je telefoonnummer / WhatsApp",
-         request: "🟡 Dit tijdstip aanvragen"*/
     }
 };
-
-/* =========================================
-   IDIOMAS DEL CALENDARIO
-========================================= */
-
 
 let calendarLanguage = "nl";
 
 try {
-    const savedCalendarLanguage =
-        localStorage.getItem("spaansLerenLanguage");
-
-    if (savedCalendarLanguage === "nl" ||
-        savedCalendarLanguage === "es") {
+    const savedCalendarLanguage = localStorage.getItem("spaansLerenLanguage");
+    if (savedCalendarLanguage === "nl" || savedCalendarLanguage === "es") {
         calendarLanguage = savedCalendarLanguage;
     }
-} catch (error) {}
+} catch (error) {
+    // Ignoramos el error si localStorage no está disponible
+}
 
 function calendarText(key) {
     return calendarTranslations[calendarLanguage][key];
@@ -146,8 +122,7 @@ function applyCalendarLanguage() {
     });
 
     document.querySelectorAll(".calendar-weekdays div").forEach((element, index) => {
-        element.textContent =
-            calendarTranslations[calendarLanguage].weekdays[index];
+        element.textContent = calendarTranslations[calendarLanguage].weekdays[index];
     });
 
     const languageButton = document.getElementById("languageToggle");
@@ -155,26 +130,22 @@ function applyCalendarLanguage() {
     if (languageButton) {
         languageButton.setAttribute(
             "aria-label",
-            calendarLanguage === "nl"
-                ? "Cambiar idioma a español"
-                : "Verander de taal naar Nederlands"
+            calendarLanguage === "nl" ? "Cambiar idioma a español" : "Verander de taal naar Nederlands"
         );
     }
 }
 
-const calendarLanguageButton =
-    document.getElementById("languageToggle");
+const calendarLanguageButton = document.getElementById("languageToggle");
 
 if (calendarLanguageButton) {
     calendarLanguageButton.addEventListener("click", function () {
         calendarLanguage = calendarLanguage === "nl" ? "es" : "nl";
 
         try {
-            localStorage.setItem(
-                "spaansLerenLanguage",
-                calendarLanguage
-            );
-        } catch (error) {}
+            localStorage.setItem("spaansLerenLanguage", calendarLanguage);
+        } catch (error) {
+            // Ignoramos el error si localStorage está bloqueado
+        }
 
         applyCalendarLanguage();
         renderCalendar();
@@ -183,59 +154,26 @@ if (calendarLanguageButton) {
 
 applyCalendarLanguage();
 
-
-
-
 // =========================================
 // ELEMENTOS DEL CALENDARIO
 // =========================================
-
 const currentMonth = document.getElementById("currentMonth");
 const calendarDays = document.getElementById("calendarDays");
 const availableTimes = document.getElementById("availableTimes");
-
 const previousMonth = document.getElementById("previousMonth");
 const nextMonth = document.getElementById("nextMonth");
-
-
-// =========================================
-// MESES
-// =========================================
-
-const months = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre"
-];
-
 
 // =========================================
 // MOSTRAR CALENDARIO
 // =========================================
-
-async function renderCalendar() {
-
+function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
-  
-currentMonth.textContent =
-    `${calendarTranslations[calendarLanguage].months[month]} ${year}`;
-
-
+    currentMonth.textContent = `${calendarTranslations[calendarLanguage].months[month]} ${year}`;
     calendarDays.innerHTML = "";
 
     const firstDay = new Date(year, month, 1);
-
     let startingDay = firstDay.getDay();
 
     // Convertimos domingo = 0 a lunes = 0
@@ -245,615 +183,239 @@ currentMonth.textContent =
         startingDay = startingDay - 1;
     }
 
-    const daysInMonth =
-        new Date(year, month + 1, 0).getDate();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-
-    // =====================================
     // ESPACIOS ANTES DEL PRIMER DÍA
-    // =====================================
-
     for (let i = 0; i < startingDay; i++) {
-
-        const emptyDay =
-            document.createElement("div");
-
-        emptyDay.classList.add(
-            "calendar-day",
-            "empty"
-        );
-
+        const emptyDay = document.createElement("div");
+        emptyDay.classList.add("calendar-day", "empty");
         calendarDays.appendChild(emptyDay);
     }
 
-
-    // =====================================
     // DÍAS DEL MES
-    // =====================================
-
     for (let day = 1; day <= daysInMonth; day++) {
-
-        const date =
-            new Date(year, month, day);
-
-        const dayElement =
-            document.createElement("button");
-
+        const date = new Date(year, month, day);
+        const dayElement = document.createElement("button");
         dayElement.type = "button";
-
-        dayElement.classList.add(
-            "calendar-day"
-        );
-
+        dayElement.classList.add("calendar-day");
         dayElement.textContent = day;
 
-
-        // =================================
-        // FIN DE SEMANA (Mantener el color gris)
-        // =================================
-
-        if (
-            date.getDay() === 0 ||
-            date.getDay() === 6
-        ) {
-
+        // FIN DE SEMANA
+        if (date.getDay() === 0 || date.getDay() === 6) {
             dayElement.classList.add("weekend");
-           
-           }
+        }
 
-            // =============================
-            // CLICK EN DÍA (Para todos los días)
-            // =============================
+        // CLICK EN DÍA
+        dayElement.addEventListener("click", function () {
+            selectDay(year, month, day);
+        });
 
-            dayElement.addEventListener(
-                "click",
-                function () {
+        // COMPROBAR RESERVAS DEL DÍA
+        const dateString = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
-                    selectDay(
-                        year,
-                        month,
-                        day
-                    );
-
-                }
-            );
-
-
-            // =============================
-            // COMPROBAR RESERVAS DEL DÍA (Para todos los días)
-            // =============================
-
-            const dateString =
-                `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-
-
-            fetch( `/api/chat?day=true&date=${dateString}` )
+        fetch(`/api/chat?day=true&date=${dateString}`)
             .then(response => response.json())
             .then(data => {
+                if (!data.ok || !data.availability) return;
 
-                if (
-                    !data.ok ||
-                    !data.availability
-                ) {
-                    return;
+                const totalSlots = data.availability.length;
+                const preReservedSlots = data.availability.filter(slot => slot.status === "pre_reserved").length;
+                const availableSlots = data.availability.filter(slot => slot.status === "available").length;
+
+                // DÍA COMPLETAMENTE OCUPADO
+                if (availableSlots === 0 && totalSlots > 0) {
+                    if (preReservedSlots === totalSlots) {
+                        dayElement.classList.add("fully-pre-reserved");
+                    } else {
+                        dayElement.classList.add("fully-booked");
+                    }
                 }
-
-
-// =========================
-// COMPROBAR ESTADO DEL DÍA
-// =========================
-
-const totalSlots =
-    data.availability.length;
-
-
-const preReservedSlots =
-    data.availability.filter(
-        slot =>
-            slot.status === "pre_reserved"
-    ).length;
-
-
-const bookedSlots =
-    data.availability.filter(
-        slot =>
-            slot.status === "booked"
-    ).length;
-
-
-const availableSlots =
-    data.availability.filter(
-        slot =>
-            slot.status === "available"
-    ).length;
-
-
-// =========================
-// DÍA COMPLETAMENTE OCUPADO
-// =========================
-
-if (
-    availableSlots === 0 &&
-    totalSlots > 0
-) {
-
-    /*
-       Todas las horas están ocupadas.
-
-       Si todas son pre-reservas:
-       🟡 amarillo
-
-       Si todas son reservas:
-       🔴 rojo
-
-       Si hay mezcla:
-       🔴 rojo porque el día
-       está completamente ocupado.
-    */
-
-    if (
-        preReservedSlots === totalSlots
-    ) {
-
-        dayElement.classList.add(
-            "fully-pre-reserved"
-        );
-
-    } else {
-
-        dayElement.classList.add(
-            "fully-booked"
-        );
-
-    }
-
-}
-
             })
             .catch(error => {
-
-                console.error(
-                    `Error consultando el día ${dateString}:`,
-                    error
-                );
-
+                console.error(`Error consultando el día ${dateString}:`, error);
             });
 
-        calendarDays.appendChild(
-            dayElement
-        );
-
+        calendarDays.appendChild(dayElement);
     }
-
 }
+
 // =========================================
 // SELECCIONAR DÍA
 // =========================================
-
 async function selectDay(year, month, day) {
-
     const selectedDate = new Date(year, month, day);
+    const dayName = selectedDate.toLocaleDateString(
+        calendarLanguage === "nl" ? "nl-NL" : "es-ES",
+        { weekday: "long", day: "numeric", month: "long" }
+    );
 
-
-      const dayName = selectedDate.toLocaleDateString(
-          calendarLanguage === "nl" ? "nl-NL" : "es-ES",
-          {
-              weekday: "long",
-              day: "numeric",
-              month: "long"
-          }
-      );
-
-
-    // Fecha en formato YYYY-MM-DD
-    const dateString =
-        `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const dateString = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
     availableTimes.innerHTML = `
-
         <h3>${dayName}</h3>
-
         <p>${calendarText("checking")}</p>
-
         <div class="time-list"></div>
-
     `;
 
-    const timeList =
-        availableTimes.querySelector(".time-list");
-
+    const timeList = availableTimes.querySelector(".time-list");
 
     try {
-
-        const response = await fetch(
-            `/api/chat?day=true&date=${dateString}`
-           /* `https://spaans-leren-chatbot.newpalma.workers.dev/?day=true&date=${dateString}`*//*antiguo...*/
-        );
-
+        const response = await fetch(`/api/chat?day=true&date=${dateString}`);
         const data = await response.json();
 
-
         if (!data.ok) {
-
-            throw new Error(
-                data.error || "No se pudo consultar la disponibilidad."
-            );
-
+            throw new Error(data.error || "No se pudo consultar la disponibilidad.");
         }
 
-
         data.availability.forEach(function(slot) {
-
-            const button =
-                document.createElement("button");
-
+            const button = document.createElement("button");
             button.type = "button";
-
             button.textContent = slot.time;
 
-
-            // =====================================
-            // DISPONIBLE
-            // =====================================
-
             if (slot.status === "available") {
-
                 button.classList.add("available-time");
-
                 button.addEventListener("click", function() {
-
-                    selectTime(
-                        dayName,
-                        slot.time,
-                        button
-                    );
-
+                    selectTime(dayName, slot.time, button);
                 });
-
-            }
-
-
-            // =====================================
-            // PRE-RESERVADO
-            // =====================================
-
-            else if (slot.status === "pre_reserved") {
-
+            } else if (slot.status === "pre_reserved") {
                 button.classList.add("pre-reserved");
-
                 button.disabled = true;
-
-            }
-
-
-            // =====================================
-            // RESERVADO
-            // =====================================
-
-            else if (slot.status === "booked") {
-
+            } else if (slot.status === "booked") {
                 button.classList.add("booked");
-
                 button.disabled = true;
-
-            }
-
-
-            // =====================================
-            // OTRO ESTADO
-            // =====================================
-
-            else {
-
+            } else {
                 button.disabled = true;
-
             }
-
 
             timeList.appendChild(button);
-
         });
 
-
     } catch (error) {
-
-        console.error(
-            "Error consultando disponibilidad:",
-            error
-        );
-
+        console.error("Error consultando disponibilidad:", error);
         availableTimes.innerHTML = `
-
             <h3>${dayName}</h3>
-
-            <p>
-                No se ha podido consultar la disponibilidad.
-                Inténtalo de nuevo.
-            </p>
-
+            <p>${calendarText("unavailableError")}</p>
         `;
-
     }
-
 }
 
 // =========================================
 // SELECCIONAR HORA
 // =========================================
-async function selectTime(dayName, time, timeButton) {
-
+function selectTime(dayName, time, timeButton) {
     availableTimes.innerHTML = `
-
         <h3>${dayName}</h3>
-
         <div class="selected-time">
-
-          <p>${calendarText("selected")}</p>
-
+            <p>${calendarText("selected")}</p>
             <strong>${time}</strong>
-
-            <p>
-                ${calendarText("timeAvailable")}
-            </p>
-
+            <p>${calendarText("timeAvailable")}</p>
             <div class="reservation-form">
-
-                <label for="studentName">
-                     ${calendarText("name")}
-                </label>
-
-                <input
-                    type="text"
-                    id="studentName"
-                    placeholder="${calendarText("namePlaceholder")}"
-                    required
-                >
-                  <label for="studentContact">
-                       ${calendarText("phone")}
-                  </label>
-                  
-                  <input
-                      type="tel"
-                      id="studentContact"
-                      placeholder="${calendarText("phonePlaceholder")}"
-                      required
-                  >
-   
-                <button type="button" id="requestClass">
-                    ${calendarText("request")}
-                </button>
-
+                <label for="studentName">${calendarText("name")}</label>
+                <input type="text" id="studentName" placeholder="${calendarText("namePlaceholder")}" required>
+                <label for="studentContact">${calendarText("phone")}</label>
+                <input type="tel" id="studentContact" placeholder="${calendarText("phonePlaceholder")}" required>
+                <button type="button" id="requestClass">${calendarText("request")}</button>
             </div>
-
         </div>
-
     `;
 
-
-    const requestClass =
-        document.getElementById("requestClass");
-
+    const requestClass = document.getElementById("requestClass");
 
     requestClass.addEventListener("click", async function() {
+        const studentName = document.getElementById("studentName").value.trim();
+        const studentContact = document.getElementById("studentContact").value.trim();
 
-        const studentName =
-            document.getElementById("studentName")
-                .value
-                .trim();
-
-        const studentContact =
-            document.getElementById("studentContact")
-                .value
-                .trim();
-
-
-        // =====================================
         // COMPROBAR CAMPOS
-        // =====================================
-
         if (!studentName || !studentContact) {
-
-            alert(
-                "Por favor, introduce tu nombre y tu teléfono."
-            );
-
+            alert(calendarText("required"));
             return;
         }
 
-         
-        // =====================================
         // COMPROBAR TELÉFONO
-        // =====================================
-
-        const phonePattern =
-            /^\+?[0-9\s().-]{7,20}$/;
-
+        const phonePattern = /^\+?[0-9\s().-]{7,20}$/;
         if (!phonePattern.test(studentContact)) {
-
-            alert(
-                "Por favor, introduce un número de teléfono válido."
-            );
-
+            alert(calendarText("invalidPhone"));
             return;
         }
 
-  
-
-        // =====================================
         // OBTENER FECHA
-        // =====================================
+        const selectedDate = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            parseInt(dayName.match(/\d+/)[0])
+        );
 
-        const selectedDate =
-            new Date(
-                currentDate.getFullYear(),
-                currentDate.getMonth(),
-                parseInt(
-                    dayName.match(/\d+/)[0]
-                )
-            );
-
-        const dateString =
-            `${selectedDate.getFullYear()}-` +
-            `${String(selectedDate.getMonth() + 1).padStart(2, "0")}-` +
-            `${String(selectedDate.getDate()).padStart(2, "0")}`;
-
-
-        // =====================================
-        // DESACTIVAR BOTÓN DURANTE LA PETICIÓN
-        // =====================================
+        const dateString = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, "0")}-${String(selectedDate.getDate()).padStart(2, "0")}`;
 
         requestClass.disabled = true;
-
-         requestClass.textContent =
-             calendarText("checkingButton");
-
+        requestClass.textContent = calendarText("checkingButton");
 
         try {
+            const response = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    action: "create_reservation",
+                    date: dateString,
+                    time: time,
+                    name: studentName,
+                    contact: studentContact,
+                    class_type: "diagnóstico",
+                    source: "calendar"
+                })
+            });
 
-            const response = await fetch(
-               /* "https://spaans-leren-chatbot.newpalma.workers.dev/",*/
-                "/api/chat",
-                {
-                    method: "POST",
+            const data = await response.json();
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        action: "create_reservation",
-                        date: dateString,
-                        time: time,
-                        name: studentName,
-                        contact: studentContact,
-                        class_type: "diagnóstico",
-                        source: "calendar"
-                    })
-                }
-            );
-
-
-            const data =
-                await response.json();
-
-
-            // =====================================
             // RESERVA CREADA
-            // =====================================
-
-            if (
-                response.ok &&
-                data.ok &&
-                data.created
-            ) {
-
-                requestClass.textContent =
-                   calendarText("preReservation");
-
-
-                timeButton.classList.add(
-                    "pre-reserved"
-                );
-
+            if (response.ok && data.ok && data.created) {
+                requestClass.textContent = calendarText("preReservation");
+                timeButton.classList.add("pre-reserved");
                 timeButton.disabled = true;
 
                 alert(
-                   `${calendarText("requestSent")}\n\n` +
-                   `${dayName} · ${time}\n` +
-                   `${calendarText("name")}: ${studentName}\n` +
-                   `${calendarText("phone")}: ${studentContact}\n\n` +
-                   `${calendarText("teacherConfirmation")}`
+                    `${calendarText("requestSent")}\n\n` +
+                    `${dayName} · ${time}\n` +
+                    `${calendarText("name")}: ${studentName}\n` +
+                    `${calendarText("phone")}: ${studentContact}\n\n` +
+                    `${calendarText("teacherConfirmation")}`
                 );
-
-
                 return;
             }
 
-
-            // =====================================
             // HORA YA OCUPADA
-            // =====================================
-
-            if (
-                response.status === 409 ||
-                data.status === "pre_reserved" ||
-                data.status === "booked"
-            ) {
-
+            if (response.status === 409 || data.status === "pre_reserved" || data.status === "booked") {
                 requestClass.disabled = false;
-
-                requestClass.textContent =
-                    "Hora no disponible";
-
-
-                alert(
-                    "Lo sentimos, esta hora acaba de ser reservada por otra persona."
-                );
-
-
+                requestClass.textContent = calendarText("timeUnavailable");
+                alert(calendarText("conflict"));
                 return;
             }
 
-
-            // =====================================
-            // OTRO ERROR
-            // =====================================
-
-            throw new Error(
-                data.error ||
-                "No se pudo realizar la reserva."
-            );
-
+            throw new Error(data.error || "Error desconocido");
 
         } catch (error) {
-
-            console.error(
-                "Error creando pre-reserva:",
-                error
-            );
-
-
+            console.error("Error creando pre-reserva:", error);
             requestClass.disabled = false;
-
-            requestClass.textContent =
-                "🟡 Solicitar esta hora";
-
-
-            alert(
-                "No se ha podido realizar la solicitud. " +
-                "Por favor, inténtalo de nuevo."
-            );
+            requestClass.textContent = calendarText("request");
+            alert(calendarText("requestError"));
         }
-
     });
-
 }
 
 // =========================================
 // CAMBIAR DE MES
 // =========================================
-
 previousMonth.addEventListener("click", function () {
-
     currentDate.setMonth(currentDate.getMonth() - 1);
-
     renderCalendar();
-
 });
-
 
 nextMonth.addEventListener("click", function () {
-
     currentDate.setMonth(currentDate.getMonth() + 1);
-
     renderCalendar();
-
 });
-
-
 
 // =========================================
 // INICIAR CALENDARIO
 // =========================================
-
 renderCalendar();
